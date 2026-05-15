@@ -172,7 +172,7 @@ export default function TeamPageContent({
       <Card className="bg-white dark:bg-gray-800">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-            <Users size={18} className="text-blue-500" /> Members ({members.length})
+            <Users size={18} className="text-blue-500" /> Members ({members.length} / 3)
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-1">

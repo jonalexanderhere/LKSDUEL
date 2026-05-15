@@ -218,6 +218,7 @@ export default function TeamsPage() {
                   <CardHeader>
                     <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <Users size={18} /> Create Team
+                      <span className="text-[10px] bg-blue-500/10 text-blue-600 px-2 py-0.5 rounded-full ml-auto">Max 3 Members</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
@@ -241,6 +242,7 @@ export default function TeamsPage() {
                   <CardHeader>
                     <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <UserPlus size={18} /> Join Team
+                      <span className="text-[10px] bg-blue-500/10 text-blue-600 px-2 py-0.5 rounded-full ml-auto">Max 3 Members</span>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
