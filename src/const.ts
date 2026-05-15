@@ -1,11 +1,11 @@
-export const PHOENIX_ARENA = {
-  nxctf_title: 'Phoenix Arena',
+export const SCTF_ARENA = {
+  nxctf_title: 'SCTF',
   nxctf_logo: '/sctf.png',
   nxctf_discord: 'https://discord.gg/5etKks6aQQ',
   nxctf_donation: 'https://saweria.co/ariafatah',
-  nxctf_github: 'https://github.com/nxctf/nxctf',
-  nxctf_github_org: 'https://github.com/nxctf',
-  nxctf_author: 'https://github.com/ariafatah0711',
+  nxctf_github: 'https://github.com/jonalexanderhere/SCTF-PLATFORM-',
+  nxctf_github_org: 'https://github.com/jonalexanderhere',
+  nxctf_author: 'https://github.com/jonalexanderhere',
   nxctf_docs: 'https://docs.nxctf.my.id/'
 }
 

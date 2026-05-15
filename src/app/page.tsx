@@ -60,17 +60,17 @@ export default function Home() {
   const { user, loading } = require("@/shared/contexts").useAuth();
 
   if (loading) {
-    return <Loader fullscreen color="text-orange-500" />
+    return <Loader fullscreen color="text-blue-500" />
   }
 
   return (
     // <div className="flex flex-col min-h-[calc(100lvh-60px)] bg-[#fafafa] dark:bg-[#0b0f19] text-gray-900 dark:text-gray-100 selection:bg-blue-500/30">
-    <div className="flex flex-col min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-gray-900 dark:text-gray-100 selection:bg-orange-500/30 overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#fafafa] dark:bg-[#09090b] text-gray-900 dark:text-gray-100 selection:bg-blue-500/30 overflow-hidden">
       {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-orange-600/10 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-red-600/10 blur-[120px] animate-pulse" />
-        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-amber-500/5 blur-[100px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-600/10 blur-[120px] animate-pulse" />
+        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-blue-500/5 blur-[100px]" />
       </div>
 
       <main className="flex-1 flex flex-col items-center justify-center relative z-10 w-full px-6 py-10 lg:py-16">
@@ -79,11 +79,11 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 dark:bg-orange-950/20 border border-gray-200 dark:border-orange-500/20 backdrop-blur-md mb-6 shadow-sm"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 dark:bg-blue-950/20 border border-gray-200 dark:border-blue-500/20 backdrop-blur-md mb-6 shadow-sm"
           >
-            <span className="flex h-2 w-2 rounded-full bg-orange-500 animate-pulse" />
-            <span className="text-[11px] uppercase tracking-wider font-bold text-gray-600 dark:text-orange-200/70">
-              Arena Flag format: <span className="font-mono text-orange-600 dark:text-orange-400">{APP.flagFormat}</span>
+            <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+            <span className="text-[11px] uppercase tracking-wider font-bold text-gray-600 dark:text-blue-200/70">
+              Arena Flag format: <span className="font-mono text-blue-600 dark:text-blue-400">{APP.flagFormat}</span>
             </span>
           </motion.div>
 
@@ -101,7 +101,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-xl mb-8 leading-relaxed"
           >
-            The Ultimate Cyber Security Proving Ground. Rise from the ashes with <b>on-demand instances</b>, complex multi-step tasks, and elite event management.
+            {APP.description} Rise from the ashes with <b>on-demand instances</b>, complex multi-step tasks, and elite event management.
           </motion.p>
 
           <motion.div
@@ -112,7 +112,7 @@ export default function Home() {
           >
             <Link
               href={user ? "/challenges" : "/login"}
-              className="group relative inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-bold text-white transition-all bg-orange-600 hover:bg-orange-700 rounded-lg shadow-lg shadow-orange-500/20 hover:scale-[1.02] active:scale-[0.98]"
+              className="group relative inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-bold text-white transition-all bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98]"
             >
               {user ? "Enter Arena" : "Join the Arena"}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -142,12 +142,12 @@ export default function Home() {
                   whileHover={{ y: -4 }}
                   className="cursor-pointer group relative p-6 bg-white/40 dark:bg-zinc-950/40 border border-gray-200 dark:border-zinc-800 rounded-xl backdrop-blur-sm transition-all duration-300 hover:border-orange-500/50 hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:shadow-[0_10px_30px_rgba(249,115,22,0.1)]"
                 >
-                  <div className="mb-4 inline-flex items-center justify-center text-orange-600 dark:text-orange-500 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                  <div className="mb-4 inline-flex items-center justify-center text-blue-600 dark:text-blue-500 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                     <Icon className="w-7 h-7" />
                   </div>
 
                   <div className="relative z-10">
-                    <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-xs text-gray-500 dark:text-zinc-400 leading-normal">

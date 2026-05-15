@@ -1,10 +1,10 @@
-import { LINKS, YEAR, DIFFICULTY_STYLES, PHOENIX_ARENA } from './const'
+import { LINKS, YEAR, DIFFICULTY_STYLES, SCTF_ARENA } from './const'
 
 export const APP = {
   shortName: "SCTF",
-  fullName: "SCTF26",
-  description: "Modern Cyber Security Arena with Next.js and Supabase",
-  flagFormat: "PHOENIX{your_flag_here}",
+  fullName: "STEVEN CAPTURE THE FLAG",
+  description: "Platform kompetisi siber modern yang dikhususkan untuk penyelenggaraan lomba Capture The Flag.",
+  flagFormat: "SCTF{your_flag_here}",
 
   challengeCategories: [
     "Intro",
@@ -59,7 +59,7 @@ export const APP = {
   },
   difficultyStyles: DIFFICULTY_STYLES,
   year: YEAR,
-  nxctf: PHOENIX_ARENA
+  nxctf: SCTF_ARENA
 }
 
 export default APP
