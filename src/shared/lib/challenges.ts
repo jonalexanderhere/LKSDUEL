@@ -1006,7 +1006,7 @@ export async function deleteNotification(id: string) {
   return data;
 }
 
-export function subscribeToNotifications(onNotif: (payload: { id: string; title: string; message: string; level: string; created_at: string }) => void) {
+export function subscribeToNotifications(onNotif: (payload: { id: string; title: string; message: string; level: string; created_at: string, created_by?: string | null }) => void) {
   const channel = supabase
     .channel('admin-notifications-insert')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
@@ -1017,6 +1017,7 @@ export function subscribeToNotifications(onNotif: (payload: { id: string; title:
         message: row.message || '',
         level: row.level || 'info',
         created_at: row.created_at || new Date().toISOString(),
+        created_by: row.created_by || null,
       });
     })
     .subscribe();
@@ -1026,11 +1027,21 @@ export function subscribeToNotifications(onNotif: (payload: { id: string; title:
   };
 }
 
-/**
- * Subscribe to real-time solves (challenge solved events)
- * @param onSolve callback({ username, challenge }) dipanggil setiap ada solve baru
- * @returns unsubscribe function
- */
+export function subscribeToNewChallenges(onNew: (payload: { title: string, category: string }) => void) {
+  const channel = supabase
+    .channel('new-challenges-broadcast')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'challenges' }, (payload) => {
+      const row = payload.new as any;
+      if (row.is_active) {
+        onNew({ title: row.title, category: row.category });
+      }
+    })
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}
 export function subscribeToSolves(onSolve: (payload: { username: string, challenge: string, isFirstBlood: boolean }) => void) {
   console.log('[subscribeToSolves] Subscribing to solves-insert channel...')
   const channel = supabase

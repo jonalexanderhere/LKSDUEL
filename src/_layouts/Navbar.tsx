@@ -123,8 +123,8 @@ export default function Navbar() {
   }, [docsOpen])
 
   useEffect(() => {
-    if (notifOpen) setNotifOpen(false)
-  }, [pathname, notifOpen, setNotifOpen])
+    setNotifOpen(false)
+  }, [pathname, setNotifOpen])
 
   if (loading) return null
 

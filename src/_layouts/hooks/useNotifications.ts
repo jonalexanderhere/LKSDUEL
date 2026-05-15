@@ -8,6 +8,7 @@ import {
   deleteNotification,
   subscribeToNotifications,
   subscribeToSolves,
+  subscribeToNewChallenges,
   getSolveSoundEnabledSetting,
   setSolveSoundEnabledSetting,
   getNotifSeenIds,
@@ -84,8 +85,14 @@ export function useNotifications() {
       await createNotification(notifTitle.trim(), notifMessage.trim(), notifLevel)
       setNotifTitle('')
       setNotifMessage('')
+      setNotifToast({ title: 'Success', message: 'Broadcast sent successfully!' })
+      if (notifToastTimeout.current) clearTimeout(notifToastTimeout.current)
+      notifToastTimeout.current = setTimeout(() => setNotifToast(null), 3000)
     } catch (err) {
       console.warn('Failed to create notification', err)
+      setNotifToast({ title: 'Error', message: 'Failed to send broadcast.' })
+      if (notifToastTimeout.current) clearTimeout(notifToastTimeout.current)
+      notifToastTimeout.current = setTimeout(() => setNotifToast(null), 5000)
     }
   }, [notifTitle, notifMessage, notifLevel])
 
@@ -160,19 +167,26 @@ export function useNotifications() {
   // Real-time notifications subscription
   useEffect(() => {
     if (!user) return
-    const unsubscribe = subscribeToNotifications((payload) => {
+    const unsubscribe = subscribeToNotifications((payload: any) => {
       const id = payload.id || `realtime-${payload.created_at}-${payload.title}`
-      setNotifItems(prev => ([
-        {
-          id,
-          title: payload.title,
-          message: payload.message,
-          level: payload.level,
-          created_at: payload.created_at,
-        },
-        ...prev,
-      ]))
+      
+      // Skip if it's already in the list
+      setNotifItems(prev => {
+        if (prev.some(p => p.id === id)) return prev;
+        return ([
+          {
+            id,
+            title: payload.title,
+            message: payload.message,
+            level: payload.level,
+            created_at: payload.created_at,
+          },
+          ...prev,
+        ])
+      })
 
+      // Don't show toast for "Success" or "Error" if they are coming from real-time (shouldn't happen but safe)
+      // Actually, we want to show the toast for the broadcast.
       setNotifToast({ title: payload.title, message: payload.message })
       if (notifToastTimeout.current) clearTimeout(notifToastTimeout.current)
       notifToastTimeout.current = setTimeout(() => setNotifToast(null), 8000)
@@ -184,7 +198,9 @@ export function useNotifications() {
       } catch { }
 
       const seen = getSeenNotifIds()
-      if (!seen.has(id)) {
+      const isSelf = user && payload.created_by === user.id;
+      
+      if (!seen.has(id) && !isSelf) {
         setNotifUnreadCount(prev => prev + 1)
       }
     })
@@ -206,6 +222,23 @@ export function useNotifications() {
       setNotifUnreadCount(unread)
     })()
   }, [user, getSeenNotifIds])
+
+  // Real-time new challenges subscription
+  useEffect(() => {
+    if (!user) return;
+    const unsubscribe = subscribeToNewChallenges(({ title, category }) => {
+      setNotifToast({ title: 'New Challenge!', message: `[${category}] ${title} is now available.` })
+      if (notifToastTimeout.current) clearTimeout(notifToastTimeout.current)
+      notifToastTimeout.current = setTimeout(() => setNotifToast(null), 10000)
+      
+      try {
+        const audio = new Audio('/sounds/notif.mp3')
+        audio.volume = 0.5
+        audio.play()
+      } catch { }
+    })
+    return () => unsubscribe()
+  }, [user])
 
   // Real-time solves subscription
   useEffect(() => {

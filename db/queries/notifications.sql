@@ -39,8 +39,12 @@ DECLARE
   v_user_id UUID := auth.uid()::uuid;
   v_new_id UUID;
 BEGIN
-  IF NOT is_admin() THEN
+  IF NOT is_admin() AND current_user <> 'postgres' AND current_user <> 'service_role' THEN
     RAISE EXCEPTION 'Only admin can create notifications';
+  END IF;
+
+  IF p_title IS NULL OR p_title = '' OR p_message IS NULL OR p_message = '' THEN
+    RAISE EXCEPTION 'Title and message are required';
   END IF;
 
   INSERT INTO public.notifications(title, message, level, created_by)
