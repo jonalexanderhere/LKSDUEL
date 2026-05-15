@@ -384,13 +384,20 @@ CREATE OR REPLACE FUNCTION get_solve_info(
 )
 RETURNS TABLE (
   username TEXT,
-  challenge TEXT
+  challenge TEXT,
+  is_first_blood BOOLEAN
 ) AS $$
 BEGIN
   RETURN QUERY
   SELECT
     u.username,
-    c.title
+    c.title,
+    NOT EXISTS (
+      SELECT 1 
+      FROM public.solves s 
+      WHERE s.challenge_id = p_challenge_id 
+        AND s.created_at < (SELECT MIN(created_at) FROM public.solves WHERE challenge_id = p_challenge_id AND user_id = p_user_id)
+    ) AS is_first_blood
   FROM public.users u
   JOIN public.challenges c ON c.id = p_challenge_id
   WHERE u.id = p_user_id;
