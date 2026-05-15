@@ -1,8 +1,8 @@
 import { LINKS, YEAR, DIFFICULTY_STYLES, PHOENIX_ARENA } from './const'
 
 export const APP = {
-  shortName: "PHOENIX",
-  fullName: "Phoenix Arena",
+  shortName: "SCTF",
+  fullName: "SCTF26",
   description: "Modern Cyber Security Arena with Next.js and Supabase",
   flagFormat: "PHOENIX{your_flag_here}",
 
@@ -22,8 +22,8 @@ export const APP = {
 
   // Base URL (ambil dari env kalau ada). Prefer changing NEXT_PUBLIC_SITE_URL in .env.local.
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  image_icon: 'favicon.ico',
-  image_logo: 'logo-no-bg.svg',
+  image_icon: 'sctf.png',
+  image_logo: 'sctf.png',
   image_preview: 'og-image.png',
 
   // Turnstile aktif otomatis kalau site key ada di env.
