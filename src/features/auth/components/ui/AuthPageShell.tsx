@@ -17,7 +17,7 @@ export function AuthPageShell({ children, className, contentClassName }: AuthPag
   return (
     <div
       className={cn(
-        'relative flex min-h-[calc(100vh-3.5rem)] flex-col overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-orange-500/30 dark:bg-[#0b0f19] dark:text-gray-100',
+        'relative flex min-h-[calc(100vh-3.5rem)] flex-col overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100',
         className
       )}
     >

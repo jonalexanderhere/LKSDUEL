@@ -82,7 +82,7 @@ const AuditLogList: React.FC<AuditLogListProps> = ({ logs: propLogs, isLoading: 
   if (isLoading) return (
     <Card className="bg-white dark:bg-gray-800 pt-5">
       <CardHeader><CardTitle className="text-lg font-semibold">Audit Logs</CardTitle></CardHeader>
-      <CardContent className="flex justify-center py-8"><Loader color="text-orange-500" /></CardContent>
+      <CardContent className="flex justify-center py-8"><Loader color="text-blue-500" /></CardContent>
     </Card>
   )
 
@@ -119,7 +119,7 @@ const AuditLogList: React.FC<AuditLogListProps> = ({ logs: propLogs, isLoading: 
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Filter by email..."
-            className="text-sm px-3 py-2 rounded-lg border bg-transparent outline-none focus:ring-1 ring-orange-500/50"
+            className="text-sm px-3 py-2 rounded-lg border bg-transparent outline-none focus:ring-1 ring-blue-500/50"
           />
         </div>
       </CardHeader>

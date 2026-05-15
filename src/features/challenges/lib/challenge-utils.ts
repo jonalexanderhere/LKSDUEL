@@ -16,7 +16,7 @@ export function getCategoryDetails(category: string): CategoryDetails {
   if (cat.includes('forensic'))     return { color: 'text-teal-500',    borderColor: 'border-teal-500/30',    badgeColor: 'bg-teal-500/15 text-teal-400'        }
   if (cat.includes('osint'))        return { color: 'text-cyan-500',    borderColor: 'border-cyan-500/30',    badgeColor: 'bg-cyan-500/15 text-cyan-400'        }
   if (cat.includes('crypto'))       return { color: 'text-purple-500',  borderColor: 'border-purple-500/30',  badgeColor: 'bg-purple-500/15 text-purple-400'    }
-  if (cat.includes('rev'))          return { color: 'text-orange-500',  borderColor: 'border-orange-500/30',  badgeColor: 'bg-orange-500/15 text-orange-400'    }
+  if (cat.includes('rev'))          return { color: 'text-blue-500',  borderColor: 'border-blue-500/30',  badgeColor: 'bg-blue-500/15 text-blue-400'    }
   if (cat.includes('pwn') || cat.includes('exploit')) return { color: 'text-red-500', borderColor: 'border-red-500/30', badgeColor: 'bg-red-500/15 text-red-400' }
   if (cat.includes('steg'))         return { color: 'text-pink-500',    borderColor: 'border-pink-500/30',    badgeColor: 'bg-pink-500/15 text-pink-400'        }
   if (cat.includes('network'))      return { color: 'text-indigo-500',  borderColor: 'border-indigo-500/30',  badgeColor: 'bg-indigo-500/15 text-indigo-400'    }

@@ -31,8 +31,8 @@ export default function NotificationItem({
     <div
       className={`group relative px-3 py-2.5 rounded-lg transition-all duration-150 flex flex-col gap-1
         ${!isRead
-          ? 'bg-orange-500/[0.03] dark:bg-orange-400/[0.03] border-l-2 border-orange-500'
-          : 'border-l-2 border-transparent hover:bg-orange-500/5 dark:hover:bg-orange-400/10'}
+          ? 'bg-blue-500/[0.03] dark:bg-blue-400/[0.03] border-l-2 border-blue-500'
+          : 'border-l-2 border-transparent hover:bg-blue-500/5 dark:hover:bg-blue-400/10'}
       `}
     >
       <div className="flex items-start justify-between gap-3">
@@ -46,7 +46,7 @@ export default function NotificationItem({
                 {notification.level.replace('info_', '')}
               </span>
               {!isRead && (
-                <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300">
+                <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
                   New
                 </span>
               )}
@@ -57,7 +57,7 @@ export default function NotificationItem({
             <MarkdownRenderer
               content={notification.message}
               variant="compact"
-              className="line-clamp-2 break-words [&_a]:text-orange-600 dark:[&_a]:text-orange-400"
+              className="line-clamp-2 break-words [&_a]:text-blue-600 dark:[&_a]:text-blue-400"
             />
           </div>
         </div>

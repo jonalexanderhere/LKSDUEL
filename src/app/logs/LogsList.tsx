@@ -43,7 +43,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   const solveLogs = notifications.filter(n => n.log_type === 'solve');
   const filteredNotifications = tabType === 'solves' ? solveLogs : challengeLogs;
 
-  if (loading && notifications.length === 0) return <Loader fullscreen color="text-orange-500" />;
+  if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
 
   if (filteredNotifications.length === 0)
     return (

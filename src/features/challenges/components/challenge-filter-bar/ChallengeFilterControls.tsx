@@ -131,7 +131,7 @@ export default function ChallengeFilterControls({
           className={`inline-flex h-9 w-9 items-center justify-center rounded border text-[11px] font-bold transition ${featureMode === 'N'
             ? 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
             : featureMode === 'T'
-              ? 'bg-orange-500 border-orange-500 text-white'
+              ? 'bg-blue-500 border-blue-500 text-white'
               : 'bg-blue-500 border-blue-500 text-white'
             }`}
         >

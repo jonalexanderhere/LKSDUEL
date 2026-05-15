@@ -64,7 +64,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
 
           {/* HEADER */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 font-bold text-sm text-orange-600 dark:text-orange-400">
+            <div className="flex items-center gap-2 font-bold text-sm text-blue-600 dark:text-blue-400">
               <Flag size={16} />
               FLAG INSPECTOR
             </div>
@@ -133,7 +133,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
           {/* ACTION */}
           <Button
             onClick={() => onOpenChange(false)}
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white text-xs h-9 rounded-lg"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs h-9 rounded-lg"
           >
             Close
           </Button>

@@ -69,7 +69,7 @@ export default function ProfileHeader({
           </div>
 
           <p className="max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-400 sm:text-base">
-            {userDetail.bio?.trim() || 'CTF player on Phoenix Arena'}
+            {userDetail.bio?.trim() || 'CTF player on SCTF'}
           </p>
 
           <div className="mt-1 flex flex-row items-start justify-between gap-4 w-full flex-wrap">

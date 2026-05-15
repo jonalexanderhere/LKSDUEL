@@ -22,12 +22,12 @@ export default function NotificationBell({
     <div className="relative mr-2" data-tour="navbar-notifications">
       <button
         ref={notifButtonRef}
-        className={`rounded-full p-1 transition-colors duration-150 ${notifOpen ? (theme === 'dark' ? 'bg-orange-900' : 'bg-orange-100') : ''}`}
+        className={`rounded-full p-1 transition-colors duration-150 ${notifOpen ? (theme === 'dark' ? 'bg-blue-900' : 'bg-blue-100') : ''}`}
         title="Notifications"
         aria-label="Notifications"
         onClick={onToggle}
       >
-        <Bell size={22} className="text-orange-500" />
+        <Bell size={22} className="text-blue-500" />
       </button>
 
       {unreadCount > 0 && (

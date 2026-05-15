@@ -51,8 +51,8 @@ const ChallengeListPanel: React.FC<ChallengeListPanelProps> = ({
             <div className="flex items-center gap-3">
               <span>Challenge List</span>
               {isRefreshing && (
-                <div className="flex items-center gap-2 text-[10px] font-medium text-orange-500 animate-pulse">
-                  <div className="w-1 h-1 rounded-full bg-orange-500 animate-bounce" />
+                <div className="flex items-center gap-2 text-[10px] font-medium text-blue-500 animate-pulse">
+                  <div className="w-1 h-1 rounded-full bg-blue-500 animate-bounce" />
                   SYNCING...
                 </div>
               )}

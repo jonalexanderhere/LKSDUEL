@@ -191,13 +191,13 @@ export default function DevConfigDialog({ open, onOpenChange }: DevConfigDialogP
         {/* Header */}
         <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center">
-              <Settings2 className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+              <Settings2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
               <DialogTitle className="text-xl font-bold text-gray-900 dark:text-white">Platform Setup</DialogTitle>
               <div className="flex items-center gap-2 mt-1.5">
-                <Badge className="bg-orange-600 text-white border-none text-[10px] py-0.5 px-2 font-black uppercase">Dev Only</Badge>
+                <Badge className="bg-blue-600 text-white border-none text-[10px] py-0.5 px-2 font-black uppercase">Dev Only</Badge>
                 <div className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 font-mono">
                   <Info size={12} />
                   {activeTab === 'config' ? 'src/config.ts' : '.env.local'}
@@ -209,7 +209,7 @@ export default function DevConfigDialog({ open, onOpenChange }: DevConfigDialogP
           <Button
             onClick={saveConfig}
             disabled={saving || loading}
-            className="bg-orange-600 hover:bg-orange-700 text-white shadow-sm font-bold h-10 px-8 transition-all active:scale-95 disabled:bg-gray-300 dark:disabled:bg-gray-800"
+            className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm font-bold h-10 px-8 transition-all active:scale-95 disabled:bg-gray-300 dark:disabled:bg-gray-800"
           >
             {saving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
             Save Changes
@@ -253,7 +253,7 @@ export default function DevConfigDialog({ open, onOpenChange }: DevConfigDialogP
 
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 gap-4 text-gray-500">
-              <Loader2 className="w-10 h-10 animate-spin text-orange-500" />
+              <Loader2 className="w-10 h-10 animate-spin text-blue-500" />
               <p className="text-sm font-medium uppercase tracking-widest">Loading...</p>
             </div>
           ) : activeTab === 'config' ? (
@@ -289,7 +289,7 @@ export default function DevConfigDialog({ open, onOpenChange }: DevConfigDialogP
                       className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white h-11 shadow-sm"
                       onKeyDown={(e) => e.key === 'Enter' && addCategory()}
                     />
-                    <Button onClick={addCategory} size="icon" className="bg-orange-600 hover:bg-orange-700 text-white shrink-0 h-11 w-11 rounded-lg"><Plus className="w-6 h-6" /></Button>
+                    <Button onClick={addCategory} size="icon" className="bg-blue-600 hover:bg-blue-700 text-white shrink-0 h-11 w-11 rounded-lg"><Plus className="w-6 h-6" /></Button>
                   </div>
                   <DndContext collisionDetection={closestCenter} sensors={sensors} onDragEnd={handleCategoryDragEnd}>
                     <SortableContext items={config.challengeCategories} strategy={verticalListSortingStrategy}>
@@ -383,7 +383,7 @@ export default function DevConfigDialog({ open, onOpenChange }: DevConfigDialogP
 function Section({ title, description, children }: { title: string; description: string; children: React.ReactNode }) {
   return (
     <div className="space-y-4">
-      <div className="border-l-4 border-orange-600 pl-4">
+      <div className="border-l-4 border-blue-600 pl-4">
         <h4 className="text-lg font-bold text-gray-900 dark:text-white leading-none">{title}</h4>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5">{description}</p>
       </div>
@@ -401,7 +401,7 @@ function TabButton({ active, onClick, label, icon }: { active: boolean; onClick:
       className={cn(
         "flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-xl transition-all",
         active
-          ? "bg-orange-600 text-white shadow-lg shadow-orange-600/20"
+          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
           : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-white dark:hover:bg-gray-800"
       )}
     >
@@ -413,7 +413,7 @@ function TabButton({ active, onClick, label, icon }: { active: boolean; onClick:
 
 function ToggleItem({ title, desc, checked, onToggle }: { title: string; desc: string; checked: boolean; onToggle: () => void }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 transition-all hover:border-orange-600/30">
+    <div className="flex items-center justify-between p-4 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 transition-all hover:border-blue-600/30">
       <div className="pr-4">
         <p className="text-sm font-bold text-gray-900 dark:text-white">{title}</p>
         <p className="text-[11px] text-gray-500 dark:text-gray-500 leading-tight mt-1">{desc}</p>
@@ -421,7 +421,7 @@ function ToggleItem({ title, desc, checked, onToggle }: { title: string; desc: s
       <Switch
         checked={checked}
         onCheckedChange={onToggle}
-        className="data-[state=checked]:bg-orange-600"
+        className="data-[state=checked]:bg-blue-600"
       />
     </div>
   )
@@ -437,10 +437,10 @@ function SortableCategoryItem({ id, label, onRemove }: { id: string; label: stri
       style={style}
       className={cn(
         "flex items-center gap-2 bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 pl-2.5 pr-3 py-2 rounded-xl text-sm font-bold transition-all",
-        isDragging ? "shadow-2xl border-orange-600 scale-110 z-50 ring-4 ring-orange-600/10" : "hover:border-gray-300 dark:hover:border-gray-600"
+        isDragging ? "shadow-2xl border-blue-600 scale-110 z-50 ring-4 ring-blue-600/10" : "hover:border-gray-300 dark:hover:border-gray-600"
       )}
     >
-      <button {...attributes} {...listeners} className="cursor-grab text-gray-400 hover:text-orange-600">
+      <button {...attributes} {...listeners} className="cursor-grab text-gray-400 hover:text-blue-600">
         <GripVertical className="w-4 h-4" />
       </button>
       <span className="text-gray-900 dark:text-gray-100">{label}</span>

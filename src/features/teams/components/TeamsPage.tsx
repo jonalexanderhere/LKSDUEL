@@ -165,7 +165,7 @@ export default function TeamsPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-orange-500" />
+        <Loader fullscreen color="text-blue-500" />
       </div>
     )
   }
@@ -177,13 +177,13 @@ export default function TeamsPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         {initialLoading ? (
           <div className="flex justify-center py-16">
-            <Loader color="text-orange-500" />
+            <Loader color="text-blue-500" />
           </div>
         ) : (
           <>
             {loading && team && (
               <div className="fixed top-20 right-8 z-50 opacity-70 pointer-events-none">
-                <Loader color="text-orange-500" />
+                <Loader color="text-blue-500" />
               </div>
             )}
 

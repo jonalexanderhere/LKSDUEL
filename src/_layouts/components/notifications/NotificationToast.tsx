@@ -44,7 +44,7 @@ export default function NotificationToast({
             )}
 
             <div className={`relative flex-shrink-0 p-2.5 rounded-lg
-              ${solveNotif.isFirstBlood ? 'bg-white/10' : 'bg-orange-500/10 text-orange-500'}
+              ${solveNotif.isFirstBlood ? 'bg-white/10' : 'bg-blue-500/10 text-blue-500'}
             `}>
               {solveNotif.isFirstBlood ? <Trophy size={20} className="text-yellow-400" /> : <Bell size={20} />}
             </div>
@@ -87,7 +87,7 @@ export default function NotificationToast({
               animate={{ width: 0 }}
               transition={{ duration: 12, ease: "linear" }}
               className={`absolute bottom-0 left-0 h-0.5 
-                ${solveNotif.isFirstBlood ? 'bg-yellow-400/50' : 'bg-orange-500/50'}
+                ${solveNotif.isFirstBlood ? 'bg-yellow-400/50' : 'bg-blue-500/50'}
               `}
             />
           </motion.div>

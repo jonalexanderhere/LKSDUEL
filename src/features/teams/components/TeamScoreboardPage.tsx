@@ -38,7 +38,7 @@ export default function TeamScoreboardPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-orange-500" />
+        <Loader fullscreen color="text-blue-500" />
       </div>
     )
   }
@@ -67,7 +67,7 @@ export default function TeamScoreboardPage() {
             <button
               onClick={() => setShowTotalScore(false)}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${!showTotalScore
-                ? 'border-orange-500 text-orange-600 dark:text-orange-400'
+                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
@@ -121,7 +121,7 @@ export default function TeamScoreboardPage() {
             <CardContent>
               {loading && entries.length === 0 ? (
                 <div className="flex justify-center py-10">
-                  <Loader color="text-orange-500" />
+                  <Loader color="text-blue-500" />
                 </div>
               ) : entries.length === 0 ? (
                 <EmptyState

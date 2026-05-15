@@ -42,7 +42,7 @@ export default function LogsPage() {
   }, [tabType, user, selectedEvent, markAllRead])
 
   // if (authLoading) return null
-  if (authLoading) return <Loader fullscreen color="text-orange-500" />
+  if (authLoading) return <Loader fullscreen color="text-blue-500" />
   if (!user) return null;
 
   return (

@@ -33,7 +33,7 @@ export default function LoginForm() {
     <AuthCard>
       <AuthHeader
         badge="Welcome Back"
-        title="Sign in to Phoenix Arena"
+        title="Sign in to SCTF"
         subtitle="Continue your CTF journey"
       />
 
@@ -62,7 +62,7 @@ export default function LoginForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
-                className="rounded-lg p-1 text-gray-400 transition-colors hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/40"
+                className="rounded-lg p-1 text-gray-400 transition-colors hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -80,7 +80,7 @@ export default function LoginForm() {
         <div className="flex justify-end">
           <Link
             href="/forgot-password"
-            className="text-xs font-semibold text-orange-600 transition-colors hover:text-orange-500 dark:text-orange-400 dark:hover:text-orange-300"
+            className="text-xs font-semibold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
           >
             Forgot password?
           </Link>
@@ -107,7 +107,7 @@ export default function LoginForm() {
         <GoogleLoginButton />
       </form>
 
-      <AuthFooter text="New to Phoenix Arena?" href="/register" linkText="Create an account" />
+      <AuthFooter text="New to SCTF?" href="/register" linkText="Create an account" />
     </AuthCard>
   )
 }

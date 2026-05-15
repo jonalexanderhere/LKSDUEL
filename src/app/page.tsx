@@ -140,7 +140,7 @@ export default function Home() {
                 <motion.div
                   key={idx}
                   whileHover={{ y: -4 }}
-                  className="cursor-pointer group relative p-6 bg-white/40 dark:bg-zinc-950/40 border border-gray-200 dark:border-zinc-800 rounded-xl backdrop-blur-sm transition-all duration-300 hover:border-orange-500/50 hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:shadow-[0_10px_30px_rgba(249,115,22,0.1)]"
+                  className="cursor-pointer group relative p-6 bg-white/40 dark:bg-zinc-950/40 border border-gray-200 dark:border-zinc-800 rounded-xl backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:bg-white/80 dark:hover:bg-zinc-900/80 hover:shadow-[0_10px_30px_rgba(249,115,22,0.1)]"
                 >
                   <div className="mb-4 inline-flex items-center justify-center text-blue-600 dark:text-blue-500 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                     <Icon className="w-7 h-7" />

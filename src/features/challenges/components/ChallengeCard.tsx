@@ -45,7 +45,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
   const categoryIconMap: Record<string, React.ElementType> = {
     'text-yellow-500': Lightbulb, 'text-emerald-500': Terminal, 'text-blue-500': Globe,
     'text-teal-500': Search, 'text-cyan-500': Eye, 'text-purple-500': Binary,
-    'text-orange-500': Cpu, 'text-red-500': Bomb, 'text-pink-500': ImageIcon,
+    'text-blue-500': Cpu, 'text-red-500': Bomb, 'text-pink-500': ImageIcon,
     'text-indigo-500': Wifi, 'text-gray-500': Puzzle,
   };
   const { color: categoryIconColor, borderColor: categoryBorderColor, badgeColor: categoryBadgeColor } = getCategoryDetails(challenge.category);

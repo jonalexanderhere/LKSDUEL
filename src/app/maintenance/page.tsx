@@ -87,7 +87,7 @@ export default function MaintenancePage() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center p-4 font-sans antialiased relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.98, y: 10 }}
@@ -97,14 +97,14 @@ export default function MaintenancePage() {
         <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
           <div className={cn(
             "h-1.5 w-full",
-            errorType === 'maintenance' ? "bg-orange-500" : "bg-red-500"
+            errorType === 'maintenance' ? "bg-blue-500" : "bg-red-500"
           )} />
 
           <div className="p-6 md:p-8 space-y-6">
             <div className="flex items-center gap-4">
               <div className={cn(
                 "w-12 h-12 rounded-xl flex items-center justify-center shrink-0",
-                errorType === 'maintenance' ? "bg-orange-500/20 text-orange-500" : "bg-red-500/20 text-red-500"
+                errorType === 'maintenance' ? "bg-blue-500/20 text-blue-500" : "bg-red-500/20 text-red-500"
               )}>
                 {errorType === 'maintenance' ? <ShieldAlert size={24} /> :
                   errorType === 'config' ? <Settings size={24} /> : <Database size={24} />}

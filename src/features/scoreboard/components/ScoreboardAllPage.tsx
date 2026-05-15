@@ -17,7 +17,7 @@ export default function ScoreboardAllPage() {
     setSelectedEvent,
   } = useScoreboardAllPageData()
 
-  if (authLoading) return <Loader fullscreen color="text-orange-500" />
+  if (authLoading) return <Loader fullscreen color="text-blue-500" />
   if (!user) return null
 
   return (
@@ -45,7 +45,7 @@ export default function ScoreboardAllPage() {
 
         {loading && leaderboard.length === 0 ? (
           <div className="flex justify-center py-16">
-            <Loader color="text-orange-500" />
+            <Loader color="text-blue-500" />
           </div>
         ) : (
           <motion.div

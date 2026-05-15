@@ -15,7 +15,7 @@ function getStrength(password: string) {
 export function PasswordStrength({ password }: { password: string }) {
   const strength = getStrength(password)
   const label = strength >= 3 ? 'Strong password' : strength >= 2 ? 'Good password' : 'Keep going'
-  const barClass = strength >= 3 ? 'bg-emerald-500' : strength >= 2 ? 'bg-orange-500' : 'bg-red-500'
+  const barClass = strength >= 3 ? 'bg-emerald-500' : strength >= 2 ? 'bg-blue-500' : 'bg-red-500'
 
   return (
     <div className="space-y-3 rounded-xl border border-gray-200 bg-white/40 p-3 dark:border-white/10 dark:bg-white/5">
