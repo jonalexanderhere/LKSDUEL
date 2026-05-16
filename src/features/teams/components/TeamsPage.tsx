@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Users, UserPlus } from 'lucide-react'
+import { Users, UserPlus, Shield, Key, Lock } from 'lucide-react'
+import { Label } from '@/shared/ui/label'
 
 import { Loader } from '@/shared/components'
 import { BackButton, ConfirmDialog, EventSelect } from '@/shared/components/custom'
@@ -213,52 +214,65 @@ export default function TeamsPage() {
             )}
 
             {!team ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="bg-white dark:bg-gray-800">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <Users size={18} /> Create Team
-                      <span className="text-[10px] bg-blue-500/10 text-blue-600 px-2 py-0.5 rounded-full ml-auto">Max 3 Members</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Input
-                      value={teamName}
-                      onChange={(e) => setTeamName(e.target.value)}
-                      placeholder="Team name"
-                      disabled={busy}
-                    />
-                    <Button
-                      onClick={onCreateTeam}
-                      disabled={busy || !teamName.trim()}
-                      className="w-full"
-                    >
-                      Create
-                    </Button>
-                  </CardContent>
-                </Card>
+              <div className={`grid grid-cols-1 ${user?.is_admin ? 'md:grid-cols-2' : ''} gap-6`}>
+                {user?.is_admin && (
+                  <Card className="bg-white/5 border-white/10 backdrop-blur-md overflow-hidden animate-slide-up">
+                    <CardHeader className="border-b border-white/5">
+                      <CardTitle className="text-lg font-semibold text-white flex items-center gap-2">
+                        <Users size={18} className="text-indigo-400" /> Create Team
+                        <span className="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-full ml-auto">Admin Only</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4 pt-6">
+                      <div className="space-y-2">
+                        <Label className="text-neutral-400 text-xs uppercase tracking-wider">Team Name</Label>
+                        <Input
+                          value={teamName}
+                          onChange={(e) => setTeamName(e.target.value)}
+                          placeholder="Enter a unique team name"
+                          className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500"
+                          disabled={busy}
+                        />
+                      </div>
+                      <Button
+                        onClick={onCreateTeam}
+                        disabled={busy || !teamName.trim()}
+                        className="w-full bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 transition-all"
+                      >
+                        Create Team
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
 
-                <Card className="bg-white dark:bg-gray-800">
-                  <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <UserPlus size={18} /> Join Team
-                      <span className="text-[10px] bg-blue-500/10 text-blue-600 px-2 py-0.5 rounded-full ml-auto">Max 3 Members</span>
+                <Card className="bg-white/5 border-white/10 backdrop-blur-md overflow-hidden animate-slide-up [animation-delay:100ms]">
+                  <CardHeader className="border-b border-white/5">
+                    <CardTitle className="text-lg font-semibold text-white flex items-center gap-2">
+                      <UserPlus size={18} className="text-emerald-400" /> Join Team
+                      <span className="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full ml-auto">Use Credentials</span>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
-                    <Input
-                      value={inviteCode}
-                      onChange={(e) => setInviteCode(e.target.value)}
-                      placeholder="Invite code"
-                      disabled={busy}
-                    />
+                  <CardContent className="space-y-4 pt-6">
+                    <div className="space-y-2">
+                      <Label className="text-neutral-400 text-xs uppercase tracking-wider">Invite Code</Label>
+                      <Input
+                        value={inviteCode}
+                        onChange={(e) => setInviteCode(e.target.value)}
+                        placeholder="Paste invite code or token here"
+                        className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 font-mono"
+                        disabled={busy}
+                      />
+                    </div>
                     <Button
                       onClick={onJoinTeam}
                       disabled={busy || !inviteCode.trim()}
-                      className="w-full"
+                      className="w-full bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-500/20 transition-all"
                     >
-                      Join
+                      Join Team
                     </Button>
+                    <p className="text-[11px] text-neutral-500 text-center italic">
+                      Ask your admin for the team credentials.
+                    </p>
                   </CardContent>
                 </Card>
               </div>

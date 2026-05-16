@@ -34,6 +34,8 @@ BEGIN
     'id', t.id,
     'name', t.name,
     'invite_code', t.invite_code,
+    'secret_key', t.secret_key,
+    'access_token', t.access_token,
     'created_at', t.created_at
   )
   INTO v_team
@@ -164,6 +166,8 @@ BEGIN
     'id', t.id,
     'name', t.name,
     'invite_code', t.invite_code,
+    'secret_key', t.secret_key,
+    'access_token', t.access_token,
     'created_at', t.created_at
   )
   INTO v_team
@@ -385,6 +389,11 @@ BEGIN
   IF v_count >= 3 THEN
     RAISE EXCEPTION 'Team is full';
   END IF;
+
+  -- Set captain if not exists
+  UPDATE public.teams
+  SET captain_user_id = v_user_id
+  WHERE id = v_team_id AND captain_user_id IS NULL;
 
   INSERT INTO public.team_members(team_id, user_id)
   VALUES (v_team_id, v_user_id);

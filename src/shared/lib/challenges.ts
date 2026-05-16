@@ -1006,9 +1006,9 @@ export async function deleteNotification(id: string) {
   return data;
 }
 
-export function subscribeToNotifications(onNotif: (payload: { id: string; title: string; message: string; level: string; created_at: string, created_by?: string | null }) => void) {
+export function subscribeToNotifications(onNotif: (payload: { id: string; title: string; message: string; level: string; created_at: string, created_by?: string | null, type: 'INSERT' | 'DELETE' }) => void) {
   const channel = supabase
-    .channel('admin-notifications-insert')
+    .channel('admin-notifications-changes')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
       const row: any = payload.new || {};
       onNotif({
@@ -1018,7 +1018,21 @@ export function subscribeToNotifications(onNotif: (payload: { id: string; title:
         level: row.level || 'info',
         created_at: row.created_at || new Date().toISOString(),
         created_by: row.created_by || null,
+        type: 'INSERT'
       });
+    })
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'notifications' }, (payload) => {
+      const row: any = payload.old || {};
+      if (row.id) {
+        onNotif({
+          id: row.id,
+          title: '',
+          message: '',
+          level: '',
+          created_at: '',
+          type: 'DELETE'
+        });
+      }
     })
     .subscribe();
 

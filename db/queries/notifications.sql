@@ -64,7 +64,7 @@ CREATE OR REPLACE FUNCTION delete_notification(
 )
 RETURNS BOOLEAN AS $$
 BEGIN
-  IF NOT is_admin() THEN
+  IF NOT is_admin() AND current_user <> 'postgres' AND current_user <> 'service_role' THEN
     RAISE EXCEPTION 'Only admin can delete notifications';
   END IF;
 

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { InfoIcon, Users, Crown, ChartColumnDecreasing, Copy, Wrench, RefreshCw, LogOut, Trash2, CheckCircle2, Sparkles, Coins, UserX } from 'lucide-react'
+import { InfoIcon, Users, Crown, ChartColumnDecreasing, Copy, Wrench, RefreshCw, LogOut, Trash2, CheckCircle2, Sparkles, Coins, UserX, Shield, Key, Lock } from 'lucide-react'
 import EditTeamModal from './EditTeamModal'
 import TeamSolves from './TeamSolves'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
@@ -66,6 +66,36 @@ export default function TeamPageContent({
                   />
                 )}
               </div>
+            </div>
+            <div className="pt-2 space-y-3 border-t border-gray-100 dark:border-gray-700 mt-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                  <Shield size={14} /> Team ID
+                </span>
+                <span className="font-mono text-xs text-gray-700 dark:text-gray-300">{team.id}</span>
+              </div>
+              {team.secret_key && (
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                    <Key size={14} /> Secret Key
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-gray-700 dark:text-gray-300">{team.secret_key}</span>
+                    <button onClick={() => { navigator.clipboard.writeText(team.secret_key!); }} className="text-gray-400 hover:text-blue-500"><Copy size={12} /></button>
+                  </div>
+                </div>
+              )}
+              {team.access_token && (
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                    <Lock size={14} /> Access Token
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-gray-700 dark:text-gray-300">{team.access_token}</span>
+                    <button onClick={() => { navigator.clipboard.writeText(team.access_token!); }} className="text-gray-400 hover:text-blue-500"><Copy size={12} /></button>
+                  </div>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

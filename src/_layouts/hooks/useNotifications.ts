@@ -97,6 +97,10 @@ export function useNotifications() {
   }, [notifTitle, notifMessage, notifLevel])
 
   const handleDeleteNotif = useCallback(async (id: string) => {
+    if (id.startsWith('realtime-')) {
+      setNotifToast({ title: 'Error', message: 'Cannot delete unsynced notification.' })
+      return;
+    }
     try {
       await deleteNotification(id)
       setNotifItems(prev => prev.filter(n => n.id !== id))
@@ -104,8 +108,14 @@ export function useNotifications() {
       if (!seen.has(id)) {
         setNotifUnreadCount(prev => Math.max(0, prev - 1))
       }
+      setNotifToast({ title: 'Success', message: 'Notification deleted.' })
+      if (notifToastTimeout.current) clearTimeout(notifToastTimeout.current)
+      notifToastTimeout.current = setTimeout(() => setNotifToast(null), 3000)
     } catch (err) {
       console.warn('Failed to delete notification', err)
+      setNotifToast({ title: 'Error', message: 'Failed to delete notification.' })
+      if (notifToastTimeout.current) clearTimeout(notifToastTimeout.current)
+      notifToastTimeout.current = setTimeout(() => setNotifToast(null), 5000)
     }
   }, [getSeenNotifIds])
 
@@ -170,6 +180,15 @@ export function useNotifications() {
     const unsubscribe = subscribeToNotifications((payload: any) => {
       const id = payload.id || `realtime-${payload.created_at}-${payload.title}`
       
+      if (payload.type === 'DELETE') {
+        setNotifItems(prev => prev.filter(n => n.id !== id))
+        const seen = getSeenNotifIds()
+        if (!seen.has(id)) {
+          setNotifUnreadCount(prev => Math.max(0, prev - 1))
+        }
+        return;
+      }
+
       // Skip if it's already in the list
       setNotifItems(prev => {
         if (prev.some(p => p.id === id)) return prev;

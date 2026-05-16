@@ -14,6 +14,8 @@ export type TeamInfo = {
 	id: string
 	name: string
 	invite_code: string
+	secret_key?: string
+	access_token?: string
 	created_at: string
 }
 
@@ -395,5 +397,15 @@ export async function getTeamByUserId(userId: string): Promise<{ team: TeamInfo 
 	} catch (err: any) {
 		console.error('getTeamByUserId error:', err)
 		return { team: null, members: [], error: err?.message || 'Failed to fetch team' }
+	}
+}
+
+export async function adminGetAllTeams(): Promise<{ teams: (TeamInfo & { member_count: number; captain_user_id: string | null })[]; error?: string }> {
+	try {
+		const { data, error } = await supabase.rpc('admin_get_all_teams')
+		if (error) return { teams: [], error: error.message }
+		return { teams: (data as any[]) || [] }
+	} catch (err: any) {
+		return { teams: [], error: err?.message || 'Failed to fetch all teams' }
 	}
 }
