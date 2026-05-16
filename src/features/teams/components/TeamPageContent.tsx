@@ -17,7 +17,6 @@ interface TeamPageContentProps {
   canManage?: boolean
   busy?: boolean
   showManageActions?: boolean
-  onCopyInvite?: () => void
   onLeaveTeam?: () => void
   onKickMember?: (member: TeamMember) => void
   onTransferCaptain?: (member: TeamMember) => void
@@ -32,7 +31,6 @@ export default function TeamPageContent({
   canManage = false,
   busy = false,
   showManageActions = false,
-  onCopyInvite,
   onLeaveTeam,
   onKickMember,
   onTransferCaptain,
@@ -103,48 +101,20 @@ export default function TeamPageContent({
       </div>
 
       {showManageActions && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-white dark:bg-gray-800">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                <Copy size={18} className="text-green-500" /> Invite Code
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="flex-1 font-mono text-sm bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-3 py-2 rounded border border-green-200 dark:border-green-700 break-all">
-                  {team.invite_code}
-                </div>
-                {onCopyInvite && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={onCopyInvite}
-                    disabled={busy}
-                    className="bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold border-none"
-                  >
-                    <Copy size={14} />
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white dark:bg-gray-800">
-            <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                <Wrench size={18} className="text-red-500" /> Quick Actions
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {onLeaveTeam && (
-                <Button variant="secondary" size="sm" onClick={onLeaveTeam} disabled={busy} className="w-full">
-                  <LogOut size={14} /> Leave Team
-                </Button>
-              )}
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="bg-white dark:bg-gray-800">
+          <CardHeader>
+            <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+              <Wrench size={18} className="text-red-500" /> Quick Actions
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            {onLeaveTeam && (
+              <Button variant="secondary" size="sm" onClick={onLeaveTeam} disabled={busy} className="w-full">
+                <LogOut size={14} /> Leave Team
+              </Button>
+            )}
+          </CardContent>
+        </Card>
       )}
 
       <Card className="bg-white dark:bg-gray-800">

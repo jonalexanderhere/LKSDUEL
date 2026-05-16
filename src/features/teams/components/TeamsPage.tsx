@@ -112,16 +112,6 @@ export default function TeamsPage() {
     setConfirmOpen(true)
   }
 
-  const onCopyInvite = async () => {
-    if (!team?.invite_code) return
-    try {
-      await navigator.clipboard.writeText(team.invite_code)
-      setStatus({ type: 'success', message: 'Invite code copied.' })
-    } catch {
-      setStatus({ type: 'error', message: 'Failed to copy invite code.' })
-    }
-  }
-
   const onKickMemberClick = (member: TeamMember) => {
     if (!team) return
     setConfirmMessage(`Kick ${member.username} from the team?`)
@@ -271,7 +261,6 @@ export default function TeamsPage() {
                     canManage={canManage}
                     busy={busy}
                     showManageActions
-                    onCopyInvite={onCopyInvite}
                     onLeaveTeam={onLeaveTeamClick}
                     onKickMember={onKickMemberClick}
                     onTransferCaptain={onTransferCaptainClick}
