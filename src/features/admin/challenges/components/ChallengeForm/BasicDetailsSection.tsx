@@ -34,7 +34,7 @@ export const BasicDetailsSection: React.FC<BasicDetailsSectionProps> = ({
           <Switch
             checked={!!formData.is_maintenance}
             onCheckedChange={v => onChange({ ...formData, is_maintenance: v })}
-            className="mr-2 data-[state=checked]:bg-amber-500 data-[state=checked]:border-amber-500 bg-gray-200 border-gray-300 dark:bg-gray-700 dark:border-gray-500 transition-colors"
+            className="mr-2 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 bg-gray-200 border-gray-300 dark:bg-gray-700 dark:border-gray-500 transition-colors"
           />
           Maintenance
         </Label>

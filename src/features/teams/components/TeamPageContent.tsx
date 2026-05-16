@@ -65,7 +65,7 @@ export default function TeamPageContent({
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <ChartColumnDecreasing size={18} className="text-yellow-500" /> Team Stats
+              <ChartColumnDecreasing size={18} className="text-blue-500" /> Team Stats
             </CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-4">

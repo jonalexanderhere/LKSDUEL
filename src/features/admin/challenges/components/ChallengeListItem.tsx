@@ -53,7 +53,7 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            className={`${challenge.is_maintenance ? 'text-amber-500 dark:text-amber-400' : 'text-gray-400 dark:text-gray-600'}`}
+            className={`${challenge.is_maintenance ? 'text-blue-500 dark:text-blue-400' : 'text-gray-400 dark:text-gray-600'}`}
             onClick={async () => onToggleMaintenance(challenge.id, !challenge.is_maintenance)}
             aria-label={challenge.is_maintenance ? "Disable Maintenance" : "Enable Maintenance"}
             title={challenge.is_maintenance ? "Disable Maintenance" : "Enable Maintenance"}

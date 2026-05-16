@@ -73,7 +73,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
 
       <div className={`relative h-full flex flex-col p-4 md:p-5 rounded-2xl border backdrop-blur-sm transition-all duration-300
         ${isMaintenance
-          ? 'bg-amber-500/[0.02] border-amber-500/20 dark:border-amber-500/10 border-dashed shadow-none'
+          ? 'bg-blue-500/[0.02] border-blue-500/20 dark:border-blue-500/10 border-dashed shadow-none'
           : isSolved
             ? 'bg-gray-800/60 border-green-500/25 dark:border-green-500/20 shadow-none'
             : isTeamSolved
@@ -105,7 +105,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
           {/* Maintenance Overlay Info */}
           {isMaintenance && (
             <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/70 dark:bg-gray-950 backdrop-blur-[4px] rounded-xl pointer-events-none">
-              <p className="text-[10px] font-black text-center px-4 text-amber-600 dark:text-amber-500 leading-relaxed uppercase tracking-wider">
+              <p className="text-[10px] font-black text-center px-4 text-blue-600 dark:text-blue-500 leading-relaxed uppercase tracking-wider">
                 This service is currently unavailable. Points remain awarded to those who solved it.
               </p>
             </div>
@@ -160,7 +160,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
         <div className={`flex items-center justify-between pt-3 border-t z-10 relative ${categoryBorderColor}`}>
           <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider">
             {isMaintenance ? (
-              <span className="text-amber-500 flex items-center gap-1.5 font-black">
+              <span className="text-blue-500 flex items-center gap-1.5 font-black">
                 <AlertTriangle size={12} className="animate-pulse" />
                 Maintenance
               </span>

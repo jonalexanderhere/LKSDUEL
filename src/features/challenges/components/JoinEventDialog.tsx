@@ -112,7 +112,7 @@ export default function JoinEventDialog({
           )}
 
           {isPending ? (
-            <div className="p-3 bg-amber-500/5 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-bold rounded-xl flex items-center justify-center">
+            <div className="p-3 bg-blue-500/5 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-xl flex items-center justify-center">
               Your request is currently pending admin approval.
             </div>
           ) : isRejected ? (
