@@ -169,14 +169,20 @@ export default function Home() {
           <p className="text-[10px] font-bold text-gray-500 dark:text-gray-500 uppercase tracking-[0.3em] mb-6">
             In collaboration with
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 hover:opacity-100 transition-opacity duration-500">
-            <span className="text-xl font-black text-gray-900 dark:text-white tracking-tighter">
-              PHOENIX <span className="text-blue-600">CYSEC</span>
-            </span>
-            <div className="h-4 w-px bg-gray-200 dark:bg-gray-800 hidden sm:block"></div>
-            <span className="text-xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">
-              Darmajaya <span className="text-red-600">Cyber Security Club</span>
-            </span>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 opacity-80 hover:opacity-100 transition-opacity duration-500">
+            <div className="flex flex-col items-center gap-3">
+              <img src="/phoenix-cysec.png" alt="Phoenix Cysec" className="h-16 w-auto object-contain brightness-110" />
+              <span className="text-[10px] font-black text-gray-900 dark:text-white tracking-tighter uppercase">
+                PHOENIX <span className="text-blue-600">CYSEC</span>
+              </span>
+            </div>
+            <div className="h-12 w-px bg-gray-200 dark:bg-gray-800 hidden sm:block"></div>
+            <div className="flex flex-col items-center gap-3">
+              <img src="/dcsc-logo.png" alt="DCSC" className="h-16 w-auto object-contain brightness-110" />
+              <span className="text-[10px] font-black text-gray-900 dark:text-white tracking-tighter uppercase">
+                Darmajaya <span className="text-red-600">Cyber Security Club</span>
+              </span>
+            </div>
           </div>
         </motion.section>
       </main>

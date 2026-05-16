@@ -298,15 +298,17 @@ export default function InfoPage() {
           <p className="text-xs font-bold text-gray-500 dark:text-gray-500 uppercase tracking-[0.2em] mb-4">
             In collaboration with
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-xl font-black text-gray-900 dark:text-white tracking-tight">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
+            <div className="flex flex-col items-center gap-3">
+              <img src="/phoenix-cysec.png" alt="Phoenix Cysec" className="h-20 w-auto object-contain brightness-110" />
+              <span className="text-sm font-black text-gray-900 dark:text-white tracking-tight">
                 Phoenix <span className="text-blue-600">Cysec</span>
               </span>
             </div>
-            <div className="h-px w-8 bg-gray-200 dark:bg-gray-800 sm:h-8 sm:w-px"></div>
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-xl font-black text-gray-900 dark:text-white tracking-tight">
+            <div className="h-px w-12 bg-gray-200 dark:bg-gray-800 sm:h-12 sm:w-px"></div>
+            <div className="flex flex-col items-center gap-3">
+              <img src="/dcsc-logo.png" alt="DCSC" className="h-20 w-auto object-contain brightness-110" />
+              <span className="text-sm font-black text-gray-900 dark:text-white tracking-tight">
                 Darmajaya <span className="text-red-600">Cyber Security Club</span>
               </span>
             </div>
