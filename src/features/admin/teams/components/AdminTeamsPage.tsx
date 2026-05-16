@@ -11,7 +11,7 @@ import { Label } from '@/shared/ui/label'
 import { Copy, Plus, RefreshCw, Trash2, Shield, Key, Lock, Users } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 
-type AdminTeam = TeamInfo & { member_count: number; captain_user_id: string | null }
+type AdminTeam = TeamInfo & { member_count: number; captain_user_id: string | null; member_names?: string[] }
 
 export function AdminTeamsPage() {
 	const [teams, setTeams] = useState<AdminTeam[]>([])
@@ -186,6 +186,15 @@ export function AdminTeamsPage() {
 														<Shield className="w-3 h-3 mr-1" />
 														{team.id}
 													</span>
+													{team.member_names && team.member_names.length > 0 && (
+														<div className="flex flex-wrap gap-1 mt-2">
+															{team.member_names.map((name, i) => (
+																<span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+																	{name}
+																</span>
+															))}
+														</div>
+													)}
 												</div>
 											</TableCell>
 											<TableCell>

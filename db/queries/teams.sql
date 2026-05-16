@@ -540,7 +540,13 @@ BEGIN
         'access_token', t.access_token,
         'captain_user_id', t.captain_user_id,
         'created_at', t.created_at,
-        'member_count', (SELECT count(*) FROM public.team_members tm WHERE tm.team_id = t.id)
+        'member_count', (SELECT count(*) FROM public.team_members tm WHERE tm.team_id = t.id),
+        'member_names', (
+          SELECT json_agg(u.username)
+          FROM public.team_members tm
+          JOIN public.users u ON u.id = tm.user_id
+          WHERE tm.team_id = t.id
+        )
       )
       ORDER BY t.created_at DESC
     )
