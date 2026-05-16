@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { adminGetAllTeams, createTeam, deleteTeam, TeamInfo } from '@/shared/lib/teams'
+import { adminGetAllTeams, createTeam, deleteTeam, regenerateTeamInviteCode, TeamInfo } from '@/shared/lib/teams'
 import { Button } from '@/shared/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/shared/ui/table'
@@ -62,6 +62,18 @@ export function AdminTeamsPage() {
 			fetchTeams()
 		} else {
 			toast.error(error || 'Failed to delete team')
+		}
+	}
+
+	const handleRegenerateInvite = async (teamId: string) => {
+		if (!confirm('Are you sure you want to regenerate the invite code? The old one will no longer work.')) return
+
+		const { invite_code, error } = await regenerateTeamInviteCode(teamId)
+		if (error) {
+			toast.error(error)
+		} else {
+			toast.success('Invite code regenerated')
+			fetchTeams()
 		}
 	}
 
@@ -204,6 +216,7 @@ export function AdminTeamsPage() {
 														label="Invite Code"
 														value={team.invite_code}
 														onCopy={() => copyToClipboard(team.invite_code, 'Invite Code')}
+														onRegenerate={() => handleRegenerateInvite(team.id)}
 													/>
 												</div>
 											</TableCell>
@@ -236,18 +249,29 @@ export function AdminTeamsPage() {
 	)
 }
 
-function CredentialBadge({ icon, label, value, onCopy }: { icon: React.ReactNode, label: string, value: string, onCopy: () => void }) {
+function CredentialBadge({ icon, label, value, onCopy, onRegenerate }: { icon: React.ReactNode, label: string, value: string, onCopy: () => void, onRegenerate?: () => void }) {
 	return (
 		<div className="flex items-center bg-white/5 border border-white/10 rounded-md px-2 py-1 gap-2 hover:border-white/20 transition-colors">
 			<span className="text-neutral-500">{icon}</span>
 			<span className="text-xs font-mono text-neutral-300 max-w-[80px] truncate">{value}</span>
-			<button
-				onClick={onCopy}
-				className="text-neutral-500 hover:text-white transition-colors"
-				title={`Copy ${label}`}
-			>
-				<Copy className="w-3 h-3" />
-			</button>
+			<div className="flex items-center gap-1 ml-auto">
+				<button
+					onClick={onCopy}
+					className="text-neutral-500 hover:text-white transition-colors p-1"
+					title={`Copy ${label}`}
+				>
+					<Copy className="w-3 h-3" />
+				</button>
+				{onRegenerate && (
+					<button
+						onClick={onRegenerate}
+						className="text-neutral-500 hover:text-blue-400 transition-colors p-1"
+						title={`Regenerate ${label}`}
+					>
+						<RefreshCw className="w-3 h-3" />
+					</button>
+				)}
+			</div>
 		</div>
 	)
 }

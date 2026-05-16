@@ -63,7 +63,7 @@ BEGIN
   SELECT json_agg(t) INTO v_result
   FROM (
     SELECT
-      t.id, t.name, t.invite_code, t.secret_key, t.access_token, t.created_at,
+      t.id, t.name, t.invite_code, t.created_at,
       t.captain_user_id,
       (SELECT count(*) FROM public.team_members WHERE team_id = t.id) as member_count,
       (
@@ -101,8 +101,6 @@ BEGIN
       'id', id,
       'name', name,
       'invite_code', invite_code,
-      'secret_key', CASE WHEN v_is_member OR v_is_admin THEN secret_key ELSE NULL END,
-      'access_token', CASE WHEN v_is_member OR v_is_admin THEN access_token ELSE NULL END,
       'created_at', created_at
     )
     FROM public.teams WHERE id = v_team_id
@@ -141,8 +139,6 @@ BEGIN
     'id', t.id,
     'name', t.name,
     'invite_code', t.invite_code,
-    'secret_key', t.secret_key,
-    'access_token', t.access_token,
     'created_at', t.created_at
   )
   INTO v_team
@@ -270,8 +266,6 @@ BEGIN
     'id', t.id,
     'name', t.name,
     'invite_code', t.invite_code,
-    'secret_key', t.secret_key,
-    'access_token', t.access_token,
     'created_at', t.created_at
   )
   INTO v_team

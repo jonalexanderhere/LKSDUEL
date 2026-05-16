@@ -80,8 +80,6 @@ BEGIN
     'id', t.id,
     'name', t.name,
     'invite_code', CASE WHEN v_can_view_invite THEN t.invite_code ELSE NULL END,
-    'secret_key', CASE WHEN v_can_view_invite THEN t.secret_key ELSE NULL END,
-    'access_token', CASE WHEN v_can_view_invite THEN t.access_token ELSE NULL END,
     'created_at', t.created_at
   )
   INTO v_team
@@ -536,8 +534,6 @@ BEGIN
         'id', t.id,
         'name', t.name,
         'invite_code', t.invite_code,
-        'secret_key', t.secret_key,
-        'access_token', t.access_token,
         'captain_user_id', t.captain_user_id,
         'created_at', t.created_at,
         'member_count', (SELECT count(*) FROM public.team_members tm WHERE tm.team_id = t.id),
