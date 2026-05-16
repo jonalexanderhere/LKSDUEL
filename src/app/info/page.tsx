@@ -12,25 +12,8 @@ import { Loader, ImageWithFallback, BrandLogo } from '@/shared/components';
 import { Footer } from "@/_layouts";
 
 const CONTRIBUTORS = [
-  "@ariafatah0711",
-  // "@GZTimeWalker",
-  // "@hez2010",
-  // "@GrakePch",
-  //   "@Hanmur",
-  //   "@KPwnZ",
-  //   "@kengwang",
-  //   "@idawnlight",
-  //   "@Konano",
-  //   "@YanWQ-monad",
-  //   "@Ad-Bean",
-  //   "@Reverier-Xu",
-  //   "@TonyCrane",
-  //   "@mcyydscc",
-  //   "@cyc4188",
-  //   "@Zeroc0077",
-  //   "@weyung",
-  //   "@happybear1234",
-  //   "@xfoxfu",
+  "@stevenjr-yt",
+  "@jonalexanderhere",
 ];
 
 function fillContributors(list: string[], minLength = 14) {
@@ -248,7 +231,7 @@ export default function InfoPage() {
         >
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
-              <Users size={24} className="text-blue-500" /> Built by the Community
+              <Users size={24} className="text-blue-500" /> Built with ❤️ by
             </h2>
           </div>
 
@@ -301,6 +284,31 @@ export default function InfoPage() {
                   );
                 })}
               </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* IN COLLABORATION WITH */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="w-full max-w-4xl mx-auto mt-12 text-center"
+        >
+          <p className="text-xs font-bold text-gray-500 dark:text-gray-500 uppercase tracking-[0.2em] mb-4">
+            In collaboration with
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-xl font-black text-gray-900 dark:text-white tracking-tight">
+                Phoenix <span className="text-blue-600">Cysec</span>
+              </span>
+            </div>
+            <div className="h-px w-8 bg-gray-200 dark:bg-gray-800 sm:h-8 sm:w-px"></div>
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-xl font-black text-gray-900 dark:text-white tracking-tight">
+                Darmajaya <span className="text-red-600">Cyber Security Club</span>
+              </span>
             </div>
           </div>
         </motion.div>

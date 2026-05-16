@@ -159,6 +159,26 @@ export default function Home() {
             })}
           </motion.div>
         </section>
+        {/* IN COLLABORATION WITH */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="w-full max-w-4xl mx-auto mt-20 mb-10 text-center"
+        >
+          <p className="text-[10px] font-bold text-gray-500 dark:text-gray-500 uppercase tracking-[0.3em] mb-6">
+            In collaboration with
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 hover:opacity-100 transition-opacity duration-500">
+            <span className="text-xl font-black text-gray-900 dark:text-white tracking-tighter">
+              PHOENIX <span className="text-blue-600">CYSEC</span>
+            </span>
+            <div className="h-4 w-px bg-gray-200 dark:bg-gray-800 hidden sm:block"></div>
+            <span className="text-xl font-black text-gray-900 dark:text-white tracking-tighter uppercase">
+              Darmajaya <span className="text-red-600">Cyber Security Club</span>
+            </span>
+          </div>
+        </motion.section>
       </main>
 
       <Footer />
