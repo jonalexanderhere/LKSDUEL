@@ -200,22 +200,10 @@ export function AdminTeamsPage() {
 											<TableCell>
 												<div className="flex flex-wrap gap-2">
 													<CredentialBadge
-														icon={<Plus className="w-3 h-3" />}
-														label="Invite"
+														icon={<Key className="w-3 h-3" />}
+														label="Invite Code"
 														value={team.invite_code}
 														onCopy={() => copyToClipboard(team.invite_code, 'Invite Code')}
-													/>
-													<CredentialBadge
-														icon={<Key className="w-3 h-3" />}
-														label="Secret"
-														value={team.secret_key || ''}
-														onCopy={() => copyToClipboard(team.secret_key || '', 'Secret Key')}
-													/>
-													<CredentialBadge
-														icon={<Lock className="w-3 h-3" />}
-														label="Token"
-														value={team.access_token || ''}
-														onCopy={() => copyToClipboard(team.access_token || '', 'Access Token')}
 													/>
 												</div>
 											</TableCell>

@@ -472,13 +472,8 @@ BEGIN
   FROM public.team_members
   WHERE team_id = v_team_id;
 
-  IF v_captain_id = v_user_id AND v_count > 1 THEN
-    RAISE EXCEPTION 'Captain must transfer captaincy or delete team first';
-  END IF;
-
   IF v_captain_id = v_user_id AND v_count = 1 THEN
-    DELETE FROM public.teams WHERE id = v_team_id;
-    RETURN TRUE;
+    UPDATE public.teams SET captain_user_id = NULL WHERE id = v_team_id;
   END IF;
 
   DELETE FROM public.team_members

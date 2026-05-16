@@ -512,7 +512,7 @@ BEGIN
   END IF;
 
   INSERT INTO public.teams(name, invite_code, secret_key, access_token, captain_user_id)
-  VALUES (p_name, generate_random_token(), generate_random_token(), generate_random_token(), NULL)
+  VALUES (p_name, generate_random_token(), NULL, NULL, NULL)
   RETURNING id INTO v_team_id;
 
   RETURN v_team_id;

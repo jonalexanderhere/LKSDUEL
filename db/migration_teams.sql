@@ -39,8 +39,8 @@ BEGIN
   VALUES (
     p_name,
     generate_random_token(12),
-    'sk_' || generate_random_token(24),
-    'at_' || generate_random_token(24)
+    NULL,
+    NULL
   )
   RETURNING id INTO v_team_id;
 
@@ -350,5 +350,46 @@ BEGIN
   VALUES (v_team_id, v_user_id);
 
   RETURN v_team_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth;
+
+-- 9. Update leave_team to NOT delete the team
+DROP FUNCTION IF EXISTS leave_team();
+CREATE OR REPLACE FUNCTION leave_team()
+RETURNS BOOLEAN AS $$
+DECLARE
+  v_user_id UUID := auth.uid()::uuid;
+  v_team_id UUID;
+  v_captain_id UUID;
+  v_count INT;
+BEGIN
+  IF v_user_id IS NULL THEN
+    RAISE EXCEPTION 'Not authenticated';
+  END IF;
+
+  SELECT team_id INTO v_team_id
+  FROM public.team_members
+  WHERE user_id = v_user_id;
+
+  IF v_team_id IS NULL THEN
+    RAISE EXCEPTION 'User is not in a team';
+  END IF;
+
+  SELECT captain_user_id INTO v_captain_id
+  FROM public.teams
+  WHERE id = v_team_id;
+
+  SELECT COUNT(*) INTO v_count
+  FROM public.team_members
+  WHERE team_id = v_team_id;
+
+  IF v_captain_id = v_user_id AND v_count = 1 THEN
+    UPDATE public.teams SET captain_user_id = NULL WHERE id = v_team_id;
+  END IF;
+
+  DELETE FROM public.team_members
+  WHERE team_id = v_team_id AND user_id = v_user_id;
+
+  RETURN TRUE;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth;
