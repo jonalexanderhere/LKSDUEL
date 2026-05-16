@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { InfoIcon, Users, Crown, ChartColumnDecreasing, Copy, Wrench, RefreshCw, LogOut, Trash2, CheckCircle2, Sparkles, Coins, UserX, Shield, Key, Lock } from 'lucide-react'
-import EditTeamModal from './EditTeamModal'
+import { InfoIcon, Users, Crown, ChartColumnDecreasing, Copy, Wrench, LogOut, CheckCircle2, Sparkles, Coins, UserX, Shield, Key, Lock } from 'lucide-react'
 import TeamSolves from './TeamSolves'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
 import { Button } from '@/shared/ui/button'
@@ -18,11 +17,8 @@ interface TeamPageContentProps {
   canManage?: boolean
   busy?: boolean
   showManageActions?: boolean
-  onRenameTeam?: (newName: string) => Promise<{ success: boolean; error?: string }>
   onCopyInvite?: () => void
-  onRegenerateInvite?: () => void
   onLeaveTeam?: () => void
-  onDeleteTeam?: () => void
   onKickMember?: (member: TeamMember) => void
   onTransferCaptain?: (member: TeamMember) => void
 }
@@ -36,11 +32,8 @@ export default function TeamPageContent({
   canManage = false,
   busy = false,
   showManageActions = false,
-  onRenameTeam,
   onCopyInvite,
-  onRegenerateInvite,
   onLeaveTeam,
-  onDeleteTeam,
   onKickMember,
   onTransferCaptain,
 }: TeamPageContentProps) {
@@ -58,13 +51,6 @@ export default function TeamPageContent({
               <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">Team Name</div>
               <div className="flex items-center gap-2 justify-between">
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">{team.name}</div>
-                {canManage && onRenameTeam && (
-                  <EditTeamModal
-                    currentName={team.name}
-                    onSave={onRenameTeam}
-                    disabled={busy}
-                  />
-                )}
               </div>
             </div>
             <div className="pt-2 space-y-3 border-t border-gray-100 dark:border-gray-700 mt-2">
@@ -141,17 +127,6 @@ export default function TeamPageContent({
                   </Button>
                 )}
               </div>
-              {canManage && onRegenerateInvite && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onRegenerateInvite}
-                  disabled={busy}
-                  className="w-full bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold border-none"
-                >
-                  <RefreshCw size={14} /> Regenerate Code
-                </Button>
-              )}
             </CardContent>
           </Card>
 
@@ -165,11 +140,6 @@ export default function TeamPageContent({
               {onLeaveTeam && (
                 <Button variant="secondary" size="sm" onClick={onLeaveTeam} disabled={busy} className="w-full">
                   <LogOut size={14} /> Leave Team
-                </Button>
-              )}
-              {canManage && onDeleteTeam && (
-                <Button variant="destructive" size="sm" onClick={onDeleteTeam} disabled={busy} className="w-full">
-                  <Trash2 size={14} /> Delete Team
                 </Button>
               )}
             </CardContent>

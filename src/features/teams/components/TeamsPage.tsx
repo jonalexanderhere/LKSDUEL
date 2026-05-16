@@ -112,24 +112,6 @@ export default function TeamsPage() {
     setConfirmOpen(true)
   }
 
-  const onDeleteTeamClick = () => {
-    if (!team) return
-    setConfirmMessage('Delete this team? This cannot be undone.')
-    setConfirmExpected('delete this team')
-    setConfirmInput('')
-    confirmActionRef.current = () => handleDeleteTeam(team.id)
-    setConfirmOpen(true)
-  }
-
-  const onRegenerateInviteClick = () => {
-    if (!team) return
-    setConfirmMessage('Regenerate invite code? Old code will be invalid.')
-    setConfirmExpected(null)
-    setConfirmInput('')
-    confirmActionRef.current = () => handleRegenerateInvite(team.id)
-    setConfirmOpen(true)
-  }
-
   const onCopyInvite = async () => {
     if (!team?.invite_code) return
     try {
@@ -156,11 +138,6 @@ export default function TeamsPage() {
     setConfirmInput('')
     confirmActionRef.current = () => handleTransferCaptain(team.id, member)
     setConfirmOpen(true)
-  }
-
-  const onRenameTeamInternal = (newName: string) => {
-    if (!team) return Promise.resolve({ success: false, error: 'No team' })
-    return handleRenameTeam(team.id, newName)
   }
 
   if (authLoading) {
@@ -294,11 +271,8 @@ export default function TeamsPage() {
                     canManage={canManage}
                     busy={busy}
                     showManageActions
-                    onRenameTeam={onRenameTeamInternal}
                     onCopyInvite={onCopyInvite}
-                    onRegenerateInvite={onRegenerateInviteClick}
                     onLeaveTeam={onLeaveTeamClick}
-                    onDeleteTeam={onDeleteTeamClick}
                     onKickMember={onKickMemberClick}
                     onTransferCaptain={onTransferCaptainClick}
                   />
