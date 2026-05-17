@@ -1,10 +1,10 @@
--- Dummy Seed Data for SCTF
+-- Dummy Seed Data for SCTF26
 -- This script adds dummy event, challenges, and solves for existing users.
 
 -- 1. Create a dummy event
 INSERT INTO public.events (id, name, description, start_time, end_time)
 VALUES 
-  ('e1e1e1e1-e1e1-4e1e-a1e1-e1e1e1e1e1e1', 'SCTF Warmup 2026', 'A quick warmup event to test your skills.', now() - interval '1 day', now() + interval '7 days')
+  ('e1e1e1e1-e1e1-4e1e-a1e1-e1e1e1e1e1e1', 'SCTF26 Warmup 2026', 'A quick warmup event to test your skills.', now() - interval '1 day', now() + interval '7 days')
 ON CONFLICT (id) DO NOTHING;
 
 -- 2. Create challenges
@@ -20,31 +20,31 @@ DECLARE
 BEGIN
     -- Intro
     INSERT INTO public.challenges (id, event_id, title, description, category, points, difficulty, is_active)
-    VALUES (v_chall1, v_event_id, 'Welcome to SCTF', 'Just a simple welcome challenge. Flag is SCTF{w3lc0m3_t0_sctf}', 'Intro', 100, 'Easy', true);
+    VALUES (v_chall1, v_event_id, 'Welcome to SCTF26', 'Just a simple welcome challenge. Flag is SCTF26{w3lc0m3_t0_sctf}', 'Intro', 100, 'Easy', true);
     
     INSERT INTO public.challenge_flags (challenge_id, flag, flag_hash)
-    VALUES (v_chall1, 'SCTF{w3lc0m3_t0_sctf}', encode(digest('SCTF{w3lc0m3_t0_sctf}', 'sha256'), 'hex'));
+    VALUES (v_chall1, 'SCTF26{w3lc0m3_t0_sctf}', encode(digest('SCTF26{w3lc0m3_t0_sctf}', 'sha256'), 'hex'));
 
     -- Web
     INSERT INTO public.challenges (id, event_id, title, description, category, points, difficulty, is_active)
-    VALUES (v_chall2, v_event_id, 'Broken Login', 'Can you bypass this login form? Flag is SCTF{sqli_is_st1ll_aliv3}', 'Web', 250, 'Medium', true);
+    VALUES (v_chall2, v_event_id, 'Broken Login', 'Can you bypass this login form? Flag is SCTF26{sqli_is_st1ll_aliv3}', 'Web', 250, 'Medium', true);
     
     INSERT INTO public.challenge_flags (challenge_id, flag, flag_hash)
-    VALUES (v_chall2, 'SCTF{sqli_is_st1ll_aliv3}', encode(digest('SCTF{sqli_is_st1ll_aliv3}', 'sha256'), 'hex'));
+    VALUES (v_chall2, 'SCTF26{sqli_is_st1ll_aliv3}', encode(digest('SCTF26{sqli_is_st1ll_aliv3}', 'sha256'), 'hex'));
 
     -- Crypto
     INSERT INTO public.challenges (id, event_id, title, description, category, points, difficulty, is_active)
-    VALUES (v_chall3, v_event_id, 'Simple XOR', 'Decrypt this XORed string. Flag is SCTF{x0r_is_fun}', 'Crypto', 200, 'Easy', true);
+    VALUES (v_chall3, v_event_id, 'Simple XOR', 'Decrypt this XORed string. Flag is SCTF26{x0r_is_fun}', 'Crypto', 200, 'Easy', true);
     
     INSERT INTO public.challenge_flags (challenge_id, flag, flag_hash)
-    VALUES (v_chall3, 'SCTF{x0r_is_fun}', encode(digest('SCTF{x0r_is_fun}', 'sha256'), 'hex'));
+    VALUES (v_chall3, 'SCTF26{x0r_is_fun}', encode(digest('SCTF26{x0r_is_fun}', 'sha256'), 'hex'));
 
     -- Pwn
     INSERT INTO public.challenges (id, event_id, title, description, category, points, difficulty, is_active)
-    VALUES (v_chall4, v_event_id, 'Buffer Overflow 101', 'Classic pwn challenge. Flag is SCTF{pwn_th3_stack}', 'Pwn', 500, 'Hard', true);
+    VALUES (v_chall4, v_event_id, 'Buffer Overflow 101', 'Classic pwn challenge. Flag is SCTF26{pwn_th3_stack}', 'Pwn', 500, 'Hard', true);
     
     INSERT INTO public.challenge_flags (challenge_id, flag, flag_hash)
-    VALUES (v_chall4, 'SCTF{pwn_th3_stack}', encode(digest('SCTF{pwn_th3_stack}', 'sha256'), 'hex'));
+    VALUES (v_chall4, 'SCTF26{pwn_th3_stack}', encode(digest('SCTF26{pwn_th3_stack}', 'sha256'), 'hex'));
 
     -- Create Teams (if they don't have one)
     IF NOT EXISTS (SELECT 1 FROM public.team_members WHERE user_id = v_user1) THEN

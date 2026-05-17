@@ -91,7 +91,7 @@ export default function Home() {
           >
             <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
             <span className="text-[11px] uppercase tracking-wider font-bold text-gray-600 dark:text-blue-200/70">
-              Arena Flag format: <span className="font-mono text-blue-600 dark:text-blue-400">{APP.flagFormat}</span>
+              {APP.shortName} Flag format: <span className="font-mono text-blue-600 dark:text-blue-400">{APP.flagFormat}</span>
             </span>
           </motion.div>
 

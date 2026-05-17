@@ -1,5 +1,5 @@
 export const SCTF_ARENA = {
-  nxctf_title: 'SCTF',
+  nxctf_title: 'SCTF26',
   nxctf_logo: '/sctf.png',
   nxctf_discord: 'https://discord.gg/5etKks6aQQ',
   nxctf_donation: 'https://saweria.co/ariafatah',

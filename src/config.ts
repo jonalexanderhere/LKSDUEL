@@ -1,10 +1,10 @@
 import { LINKS, YEAR, DIFFICULTY_STYLES, SCTF_ARENA } from './const'
 
 export const APP = {
-  shortName: "SCTF",
-  fullName: "STEVEN CAPTURE THE FLAG",
+  shortName: "SCTF26",
+  fullName: "STEVEN CAPTURE THE FLAG 26",
   description: "Platform kompetisi siber modern yang dikhususkan untuk penyelenggaraan lomba Capture The Flag.",
-  flagFormat: "SCTF{your_flag_here}",
+  flagFormat: "SCTF26{your_flag_here}",
 
   challengeCategories: [
     "Intro",

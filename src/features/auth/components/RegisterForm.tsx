@@ -41,7 +41,7 @@ export default function RegisterForm() {
     <AuthCard>
       <AuthHeader
         badge="Create Account"
-        title="Join SCTF"
+        title="Join SCTF26"
         subtitle="Start solving challenges today"
       />
 
