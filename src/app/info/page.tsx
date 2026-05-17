@@ -69,7 +69,7 @@ export default function InfoPage() {
       {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-red-600/10 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-600/10 blur-[120px] animate-pulse" />
       </div>
 
       {/* Faint Watermark Logo */}
@@ -309,7 +309,7 @@ export default function InfoPage() {
             <div className="flex flex-col items-center gap-3">
               <img src="/dcsc-logo.png" alt="DCSC" className="h-20 w-auto object-contain brightness-110" />
               <span className="text-sm font-black text-gray-900 dark:text-white tracking-tight">
-                Darmajaya <span className="text-red-600">Cyber Security Club</span>
+                Darmajaya <span className="text-blue-600">Cyber Security Club</span>
               </span>
             </div>
           </div>
