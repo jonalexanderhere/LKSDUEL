@@ -26,7 +26,17 @@ export default function NotificationToast({
             key="solve-notif"
             layout
             initial={{ opacity: 0, x: 100, scale: 0.9 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+            animate={
+              solveNotif.isFirstBlood
+                ? { 
+                    opacity: 1, 
+                    x: [100, -15, 12, -8, 5, -2, 0], 
+                    y: [0, -5, 4, -3, 2, -1, 0],
+                    scale: [0.9, 1.1, 0.95, 1.05, 0.98, 1],
+                    transition: { duration: 0.6, ease: "easeOut" }
+                  }
+                : { opacity: 1, x: 0, scale: 1 }
+            }
             exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
             className={`pointer-events-auto relative flex items-center gap-4 px-5 py-4 rounded-xl shadow-2xl overflow-hidden min-w-[280px] max-w-[400px] border
               ${solveNotif.isFirstBlood 
@@ -56,7 +66,7 @@ export default function NotificationToast({
                     const tx = Math.cos(angle) * velocity;
                     const ty = Math.sin(angle) * velocity;
                     const size = 1.5 + ((i * 11) % 3);
-                    const colors = ['bg-yellow-300', 'bg-yellow-400', 'bg-orange-400', 'bg-red-500', 'bg-white'];
+                    const colors = ['bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-rose-500', 'bg-orange-600'];
                     const color = colors[(i * 7) % colors.length];
                     return (
                       <motion.span
@@ -80,7 +90,7 @@ export default function NotificationToast({
                     initial={{ scale: 0.5, opacity: 1, borderWidth: '6px' }}
                     animate={{ scale: 3.5, opacity: 0, borderWidth: '0px' }}
                     transition={{ duration: 0.7, ease: 'easeOut' }}
-                    className="absolute left-12 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-yellow-400"
+                    className="absolute left-12 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-red-500"
                   />
                 </div>
               </>

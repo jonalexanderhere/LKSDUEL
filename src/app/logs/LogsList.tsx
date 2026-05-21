@@ -75,7 +75,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     const enteredFirstBloodTab = prevTabRef.current !== 'firstblood' && tabType === 'firstblood'
     if (enteredFirstBloodTab) {
       try {
-        const audio = new Audio('/sounds/first-blood.mp3')
+        const audio = new Audio('/sounds/soundfirstbloodlogs.mp3')
         audio.volume = 0.7
         void audio.play()
       } catch { }
@@ -125,22 +125,26 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             className="pointer-events-none relative overflow-hidden rounded-xl border border-red-600/70 bg-black/70 px-5 py-8"
           >
             <div className="absolute inset-0">
-              {[...Array(22)].map((_, i) => {
-                const angle = (i / 22) * Math.PI * 2
-                const radius = 170 + (i % 5) * 24
+              {[...Array(40)].map((_, i) => {
+                const angle = (i / 40) * Math.PI * 2 + (i % 3) * 0.1
+                const radius = 170 + (i % 7) * 28
                 const fromX = Math.cos(angle) * radius
                 const fromY = Math.sin(angle) * radius
+                const colors = ['bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-rose-500', 'bg-orange-600']
+                const color = colors[i % colors.length]
+                const size = 1.5 + (i % 3) * 0.5
                 return (
                   <motion.span
                     key={`energy-particle-${i}`}
-                    initial={{ x: fromX, y: fromY, opacity: 0, scale: 0.6 }}
-                    animate={{ x: 0, y: 0, opacity: [0, 0.95, 0.2], scale: [0.6, 1, 0.4] }}
+                    initial={{ x: fromX, y: fromY, opacity: 0, scale: 0.5 }}
+                    animate={{ x: 0, y: 0, opacity: [0, 0.95, 0.1], scale: [0.5, 1.2, 0.3] }}
                     transition={{
                       duration: 1.35,
                       ease: 'easeInOut',
-                      delay: (i % 6) * 0.04,
+                      delay: (i % 8) * 0.05,
                     }}
-                    className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(252,211,77,0.9)]"
+                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${color} shadow-[0_0_12px_rgba(220,38,38,0.9)]`}
+                    style={{ width: size + 'px', height: size + 'px' }}
                   />
                 )
               })}
@@ -164,8 +168,14 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         )}
         {featuredFirstBlood && showFeaturedFirstBlood && (
           <motion.div
-            initial={{ opacity: 0, y: -22, scale: 0.93, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: -50, scale: 0.5, filter: 'blur(10px)' }}
+            animate={{ 
+              opacity: 1, 
+              y: [0, -15, 12, -8, 5, -2, 0], 
+              x: [0, 10, -8, 6, -4, 2, 0],
+              scale: [1, 1.1, 0.95, 1.05, 0.98, 1], 
+              filter: 'blur(0px)' 
+            }}
             exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
             className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.55)]"
