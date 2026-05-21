@@ -230,7 +230,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
-            className="relative overflow-hidden rounded-xl border-2 border-red-700 bg-black px-5 py-10 shadow-[0_0_60px_rgba(220,38,38,0.5)]"
+            className="relative overflow-hidden rounded-xl border-2 border-red-700 bg-black px-5 py-10 shadow-[0_0_60px_rgba(220,38,38,0.55)]"
           >
             {/* Dark moving blood mist */}
             <motion.div
@@ -239,31 +239,76 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(136,19,55,0.45),transparent_75%)]"
             />
             
-            {/* Blood drips on the edges - Highly realistic swelling drops */}
-            <div className="absolute top-0 left-0 right-0 flex justify-around opacity-90 pointer-events-none">
-              {[...Array(12)].map((_, i) => {
-                const dripHeight = 12 + (i % 5) * 14;
+            {/* Top Blood Smear/Border Layer 1 (Darker, thicker base) */}
+            <svg viewBox="0 0 1000 45" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-12 fill-rose-955 filter drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] z-20 pointer-events-none" style={{ fill: '#4c0519' }}>
+              <path d="M 0 0 L 1000 0 L 1000 20 Q 980 25, 960 15 T 920 12 Q 900 30, 890 40 Q 880 45, 870 30 Q 860 15, 840 12 T 800 10 Q 785 25, 775 35 Q 765 40, 755 30 Q 745 15, 730 12 T 670 10 Q 650 20, 630 15 T 590 10 Q 570 30, 560 42 Q 550 45, 540 30 Q 530 15, 520 12 T 460 10 Q 440 20, 420 15 T 380 10 Q 365 25, 355 35 Q 345 40, 335 30 Q 325 15, 320 12 T 290 10 T 250 10 Q 230 25, 220 35 Q 210 40, 200 25 Q 190 12, 170 10 T 130 10 Q 110 20, 90 15 T 50 10 Q 30 25, 20 30 Q 10 32, 0 18 Z" />
+            </svg>
+
+            {/* Top Blood Smear/Border Layer 2 (Brighter red overlay for 3D depth) */}
+            <svg viewBox="0 0 1000 45" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-9 fill-red-700/90 filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] z-20 pointer-events-none">
+              <path d="M 0 0 L 1000 0 L 1000 14 Q 980 18, 960 10 T 920 8 Q 900 20, 890 28 Q 880 32, 870 20 Q 860 10, 840 8 T 800 6 Q 785 18, 775 25 Q 765 28, 755 20 Q 745 10, 730 8 T 670 6 Q 650 12, 630 10 T 590 6 Q 570 20, 560 28 Q 550 32, 540 20 Q 530 10, 520 8 T 460 6 Q 440 12, 420 10 T 380 6 Q 365 18, 355 25 Q 345 28, 335 20 Q 325 10, 320 8 T 290 6 T 250 6 Q 230 18, 220 25 Q 210 28, 200 18 Q 190 8, 170 6 T 130 6 Q 110 12, 90 10 T 50 6 Q 30 18, 20 20 Q 10 22, 0 12 Z" />
+            </svg>
+
+            {/* Dynamic Blood Drips - Organic SVG shapes at non-uniform positions */}
+            <div className="absolute top-6 left-0 right-0 bottom-0 pointer-events-none overflow-hidden z-20">
+              {[
+                { left: 7, height: 45, delay: 0.2, pathIdx: 0 },
+                { left: 14, height: 85, delay: 1.5, pathIdx: 1 },
+                { left: 22, height: 60, delay: 0.8, pathIdx: 2 },
+                { left: 38, height: 110, delay: 2.3, pathIdx: 1 },
+                { left: 47, height: 50, delay: 0.5, pathIdx: 0 },
+                { left: 56, height: 95, delay: 1.1, pathIdx: 2 },
+                { left: 69, height: 70, delay: 1.9, pathIdx: 0 },
+                { left: 78, height: 120, delay: 0.1, pathIdx: 1 },
+                { left: 85, height: 55, delay: 1.4, pathIdx: 2 },
+                { left: 93, height: 80, delay: 0.7, pathIdx: 0 }
+              ].map((drip, i) => {
+                const paths = [
+                  "M 10 0 Q 12 20, 8 40 Q 6 60, 10 80 C 10 87, 4 95, 10 100 C 16 95, 10 87, 10 80 Q 14 60, 12 40 Q 16 20, 10 0 Z",
+                  "M 10 0 Q 6 25, 14 50 Q 18 75, 10 100 C 5 108, 15 120, 10 120 C 5 120, 15 108, 10 100 Q 18 75, 14 50 Q 6 25, 10 0 Z",
+                  "M 12 0 C 15 20, 9 35, 7 50 Q 5 70, 9 90 C 9 97, 5 102, 9 105 C 13 102, 9 97, 11 90 Q 13 70, 11 50 C 9 35, 15 20, 12 0 Z"
+                ];
+                
+                const selectedPath = paths[drip.pathIdx];
+                const duration = 3.8 + (i % 3) * 0.7;
+                
                 return (
-                  <div key={`edge-drip-${i}`} className="relative flex flex-col items-center">
-                    <motion.div
-                      animate={{ height: [`${dripHeight - 4}px`, `${dripHeight + 10}px`, `${dripHeight - 4}px`] }}
-                      transition={{ duration: 2.2 + (i % 3) * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="w-[2px] bg-gradient-to-b from-red-950 via-red-900 to-red-800 shadow-[0_0_2px_rgba(0,0,0,0.5)]"
-                    />
-                    <motion.div
+                  <div 
+                    key={`dynamic-drip-${i}`} 
+                    className="absolute top-0" 
+                    style={{ left: `${drip.left}%` }}
+                  >
+                    <motion.svg
+                      viewBox="0 0 20 120"
+                      className="w-3.5 origin-top filter drop-shadow-[0_3px_5px_rgba(0,0,0,0.6)]"
+                      style={{ height: `${drip.height}px` }}
+                      initial={{ scaleY: 0, opacity: 0 }}
                       animate={{ 
-                        scaleY: [1, 1.3, 1],
-                        scaleX: [1, 0.9, 1],
-                        y: [-1, 2, -1]
+                        scaleY: [0, 1, 1, 0.85, 0],
+                        opacity: [0, 1, 1, 0.7, 0],
+                        y: [0, 0, 4, 10, 0]
                       }}
-                      transition={{ duration: 2.2 + (i % 3) * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                      className="w-2.5 h-3.5 -mt-[3px] rounded-full rounded-t-sm bg-gradient-to-b from-red-800 to-red-950 shadow-[0_3px_6px_rgba(153,27,27,0.9)] relative"
+                      transition={{ 
+                        duration: duration, 
+                        repeat: Infinity, 
+                        delay: drip.delay,
+                        ease: "easeInOut",
+                        times: [0, 0.25, 0.75, 0.9, 1]
+                      }}
                     >
-                      {/* Shining Reflection highlight on liquid surface */}
-                      <div className="absolute top-0.5 left-0.5 w-[2px] h-[3px] bg-white/45 rounded-full" />
-                    </motion.div>
+                      <defs>
+                        <linearGradient id={`bloodDripGrad-${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="#3f0712" />
+                          <stop offset="40%" stopColor="#881337" />
+                          <stop offset="85%" stopColor="#e11d48" />
+                          <stop offset="100%" stopColor="#4c0519" />
+                        </linearGradient>
+                      </defs>
+                      <path d={selectedPath} fill={`url(#bloodDripGrad-${i})`} />
+                      <ellipse cx="10" cy="85" rx="1.5" ry="3.5" fill="white" opacity="0.4" />
+                    </motion.svg>
                   </div>
-                )
+                );
               })}
             </div>
 
