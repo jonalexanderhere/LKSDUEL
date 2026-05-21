@@ -23,7 +23,7 @@ type LogsContextType = {
   // Return a set of challenge ids for a given event (cached)
   getEventChallengeIds: (eventId: string | null | 'all') => Promise<Set<string> | null>
   // Get cached feed for logs page tabs, with incremental refresh of only the latest rows.
-  getFeed: (tabType: 'challenges' | 'solves', eventId?: string | null | 'all') => Promise<any[]>
+  getFeed: (tabType: 'challenges' | 'solves' | 'firstblood', eventId?: string | null | 'all') => Promise<any[]>
 }
 
 const LogsContext = createContext<LogsContextType | undefined>(undefined)
@@ -94,7 +94,7 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
     return logs
   }
 
-  async function getFeed(tabType: 'challenges' | 'solves', eventId?: string | null | 'all'): Promise<any[]> {
+  async function getFeed(tabType: 'challenges' | 'solves' | 'firstblood', eventId?: string | null | 'all'): Promise<any[]> {
     const normalizedEventKey = feedEventKey(eventId)
     const cacheKey = `${tabType}:${normalizedEventKey}`
 
@@ -112,9 +112,9 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
       }
 
       const isRefresh = !!cached
-      const limit = tabType === 'challenges'
-        ? (isRefresh ? REFRESH_CHALLENGE_LOGS : MAX_CHALLENGE_LOGS)
-        : (isRefresh ? REFRESH_SOLVE_LOGS : MAX_SOLVE_LOGS)
+      const limit = tabType === 'solves'
+        ? (isRefresh ? REFRESH_SOLVE_LOGS : MAX_SOLVE_LOGS)
+        : (isRefresh ? REFRESH_CHALLENGE_LOGS : MAX_CHALLENGE_LOGS)
 
       const eventMode: 'any' | 'main' | 'event' =
         eventId === undefined || eventId === 'all'
@@ -125,9 +125,9 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
       const eventParam = eventMode === 'event' ? String(eventId) : null
 
       // Fetch latest rows only (offset 0). For refresh, keep it small.
-      const fetched = tabType === 'challenges'
-        ? await getLogs(limit, 0)
-        : await getRecentSolves(limit, 0, eventParam, eventMode)
+      const fetched = tabType === 'solves'
+        ? await getRecentSolves(limit, 0, eventParam, eventMode)
+        : await getLogs(limit, 0)
 
       // Apply event filter if specified and not 'all'.
       let allowedSet: Set<string> | null = null
@@ -147,7 +147,7 @@ export function LogsProvider({ children }: { children: React.ReactNode }) {
       for (const item of fetchedFiltered) mergedMap.set(feedEntryId(item), item)
 
       let merged = Array.from(mergedMap.values()).sort(sortByCreatedAtDesc)
-      const cap = tabType === 'challenges' ? MAX_CHALLENGE_LOGS : MAX_SOLVE_LOGS
+      const cap = tabType === 'solves' ? MAX_SOLVE_LOGS : MAX_CHALLENGE_LOGS
       if (merged.length > cap) merged = merged.slice(0, cap)
 
       feedCacheRef.current.set(cacheKey, { fetchedAt: now, data: merged })

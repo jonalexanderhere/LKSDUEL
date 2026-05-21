@@ -21,7 +21,7 @@ export type LogEntry = {
   log_created_at: string;
 };
 
-export default function LogsList({ tabType = 'challenges', eventId }: { tabType?: 'challenges' | 'solves', eventId?: string | null | 'all' }) {
+export default function LogsList({ tabType = 'challenges', eventId }: { tabType?: 'challenges' | 'solves' | 'firstblood', eventId?: string | null | 'all' }) {
   const [notifications, setNotifications] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const { getFeed } = useLogs()
@@ -40,9 +40,14 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   }, [cacheKey, eventId, getFeed, tabType]);
 
   // Filter based on tab type
-  const challengeLogs = notifications.filter(n => n.log_type === 'first_blood' || n.log_type === 'new_challenge');
-  const solveLogs = notifications.filter(n => n.log_type === 'solve' || n.log_type === 'first_blood');
-  const filteredNotifications = tabType === 'solves' ? solveLogs : challengeLogs;
+  const challengeLogs = notifications.filter(n => n.log_type === 'new_challenge');
+  const solveLogs = notifications.filter(n => n.log_type === 'solve');
+  const firstBloodLogs = notifications.filter(n => n.log_type === 'first_blood');
+  const filteredNotifications = tabType === 'solves'
+    ? solveLogs
+    : tabType === 'firstblood'
+      ? firstBloodLogs
+      : challengeLogs;
 
   if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
 
@@ -86,13 +91,19 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       {filteredNotifications.map((notif, idx) => (
         <motion.li
           key={idx}
-          className="border rounded-lg px-4 py-3 shadow bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150 min-w-0"
+          className={`border rounded-lg px-4 py-3 shadow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm transition-colors duration-150 min-w-0 ${
+            notif.log_type === "first_blood"
+              ? "bg-gradient-to-r from-red-50 via-rose-50 to-amber-50 border-red-300 dark:from-red-950/50 dark:via-rose-950/40 dark:to-amber-950/30 dark:border-red-800/60 hover:bg-red-50/80"
+              : "bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700"
+          }`}
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
         >
           {/* Icon */}
-          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 mr-2">
+          <span className={`flex items-center justify-center w-8 h-8 rounded-full mr-2 ${
+            notif.log_type === "first_blood" ? "bg-red-100 dark:bg-red-900/40" : "bg-blue-100 dark:bg-blue-900"
+          }`}>
             {notif.log_type === "new_challenge" ? (
               <svg
                 width="20"
@@ -135,7 +146,14 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               </>
             ) : notif.log_type === "first_blood" ? (
               <>
-                <span className="font-semibold text-red-600 dark:text-red-300">FIRST BLOOD</span>
+                <span className="inline-flex items-center rounded-md bg-red-600 text-white px-2 py-0.5 text-[10px] font-black tracking-wider shadow-sm">
+                  FIRST BLOOD
+                </span>
+                <motion.span
+                  animate={{ opacity: [0.35, 0.9, 0.35] }}
+                  transition={{ duration: 1.2, repeat: Infinity }}
+                  className="inline-block h-2 w-2 rounded-full bg-yellow-400"
+                />
                 <span className="inline-flex items-center gap-1 min-w-0">
                   <Link
                     href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"}
@@ -148,7 +166,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                     </span>
                   </Link>
                 </span>
-                <span className="text-gray-700 dark:text-gray-300">solved</span>
+                <span className="text-red-700 dark:text-red-200 font-semibold">solved</span>
                 <b className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-block">{notif.log_challenge_title}</b>
                 <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
               </>
