@@ -124,46 +124,47 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             exit={{ opacity: 0 }}
             className="pointer-events-none relative overflow-hidden rounded-xl border border-red-600/70 bg-black/70 px-5 py-8"
           >
-            <div className="absolute inset-0">
-              {[...Array(40)].map((_, i) => {
-                const angle = (i / 40) * Math.PI * 2 + (i % 3) * 0.1
-                const radius = 170 + (i % 7) * 28
+            <motion.div 
+              animate={{ rotate: 180 }} 
+              transition={{ duration: 1.5, ease: "easeIn" }}
+              className="absolute inset-0"
+            >
+              {[...Array(60)].map((_, i) => {
+                const angle = (i / 60) * Math.PI * 2 + (i % 5) * 0.2
+                const radius = 220 + (i % 8) * 20
                 const fromX = Math.cos(angle) * radius
                 const fromY = Math.sin(angle) * radius
-                const colors = ['bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-rose-500', 'bg-orange-600']
+                const colors = ['bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-rose-500', 'bg-white']
                 const color = colors[i % colors.length]
-                const size = 1.5 + (i % 3) * 0.5
+                const size = 1.5 + (i % 4) * 0.5
                 return (
                   <motion.span
                     key={`energy-particle-${i}`}
                     initial={{ x: fromX, y: fromY, opacity: 0, scale: 0.5 }}
-                    animate={{ x: 0, y: 0, opacity: [0, 0.95, 0.1], scale: [0.5, 1.2, 0.3] }}
+                    animate={{ x: 0, y: 0, opacity: [0, 1, 0], scale: [0.5, 1.5, 0.2] }}
                     transition={{
-                      duration: 1.35,
-                      ease: 'easeInOut',
-                      delay: (i % 8) * 0.05,
+                      duration: 1.2,
+                      ease: 'easeIn',
+                      delay: (i % 12) * 0.05,
                     }}
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${color} shadow-[0_0_12px_rgba(220,38,38,0.9)]`}
+                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${color} shadow-[0_0_15px_rgba(220,38,38,1)]`}
                     style={{ width: size + 'px', height: size + 'px' }}
                   />
                 )
               })}
-            </div>
+            </motion.div>
             <motion.div
-              initial={{ scale: 2.4, opacity: 0.25 }}
-              animate={{ scale: 0.8, opacity: 0.8 }}
-              transition={{ duration: 1.35, ease: 'easeOut' }}
-              className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500/40 blur-2xl"
+              initial={{ scale: 2.5, opacity: 0 }}
+              animate={{ scale: 0.5, opacity: 1 }}
+              transition={{ duration: 1.35, ease: 'easeIn' }}
+              className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/50 blur-3xl"
             />
             <motion.div
-              initial={{ scale: 1.8, opacity: 0.15 }}
-              animate={{ scale: 0.9, opacity: 0.65 }}
-              transition={{ duration: 1.35, ease: 'easeOut' }}
-              className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-300/70"
+              initial={{ scale: 2, opacity: 0 }}
+              animate={{ scale: 0.2, opacity: 1 }}
+              transition={{ duration: 1.35, ease: 'easeIn' }}
+              className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-red-400/80"
             />
-            <div className="relative text-center text-red-100 text-xs tracking-[0.3em] font-bold">
-              ENERGY CHARGING
-            </div>
           </motion.div>
         )}
         {featuredFirstBlood && showFeaturedFirstBlood && (
