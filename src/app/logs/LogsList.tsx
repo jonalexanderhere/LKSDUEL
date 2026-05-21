@@ -190,32 +190,57 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/30 blur-[60px] pointer-events-none"
             />
+            
+            {/* Radar / Target Overlay */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/10" />
+              <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/15" />
+              <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-red-500/20" />
+              <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/30 bg-red-500/10" />
+              
+              {/* Crosshairs */}
+              <div className="absolute left-1/2 top-1/2 h-[600px] w-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10" />
+              <div className="absolute top-1/2 left-1/2 w-[600px] h-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10" />
+              <div className="absolute left-1/2 top-1/2 h-[600px] w-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10 rotate-45" />
+              <div className="absolute top-1/2 left-1/2 w-[600px] h-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10 rotate-45" />
+            </div>
 
-            {/* Floating embers */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(24)].map((_, i) => {
-                const duration = 2 + (i % 5) * 0.6;
-                const delay = (i % 10) * 0.3;
-                const xOffset = ((i * 17) % 60) - 30;
-                const size = 1.5 + (i % 3);
+            {/* Shooting particles explosion */}
+            <div className="absolute inset-0 pointer-events-none overflow-visible">
+              {[...Array(80)].map((_, i) => {
+                const angle = (i / 80) * Math.PI * 2 + (Math.random() * 0.1 - 0.05);
+                const velocity = 200 + Math.random() * 300;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                const rotation = (angle * 180) / Math.PI;
+                const delay = Math.random() * 2;
                 return (
                   <motion.div
-                    key={`ember-${i}`}
+                    key={`shooting-particle-${i}`}
+                    initial={{ x: 0, y: 0, opacity: 1, scale: 0 }}
                     animate={{
-                      y: ['100%', '-20%'],
-                      x: [0, xOffset, -xOffset, 0],
-                      opacity: [0, 1, 0],
-                      scale: [0, 1.2, 0],
+                      x: [0, tx],
+                      y: [0, ty],
+                      opacity: [0, 1, 1, 0],
+                      scale: [0, 1, 1, 0.5],
                     }}
                     transition={{
-                      duration: duration,
-                      repeat: Infinity,
+                      duration: 1 + Math.random() * 0.8,
+                      ease: 'easeOut',
                       delay: delay,
-                      ease: 'linear'
+                      repeat: Infinity
                     }}
-                    className="absolute bottom-0 rounded-full bg-red-500 blur-[0.5px]"
-                    style={{ left: `${(i / 24) * 100}%`, width: size, height: size }}
-                  />
+                    className="absolute left-1/2 top-1/2 flex items-center justify-end origin-left"
+                    style={{ 
+                      width: `${40 + Math.random() * 80}px`, 
+                      height: '2px', 
+                      rotate: `${rotation}deg`,
+                      zIndex: 20
+                    }}
+                  >
+                    <div className="w-full h-full bg-gradient-to-r from-transparent via-red-600 to-red-400" />
+                    <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_3px_rgba(255,255,255,0.9)] shrink-0 translate-x-[1px]" />
+                  </motion.div>
                 );
               })}
             </div>
