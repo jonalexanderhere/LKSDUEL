@@ -269,7 +269,7 @@ export function useNotifications() {
       // We play it even for the current user if it's First Blood for maximum impact.
       if (solveSoundEnabled && (isFirstBlood || username !== user.username)) {
         try {
-          const soundFile = isFirstBlood ? '/sounds/soundfirstbloodlogs.mp3' : '/sounds/notif_solves.mp3'
+          const soundFile = isFirstBlood ? '/sounds/first-blood.mp3' : '/sounds/notif_solves.mp3'
           const audio = new Audio(soundFile)
           audio.volume = 0.5
           audio.play()

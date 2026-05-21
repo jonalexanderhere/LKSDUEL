@@ -59,14 +59,9 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       setEnergyPhase(false)
       return
     }
-    setEnergyPhase(true)
-    const t1 = setTimeout(() => {
-      setEnergyPhase(false)
-      setShowFeaturedFirstBlood(true)
-    }, 1500)
-    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 6200)
+    setShowFeaturedFirstBlood(true)
+    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 6000)
     return () => {
-      clearTimeout(t1)
       clearTimeout(t2)
     }
   }, [tabType, featuredFirstBlood?.log_created_at, featuredFirstBlood?.log_challenge_id])
@@ -75,7 +70,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     const enteredFirstBloodTab = prevTabRef.current !== 'firstblood' && tabType === 'firstblood'
     if (enteredFirstBloodTab) {
       try {
-        const audio = new Audio('/sounds/soundfirstbloodlogs.mp3')
+        const audio = new Audio('/sounds/first-blood.mp3')
         audio.volume = 0.7
         void audio.play()
       } catch { }
@@ -256,13 +251,83 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               </motion.div>
 
               <div className="relative text-center">
-                <motion.h2 
-                  animate={{ textShadow: ['0 0 15px rgba(248,113,113,0.5)', '0 0 30px rgba(239,68,68,0.8)', '0 0 15px rgba(248,113,113,0.5)'] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="text-4xl sm:text-5xl font-black uppercase tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-white via-red-200 to-red-600 mb-1"
-                >
-                  FIRST BLOOD
-                </motion.h2>
+                {/* Glitch CSS */}
+                <style dangerouslySetInnerHTML={{ __html: `
+                  @keyframes glitch-skew {
+                    0% { transform: skew(0deg); }
+                    10% { transform: skew(-2deg); }
+                    20% { transform: skew(0.5deg); }
+                    30% { transform: skew(0deg); }
+                    40% { transform: skew(1.5deg); }
+                    50% { transform: skew(-0.5deg); }
+                    60% { transform: skew(0deg); }
+                    70% { transform: skew(-1deg); }
+                    80% { transform: skew(0.4deg); }
+                    90% { transform: skew(0deg); }
+                    100% { transform: skew(-0.5deg); }
+                  }
+                  @keyframes glitch-top {
+                    0% { clip-path: inset(0 0 85% 0); transform: translate(0); }
+                    5% { clip-path: inset(20% 0 60% 0); transform: translate(-6px, -2px); }
+                    10% { clip-path: inset(0 0 85% 0); transform: translate(0); }
+                    15% { clip-path: inset(60% 0 10% 0); transform: translate(4px, 1px); }
+                    20% { clip-path: inset(0 0 85% 0); transform: translate(0); }
+                    25% { clip-path: inset(30% 0 50% 0); transform: translate(-3px, 2px); }
+                    30% { clip-path: inset(0 0 85% 0); transform: translate(0); }
+                    100% { clip-path: inset(0 0 85% 0); transform: translate(0); }
+                  }
+                  @keyframes glitch-bottom {
+                    0% { clip-path: inset(85% 0 0 0); transform: translate(0); }
+                    5% { clip-path: inset(50% 0 20% 0); transform: translate(5px, 2px); }
+                    10% { clip-path: inset(85% 0 0 0); transform: translate(0); }
+                    15% { clip-path: inset(10% 0 65% 0); transform: translate(-4px, -1px); }
+                    20% { clip-path: inset(85% 0 0 0); transform: translate(0); }
+                    25% { clip-path: inset(40% 0 30% 0); transform: translate(3px, -2px); }
+                    30% { clip-path: inset(85% 0 0 0); transform: translate(0); }
+                    100% { clip-path: inset(85% 0 0 0); transform: translate(0); }
+                  }
+                  @keyframes glitch-glow {
+                    0%, 100% { text-shadow: 0 0 10px rgba(239,68,68,0.5), 0 0 20px rgba(239,68,68,0.3); }
+                    25% { text-shadow: 0 0 20px rgba(239,68,68,0.8), 0 0 40px rgba(239,68,68,0.5), 0 0 60px rgba(239,68,68,0.2); }
+                    50% { text-shadow: 0 0 15px rgba(239,68,68,0.6), 0 0 30px rgba(239,68,68,0.4); }
+                    75% { text-shadow: 0 0 25px rgba(239,68,68,0.9), 0 0 50px rgba(239,68,68,0.6), 0 0 80px rgba(239,68,68,0.3); }
+                  }
+                  .fb-glitch-wrapper {
+                    position: relative;
+                    display: inline-block;
+                    animation: glitch-skew 4s infinite linear alternate-reverse;
+                  }
+                  .fb-glitch-text {
+                    animation: glitch-glow 2s ease-in-out infinite;
+                  }
+                  .fb-glitch-layer-top {
+                    position: absolute;
+                    left: 0; top: 0;
+                    width: 100%; height: 100%;
+                    color: #ef4444;
+                    animation: glitch-top 3s infinite linear alternate-reverse;
+                    pointer-events: none;
+                  }
+                  .fb-glitch-layer-bottom {
+                    position: absolute;
+                    left: 0; top: 0;
+                    width: 100%; height: 100%;
+                    color: #f87171;
+                    animation: glitch-bottom 2.5s infinite linear alternate-reverse;
+                    pointer-events: none;
+                  }
+                `}} />
+                <div className="fb-glitch-wrapper">
+                  <h2 className="fb-glitch-text text-4xl sm:text-5xl font-black uppercase tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-white via-red-200 to-red-600 mb-1">
+                    FIRST BLOOD
+                  </h2>
+                  <span aria-hidden="true" className="fb-glitch-layer-top text-4xl sm:text-5xl font-black uppercase tracking-[0.15em]">
+                    FIRST BLOOD
+                  </span>
+                  <span aria-hidden="true" className="fb-glitch-layer-bottom text-4xl sm:text-5xl font-black uppercase tracking-[0.15em]">
+                    FIRST BLOOD
+                  </span>
+                </div>
                 
                 <div className="flex items-center justify-center gap-4 mt-8 mb-4">
                   <div className="h-[2px] w-16 bg-gradient-to-r from-transparent to-red-600 rounded-full" />
