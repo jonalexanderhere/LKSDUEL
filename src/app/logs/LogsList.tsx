@@ -103,13 +103,6 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         audio.volume = 0.7
         void audio.play()
       } catch { }
-
-      // Mobile / device physical vibration
-      try {
-        if (typeof window !== 'undefined' && navigator.vibrate) {
-          navigator.vibrate([250, 80, 250, 80, 400])
-        }
-      } catch { }
     }
 
     prevTabRef.current = tabType
@@ -150,6 +143,17 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         }
       `}} />
 
+      {/* Global SVG Filters for liquid/gooey blood effects */}
+      <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+        <defs>
+          <filter id="gooey-blood">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+        </defs>
+      </svg>
+
       <AnimatePresence mode="popLayout">
         {tabType === 'firstblood' && featuredFirstBlood && !dismissed && (
           <motion.div
@@ -158,26 +162,9 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             animate={{ 
               opacity: 1, 
               scale: 1, 
-              // Only apply glitch/shake keyframes in splash phase; in details phase, stay perfectly flat (0)
-              x: cardPhase === 'splash' ? [0, -3, 3, -1.5, 1.5, 0, -2.5, 2.5, 0, 0, 0, 0] : 0,
-              y: cardPhase === 'splash' ? [0, 1.5, -1.5, 1, -1, 0, 2, -2, 0, 0, 0, 0] : 0,
-              skewX: cardPhase === 'splash' ? [0, 4, -4, 0, 3, -3, 0, 0, 0] : 0,
-              filter: cardPhase === 'splash' 
-                ? [
-                    "hue-rotate(0deg)",
-                    "hue-rotate(12deg)",
-                    "hue-rotate(-12deg)",
-                    "hue-rotate(0deg)",
-                    "hue-rotate(0deg)"
-                  ]
-                : "hue-rotate(0deg)"
             }}
             exit={{ opacity: 0, scale: 0.95, y: -10, filter: 'blur(8px)' }}
             transition={{ 
-              x: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
-              y: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
-              skewX: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
-              filter: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
               default: { type: 'spring', stiffness: 130, damping: 20 }
             }}
             className="relative w-full overflow-hidden rounded-xl border border-red-950 bg-black/95 px-5 py-12 shadow-[0_0_35px_rgba(136,19,55,0.25)]"
@@ -405,44 +392,77 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                   >
                     {/* Splash Splatter Background Animation */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-                      <motion.svg
-                        viewBox="0 0 200 200"
-                        className="w-80 h-80 filter drop-shadow-[0_0_25px_rgba(136,19,55,0.7)]"
-                        initial={{ scale: 0.1, opacity: 0, rotate: -45 }}
-                        animate={{ 
-                          scale: [0.1, 1.25, 1.1],
-                          opacity: [0, 1, 0.95],
-                          rotate: [-45, 15, 0]
-                        }}
-                        transition={{ 
-                          duration: 0.55,
-                          ease: "easeOut",
-                          times: [0, 0.7, 1]
-                        }}
+                      {/* Gooey filter wrapper */}
+                      <div 
+                        className="relative w-80 h-80 flex items-center justify-center"
+                        style={{ filter: "url(#gooey-blood)" }}
                       >
-                        <defs>
-                          <radialGradient id="centerSplashGrad" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stopColor="#be123c" />
-                            <stop offset="40%" stopColor="#991b1b" />
-                            <stop offset="75%" stopColor="#450a0a" />
-                            <stop offset="100%" stopColor="#180003" />
-                          </radialGradient>
-                        </defs>
-                        {/* Organic main splash body */}
-                        <path d="M 100 100 Q 70 70, 75 90 T 55 120 T 80 150 T 130 140 T 145 105 T 120 75 Z" fill="url(#centerSplashGrad)" />
-                        {/* Dynamic splash extension rays */}
-                        <path d="M 85 90 Q 30 70, 15 65" stroke="url(#centerSplashGrad)" strokeWidth="3" strokeLinecap="round" fill="none" />
-                        <path d="M 115 90 Q 170 60, 185 55" stroke="url(#centerSplashGrad)" strokeWidth="3" strokeLinecap="round" fill="none" />
-                        <path d="M 100 120 Q 90 180, 85 195" stroke="url(#centerSplashGrad)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-                        <path d="M 115 110 Q 165 150, 175 160" stroke="url(#centerSplashGrad)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-                        {/* Detached micro droplets around impact */}
-                        <circle cx="45" cy="55" r="4" fill="url(#centerSplashGrad)" />
-                        <circle cx="30" cy="85" r="2.5" fill="url(#centerSplashGrad)" />
-                        <circle cx="165" cy="65" r="3.5" fill="url(#centerSplashGrad)" />
-                        <circle cx="180" cy="115" r="2" fill="url(#centerSplashGrad)" />
-                        <circle cx="70" cy="170" r="3" fill="url(#centerSplashGrad)" />
-                        <circle cx="140" cy="165" r="4" fill="url(#centerSplashGrad)" />
-                      </motion.svg>
+                        <motion.svg
+                          viewBox="0 0 200 200"
+                          className="w-48 h-48 filter drop-shadow-[0_0_15px_rgba(136,19,55,0.8)]"
+                          initial={{ scale: 0.1, opacity: 0, rotate: -45 }}
+                          animate={{ 
+                            scale: [0.1, 1.1, 1],
+                            opacity: [0, 1, 0.95],
+                            rotate: [-45, 10, 0]
+                          }}
+                          transition={{ 
+                            duration: 0.5,
+                            ease: "easeOut",
+                          }}
+                        >
+                          <defs>
+                            <radialGradient id="centerSplashGrad" cx="50%" cy="50%" r="50%">
+                              <stop offset="0%" stopColor="#be123c" />
+                              <stop offset="40%" stopColor="#991b1b" />
+                              <stop offset="75%" stopColor="#450a0a" />
+                              <stop offset="100%" stopColor="#180003" />
+                            </radialGradient>
+                          </defs>
+                          {/* Organic main splash body with specular lighting */}
+                          <path d="M 100 100 C 90 85, 75 75, 70 90 C 65 105, 55 110, 60 125 C 65 140, 80 145, 95 140 C 110 135, 125 145, 135 135 C 145 125, 140 105, 130 95 C 120 85, 110 90, 100 100 Z" fill="url(#centerSplashGrad)" />
+                          <path d="M 75 92 C 85 82, 115 82, 125 92 C 115 86, 85 86, 75 92 Z" fill="#ffffff" opacity="0.3" />
+                        </motion.svg>
+
+                        {/* Dynamic bursting droplets */}
+                        {Array.from({ length: 18 }).map((_, i) => {
+                          const angle = (i * 360) / 18 + (Math.random() * 20 - 10);
+                          const distance = 55 + Math.random() * 75; // how far it travels
+                          const rad = (angle * Math.PI) / 180;
+                          const targetX = Math.cos(rad) * distance;
+                          const targetY = Math.sin(rad) * distance;
+                          const size = 8 + Math.random() * 12; // droplet size
+                          const delay = Math.random() * 0.12;
+                          const duration = 0.5 + Math.random() * 0.4;
+
+                          return (
+                            <motion.div
+                              key={`splat-drop-${i}`}
+                              className="absolute rounded-full bg-gradient-to-br from-red-600 via-red-800 to-rose-950"
+                              style={{
+                                width: size,
+                                height: size,
+                                transformOrigin: "center",
+                              }}
+                              initial={{ x: 0, y: 0, scale: 0.1, opacity: 0 }}
+                              animate={{
+                                x: [0, targetX * 0.4, targetX],
+                                y: [0, targetY * 0.4, targetY],
+                                scale: [0.1, 1.25, 1, 0.9],
+                                opacity: [0, 1, 1, 0.95],
+                              }}
+                              transition={{
+                                duration: duration,
+                                ease: [0.15, 0.85, 0.3, 1], // clean ease-out deceleration
+                                delay: delay,
+                              }}
+                            >
+                              {/* Specular wet highlight inside droplet */}
+                              <span className="absolute top-0.5 left-0.5 w-[30%] h-[30%] bg-white rounded-full opacity-60" />
+                            </motion.div>
+                          );
+                        })}
+                      </div>
                     </div>
 
                     {/* Splash Title */}
