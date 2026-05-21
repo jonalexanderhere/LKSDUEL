@@ -1,7 +1,7 @@
 "use client";
 
 // React Imports
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Trophy } from "lucide-react";
@@ -26,6 +26,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   const [loading, setLoading] = useState(true);
   const [showFeaturedFirstBlood, setShowFeaturedFirstBlood] = useState(false)
   const [energyPhase, setEnergyPhase] = useState(false)
+  const prevTabRef = useRef<'challenges' | 'solves' | 'firstblood' | null>(null)
   const { getFeed } = useLogs()
 
   const eventKey = eventId === undefined ? 'any' : (eventId === null ? 'main' : String(eventId))
@@ -62,13 +63,25 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     const t1 = setTimeout(() => {
       setEnergyPhase(false)
       setShowFeaturedFirstBlood(true)
-    }, 650)
-    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 4300)
+    }, 1500)
+    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 6200)
     return () => {
       clearTimeout(t1)
       clearTimeout(t2)
     }
   }, [tabType, featuredFirstBlood?.log_created_at, featuredFirstBlood?.log_challenge_id])
+
+  useEffect(() => {
+    const enteredFirstBloodTab = prevTabRef.current !== 'firstblood' && tabType === 'firstblood'
+    if (enteredFirstBloodTab) {
+      try {
+        const audio = new Audio('/sounds/first-blood.mp3')
+        audio.volume = 0.7
+        void audio.play()
+      } catch { }
+    }
+    prevTabRef.current = tabType
+  }, [tabType])
 
   if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
 
@@ -111,16 +124,37 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             exit={{ opacity: 0 }}
             className="pointer-events-none relative overflow-hidden rounded-xl border border-red-600/70 bg-black/70 px-5 py-8"
           >
+            <div className="absolute inset-0">
+              {[...Array(22)].map((_, i) => {
+                const angle = (i / 22) * Math.PI * 2
+                const radius = 170 + (i % 5) * 24
+                const fromX = Math.cos(angle) * radius
+                const fromY = Math.sin(angle) * radius
+                return (
+                  <motion.span
+                    key={`energy-particle-${i}`}
+                    initial={{ x: fromX, y: fromY, opacity: 0, scale: 0.6 }}
+                    animate={{ x: 0, y: 0, opacity: [0, 0.95, 0.2], scale: [0.6, 1, 0.4] }}
+                    transition={{
+                      duration: 1.35,
+                      ease: 'easeInOut',
+                      delay: (i % 6) * 0.04,
+                    }}
+                    className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(252,211,77,0.9)]"
+                  />
+                )
+              })}
+            </div>
             <motion.div
               initial={{ scale: 2.4, opacity: 0.25 }}
               animate={{ scale: 0.8, opacity: 0.8 }}
-              transition={{ duration: 0.62, ease: 'easeOut' }}
+              transition={{ duration: 1.35, ease: 'easeOut' }}
               className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500/40 blur-2xl"
             />
             <motion.div
               initial={{ scale: 1.8, opacity: 0.15 }}
               animate={{ scale: 0.9, opacity: 0.65 }}
-              transition={{ duration: 0.62, ease: 'easeOut' }}
+              transition={{ duration: 1.35, ease: 'easeOut' }}
               className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-300/70"
             />
             <div className="relative text-center text-red-100 text-xs tracking-[0.3em] font-bold">
@@ -130,11 +164,18 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         )}
         {featuredFirstBlood && showFeaturedFirstBlood && (
           <motion.div
-            initial={{ opacity: 0, y: -16, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.99 }}
+            initial={{ opacity: 0, y: -22, scale: 0.93, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
+            transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
             className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.55)]"
           >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.15, 0.28, 0.15], x: [0, -1, 1, 0] }}
+              transition={{ duration: 0.22, repeat: 4, ease: 'linear' }}
+              className="pointer-events-none absolute inset-0 mix-blend-screen bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.08)_48%,transparent_100%)]"
+            />
             <motion.div
               animate={{ opacity: [0.25, 0.55, 0.25] }}
               transition={{ duration: 1.6, repeat: Infinity }}
@@ -142,7 +183,18 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             />
             <div className="relative">
               <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
-              <div className="mt-2 text-3xl font-black uppercase tracking-[0.12em] text-red-400">FIRST BLOOD</div>
+              <div className="mt-2 relative text-3xl font-black uppercase tracking-[0.12em] text-red-400">
+                <span>FIRST BLOOD</span>
+                <motion.span
+                  aria-hidden
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 0.8, 0, 0.55, 0] }}
+                  transition={{ duration: 0.35, times: [0, 0.2, 0.45, 0.7, 1] }}
+                  className="absolute left-0 top-0 text-red-200/80 translate-x-[1px] -translate-y-[1px]"
+                >
+                  FIRST BLOOD
+                </motion.span>
+              </div>
               <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">
                 {featuredFirstBlood.log_username || 'unknown'}
               </p>

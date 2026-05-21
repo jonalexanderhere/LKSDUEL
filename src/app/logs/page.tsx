@@ -1,7 +1,7 @@
 "use client";
 
 // React Imports
-import { Suspense, useState, useEffect, useRef } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flag, Logs, Droplets } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { Loader, TitlePage } from '@/shared/components';
 import { EventSelect } from '@/shared/components/custom'
 import { useLogs, useEventContext, useAuth } from '@/shared/contexts'
-import { subscribeToSolves } from '@/shared/lib'
 
 // Local Imports
 import LogsList from "./LogsList";
@@ -22,7 +21,6 @@ export default function LogsPage() {
   const [tabType, setTabType] = useState<'challenges' | 'solves' | 'firstblood'>('solves')
   const [entryBlast, setEntryBlast] = useState(false)
   const { startedEvents, selectedEvent, setSelectedEvent } = useEventContext()
-  const playedFirstBloodKeysRef = useRef<Set<string>>(new Set())
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -43,28 +41,6 @@ export default function LogsPage() {
     setTabType(nextTab)
     setEntryBlast(false)
   }
-
-  useEffect(() => {
-    if (!user) return
-
-    const unsubscribe = subscribeToSolves(({ username, challenge, isFirstBlood }) => {
-      if (!isFirstBlood) return
-
-      const eventKey = `${username || 'unknown'}|${challenge || 'unknown'}`
-      if (playedFirstBloodKeysRef.current.has(eventKey)) return
-      playedFirstBloodKeysRef.current.add(eventKey)
-
-      if (tabType === 'firstblood') {
-        try {
-          const audio = new Audio('/sounds/first-blood.mp3')
-          audio.volume = 0.7
-          void audio.play()
-        } catch { }
-      }
-    })
-
-    return () => unsubscribe()
-  }, [tabType, user])
 
   // Events are loaded globally via EventProvider
 
