@@ -48,21 +48,40 @@ export default function NotificationToast({
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-red-500/20"
                 />
-                <div className="pointer-events-none absolute inset-0">
-                  {[...Array(8)].map((_, i) => (
-                    <motion.span
-                      key={`fb-particle-${i}`}
-                      initial={{ x: 0, y: 0, opacity: 0.95, scale: 1 }}
-                      animate={{
-                        x: [0, (i % 2 === 0 ? 1 : -1) * (18 + i * 4)],
-                        y: [0, (i < 4 ? -1 : 1) * (10 + i * 3)],
-                        opacity: [0.95, 0],
-                        scale: [1, 0.3],
-                      }}
-                      transition={{ duration: 0.65, ease: 'easeOut' }}
-                      className="absolute left-14 top-1/2 h-1.5 w-1.5 rounded-full bg-yellow-300"
-                    />
-                  ))}
+                <div className="pointer-events-none absolute inset-0 overflow-visible">
+                  {/* Explosion particles */}
+                  {[...Array(40)].map((_, i) => {
+                    const angle = (Math.PI * 2 * i) / 40 + ((i * 13) % 10) / 100;
+                    const velocity = 40 + ((i * 17) % 80);
+                    const tx = Math.cos(angle) * velocity;
+                    const ty = Math.sin(angle) * velocity;
+                    const size = 1.5 + ((i * 11) % 3);
+                    const colors = ['bg-yellow-300', 'bg-yellow-400', 'bg-orange-400', 'bg-red-500', 'bg-white'];
+                    const color = colors[(i * 7) % colors.length];
+                    return (
+                      <motion.span
+                        key={`fb-particle-${i}`}
+                        initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                        animate={{
+                          x: [0, tx],
+                          y: [0, ty],
+                          opacity: [1, 0],
+                          scale: [1, 0.4],
+                        }}
+                        transition={{ duration: 0.6 + ((i * 3) % 4) * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                        className={`absolute left-12 top-1/2 -mt-1 -ml-1 rounded-full ${color}`}
+                        style={{ width: size, height: size, zIndex: 10 }}
+                      />
+                    );
+                  })}
+                  
+                  {/* Blast wave */}
+                  <motion.div
+                    initial={{ scale: 0.5, opacity: 1, borderWidth: '6px' }}
+                    animate={{ scale: 3.5, opacity: 0, borderWidth: '0px' }}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
+                    className="absolute left-12 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-yellow-400"
+                  />
                 </div>
               </>
             )}
@@ -116,7 +135,7 @@ export default function NotificationToast({
             <motion.div 
               initial={{ width: "100%" }}
               animate={{ width: 0 }}
-              transition={{ duration: 12, ease: "linear" }}
+              transition={{ duration: solveNotif.isFirstBlood ? 25 : 12, ease: "linear" }}
               className={`absolute bottom-0 left-0 h-0.5 
                 ${solveNotif.isFirstBlood ? 'bg-yellow-400/50' : 'bg-blue-500/50'}
               `}

@@ -276,7 +276,7 @@ export function useNotifications() {
         } catch { }
       }
       if (notifTimeout.current) clearTimeout(notifTimeout.current)
-      notifTimeout.current = setTimeout(() => setSolveNotif(null), 12000)
+      notifTimeout.current = setTimeout(() => setSolveNotif(null), isFirstBlood ? 25000 : 12000)
     })
     return () => {
       unsubscribe()
