@@ -22,6 +22,8 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   const [notifications, setNotifications] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [resolvedTeamName, setResolvedTeamName] = useState<string>("")
+  const [dismissed, setDismissed] = useState(false)
+  const [cardPhase, setCardPhase] = useState<'splash' | 'details'>('splash')
   const prevTabRef = useRef<'challenges' | 'solves' | 'firstblood' | null>(null)
   const { getFeed } = useLogs()
 
@@ -76,6 +78,15 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       }
     })()
   }, [featuredFirstBlood])
+
+  useEffect(() => {
+    setDismissed(false)
+    setCardPhase('splash')
+    const timer = setTimeout(() => {
+      setCardPhase('details')
+    }, 1800)
+    return () => clearTimeout(timer)
+  }, [featuredFirstBlood?.log_challenge_id, featuredFirstBlood?.log_created_at])
 
   useEffect(() => {
     const enteredFirstBloodTab = prevTabRef.current !== 'firstblood' && tabType === 'firstblood'
@@ -134,24 +145,45 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       `}} />
 
       <AnimatePresence mode="popLayout">
-        {tabType === 'firstblood' && featuredFirstBlood && (
+        {tabType === 'firstblood' && featuredFirstBlood && !dismissed && (
           <motion.div
             key={`featured-${featuredFirstBlood.log_challenge_id}`}
             initial={{ opacity: 0, scale: 0.97, y: 15 }}
             animate={{ 
               opacity: 1, 
               scale: 1, 
-              x: [0, -0.4, 0.4, -0.3, 0.3, -0.4, 0.4, 0],
-              y: [0, 0.4, -0.4, 0.3, -0.3, 0.4, -0.4, 0]
+              // Glitch horizontal & vertical twitches followed by silence
+              x: [0, -3, 3, -1.5, 1.5, 0, -2.5, 2.5, 0, 0, 0, 0, 0, 0, 0],
+              y: [0, 1.5, -1.5, 1, -1, 0, 2, -2, 0, 0, 0, 0, 0, 0, 0],
+              skewX: [0, 4, -4, 0, 3, -3, 0, 0, 0, 0, 0, 0, 0],
+              filter: [
+                "hue-rotate(0deg)",
+                "hue-rotate(12deg)",
+                "hue-rotate(-12deg)",
+                "hue-rotate(0deg)",
+                "hue-rotate(0deg)",
+                "hue-rotate(0deg)"
+              ]
             }}
             exit={{ opacity: 0, scale: 0.95, y: -10, filter: 'blur(8px)' }}
             transition={{ 
-              x: { repeat: Infinity, duration: 0.28, ease: "linear" },
-              y: { repeat: Infinity, duration: 0.28, ease: "linear" },
+              x: { repeat: Infinity, duration: 1.6, ease: "linear" },
+              y: { repeat: Infinity, duration: 1.6, ease: "linear" },
+              skewX: { repeat: Infinity, duration: 1.6, ease: "linear" },
+              filter: { repeat: Infinity, duration: 1.6, ease: "linear" },
               default: { type: 'spring', stiffness: 130, damping: 20 }
             }}
             className="relative w-full overflow-hidden rounded-xl border border-red-950 bg-black/95 px-5 py-12 shadow-[0_0_35px_rgba(136,19,55,0.25)]"
           >
+            {/* Dismiss Button */}
+            <button 
+              onClick={() => setDismissed(true)}
+              className="absolute top-4 right-4 z-30 text-red-500 hover:text-white transition-colors text-2xl font-bold bg-black/40 hover:bg-red-950/40 w-8 h-8 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer"
+              title="Close"
+            >
+              &times;
+            </button>
+
             {/* Dark moving blood mist */}
             <motion.div
               animate={{ opacity: [0.35, 0.65, 0.35], scale: [1, 1.02, 1] }}
@@ -353,38 +385,65 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             </div>
 
             {/* Pushed down pt-16 here to fully prevent dripping top SVG border overlap and maintain ultra-neat layout! */}
-            <div className="relative z-10 flex flex-col items-center justify-center pt-16 text-center">
-              {/* Subtle top indicator */}
-              <div className="text-[10px] font-mono tracking-[0.45em] text-red-500/80 font-bold uppercase mb-2">
-                FIRST BLOOD ACHIEVED
-              </div>
+            <div className="relative z-10 flex flex-col items-center justify-center pt-16 text-center w-full min-h-[220px]">
+              <AnimatePresence mode="wait">
+                {cardPhase === 'splash' ? (
+                  <motion.div
+                    key="splash-content"
+                    initial={{ opacity: 0, scale: 0.82, filter: 'blur(5px)' }}
+                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, scale: 1.15, filter: 'blur(8px)' }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="flex flex-col items-center justify-center py-8"
+                  >
+                    {/* Splash Title */}
+                    <div className="text-4xl sm:text-5xl font-bold uppercase tracking-wider font-nosifer text-red-600 drop-shadow-[0_0_30px_rgba(220,38,38,0.95)] select-none">
+                      FIRST BLOOD
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="details-content"
+                    initial={{ opacity: 0, y: 12, filter: 'blur(5px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -10, filter: 'blur(5px)' }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="flex flex-col items-center justify-center w-full"
+                  >
+                    {/* Subtle top indicator */}
+                    <div className="text-[10px] font-mono tracking-[0.45em] text-red-500/80 font-bold uppercase mb-2">
+                      FIRST BLOOD ACHIEVED
+                    </div>
 
-              {/* Main Heading */}
-              <div className="text-3xl sm:text-4xl font-bold uppercase tracking-wider font-nosifer text-red-600 drop-shadow-[0_0_20px_rgba(220,38,38,0.85)] select-none mb-6">
-                FIRST BLOOD
-              </div>
+                    {/* Main Heading */}
+                    <div className="text-3xl sm:text-4xl font-bold uppercase tracking-wider font-nosifer text-red-600 drop-shadow-[0_0_20px_rgba(220,38,38,0.85)] select-none mb-6">
+                      FIRST BLOOD
+                    </div>
 
-              {/* Username */}
-              <div className="text-3xl sm:text-4xl font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] tracking-wide font-creepster mb-1">
-                {featuredFirstBlood.log_username || 'unknown'}
-              </div>
-              
-              {/* Sleek, raw team badge */}
-              {resolvedTeamName && (
-                <div className="mt-2 mb-4 text-xs uppercase tracking-[0.25em] text-red-500 font-mono font-bold">
-                  [ {resolvedTeamName} ]
-                </div>
-              )}
+                    {/* Username */}
+                    <div className="text-3xl sm:text-4xl font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] tracking-wide font-creepster mb-1">
+                      {featuredFirstBlood.log_username || 'unknown'}
+                    </div>
+                    
+                    {/* Sleek, raw team badge */}
+                    {resolvedTeamName && (
+                      <div className="mt-2 mb-4 text-xs uppercase tracking-[0.25em] text-red-500 font-mono font-bold">
+                        [ {resolvedTeamName} ]
+                      </div>
+                    )}
 
-              {/* Challenge Title */}
-              <div className="mt-2 text-2xl sm:text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide mb-6">
-                {featuredFirstBlood.log_challenge_title}
-              </div>
+                    {/* Challenge Title */}
+                    <div className="mt-2 text-2xl sm:text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide mb-6">
+                      {featuredFirstBlood.log_challenge_title}
+                    </div>
 
-              {/* Challenge Category Text - Styled beautifully as a bottom tag */}
-              <div className="mt-2 text-[10px] font-mono font-bold tracking-[0.25em] text-rose-400 uppercase bg-red-950/40 border border-red-900/60 rounded-full px-4 py-1">
-                Category: {featuredFirstBlood.log_category}
-              </div>
+                    {/* Challenge Category Text - Styled beautifully as a bottom tag */}
+                    <div className="mt-2 text-[10px] font-mono font-bold tracking-[0.25em] text-rose-400 uppercase bg-red-950/40 border border-red-900/60 rounded-full px-4 py-1">
+                      Category: {featuredFirstBlood.log_category}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
