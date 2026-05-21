@@ -82,10 +82,16 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   useEffect(() => {
     setDismissed(false)
     setCardPhase('splash')
-    const timer = setTimeout(() => {
+    const t1 = setTimeout(() => {
       setCardPhase('details')
     }, 1800)
-    return () => clearTimeout(timer)
+    const t2 = setTimeout(() => {
+      setDismissed(true)
+    }, 8800)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
   }, [featuredFirstBlood?.log_challenge_id, featuredFirstBlood?.log_created_at])
 
   useEffect(() => {
@@ -152,25 +158,26 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             animate={{ 
               opacity: 1, 
               scale: 1, 
-              // Glitch horizontal & vertical twitches followed by silence
-              x: [0, -3, 3, -1.5, 1.5, 0, -2.5, 2.5, 0, 0, 0, 0, 0, 0, 0],
-              y: [0, 1.5, -1.5, 1, -1, 0, 2, -2, 0, 0, 0, 0, 0, 0, 0],
-              skewX: [0, 4, -4, 0, 3, -3, 0, 0, 0, 0, 0, 0, 0],
-              filter: [
-                "hue-rotate(0deg)",
-                "hue-rotate(12deg)",
-                "hue-rotate(-12deg)",
-                "hue-rotate(0deg)",
-                "hue-rotate(0deg)",
-                "hue-rotate(0deg)"
-              ]
+              // Only apply glitch/shake keyframes in splash phase; in details phase, stay perfectly flat (0)
+              x: cardPhase === 'splash' ? [0, -3, 3, -1.5, 1.5, 0, -2.5, 2.5, 0, 0, 0, 0] : 0,
+              y: cardPhase === 'splash' ? [0, 1.5, -1.5, 1, -1, 0, 2, -2, 0, 0, 0, 0] : 0,
+              skewX: cardPhase === 'splash' ? [0, 4, -4, 0, 3, -3, 0, 0, 0] : 0,
+              filter: cardPhase === 'splash' 
+                ? [
+                    "hue-rotate(0deg)",
+                    "hue-rotate(12deg)",
+                    "hue-rotate(-12deg)",
+                    "hue-rotate(0deg)",
+                    "hue-rotate(0deg)"
+                  ]
+                : "hue-rotate(0deg)"
             }}
             exit={{ opacity: 0, scale: 0.95, y: -10, filter: 'blur(8px)' }}
             transition={{ 
-              x: { repeat: Infinity, duration: 1.6, ease: "linear" },
-              y: { repeat: Infinity, duration: 1.6, ease: "linear" },
-              skewX: { repeat: Infinity, duration: 1.6, ease: "linear" },
-              filter: { repeat: Infinity, duration: 1.6, ease: "linear" },
+              x: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
+              y: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
+              skewX: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
+              filter: cardPhase === 'splash' ? { repeat: Infinity, duration: 1.4, ease: "linear" } : { duration: 0.2 },
               default: { type: 'spring', stiffness: 130, damping: 20 }
             }}
             className="relative w-full overflow-hidden rounded-xl border border-red-950 bg-black/95 px-5 py-12 shadow-[0_0_35px_rgba(136,19,55,0.25)]"
@@ -394,10 +401,52 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                     animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, scale: 1.15, filter: 'blur(8px)' }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="flex flex-col items-center justify-center py-8"
+                    className="relative flex flex-col items-center justify-center py-8 w-full overflow-visible"
                   >
+                    {/* Splash Splatter Background Animation */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                      <motion.svg
+                        viewBox="0 0 200 200"
+                        className="w-80 h-80 filter drop-shadow-[0_0_25px_rgba(136,19,55,0.7)]"
+                        initial={{ scale: 0.1, opacity: 0, rotate: -45 }}
+                        animate={{ 
+                          scale: [0.1, 1.25, 1.1],
+                          opacity: [0, 1, 0.95],
+                          rotate: [-45, 15, 0]
+                        }}
+                        transition={{ 
+                          duration: 0.55,
+                          ease: "easeOut",
+                          times: [0, 0.7, 1]
+                        }}
+                      >
+                        <defs>
+                          <radialGradient id="centerSplashGrad" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stopColor="#be123c" />
+                            <stop offset="40%" stopColor="#991b1b" />
+                            <stop offset="75%" stopColor="#450a0a" />
+                            <stop offset="100%" stopColor="#180003" />
+                          </radialGradient>
+                        </defs>
+                        {/* Organic main splash body */}
+                        <path d="M 100 100 Q 70 70, 75 90 T 55 120 T 80 150 T 130 140 T 145 105 T 120 75 Z" fill="url(#centerSplashGrad)" />
+                        {/* Dynamic splash extension rays */}
+                        <path d="M 85 90 Q 30 70, 15 65" stroke="url(#centerSplashGrad)" strokeWidth="3" strokeLinecap="round" fill="none" />
+                        <path d="M 115 90 Q 170 60, 185 55" stroke="url(#centerSplashGrad)" strokeWidth="3" strokeLinecap="round" fill="none" />
+                        <path d="M 100 120 Q 90 180, 85 195" stroke="url(#centerSplashGrad)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                        <path d="M 115 110 Q 165 150, 175 160" stroke="url(#centerSplashGrad)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                        {/* Detached micro droplets around impact */}
+                        <circle cx="45" cy="55" r="4" fill="url(#centerSplashGrad)" />
+                        <circle cx="30" cy="85" r="2.5" fill="url(#centerSplashGrad)" />
+                        <circle cx="165" cy="65" r="3.5" fill="url(#centerSplashGrad)" />
+                        <circle cx="180" cy="115" r="2" fill="url(#centerSplashGrad)" />
+                        <circle cx="70" cy="170" r="3" fill="url(#centerSplashGrad)" />
+                        <circle cx="140" cy="165" r="4" fill="url(#centerSplashGrad)" />
+                      </motion.svg>
+                    </div>
+
                     {/* Splash Title */}
-                    <div className="text-4xl sm:text-5xl font-bold uppercase tracking-wider font-nosifer text-red-600 drop-shadow-[0_0_30px_rgba(220,38,38,0.95)] select-none">
+                    <div className="relative z-10 text-4xl sm:text-5xl font-bold uppercase tracking-wider font-nosifer text-red-600 drop-shadow-[0_0_30px_rgba(220,38,38,0.95)] select-none">
                       FIRST BLOOD
                     </div>
                   </motion.div>
