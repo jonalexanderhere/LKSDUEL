@@ -12,7 +12,7 @@ import ScoreboardChart from './ScoreboardChart'
 import ScoreboardTable from './ScoreboardTable'
 
 export default function ScoreboardPage() {
-  const [firstBloodAlert, setFirstBloodAlert] = useState<{ username: string; challenge: string } | null>(null)
+  const [firstBloodAlert, setFirstBloodAlert] = useState<{ username: string; teamName?: string; challenge: string } | null>(null)
   const firstBloodAlertTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const {
@@ -35,10 +35,10 @@ export default function ScoreboardPage() {
   useEffect(() => {
     if (!user || !firstBloodMode) return
 
-    const unsubscribe = subscribeToSolves(({ username, challenge, isFirstBlood }) => {
+    const unsubscribe = subscribeToSolves(({ username, teamName, challenge, isFirstBlood }) => {
       if (!isFirstBlood) return
 
-      setFirstBloodAlert({ username, challenge })
+      setFirstBloodAlert({ username, teamName, challenge })
 
       try {
         const audio = new Audio('/sounds/first-blood.mp3')
@@ -140,6 +140,11 @@ export default function ScoreboardPage() {
                 <span className="inline-flex items-center rounded-md bg-black/25 px-2 py-1 text-[10px] font-black tracking-wide">FIRST BLOOD</span>
                 <p className="text-sm md:text-base font-semibold">
                   <span className="text-yellow-200">{firstBloodAlert.username}</span>
+                  {firstBloodAlert.teamName && firstBloodAlert.teamName !== '-' ? (
+                    <span className="ml-2 rounded bg-black/25 px-2 py-0.5 text-xs text-amber-100">
+                      {firstBloodAlert.teamName}
+                    </span>
+                  ) : null}
                   {' '}menjadi yang pertama menyelesaikan{' '}
                   <span className="underline decoration-yellow-200/70">{firstBloodAlert.challenge}</span>
                 </p>

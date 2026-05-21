@@ -29,7 +29,7 @@ export function useNotifications() {
   const [notifMessage, setNotifMessage] = useState('')
   const [notifLevel, setNotifLevel] = useState<'info' | 'info_platform' | 'info_challenges'>('info')
   
-  const [solveNotif, setSolveNotif] = useState<{ username: string; challenge: string; isFirstBlood?: boolean } | null>(null)
+  const [solveNotif, setSolveNotif] = useState<{ username: string; teamName?: string; challenge: string; isFirstBlood?: boolean } | null>(null)
   const [notifToast, setNotifToast] = useState<{ title: string; message: string } | null>(null)
   
   const notifTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -262,8 +262,8 @@ export function useNotifications() {
   // Real-time solves subscription
   useEffect(() => {
     if (!user || !APP.notifSolves) return;
-    const unsubscribe = subscribeToSolves(({ username, challenge, isFirstBlood }) => {
-      setSolveNotif({ username, challenge, isFirstBlood })
+    const unsubscribe = subscribeToSolves(({ username, teamName, challenge, isFirstBlood }) => {
+      setSolveNotif({ username, teamName, challenge, isFirstBlood })
       
       // Play sound if enabled. 
       // We play it even for the current user if it's First Blood for maximum impact.

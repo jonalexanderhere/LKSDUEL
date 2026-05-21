@@ -1056,7 +1056,7 @@ export function subscribeToNewChallenges(onNew: (payload: { title: string, categ
     supabase.removeChannel(channel);
   };
 }
-export function subscribeToSolves(onSolve: (payload: { username: string, challenge: string, isFirstBlood: boolean }) => void) {
+export function subscribeToSolves(onSolve: (payload: { username: string, teamName?: string, challenge: string, isFirstBlood: boolean }) => void) {
   console.log('[subscribeToSolves] Subscribing to solves-insert channel...')
   const channel = supabase
     .channel('solves-insert')
@@ -1079,7 +1079,7 @@ export function subscribeToSolves(onSolve: (payload: { username: string, challen
             .maybeSingle();
           if (latestError || !latestSolve || !latestSolve.user_id || !latestSolve.challenge_id) {
             console.warn('[subscribeToSolves] Still cannot get user_id or challenge_id from latest solve:', latestError, latestSolve)
-            onSolve({ username: 'Unknown', challenge: 'Unknown', isFirstBlood: false });
+            onSolve({ username: 'Unknown', teamName: '-', challenge: 'Unknown', isFirstBlood: false });
             return;
           }
           solve = latestSolve;
@@ -1093,7 +1093,7 @@ export function subscribeToSolves(onSolve: (payload: { username: string, challen
 
         if (error) {
           console.warn('[subscribeToSolves] Error fetching solve info via RPC:', error);
-          onSolve({ username: 'Unknown', challenge: 'Unknown', isFirstBlood: false });
+          onSolve({ username: 'Unknown', teamName: '-', challenge: 'Unknown', isFirstBlood: false });
           return;
         }
 
@@ -1101,10 +1101,22 @@ export function subscribeToSolves(onSolve: (payload: { username: string, challen
           const username = typeof data[0].username === 'string' && data[0].username ? data[0].username : 'Unknown';
           const challenge = typeof data[0].challenge === 'string' && data[0].challenge ? data[0].challenge : 'Unknown';
           const isFirstBlood = !!data[0].is_first_blood;
-          onSolve({ username, challenge, isFirstBlood });
-          console.log(`[subscribeToSolves] Real-time solve: ${username} solved ${challenge} (First Blood: ${isFirstBlood})`);
+          let teamName = '-'
+          try {
+            const { data: teamData } = await supabase
+              .from('team_members')
+              .select('teams(name)')
+              .eq('user_id', solve.user_id)
+              .limit(1)
+              .maybeSingle()
+            const resolvedTeam = (teamData as any)?.teams?.name
+            if (typeof resolvedTeam === 'string' && resolvedTeam.trim()) teamName = resolvedTeam
+          } catch { }
+
+          onSolve({ username, teamName, challenge, isFirstBlood });
+          console.log(`[subscribeToSolves] Real-time solve: ${username} [${teamName}] solved ${challenge} (First Blood: ${isFirstBlood})`);
         } else {
-          onSolve({ username: 'Unknown', challenge: 'Unknown', isFirstBlood: false });
+          onSolve({ username: 'Unknown', teamName: '-', challenge: 'Unknown', isFirstBlood: false });
         }
       } catch (err) {
         console.error('[subscribeToSolves] Error handling solve event:', err)

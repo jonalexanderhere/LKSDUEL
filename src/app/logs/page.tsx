@@ -1,7 +1,7 @@
 "use client";
 
 // React Imports
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flag, Logs, Droplets } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { Loader, TitlePage } from '@/shared/components';
 import { EventSelect } from '@/shared/components/custom'
 import { useLogs, useEventContext, useAuth } from '@/shared/contexts'
+import { subscribeToSolves } from '@/shared/lib'
 
 // Local Imports
 import LogsList from "./LogsList";
@@ -21,6 +22,7 @@ export default function LogsPage() {
   const [tabType, setTabType] = useState<'challenges' | 'solves' | 'firstblood'>('solves')
   const [entryBlast, setEntryBlast] = useState(false)
   const { startedEvents, selectedEvent, setSelectedEvent } = useEventContext()
+  const playedFirstBloodKeysRef = useRef<Set<string>>(new Set())
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -36,13 +38,42 @@ export default function LogsPage() {
     if (authLoading || !user) return
     setEntryBlast(true)
     const hideTimer = setTimeout(() => setEntryBlast(false), 1200)
-    try {
-      const audio = new Audio('/sounds/first-blood.mp3')
-      audio.volume = 0.55
-      audio.play()
-    } catch { }
     return () => clearTimeout(hideTimer)
   }, [authLoading, user])
+
+  const handleTabChange = (nextTab: 'challenges' | 'solves' | 'firstblood') => {
+    setTabType(nextTab)
+    if (nextTab === 'firstblood') {
+      setEntryBlast(true)
+      setTimeout(() => setEntryBlast(false), 1200)
+    }
+  }
+
+  useEffect(() => {
+    if (!user) return
+
+    const unsubscribe = subscribeToSolves(({ username, challenge, isFirstBlood }) => {
+      if (!isFirstBlood) return
+
+      const eventKey = `${username || 'unknown'}|${challenge || 'unknown'}`
+      if (playedFirstBloodKeysRef.current.has(eventKey)) return
+      playedFirstBloodKeysRef.current.add(eventKey)
+
+      // Optional: only make the effect visible when user is on First Blood tab
+      if (tabType === 'firstblood') {
+        setEntryBlast(true)
+        setTimeout(() => setEntryBlast(false), 1200)
+      }
+
+      try {
+        const audio = new Audio('/sounds/first-blood.mp3')
+        audio.volume = 0.7
+        void audio.play()
+      } catch { }
+    })
+
+    return () => unsubscribe()
+  }, [tabType, user])
 
   // Events are loaded globally via EventProvider
 
@@ -147,7 +178,7 @@ export default function LogsPage() {
         <div>
           <span className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
             <button
-              onClick={() => setTabType('challenges')}
+              onClick={() => handleTabChange('challenges')}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${tabType === 'challenges'
                 ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
@@ -172,7 +203,7 @@ export default function LogsPage() {
               </span>
             </button>
             <button
-              onClick={() => setTabType('solves')}
+              onClick={() => handleTabChange('solves')}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${tabType === 'solves'
                 ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
@@ -189,7 +220,7 @@ export default function LogsPage() {
               </span>
             </button>
             <button
-              onClick={() => setTabType('firstblood')}
+              onClick={() => handleTabChange('firstblood')}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${tabType === 'firstblood'
                 ? 'border-red-500 text-red-600 dark:text-red-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'

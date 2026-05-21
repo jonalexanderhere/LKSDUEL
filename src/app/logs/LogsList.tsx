@@ -48,6 +48,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     : tabType === 'firstblood'
       ? firstBloodLogs
       : challengeLogs;
+  const featuredFirstBlood = tabType === 'firstblood' && firstBloodLogs.length > 0 ? firstBloodLogs[0] : null;
 
   if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
 
@@ -81,13 +82,40 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     );
 
   return (
-    <motion.ul
-      key={cacheKey}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: loading ? 0.6 : 1, y: 0 }}
-      transition={{ duration: 0.25 }}
-      className="space-y-2"
-    >
+    <div className="space-y-3">
+      {featuredFirstBlood && (
+        <motion.div
+          initial={{ opacity: 0, y: -12, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.5)]"
+        >
+          <motion.div
+            animate={{ opacity: [0.25, 0.55, 0.25] }}
+            transition={{ duration: 1.6, repeat: Infinity }}
+            className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,165,165,0.35),transparent_50%)]"
+          />
+          <div className="relative">
+            <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
+            <div className="mt-2 text-3xl font-black uppercase tracking-[0.12em] text-red-400">FIRST BLOOD</div>
+            <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">
+              {featuredFirstBlood.log_username || 'unknown'}
+            </p>
+            <p className="mt-2 text-center text-2xl font-black text-red-500">
+              {featuredFirstBlood.log_challenge_title}
+            </p>
+            <p className="mt-3 text-center text-xs uppercase tracking-[0.22em] text-zinc-400">
+              {featuredFirstBlood.log_category}
+            </p>
+          </div>
+        </motion.div>
+      )}
+      <motion.ul
+        key={cacheKey}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: loading ? 0.6 : 1, y: 0 }}
+        transition={{ duration: 0.25 }}
+        className="space-y-2"
+      >
       {filteredNotifications.map((notif, idx) => (
         <motion.li
           key={idx}
@@ -197,6 +225,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
           </span>
         </motion.li>
       ))}
-    </motion.ul>
+      </motion.ul>
+    </div>
   );
 }

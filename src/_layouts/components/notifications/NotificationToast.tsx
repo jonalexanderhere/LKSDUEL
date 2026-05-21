@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Bell, Trophy, X } from 'lucide-react'
 
 type NotificationToastProps = {
-  solveNotif: { username: string; challenge: string; isFirstBlood?: boolean } | null
+  solveNotif: { username: string; teamName?: string; challenge: string; isFirstBlood?: boolean } | null
   notifToast: { title: string; message: string } | null
   onDismissSolve: () => void
   onDismissToast: () => void
@@ -78,6 +78,13 @@ export default function NotificationToast({
                 <span className={`text-sm font-bold truncate ${solveNotif.isFirstBlood ? 'text-white' : 'text-zinc-100'}`}>
                   {solveNotif.username}
                 </span>
+                {!!solveNotif.teamName && solveNotif.teamName !== '-' && (
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded border ${
+                    solveNotif.isFirstBlood ? 'border-red-200/40 text-red-100 bg-black/20' : 'border-zinc-600 text-zinc-300'
+                  }`}>
+                    {solveNotif.teamName}
+                  </span>
+                )}
                 {solveNotif.isFirstBlood && (
                   <motion.span 
                     initial={{ scale: 0.8 }}
@@ -89,7 +96,7 @@ export default function NotificationToast({
                 )}
               </div>
               <p className={`text-xs leading-snug ${solveNotif.isFirstBlood ? 'text-red-100' : 'text-zinc-400'}`}>
-                {solveNotif.isFirstBlood ? 'Eliminated challenge ' : 'Just solved '}
+                {solveNotif.isFirstBlood ? 'First blood on challenge ' : 'Just solved '}
                 <span className={`font-bold ${solveNotif.isFirstBlood ? 'text-white underline decoration-red-500/50' : 'text-zinc-200'}`}>
                   {solveNotif.challenge}
                 </span>
