@@ -71,13 +71,12 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   }, [tabType, featuredFirstBlood?.log_created_at, featuredFirstBlood?.log_challenge_id])
 
   useEffect(() => {
-    const enteredChallengeTab = prevTabRef.current !== 'challenges' && tabType === 'challenges'
     const enteredFirstBloodTab = prevTabRef.current !== 'firstblood' && tabType === 'firstblood'
 
-    if (enteredChallengeTab || enteredFirstBloodTab) {
+    if (enteredFirstBloodTab) {
       try {
         const audio = new Audio('/sounds/first-blood.mp3')
-        audio.volume = enteredFirstBloodTab ? 0.7 : 0.55
+        audio.volume = 0.7
         void audio.play()
       } catch { }
     }
@@ -112,36 +111,87 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       <AnimatePresence>
         {featuredFirstBlood && energyPhase && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="pointer-events-none relative overflow-hidden rounded-xl border border-red-600/70 bg-black/70 px-5 py-8"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, filter: 'blur(10px)' }}
+            className="pointer-events-none relative overflow-hidden rounded-xl border border-red-700/50 bg-black px-5 py-12"
           >
+            {/* Deep dark pulsing background */}
             <motion.div
-              initial={{ opacity: 0.15, y: -24 }}
-              animate={{ opacity: 0.7, y: 0 }}
-              transition={{ duration: 1.2, ease: 'easeOut' }}
-              className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-red-500/50 to-transparent"
+              animate={{ opacity: [0.3, 0.7, 0.3], scale: [1, 1.1, 1] }}
+              transition={{ duration: 0.8, repeat: Infinity }}
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-from)_0%,_transparent_80%)] from-red-900/40"
             />
-            <div className="absolute inset-0">
-              {[...Array(12)].map((_, i) => (
+            
+            <div className="absolute inset-0 overflow-hidden">
+              {/* Intense Blood Dripping */}
+              {[...Array(24)].map((_, i) => (
                 <motion.span
                   key={`blood-drip-${i}`}
-                  initial={{ y: -30, opacity: 0, scaleY: 0.7 }}
-                  animate={{ y: [ -30, 6 + (i % 4) * 8 ], opacity: [0, 0.9, 0.65], scaleY: [0.7, 1.25, 1] }}
-                  transition={{ duration: 1.25, ease: 'easeOut', delay: i * 0.04 }}
-                  className="absolute top-0 w-1.5 rounded-b-full bg-red-400/85"
-                  style={{ left: `${6 + i * 7.5}%`, height: `${18 + (i % 5) * 7}px` }}
+                  initial={{ y: -50, opacity: 0, scaleY: 0.5 }}
+                  animate={{ 
+                    y: [ -50, 10 + (i % 6) * 15, 150 ], 
+                    opacity: [0, 1, 0.8, 0], 
+                    scaleY: [0.5, 1.5, 2, 1] 
+                  }}
+                  transition={{ 
+                    duration: 1.2 + (i % 3) * 0.2, 
+                    ease: 'easeIn', 
+                    delay: i * 0.03 
+                  }}
+                  className="absolute top-0 rounded-b-full bg-gradient-to-b from-red-800 to-red-600 shadow-[0_5px_15px_rgba(220,38,38,0.8)]"
+                  style={{ 
+                    left: `${2 + i * 4.2}%`, 
+                    width: `${2 + (i % 4)}px`,
+                    height: `${30 + (i % 7) * 15}px` 
+                  }}
                 />
               ))}
+
+              {/* Blood Splatters Exploding */}
+              {[...Array(20)].map((_, i) => {
+                const angle = (Math.PI * 2 * i) / 20;
+                const velocity = 50 + (i % 5) * 25;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity;
+                return (
+                  <motion.div
+                    key={`splatter-${i}`}
+                    initial={{ x: 0, y: 0, scale: 0, opacity: 1 }}
+                    animate={{ 
+                      x: tx, 
+                      y: ty, 
+                      scale: [0, 1.5, 2.5], 
+                      opacity: [1, 0.8, 0] 
+                    }}
+                    transition={{ duration: 0.8 + (i%3)*0.1, ease: "easeOut" }}
+                    className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600 blur-[1px]"
+                    style={{
+                      boxShadow: '0 0 15px 4px rgba(220,38,38,0.8)'
+                    }}
+                  />
+                )
+              })}
             </div>
+
+            {/* Central Blood Pool / Glow */}
             <motion.div
-              initial={{ scale: 2.3, opacity: 0.2 }}
-              animate={{ scale: 0.85, opacity: 0.8 }}
-              transition={{ duration: 1.35, ease: 'easeOut' }}
-              className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/40 blur-3xl"
+              initial={{ scale: 0, opacity: 0.9 }}
+              animate={{ scale: [0, 3, 5], opacity: [0.9, 0.5, 0] }}
+              transition={{ duration: 1.2, ease: 'easeOut' }}
+              className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600 blur-2xl"
             />
-            <div className="relative text-center text-red-100 text-xs tracking-[0.3em] font-bold">BLOOD SURGE</div>
+
+            <motion.div 
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: [0.5, 1.2, 1], opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="relative text-center"
+            >
+              <div className="text-red-500/90 text-sm tracking-[0.5em] font-black drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]">
+                BLOOD SURGE
+              </div>
+            </motion.div>
           </motion.div>
         )}
 
@@ -151,36 +201,68 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
-            className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.55)]"
+            className="relative overflow-hidden rounded-xl border-2 border-red-600/60 bg-black px-5 py-8 shadow-[0_0_50px_rgba(220,38,38,0.4)]"
           >
+            {/* Dark moving blood mist */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0.15, 0.28, 0.15], x: [0, -1, 1, 0] }}
-              transition={{ duration: 0.22, repeat: 4, ease: 'linear' }}
-              className="pointer-events-none absolute inset-0 mix-blend-screen bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.08)_48%,transparent_100%)]"
+              animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(153,27,27,0.4),transparent_70%)]"
             />
-            <motion.div
-              animate={{ opacity: [0.25, 0.55, 0.25] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
-              className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,165,165,0.35),transparent_50%)]"
-            />
-            <div className="relative">
-              <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
-              <div className="mt-2 relative text-3xl font-black uppercase tracking-[0.12em] text-red-400">
-                <span>FIRST BLOOD</span>
+            {/* Blood drips on the edges */}
+            <div className="absolute top-0 left-0 right-0 flex justify-between px-4 opacity-70">
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={`edge-drip-${i}`}
+                  animate={{ height: ['10px', `${20 + (i%4) * 15}px`, '10px'] }}
+                  transition={{ duration: 2 + (i%3) * 0.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-1.5 bg-gradient-to-b from-red-800 to-red-600 rounded-b-full blur-[0.5px] shadow-[0_2px_5px_rgba(220,38,38,0.5)]"
+                />
+              ))}
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center justify-center">
+              <motion.div 
+                animate={{ textShadow: ['0 0 10px #ef4444', '0 0 25px #dc2626', '0 0 10px #ef4444'] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="text-[12px] font-black tracking-[0.4em] text-red-500/90"
+              >
+                FIRST BLOOD ACHIEVED
+              </motion.div>
+              
+              <div className="mt-3 relative text-4xl font-black uppercase tracking-[0.1em] text-red-600">
+                <span className="drop-shadow-[0_0_15px_rgba(220,38,38,0.8)]">FIRST BLOOD</span>
                 <motion.span
                   aria-hidden
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 0.8, 0, 0.55, 0] }}
-                  transition={{ duration: 0.35, times: [0, 0.2, 0.45, 0.7, 1] }}
-                  className="absolute left-0 top-0 text-red-200/80 translate-x-[1px] -translate-y-[1px]"
+                  animate={{ opacity: [0, 1, 0, 0.8, 0], x: [-2, 2, -1, 3, 0] }}
+                  transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 3 }}
+                  className="absolute left-0 top-0 text-red-400 translate-x-[2px] mix-blend-screen"
                 >
                   FIRST BLOOD
                 </motion.span>
               </div>
-              <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">{featuredFirstBlood.log_username || 'unknown'}</p>
-              <p className="mt-2 text-center text-2xl font-black text-red-500">{featuredFirstBlood.log_challenge_title}</p>
-              <p className="mt-3 text-center text-xs uppercase tracking-[0.22em] text-zinc-400">{featuredFirstBlood.log_category}</p>
+              
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="mt-6 flex flex-col items-center"
+              >
+                <div className="text-3xl font-extrabold text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.3)]">
+                  {featuredFirstBlood.log_username || 'unknown'}
+                </div>
+                <div className="flex items-center gap-3 mt-3">
+                  <span className="h-[1px] w-8 bg-red-500/50"></span>
+                  <span className="text-xs uppercase tracking-[0.2em] text-red-400/80">SLAUGHTERED</span>
+                  <span className="h-[1px] w-8 bg-red-500/50"></span>
+                </div>
+                <div className="mt-2 text-2xl font-black text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.6)]">
+                  {featuredFirstBlood.log_challenge_title}
+                </div>
+                <div className="mt-4 px-3 py-1 border border-red-900/50 bg-red-950/30 rounded text-[10px] uppercase tracking-[0.25em] text-zinc-400">
+                  {featuredFirstBlood.log_category}
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
@@ -198,7 +280,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             key={idx}
             className={`border rounded-lg px-4 py-3 shadow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm transition-colors duration-150 min-w-0 ${
               notif.log_type === "first_blood"
-                ? "bg-gradient-to-r from-red-50 via-rose-50 to-amber-50 border-red-300 dark:from-red-950/50 dark:via-rose-950/40 dark:to-amber-950/30 dark:border-red-800/60 hover:bg-red-50/80"
+                ? "bg-gradient-to-r from-red-100 via-red-50 to-white border-red-400 dark:from-red-950/80 dark:via-red-900/40 dark:to-black dark:border-red-700/60 hover:bg-red-100/80 dark:hover:bg-red-900/50"
                 : "bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700"
             }`}
             initial={{ opacity: 0, y: 5 }}
