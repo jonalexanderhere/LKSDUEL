@@ -128,99 +128,44 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               {[...Array(20)].map((_, i) => {
                 const left = 3 + i * 5.1;
                 const delay = i * 0.04 + (i % 3) * 0.08;
-                const duration = 1.3 + (i % 4) * 0.25;
-                const trailHeight = 50 + (i % 5) * 25;
+                const trailHeight = 35 + (i % 4) * 35;
                 return (
-                  <div key={`drip-container-${i}`} className="absolute top-0" style={{ left: `${left}%` }}>
-                    {/* Falling trail */}
+                  <div key={`trail-${i}`} className="absolute top-0" style={{ left: `${left}%` }}>
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: trailHeight, opacity: [0, 0.8, 0.8, 0] }}
-                      transition={{ duration: duration, delay: delay, ease: 'easeOut' }}
-                      className="w-[1.5px] bg-red-950"
+                      initial={{ height: 0 }}
+                      animate={{ height: `${trailHeight}px` }}
+                      transition={{ duration: 0.8, delay: delay }}
+                      className="w-[1.5px] bg-gradient-to-b from-red-955 via-red-900 to-red-800"
                     />
-                    {/* The sliding bead */}
                     <motion.div
-                      initial={{ y: 0, scaleY: 1, scaleX: 1, opacity: 0 }}
-                      animate={{ 
-                        y: [0, trailHeight], 
-                        scaleY: [1.6, 1.1, 2.2, 1], 
-                        scaleX: [0.9, 1.2, 0.8, 1],
-                        opacity: [0, 1, 1, 0] 
+                      initial={{ y: 0, opacity: 0 }}
+                      animate={{
+                        y: [0, trailHeight, trailHeight + 15, trailHeight + 25],
+                        opacity: [0, 1, 1, 0]
                       }}
-                      transition={{ duration: duration, delay: delay, ease: 'easeIn' }}
-                      className="w-2.5 h-3.5 rounded-full rounded-t-sm bg-gradient-to-b from-red-900 via-red-600 to-red-950 -ml-[4px] relative"
-                      style={{
-                        boxShadow: '0 3px 8px rgba(153,27,27,0.8)',
+                      transition={{
+                        duration: 1.3,
+                        delay: delay + 0.5,
+                        repeat: Infinity,
+                        repeatDelay: 0.6
                       }}
-                    >
-                      {/* 3D Liquid Shine */}
-                      <div className="absolute top-0.5 left-0.5 w-[2px] h-[3px] bg-white/40 rounded-full" />
-                    </motion.div>
+                      className="w-2.5 h-3.5 -ml-1 rounded-full bg-red-700 shadow-[0_0_8px_#dc2626]"
+                    />
                   </div>
-                );
-              })}
-
-              {/* Organic Exploding Blood Splatters */}
-              {[...Array(24)].map((_, i) => {
-                const angle = (Math.PI * 2 * i) / 24 + (i % 3) * 0.08;
-                const velocity = 45 + (i % 6) * 22;
-                const tx = Math.cos(angle) * velocity;
-                const ty = Math.sin(angle) * velocity;
-                const borderRadii = [
-                  'rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%]',
-                  'rounded-[30%_70%_70%_30%_/_50%_30%_70%_50%]',
-                  'rounded-[60%_40%_30%_70%_/_40%_50%_50%_60%]',
-                  'rounded-[50%_50%_60%_40%_/_60%_40%_60%_40%]',
-                ];
-                const borderRadius = borderRadii[i % borderRadii.length];
-                const rotation = i * 15;
-                const scale = 0.6 + (i % 4) * 0.35;
-                const duration = 0.7 + (i % 3) * 0.15;
-                return (
-                  <motion.div
-                    key={`splatter-${i}`}
-                    initial={{ x: 0, y: 0, scale: 0, opacity: 1, rotate: rotation }}
-                    animate={{ 
-                      x: tx, 
-                      y: ty, 
-                      scale: [0, scale * 1.6, scale], 
-                      opacity: [1, 0.9, 0],
-                      rotate: rotation + (i % 2 === 0 ? 120 : -120)
-                    }}
-                    transition={{ duration: duration, ease: "easeOut" }}
-                    className={`absolute left-1/2 top-1/2 bg-gradient-to-br from-red-600 via-red-800 to-red-950 ${borderRadius}`}
-                    style={{
-                      width: `${5 + (i % 3) * 2}px`,
-                      height: `${7 + (i % 4) * 2}px`,
-                      boxShadow: 'inset -1px -1px 3px rgba(0,0,0,0.8), 0 3px 10px rgba(153,27,27,0.8)',
-                    }}
-                  >
-                    {/* Shiny Highlight */}
-                    <div className="absolute top-0.5 left-0.5 w-[30%] h-[30%] bg-white/40 rounded-full" />
-                  </motion.div>
                 )
               })}
             </div>
 
-            {/* Central Blood Pool / Glow */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0.9 }}
-              animate={{ scale: [0, 2.5, 4.5], opacity: [0.9, 0.4, 0] }}
-              transition={{ duration: 1.1, ease: 'easeOut' }}
-              className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-red-600 to-red-800 blur-2xl"
-            />
-
-            <motion.div 
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: [0.5, 1.2, 1], opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              className="relative text-center"
-            >
-              <div className="text-red-500/90 text-sm tracking-[0.5em] font-black drop-shadow-[0_0_12px_rgba(239,68,68,0.95)]">
+            <div className="relative z-10 flex flex-col items-center justify-center text-center">
+              <motion.div
+                initial={{ scale: 0.3, opacity: 0 }}
+                animate={{ scale: [0.3, 1.2, 1], opacity: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                className="text-red-500/90 text-sm tracking-[0.5em] font-black drop-shadow-[0_0_12px_rgba(239,68,68,0.95)]"
+              >
                 BLOOD SURGE
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
 
@@ -230,47 +175,68 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
-            className="relative overflow-hidden rounded-xl border-2 border-red-700 bg-black px-5 py-10 shadow-[0_0_60px_rgba(220,38,38,0.55)]"
+            className="relative overflow-hidden rounded-xl border-2 border-red-800 bg-black px-5 py-12 shadow-[0_0_60px_rgba(220,38,38,0.55)]"
           >
+            {/* Google Fonts Link & Styles */}
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap" />
+            <style dangerouslySetInnerHTML={{__html: `
+              .font-nosifer {
+                font-family: 'Nosifer', sans-serif !important;
+              }
+              .font-creepster {
+                font-family: 'Creepster', cursive !important;
+              }
+            `}} />
+
             {/* Dark moving blood mist */}
             <motion.div
               animate={{ opacity: [0.35, 0.65, 0.35], scale: [1, 1.03, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(136,19,55,0.45),transparent_75%)]"
             />
+
+            {/* Background Splatters */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+              <svg viewBox="0 0 200 200" className="absolute left-1/4 top-1/3 -translate-x-1/2 -translate-y-1/2 w-72 h-72 fill-red-800/60 filter blur-[1px]">
+                <path d="M 100 100 C 110 80, 130 50, 120 40 C 110 30, 95 60, 90 70 C 80 60, 60 30, 50 40 C 40 50, 70 80, 80 90 C 65 95, 30 90, 25 105 C 20 120, 55 115, 75 110 C 70 125, 40 160, 55 170 C 70 180, 90 140, 95 130 C 110 145, 140 175, 150 160 C 160 145, 125 125, 115 120 C 130 115, 175 125, 180 110 C 185 95, 140 100, 120 100 Z" />
+              </svg>
+              <svg viewBox="0 0 200 200" className="absolute right-1/4 bottom-1/4 translate-x-1/2 translate-y-1/2 w-64 h-64 fill-red-900/50 filter blur-[1px] rotate-90">
+                <path d="M 100 100 C 110 80, 130 50, 120 40 C 110 30, 95 60, 90 70 C 80 60, 60 30, 50 40 C 40 50, 70 80, 80 90 C 65 95, 30 90, 25 105 C 20 120, 55 115, 75 110 C 70 125, 40 160, 55 170 C 70 180, 90 140, 95 130 C 110 145, 140 175, 150 160 C 160 145, 125 125, 115 120 C 130 115, 175 125, 180 110 C 185 95, 140 100, 120 100 Z" />
+              </svg>
+            </div>
             
             {/* Top Blood Smear/Border Layer 1 (Darker, thicker base) */}
-            <svg viewBox="0 0 1000 45" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-12 fill-rose-955 filter drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] z-20 pointer-events-none" style={{ fill: '#4c0519' }}>
-              <path d="M 0 0 L 1000 0 L 1000 20 Q 980 25, 960 15 T 920 12 Q 900 30, 890 40 Q 880 45, 870 30 Q 860 15, 840 12 T 800 10 Q 785 25, 775 35 Q 765 40, 755 30 Q 745 15, 730 12 T 670 10 Q 650 20, 630 15 T 590 10 Q 570 30, 560 42 Q 550 45, 540 30 Q 530 15, 520 12 T 460 10 Q 440 20, 420 15 T 380 10 Q 365 25, 355 35 Q 345 40, 335 30 Q 325 15, 320 12 T 290 10 T 250 10 Q 230 25, 220 35 Q 210 40, 200 25 Q 190 12, 170 10 T 130 10 Q 110 20, 90 15 T 50 10 Q 30 25, 20 30 Q 10 32, 0 18 Z" />
+            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-16 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)] z-20 pointer-events-none" style={{ fill: '#3f0712' }}>
+              <path d="M 0 0 L 1000 0 L 1000 35 Q 980 45, 960 25 T 920 20 Q 900 50, 890 65 Q 880 70, 870 50 Q 860 25, 840 20 T 800 15 Q 785 40, 775 55 Q 765 60, 755 45 Q 745 25, 730 20 T 670 15 Q 650 35, 630 25 T 590 15 Q 570 50, 560 68 Q 550 72, 540 50 Q 530 25, 520 20 T 460 15 Q 440 35, 420 25 T 380 15 Q 365 40, 355 55 Q 345 60, 335 45 Q 325 25, 320 20 T 290 15 T 250 15 Q 230 40, 220 55 Q 210 60, 200 40 Q 190 20, 170 15 T 130 15 Q 110 35, 90 25 T 50 15 Q 30 40, 20 50 Q 10 52, 0 30 Z" />
             </svg>
 
             {/* Top Blood Smear/Border Layer 2 (Brighter red overlay for 3D depth) */}
-            <svg viewBox="0 0 1000 45" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-9 fill-red-700/90 filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)] z-20 pointer-events-none">
-              <path d="M 0 0 L 1000 0 L 1000 14 Q 980 18, 960 10 T 920 8 Q 900 20, 890 28 Q 880 32, 870 20 Q 860 10, 840 8 T 800 6 Q 785 18, 775 25 Q 765 28, 755 20 Q 745 10, 730 8 T 670 6 Q 650 12, 630 10 T 590 6 Q 570 20, 560 28 Q 550 32, 540 20 Q 530 10, 520 8 T 460 6 Q 440 12, 420 10 T 380 6 Q 365 18, 355 25 Q 345 28, 335 20 Q 325 10, 320 8 T 290 6 T 250 6 Q 230 18, 220 25 Q 210 28, 200 18 Q 190 8, 170 6 T 130 6 Q 110 12, 90 10 T 50 6 Q 30 18, 20 20 Q 10 22, 0 12 Z" />
+            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-12 fill-red-700/90 filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] z-20 pointer-events-none">
+              <path d="M 0 0 L 1000 0 L 1000 25 Q 980 32, 960 18 T 920 12 Q 900 35, 890 48 Q 880 52, 870 32 Q 860 18, 840 12 T 800 10 Q 785 28, 775 40 Q 765 42, 755 32 Q 745 18, 730 12 T 670 10 Q 650 20, 630 18 T 590 10 Q 570 35, 560 48 Q 550 52, 540 32 Q 530 18, 520 12 T 460 10 Q 440 20, 420 18 T 380 10 Q 365 28, 355 40 Q 345 42, 335 32 Q 325 18, 320 12 T 290 10 T 250 10 Q 230 28, 220 40 Q 210 42, 200 28 Q 190 12, 170 10 T 130 10 Q 110 22, 90 18 T 50 10 Q 30 28, 20 32 Q 10 35, 0 20 Z" />
             </svg>
 
             {/* Dynamic Blood Drips - Organic SVG shapes at non-uniform positions */}
-            <div className="absolute top-6 left-0 right-0 bottom-0 pointer-events-none overflow-hidden z-20">
+            <div className="absolute top-10 left-0 right-0 bottom-0 pointer-events-none overflow-hidden z-20">
               {[
-                { left: 7, height: 45, delay: 0.2, pathIdx: 0 },
-                { left: 14, height: 85, delay: 1.5, pathIdx: 1 },
-                { left: 22, height: 60, delay: 0.8, pathIdx: 2 },
-                { left: 38, height: 110, delay: 2.3, pathIdx: 1 },
-                { left: 47, height: 50, delay: 0.5, pathIdx: 0 },
-                { left: 56, height: 95, delay: 1.1, pathIdx: 2 },
-                { left: 69, height: 70, delay: 1.9, pathIdx: 0 },
-                { left: 78, height: 120, delay: 0.1, pathIdx: 1 },
-                { left: 85, height: 55, delay: 1.4, pathIdx: 2 },
-                { left: 93, height: 80, delay: 0.7, pathIdx: 0 }
+                { left: 9, height: 60, delay: 0.2, pathIdx: 0, width: 'w-7' },
+                { left: 18, height: 110, delay: 1.5, pathIdx: 1, width: 'w-8' },
+                { left: 27, height: 80, delay: 0.8, pathIdx: 2, width: 'w-6' },
+                { left: 41, height: 140, delay: 2.3, pathIdx: 1, width: 'w-9' },
+                { left: 49, height: 70, delay: 0.5, pathIdx: 0, width: 'w-7' },
+                { left: 58, height: 125, delay: 1.1, pathIdx: 2, width: 'w-8' },
+                { left: 71, height: 95, delay: 1.9, pathIdx: 0, width: 'w-7' },
+                { left: 81, height: 150, delay: 0.1, pathIdx: 1, width: 'w-9' },
+                { left: 88, height: 75, delay: 1.4, pathIdx: 2, width: 'w-6' },
+                { left: 94, height: 100, delay: 0.7, pathIdx: 0, width: 'w-7' }
               ].map((drip, i) => {
                 const paths = [
-                  "M 10 0 Q 12 20, 8 40 Q 6 60, 10 80 C 10 87, 4 95, 10 100 C 16 95, 10 87, 10 80 Q 14 60, 12 40 Q 16 20, 10 0 Z",
-                  "M 10 0 Q 6 25, 14 50 Q 18 75, 10 100 C 5 108, 15 120, 10 120 C 5 120, 15 108, 10 100 Q 18 75, 14 50 Q 6 25, 10 0 Z",
-                  "M 12 0 C 15 20, 9 35, 7 50 Q 5 70, 9 90 C 9 97, 5 102, 9 105 C 13 102, 9 97, 11 90 Q 13 70, 11 50 C 9 35, 15 20, 12 0 Z"
+                  "M 15 0 C 18 30, 10 50, 10 70 C 5 90, 2 100, 15 110 C 28 100, 25 90, 20 70 C 20 50, 30 30, 25 0 Z",
+                  "M 15 0 C 18 40, 8 60, 6 90 C 2 110, 0 120, 16 130 C 32 120, 26 110, 22 90 C 24 60, 20 40, 23 0 Z",
+                  "M 18 0 C 20 20, 10 35, 8 50 C 4 60, 2 65, 13 75 C 24 65, 22 60, 18 50 C 20 35, 26 20, 23 0 Z"
                 ];
                 
                 const selectedPath = paths[drip.pathIdx];
-                const duration = 3.8 + (i % 3) * 0.7;
+                const duration = 4.2 + (i % 3) * 0.9;
                 
                 return (
                   <div 
@@ -279,33 +245,34 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                     style={{ left: `${drip.left}%` }}
                   >
                     <motion.svg
-                      viewBox="0 0 20 120"
-                      className="w-3.5 origin-top filter drop-shadow-[0_3px_5px_rgba(0,0,0,0.6)]"
+                      viewBox="0 0 40 150"
+                      className={`${drip.width} origin-top filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]`}
                       style={{ height: `${drip.height}px` }}
                       initial={{ scaleY: 0, opacity: 0 }}
                       animate={{ 
                         scaleY: [0, 1, 1, 0.85, 0],
                         opacity: [0, 1, 1, 0.7, 0],
-                        y: [0, 0, 4, 10, 0]
+                        y: [0, 0, 5, 12, 0]
                       }}
                       transition={{ 
                         duration: duration, 
                         repeat: Infinity, 
                         delay: drip.delay,
                         ease: "easeInOut",
-                        times: [0, 0.25, 0.75, 0.9, 1]
+                        times: [0, 0.2, 0.8, 0.92, 1]
                       }}
                     >
                       <defs>
                         <linearGradient id={`bloodDripGrad-${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#3f0712" />
-                          <stop offset="40%" stopColor="#881337" />
-                          <stop offset="85%" stopColor="#e11d48" />
+                          <stop offset="0%" stopColor="#27050c" />
+                          <stop offset="35%" stopColor="#6b0722" />
+                          <stop offset="75%" stopColor="#be123c" />
+                          <stop offset="90%" stopColor="#f43f5e" />
                           <stop offset="100%" stopColor="#4c0519" />
                         </linearGradient>
                       </defs>
                       <path d={selectedPath} fill={`url(#bloodDripGrad-${i})`} />
-                      <ellipse cx="10" cy="85" rx="1.5" ry="3.5" fill="white" opacity="0.4" />
+                      <ellipse cx="14" cy="98" rx="2" ry="5.5" transform="rotate(-15 14 98)" fill="white" opacity="0.5" />
                     </motion.svg>
                   </div>
                 );
@@ -314,20 +281,20 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
 
             <div className="relative z-10 flex flex-col items-center justify-center">
               <motion.div 
-                animate={{ textShadow: ['0 0 10px #f43f5e', '0 0 30px #e11d48', '0 0 10px #f43f5e'] }}
+                animate={{ textShadow: ['0 0 10px #f43f5e', '0 0 25px #e11d48', '0 0 10px #f43f5e'] }}
                 transition={{ duration: 1.4, repeat: Infinity }}
-                className="text-[12px] font-black tracking-[0.45em] text-rose-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                className="text-[12px] font-black tracking-[0.45em] text-rose-500 font-creepster"
               >
                 FIRST BLOOD ACHIEVED
               </motion.div>
               
-              <div className="mt-3 relative text-4xl font-black uppercase tracking-[0.12em] text-red-600">
-                <span className="drop-shadow-[0_0_18px_rgba(220,38,38,0.95)]">FIRST BLOOD</span>
+              <div className="mt-4 mb-2 relative text-4xl font-bold uppercase tracking-wider font-nosifer text-red-600 select-none">
+                <span className="drop-shadow-[0_0_20px_rgba(220,38,38,0.95)]">FIRST BLOOD</span>
                 <motion.span
                   aria-hidden
-                  animate={{ opacity: [0, 1, 0, 0.8, 0], x: [-2, 2, -1, 3, 0] }}
+                  animate={{ opacity: [0, 1, 0, 0.8, 0], x: [-1.5, 1.5, -1, 2, 0] }}
                   transition={{ duration: 0.45, repeat: Infinity, repeatDelay: 2.5 }}
-                  className="absolute left-0 top-0 text-rose-400 translate-x-[2px] mix-blend-screen"
+                  className="absolute left-0 top-0 text-rose-500 translate-x-[1px] translate-y-[1px] mix-blend-screen"
                 >
                   FIRST BLOOD
                 </motion.span>
@@ -337,20 +304,20 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mt-6 flex flex-col items-center"
+                className="mt-6 flex flex-col items-center text-center"
               >
-                <div className="text-3xl font-extrabold text-white drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]">
+                <div className="text-4xl font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] tracking-wide font-creepster">
                   {featuredFirstBlood.log_username || 'unknown'}
                 </div>
-                <div className="flex items-center gap-3 mt-3">
-                  <span className="h-[1px] w-8 bg-red-600/50"></span>
-                  <span className="text-xs uppercase tracking-[0.25em] text-rose-400 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">SLAUGHTERED</span>
-                  <span className="h-[1px] w-8 bg-red-600/50"></span>
+                <div className="flex items-center gap-3 mt-4 mb-1">
+                  <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-red-600"></span>
+                  <span className="text-sm font-black uppercase tracking-[0.25em] text-red-500 font-creepster drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">SLAUGHTERED</span>
+                  <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-red-600"></span>
                 </div>
-                <div className="mt-2 text-2xl font-black text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.7)]">
+                <div className="mt-2 text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide">
                   {featuredFirstBlood.log_challenge_title}
                 </div>
-                <div className="mt-4 px-3 py-1 border border-red-900/50 bg-red-950/40 rounded text-[10px] uppercase tracking-[0.25em] text-zinc-400">
+                <div className="mt-5 px-4 py-1.5 border border-red-900/50 bg-red-950/40 rounded-full text-[10px] uppercase tracking-[0.25em] text-zinc-300 font-creepster shadow-[inset_0_1px_3px_rgba(0,0,0,0.8)]">
                   {featuredFirstBlood.log_category}
                 </div>
               </motion.div>
