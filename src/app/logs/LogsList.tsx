@@ -424,21 +424,21 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                           <path d="M 75 92 C 85 82, 115 82, 125 92 C 115 86, 85 86, 75 92 Z" fill="#ffffff" opacity="0.3" />
                         </motion.svg>
 
-                        {/* Dynamic bursting droplets */}
-                        {Array.from({ length: 18 }).map((_, i) => {
-                          const angle = (i * 360) / 18 + (Math.random() * 20 - 10);
-                          const distance = 55 + Math.random() * 75; // how far it travels
+                        {/* Dynamic bursting droplets - Spray Group (32 droplets) */}
+                        {Array.from({ length: 32 }).map((_, i) => {
+                          const angle = (i * 360) / 32 + (Math.random() * 15 - 7.5);
+                          const distance = 60 + Math.random() * 95; // travels further
                           const rad = (angle * Math.PI) / 180;
                           const targetX = Math.cos(rad) * distance;
                           const targetY = Math.sin(rad) * distance;
-                          const size = 8 + Math.random() * 12; // droplet size
-                          const delay = Math.random() * 0.12;
-                          const duration = 0.5 + Math.random() * 0.4;
+                          const size = 5 + Math.random() * 8; // small-medium spray
+                          const delay = Math.random() * 0.1;
+                          const duration = 0.4 + Math.random() * 0.3;
 
                           return (
                             <motion.div
-                              key={`splat-drop-${i}`}
-                              className="absolute rounded-full bg-gradient-to-br from-red-600 via-red-800 to-rose-950"
+                              key={`spray-drop-${i}`}
+                              className="absolute rounded-full bg-gradient-to-br from-red-600 via-red-800 to-rose-950 shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
                               style={{
                                 width: size,
                                 height: size,
@@ -446,19 +446,91 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                               }}
                               initial={{ x: 0, y: 0, scale: 0.1, opacity: 0 }}
                               animate={{
-                                x: [0, targetX * 0.4, targetX],
-                                y: [0, targetY * 0.4, targetY],
-                                scale: [0.1, 1.25, 1, 0.9],
+                                x: [0, targetX * 0.5, targetX],
+                                y: [0, targetY * 0.5, targetY],
+                                scale: [0.1, 1.3, 1, 0.85],
                                 opacity: [0, 1, 1, 0.95],
                               }}
                               transition={{
                                 duration: duration,
-                                ease: [0.15, 0.85, 0.3, 1], // clean ease-out deceleration
+                                ease: [0.1, 0.8, 0.2, 1], // sharp deceleration
                                 delay: delay,
                               }}
                             >
-                              {/* Specular wet highlight inside droplet */}
-                              <span className="absolute top-0.5 left-0.5 w-[30%] h-[30%] bg-white rounded-full opacity-60" />
+                              <span className="absolute top-0.5 left-0.5 w-[30%] h-[30%] bg-white rounded-full opacity-70" />
+                            </motion.div>
+                          );
+                        })}
+
+                        {/* Dynamic bursting droplets - Heavy Gravitational Group (16 droplets) */}
+                        {Array.from({ length: 16 }).map((_, i) => {
+                          const angle = (i * 360) / 16 + (Math.random() * 30 - 15);
+                          const distance = 40 + Math.random() * 55; 
+                          const rad = (angle * Math.PI) / 180;
+                          const targetX = Math.cos(rad) * distance;
+                          // add gravity pull downwards to the Y position
+                          const targetY = Math.sin(rad) * distance;
+                          const gravityY = targetY + 30 + Math.random() * 20;
+                          const size = 11 + Math.random() * 10; // larger size
+                          const delay = 0.05 + Math.random() * 0.15;
+                          const duration = 0.7 + Math.random() * 0.4;
+
+                          return (
+                            <motion.div
+                              key={`heavy-drop-${i}`}
+                              className="absolute rounded-full bg-gradient-to-br from-red-700 via-red-900 to-black shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
+                              style={{
+                                width: size,
+                                height: size,
+                                transformOrigin: "center",
+                              }}
+                              initial={{ x: 0, y: 0, scale: 0.1, opacity: 0 }}
+                              animate={{
+                                x: [0, targetX * 0.6, targetX],
+                                y: [0, targetY, gravityY],
+                                scale: [0.1, 1.2, 1.1, 1],
+                                opacity: [0, 1, 1, 0.95],
+                              }}
+                              transition={{
+                                duration: duration,
+                                ease: [0.15, 0.6, 0.35, 1],
+                                delay: delay,
+                              }}
+                            >
+                              <span className="absolute top-1 left-1 w-[25%] h-[25%] bg-white rounded-full opacity-60" />
+                            </motion.div>
+                          );
+                        })}
+
+                        {/* Dripping blood from center impact (8 drips) */}
+                        {Array.from({ length: 8 }).map((_, i) => {
+                          const startX = -45 + i * 13 + (Math.random() * 6 - 3);
+                          const dripLength = 45 + Math.random() * 85;
+                          const delay = 0.25 + Math.random() * 0.25; // drips start slightly after initial burst
+                          const duration = 1.6 + Math.random() * 1.0;
+
+                          return (
+                            <motion.div
+                              key={`core-drip-${i}`}
+                              className="absolute bg-gradient-to-b from-red-800 via-red-950 to-rose-950 rounded-b-full"
+                              style={{
+                                left: `calc(50% + ${startX}px)`,
+                                top: "50%",
+                                width: 4 + Math.random() * 4,
+                                transformOrigin: "top center",
+                              }}
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{
+                                height: [0, dripLength, dripLength],
+                                opacity: [0, 1, 0.9],
+                              }}
+                              transition={{
+                                duration: duration,
+                                ease: "easeOut",
+                                delay: delay,
+                              }}
+                            >
+                              <span className="absolute bottom-0.5 left-0.5 right-0.5 h-1 bg-rose-600 rounded-full opacity-40" />
                             </motion.div>
                           );
                         })}
