@@ -23,6 +23,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   const [loading, setLoading] = useState(true);
   const [showFeaturedFirstBlood, setShowFeaturedFirstBlood] = useState(false)
   const [energyPhase, setEnergyPhase] = useState(false)
+  const [resolvedTeamName, setResolvedTeamName] = useState<string>("")
   const prevTabRef = useRef<'challenges' | 'solves' | 'firstblood' | null>(null)
   const { getFeed } = useLogs()
 
@@ -49,6 +50,34 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       : challengeLogs;
 
   const featuredFirstBlood = tabType === 'firstblood' && firstBloodLogs.length > 0 ? firstBloodLogs[0] : null;
+
+  useEffect(() => {
+    if (!featuredFirstBlood || !featuredFirstBlood.log_user_id) {
+      setResolvedTeamName("")
+      return
+    }
+
+    (async () => {
+      try {
+        const { supabase } = await import('@/shared/lib/supabase')
+        const { data } = await supabase
+          .from('team_members')
+          .select('teams(name)')
+          .eq('user_id', featuredFirstBlood.log_user_id)
+          .limit(1)
+          .maybeSingle()
+        const name = (data as any)?.teams?.name
+        if (name) {
+          setResolvedTeamName(name)
+        } else {
+          setResolvedTeamName("")
+        }
+      } catch (err) {
+        console.warn("Failed to resolve team name", err)
+        setResolvedTeamName("")
+      }
+    })()
+  }, [featuredFirstBlood])
 
   useEffect(() => {
     if (tabType !== 'firstblood' || !featuredFirstBlood) {
@@ -78,6 +107,13 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         const audio = new Audio('/sounds/first-blood.mp3')
         audio.volume = 0.7
         void audio.play()
+      } catch { }
+
+      // Mobile / device physical vibration
+      try {
+        if (typeof window !== 'undefined' && navigator.vibrate) {
+          navigator.vibrate([250, 80, 250, 80, 400])
+        }
       } catch { }
     }
 
@@ -127,11 +163,15 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               opacity: 1, 
               scale: 1, 
               rotate: 0,
-              x: [0, -6, 5, -4, 3, -1, 0],
-              y: [0, 5, -4, 3, -2, 1, 0]
+              x: [0, -3.2, 3.2, -2.5, 2.5, -3.2, 3.2, 0],
+              y: [0, 3.2, -3.2, 2.5, -2.5, 3.2, -3.2, 0]
             }}
             exit={{ opacity: 0, filter: 'blur(10px)' }}
-            transition={{ duration: 0.45, ease: "easeOut" }}
+            transition={{ 
+              x: { repeat: Infinity, duration: 0.08, ease: "linear" },
+              y: { repeat: Infinity, duration: 0.08, ease: "linear" },
+              default: { duration: 0.45, ease: "easeOut" }
+            }}
             className="pointer-events-none relative overflow-hidden rounded-xl border-2 border-red-900 bg-black px-5 py-20 shadow-[0_0_80px_rgba(220,38,38,0.75)]"
           >
             {/* Deep dark pulsing background */}
@@ -221,7 +261,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                     <path d="M 3 0 L 7 0 L 6 95 C 6 98, 4 98, 4 95 Z" fill="#7f1d1d" />
                   </motion.svg>
                   
-                  {/* Teardrop droplet with 3D highlight */}
+                  {/* Teardrop droplet with 3D crescent specular highlight */}
                   <motion.svg
                     viewBox="0 0 20 30"
                     className="w-3.5 -ml-1 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
@@ -239,7 +279,8 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                     }}
                   >
                     <path d="M 10 0 C 13 0, 17 8, 17 18 C 17 25, 14 30, 10 30 C 6 30, 3 25, 3 18 C 3 8, 7 0, 10 0 Z" fill="#dc2626" />
-                    <ellipse cx="8" cy="10" rx="1.5" ry="3.5" transform="rotate(-15 8 10)" fill="white" opacity="0.6" />
+                    {/* Crescent curved liquid specular reflection */}
+                    <path d="M 6 5 Q 12 12, 6 18 Q 14 12, 6 5 Z" fill="white" opacity="0.55" />
                   </motion.svg>
                 </div>
               ))}
@@ -261,9 +302,19 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         {featuredFirstBlood && showFeaturedFirstBlood && (
           <motion.div
             initial={{ opacity: 0, y: -22, scale: 0.93, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              filter: 'blur(0px)',
+              x: [0, -2.5, 2.5, -1.8, 1.8, -2.5, 2.5, 0],
+              y: [0, 2.5, -2.5, 1.8, -1.8, 2.5, -2.5, 0]
+            }}
             exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
-            transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
+            transition={{ 
+              x: { repeat: Infinity, duration: 0.09, ease: "linear" },
+              y: { repeat: Infinity, duration: 0.09, ease: "linear" },
+              default: { type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }
+            }}
             className="relative overflow-hidden rounded-xl border-2 border-red-800 bg-black px-5 py-12 shadow-[0_0_60px_rgba(220,38,38,0.55)]"
           >
             {/* Dark moving blood mist */}
@@ -459,7 +510,8 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                         </linearGradient>
                       </defs>
                       <path d={selectedPath} fill={`url(#bloodDripGrad-${i})`} />
-                      <ellipse cx="14" cy="98" rx="2" ry="5.5" transform="rotate(-15 14 98)" fill="white" opacity="0.5" />
+                      {/* Realistic curved fluid reflection on dynamic drips */}
+                      <path d="M 8 10 Q 16 25, 8 38 Q 20 25, 8 10 Z" fill="white" opacity="0.45" />
                     </motion.svg>
                   </div>
                 );
@@ -468,52 +520,22 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
 
             {/* Pushed down pt-16 here to fully prevent dripping top SVG border overlap and maintain ultra-neat layout! */}
             <div className="relative z-10 flex flex-col items-center justify-center pt-16">
-              <motion.div 
-                animate={{ textShadow: ['0 0 10px #f43f5e', '0 0 20px #e11d48', '0 0 10px #f43f5e'] }}
-                transition={{ duration: 1.4, repeat: Infinity }}
-                className="text-[10px] font-bold tracking-[0.45em] text-rose-500 font-mono uppercase"
-              >
-                FIRST BLOOD ACHIEVED
-              </motion.div>
-              
-              <div className="mt-4 mb-2 relative text-4xl font-bold uppercase tracking-wider font-nosifer text-red-600 select-none">
-                <span className="drop-shadow-[0_0_20px_rgba(220,38,38,0.95)]">FIRST BLOOD</span>
-                <motion.span
-                  aria-hidden
-                  animate={{ opacity: [0, 1, 0, 0.8, 0], x: [-1.5, 1.5, -1, 2, 0] }}
-                  transition={{ duration: 0.45, repeat: Infinity, repeatDelay: 2.5 }}
-                  className="absolute left-0 top-0 text-rose-500 translate-x-[1px] translate-y-[1px] mix-blend-screen"
-                >
-                  FIRST BLOOD
-                </motion.span>
+              {/* Username */}
+              <div className="text-4xl font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] tracking-wide font-creepster">
+                {featuredFirstBlood.log_username || 'unknown'}
               </div>
               
-              <motion.div 
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="mt-6 flex flex-col items-center text-center"
-              >
-                {/* Username */}
-                <div className="text-4xl font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] tracking-wide font-creepster">
-                  {featuredFirstBlood.log_username || 'unknown'}
+              {/* Sleek, raw team badge - Only rendering requested high-priority labels */}
+              {resolvedTeamName && (
+                <div className="mt-3 text-xs uppercase tracking-[0.25em] text-red-500 font-mono font-bold">
+                  [ {resolvedTeamName} ]
                 </div>
-                
-                {/* Clean, sleek modern red connector */}
-                <div className="my-2.5 text-[11px] font-bold uppercase tracking-[0.3em] text-red-500 font-mono">
-                  conquered
-                </div>
+              )}
 
-                {/* Challenge Title */}
-                <div className="text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide">
-                  {featuredFirstBlood.log_challenge_title}
-                </div>
-                
-                {/* Category Badge */}
-                <div className="mt-5 px-4 py-1.5 border border-red-900/50 bg-red-950/40 rounded-full text-[10px] uppercase tracking-[0.25em] text-zinc-300 font-creepster shadow-[inset_0_1px_3px_rgba(0,0,0,0.8)]">
-                  {featuredFirstBlood.log_category}
-                </div>
-              </motion.div>
+              {/* Challenge Title */}
+              <div className="mt-4 text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide">
+                {featuredFirstBlood.log_challenge_title}
+              </div>
             </div>
           </motion.div>
         )}
