@@ -211,42 +211,80 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(136,19,55,0.45),transparent_75%)]"
             />
 
-            {/* High-Fidelity Background Splatters (No cartoon AI stars/flowers) */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+            {/* High-Fidelity Background Splatters with volumetric Radial Gradients (Perfect liquid depth) */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-25">
+              <svg className="absolute inset-0 w-full h-full">
+                <defs>
+                  {/* Radial Gradient for Left Splatter */}
+                  <radialGradient id="splatGradLeft" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#220106" stopOpacity="0.8" />
+                    <stop offset="25%" stopColor="#4c0519" stopOpacity="0.7" />
+                    <stop offset="60%" stopColor="#881337" stopOpacity="0.55" />
+                    <stop offset="85%" stopColor="#be123c" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#be123c" stopOpacity="0" />
+                  </radialGradient>
+                  
+                  {/* Radial Gradient for Right Splatter */}
+                  <radialGradient id="splatGradRight" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#1e0207" stopOpacity="0.85" />
+                    <stop offset="30%" stopColor="#4c0519" stopOpacity="0.75" />
+                    <stop offset="65%" stopColor="#991b1b" stopOpacity="0.55" />
+                    <stop offset="88%" stopColor="#dc2626" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
+                  </radialGradient>
+
+                  {/* Volumetric Linear Gradients for Border Smears */}
+                  <linearGradient id="smearGradBase" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#110002" />
+                    <stop offset="35%" stopColor="#2c030a" />
+                    <stop offset="70%" stopColor="#4c0519" />
+                    <stop offset="90%" stopColor="#881337" />
+                    <stop offset="100%" stopColor="#3b020c" />
+                  </linearGradient>
+                  <linearGradient id="smearGradOverlay" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#4c0519" />
+                    <stop offset="25%" stopColor="#881337" />
+                    <stop offset="60%" stopColor="#dc2626" />
+                    <stop offset="85%" stopColor="#f43f5e" />
+                    <stop offset="100%" stopColor="#991b1b" />
+                  </linearGradient>
+                </defs>
+              </svg>
+
               {/* Left splatter */}
-              <svg viewBox="0 0 200 200" className="absolute left-1/12 sm:left-1/6 top-1/2 -translate-y-1/2 w-64 h-64 fill-red-950/40 stroke-none pointer-events-none filter blur-[0.5px]">
-                <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" />
-                <path d="M 60 90 Q 20 110, 10 115" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
-                <path d="M 110 80 Q 150 50, 160 45" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
-                <path d="M 95 130 Q 110 170, 115 180" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
-                <circle cx="30" cy="50" r="3" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="25" cy="125" r="2.5" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="170" cy="70" r="3.5" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="145" cy="160" r="2" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="80" cy="175" r="4" fill="#7f1d1d" opacity="0.6" />
+              <svg viewBox="0 0 200 200" className="absolute left-1/12 sm:left-1/6 top-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none filter blur-[0.5px]">
+                <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" fill="url(#splatGradLeft)" />
+                <path d="M 60 90 Q 20 110, 10 115" stroke="url(#splatGradLeft)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <path d="M 110 80 Q 150 50, 160 45" stroke="url(#splatGradLeft)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <path d="M 95 130 Q 110 170, 115 180" stroke="url(#splatGradLeft)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <circle cx="30" cy="50" r="3" fill="url(#splatGradLeft)" />
+                <circle cx="25" cy="125" r="2.5" fill="url(#splatGradLeft)" />
+                <circle cx="170" cy="70" r="3.5" fill="url(#splatGradLeft)" />
+                <circle cx="145" cy="160" r="2" fill="url(#splatGradLeft)" />
+                <circle cx="80" cy="175" r="4" fill="url(#splatGradLeft)" />
               </svg>
               {/* Right splatter */}
-              <svg viewBox="0 0 200 200" className="absolute right-1/12 sm:right-1/6 top-1/2 -translate-y-1/2 w-64 h-64 fill-red-950/40 stroke-none pointer-events-none filter blur-[0.5px] rotate-115">
-                <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" />
-                <path d="M 60 90 Q 20 110, 10 115" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
-                <path d="M 110 80 Q 150 50, 160 45" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
-                <path d="M 95 130 Q 110 170, 115 180" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
-                <circle cx="30" cy="50" r="3" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="25" cy="125" r="2.5" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="170" cy="70" r="3.5" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="145" cy="160" r="2" fill="#7f1d1d" opacity="0.6" />
-                <circle cx="80" cy="175" r="4" fill="#7f1d1d" opacity="0.6" />
+              <svg viewBox="0 0 200 200" className="absolute right-1/12 sm:right-1/6 top-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none filter blur-[0.5px] rotate-115">
+                <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" fill="url(#splatGradRight)" />
+                <path d="M 60 90 Q 20 110, 10 115" stroke="url(#splatGradRight)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <path d="M 110 80 Q 150 50, 160 45" stroke="url(#splatGradRight)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <path d="M 95 130 Q 110 170, 115 180" stroke="url(#splatGradRight)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <circle cx="30" cy="50" r="3" fill="url(#splatGradRight)" />
+                <circle cx="25" cy="125" r="2.5" fill="url(#splatGradRight)" />
+                <circle cx="170" cy="70" r="3.5" fill="url(#splatGradRight)" />
+                <circle cx="145" cy="160" r="2" fill="url(#splatGradRight)" />
+                <circle cx="80" cy="175" r="4" fill="url(#splatGradRight)" />
               </svg>
             </div>
             
-            {/* Top Blood Smear/Border Layer 1 (Darker, thicker base) */}
-            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-16 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)] z-20 pointer-events-none" style={{ fill: '#3f0712' }}>
-              <path d="M 0 0 L 1000 0 L 1000 35 Q 980 45, 960 25 T 920 20 Q 900 50, 890 65 Q 880 70, 870 50 Q 860 25, 840 20 T 800 15 Q 785 40, 775 55 Q 765 60, 755 45 Q 745 25, 730 20 T 670 15 Q 650 35, 630 25 T 590 15 Q 570 50, 560 68 Q 550 72, 540 50 Q 530 25, 520 20 T 460 15 Q 440 35, 420 25 T 380 15 Q 365 40, 355 55 Q 345 60, 335 45 Q 325 25, 320 20 T 290 15 T 250 15 Q 230 40, 220 55 Q 210 60, 200 40 Q 190 20, 170 15 T 130 15 Q 110 35, 90 25 T 50 15 Q 30 40, 20 50 Q 10 52, 0 30 Z" />
+            {/* Top Blood Smear/Border Layer 1 (Darker, thicker base gradient) */}
+            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-16 filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)] z-20 pointer-events-none">
+              <path d="M 0 0 L 1000 0 L 1000 35 Q 980 45, 960 25 T 920 20 Q 900 50, 890 65 Q 880 70, 870 50 Q 860 25, 840 20 T 800 15 Q 785 40, 775 55 Q 765 60, 755 45 Q 745 25, 730 20 T 670 15 Q 650 35, 630 25 T 590 15 Q 570 50, 560 68 Q 550 72, 540 50 Q 530 25, 520 20 T 460 15 Q 440 35, 420 25 T 380 15 Q 365 40, 355 55 Q 345 60, 335 45 Q 325 25, 320 20 T 290 15 T 250 15 Q 230 40, 220 55 Q 210 60, 200 40 Q 190 20, 170 15 T 130 15 Q 110 35, 90 25 T 50 15 Q 30 40, 20 50 Q 10 52, 0 30 Z" fill="url(#smearGradBase)" />
             </svg>
 
-            {/* Top Blood Smear/Border Layer 2 (Brighter red overlay for 3D depth) */}
-            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-12 fill-red-700/90 filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] z-20 pointer-events-none">
-              <path d="M 0 0 L 1000 0 L 1000 25 Q 980 32, 960 18 T 920 12 Q 900 35, 890 48 Q 880 52, 870 32 Q 860 18, 840 12 T 800 10 Q 785 28, 775 40 Q 765 42, 755 32 Q 745 18, 730 12 T 670 10 Q 650 20, 630 18 T 590 10 Q 570 35, 560 48 Q 550 52, 540 32 Q 530 18, 520 12 T 460 10 Q 440 20, 420 18 T 380 10 Q 365 28, 355 40 Q 345 42, 335 32 Q 325 18, 320 12 T 290 10 T 250 10 Q 230 28, 220 40 Q 210 42, 200 28 Q 190 12, 170 10 T 130 10 Q 110 22, 90 18 T 50 10 Q 30 28, 20 32 Q 10 35, 0 20 Z" />
+            {/* Top Blood Smear/Border Layer 2 (Brighter overlay linear gradient for deep liquid 3D shine) */}
+            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-12 filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] z-20 pointer-events-none">
+              <path d="M 0 0 L 1000 0 L 1000 25 Q 980 32, 960 18 T 920 12 Q 900 35, 890 48 Q 880 52, 870 32 Q 860 18, 840 12 T 800 10 Q 785 28, 775 40 Q 765 42, 755 32 Q 745 18, 730 12 T 670 10 Q 650 20, 630 18 T 590 10 Q 570 35, 560 48 Q 550 52, 540 32 Q 530 18, 520 12 T 460 10 Q 440 20, 420 18 T 380 10 Q 365 28, 355 40 Q 345 42, 335 32 Q 325 18, 320 12 T 290 10 T 250 10 Q 230 28, 220 40 Q 210 42, 200 28 Q 190 12, 170 10 T 130 10 Q 110 22, 90 18 T 50 10 Q 30 28, 20 32 Q 10 35, 0 20 Z" fill="url(#smearGradOverlay)" />
             </svg>
 
             {/* Dynamic Blood Drips - Organic SVG shapes at non-uniform positions */}
@@ -286,7 +324,8 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                       animate={{ 
                         scaleY: [0, 1, 1, 0.85, 0],
                         opacity: [0, 1, 1, 0.7, 0],
-                        y: [0, 0, 5, 12, 0]
+                        y: [0, 0, 5, 12, 0],
+                        rotate: [0, -1.2, 1.5, -0.8, 0]
                       }}
                       transition={{ 
                         duration: duration, 
@@ -313,12 +352,12 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               })}
             </div>
 
-            {/* Pushed down pt-10 here to fully prevent dripping top SVG border overlap! */}
-            <div className="relative z-10 flex flex-col items-center justify-center pt-10">
+            {/* Pushed down pt-16 here to fully prevent dripping top SVG border overlap and maintain ultra-neat layout! */}
+            <div className="relative z-10 flex flex-col items-center justify-center pt-16">
               <motion.div 
-                animate={{ textShadow: ['0 0 10px #f43f5e', '0 0 25px #e11d48', '0 0 10px #f43f5e'] }}
+                animate={{ textShadow: ['0 0 10px #f43f5e', '0 0 20px #e11d48', '0 0 10px #f43f5e'] }}
                 transition={{ duration: 1.4, repeat: Infinity }}
-                className="text-[12px] font-black tracking-[0.45em] text-rose-500 font-creepster"
+                className="text-[10px] font-bold tracking-[0.45em] text-rose-500 font-mono uppercase"
               >
                 FIRST BLOOD ACHIEVED
               </motion.div>
@@ -341,17 +380,22 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                 transition={{ delay: 0.2 }}
                 className="mt-6 flex flex-col items-center text-center"
               >
+                {/* Username */}
                 <div className="text-4xl font-bold text-white drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] tracking-wide font-creepster">
                   {featuredFirstBlood.log_username || 'unknown'}
                 </div>
-                <div className="flex items-center gap-3 mt-4 mb-1">
-                  <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-red-600"></span>
-                  <span className="text-sm font-black uppercase tracking-[0.25em] text-red-500 font-creepster drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">SLAUGHTERED</span>
-                  <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-red-600"></span>
+                
+                {/* Clean, sleek modern red connector */}
+                <div className="my-2.5 text-[11px] font-bold uppercase tracking-[0.3em] text-red-500 font-mono">
+                  conquered
                 </div>
-                <div className="mt-2 text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide">
+
+                {/* Challenge Title */}
+                <div className="text-3xl font-black text-rose-600 font-creepster drop-shadow-[0_0_15px_rgba(239,68,68,0.7)] tracking-wide">
                   {featuredFirstBlood.log_challenge_title}
                 </div>
+                
+                {/* Category Badge */}
                 <div className="mt-5 px-4 py-1.5 border border-red-900/50 bg-red-950/40 rounded-full text-[10px] uppercase tracking-[0.25em] text-zinc-300 font-creepster shadow-[inset_0_1px_3px_rgba(0,0,0,0.8)]">
                   {featuredFirstBlood.log_category}
                 </div>
