@@ -176,44 +176,85 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               scale: [1, 1.1, 0.95, 1.05, 0.98, 1], 
               filter: 'blur(0px)' 
             }}
-            exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
+            exit={{ opacity: 0, scale: 0.9, filter: 'blur(5px)' }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
-            className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.55)]"
+            className="relative overflow-hidden rounded-2xl border border-red-500/80 bg-[#0a0000] px-6 py-10 shadow-[0_0_50px_rgba(220,38,38,0.3)] group"
           >
+            {/* Animated Grid Background */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.15)_1px,transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_20%,transparent_100%)] opacity-40" />
+            
+            {/* Pulsing Core Glow */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0.15, 0.28, 0.15], x: [0, -1, 1, 0] }}
-              transition={{ duration: 0.22, repeat: 4, ease: 'linear' }}
-              className="pointer-events-none absolute inset-0 mix-blend-screen bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.08)_48%,transparent_100%)]"
+              animate={{ opacity: [0.3, 0.7, 0.3], scale: [0.8, 1.1, 0.8] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/30 blur-[60px] pointer-events-none"
             />
-            <motion.div
-              animate={{ opacity: [0.25, 0.55, 0.25] }}
-              transition={{ duration: 1.6, repeat: Infinity }}
-              className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,165,165,0.35),transparent_50%)]"
-            />
-            <div className="relative">
-              <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
-              <div className="mt-2 relative text-3xl font-black uppercase tracking-[0.12em] text-red-400">
-                <span>FIRST BLOOD</span>
-                <motion.span
-                  aria-hidden
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 0.8, 0, 0.55, 0] }}
-                  transition={{ duration: 0.35, times: [0, 0.2, 0.45, 0.7, 1] }}
-                  className="absolute left-0 top-0 text-red-200/80 translate-x-[1px] -translate-y-[1px]"
+
+            {/* Floating embers */}
+            <div className="absolute inset-0 pointer-events-none">
+              {[...Array(24)].map((_, i) => {
+                const duration = 2 + (i % 5) * 0.6;
+                const delay = (i % 10) * 0.3;
+                const xOffset = ((i * 17) % 60) - 30;
+                const size = 1.5 + (i % 3);
+                return (
+                  <motion.div
+                    key={`ember-${i}`}
+                    animate={{
+                      y: ['100%', '-20%'],
+                      x: [0, xOffset, -xOffset, 0],
+                      opacity: [0, 1, 0],
+                      scale: [0, 1.2, 0],
+                    }}
+                    transition={{
+                      duration: duration,
+                      repeat: Infinity,
+                      delay: delay,
+                      ease: 'linear'
+                    }}
+                    className="absolute bottom-0 rounded-full bg-red-500 blur-[0.5px]"
+                    style={{ left: `${(i / 24) * 100}%`, width: size, height: size }}
+                  />
+                );
+              })}
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center justify-center">
+              <motion.div
+                initial={{ scale: 0, rotate: -90 }}
+                animate={{ scale: 1, rotate: [0, -10, 10, -5, 5, 0] }}
+                transition={{ type: 'spring', delay: 0.1, duration: 1 }}
+                className="mb-5 rounded-full bg-red-950/90 p-5 border border-red-500/60 shadow-[0_0_30px_rgba(220,38,38,0.6)]"
+              >
+                <Trophy size={42} className="text-red-400 drop-shadow-[0_0_12px_rgba(248,113,113,1)]" />
+              </motion.div>
+
+              <div className="relative text-center">
+                <motion.h2 
+                  animate={{ textShadow: ['0 0 15px rgba(248,113,113,0.5)', '0 0 30px rgba(239,68,68,0.8)', '0 0 15px rgba(248,113,113,0.5)'] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="text-4xl sm:text-5xl font-black uppercase tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-white via-red-200 to-red-600 mb-1"
                 >
                   FIRST BLOOD
-                </motion.span>
+                </motion.h2>
+                
+                <div className="flex items-center justify-center gap-4 mt-8 mb-4">
+                  <div className="h-[2px] w-16 bg-gradient-to-r from-transparent to-red-600 rounded-full" />
+                  <span className="text-red-400 text-xs font-bold tracking-[0.4em] uppercase drop-shadow-[0_0_5px_rgba(248,113,113,0.8)]">Achieved By</span>
+                  <div className="h-[2px] w-16 bg-gradient-to-l from-transparent to-red-600 rounded-full" />
+                </div>
+                
+                <p className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
+                  {featuredFirstBlood.log_username || 'unknown'}
+                </p>
+                
+                <div className="mt-8 flex flex-col items-center justify-center gap-1.5 bg-red-950/50 py-3.5 px-10 rounded-xl border border-red-800/60 backdrop-blur-md shadow-inner">
+                  <span className="text-[10px] font-bold text-red-300/90 uppercase tracking-[0.3em]">Challenge Solved</span>
+                  <p className="text-xl sm:text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">
+                    {featuredFirstBlood.log_challenge_title} <span className="text-red-500 font-black ml-1">[{featuredFirstBlood.log_category}]</span>
+                  </p>
+                </div>
               </div>
-              <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">
-                {featuredFirstBlood.log_username || 'unknown'}
-              </p>
-              <p className="mt-2 text-center text-2xl font-black text-red-500">
-                {featuredFirstBlood.log_challenge_title}
-              </p>
-              <p className="mt-3 text-center text-xs uppercase tracking-[0.22em] text-zinc-400">
-                {featuredFirstBlood.log_category}
-              </p>
             </div>
           </motion.div>
         )}
