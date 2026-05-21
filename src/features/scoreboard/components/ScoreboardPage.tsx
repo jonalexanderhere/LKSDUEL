@@ -1,14 +1,20 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { Coins, Droplet, User, Rocket } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Loader, EmptyState } from '@/shared/components'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
 import { EventSelect } from '@/shared/components/custom'
+import { subscribeToSolves } from '@/shared/lib'
 import { useScoreboardPageData } from '../hooks'
 import ScoreboardChart from './ScoreboardChart'
 import ScoreboardTable from './ScoreboardTable'
 
 export default function ScoreboardPage() {
+  const [firstBloodAlert, setFirstBloodAlert] = useState<{ username: string; challenge: string } | null>(null)
+  const firstBloodAlertTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   const {
     user,
     authLoading,
@@ -25,6 +31,30 @@ export default function ScoreboardPage() {
     isDark,
     eventParam,
   } = useScoreboardPageData()
+
+  useEffect(() => {
+    if (!user || !firstBloodMode) return
+
+    const unsubscribe = subscribeToSolves(({ username, challenge, isFirstBlood }) => {
+      if (!isFirstBlood) return
+
+      setFirstBloodAlert({ username, challenge })
+
+      try {
+        const audio = new Audio('/sounds/first-blood.mp3')
+        audio.volume = 0.65
+        audio.play()
+      } catch { }
+
+      if (firstBloodAlertTimeout.current) clearTimeout(firstBloodAlertTimeout.current)
+      firstBloodAlertTimeout.current = setTimeout(() => setFirstBloodAlert(null), 9000)
+    })
+
+    return () => {
+      unsubscribe()
+      if (firstBloodAlertTimeout.current) clearTimeout(firstBloodAlertTimeout.current)
+    }
+  }, [firstBloodMode, user])
 
   if (authLoading) return <Loader fullscreen color="text-blue-500" />
   if (!user) return null
@@ -85,6 +115,38 @@ export default function ScoreboardPage() {
             </button>
           </span>
         </div>
+
+        <AnimatePresence>
+          {firstBloodMode && firstBloodAlert && (
+            <motion.div
+              key={`${firstBloodAlert.username}-${firstBloodAlert.challenge}`}
+              initial={{ opacity: 0, y: -20, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.98 }}
+              className="relative overflow-hidden rounded-2xl border border-red-400/60 bg-gradient-to-r from-red-700 via-red-600 to-amber-600 px-6 py-5 text-white shadow-[0_15px_40px_rgba(220,38,38,0.45)]"
+            >
+              <motion.div
+                initial={{ scale: 0.4, opacity: 0.9 }}
+                animate={{ scale: 2.4, opacity: 0 }}
+                transition={{ duration: 0.9, ease: 'easeOut' }}
+                className="pointer-events-none absolute left-12 top-1/2 h-20 w-20 -translate-y-1/2 rounded-full bg-yellow-300/70 blur-sm"
+              />
+              <motion.div
+                animate={{ opacity: [0.35, 0.7, 0.35] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,211,77,0.45),transparent_45%),radial-gradient(circle_at_70%_40%,rgba(248,113,113,0.35),transparent_55%)]"
+              />
+              <div className="relative flex items-center gap-3">
+                <span className="inline-flex items-center rounded-md bg-black/25 px-2 py-1 text-[10px] font-black tracking-wide">FIRST BLOOD</span>
+                <p className="text-sm md:text-base font-semibold">
+                  <span className="text-yellow-200">{firstBloodAlert.username}</span>
+                  {' '}menjadi yang pertama menyelesaikan{' '}
+                  <span className="underline decoration-yellow-200/70">{firstBloodAlert.challenge}</span>
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {loading && leaderboard.length === 0 ? (
           <div className="flex justify-center py-16">

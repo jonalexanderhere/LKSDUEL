@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Trophy } from "lucide-react";
 
 // Shared Imports
 import { Loader } from '@/shared/components';
@@ -40,7 +41,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
 
   // Filter based on tab type
   const challengeLogs = notifications.filter(n => n.log_type === 'first_blood' || n.log_type === 'new_challenge');
-  const solveLogs = notifications.filter(n => n.log_type === 'solve');
+  const solveLogs = notifications.filter(n => n.log_type === 'solve' || n.log_type === 'first_blood');
   const filteredNotifications = tabType === 'solves' ? solveLogs : challengeLogs;
 
   if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
@@ -107,7 +108,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                 <path d="M5 12l7-7 7 7" />
               </svg>
             ) : notif.log_type === "first_blood" ? (
-              <span className="text-lg">🩸</span>
+              <Trophy size={18} className="text-amber-500" />
             ) : (
               <svg
                 width="20"
@@ -134,7 +135,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               </>
             ) : notif.log_type === "first_blood" ? (
               <>
-                <span className="font-semibold text-green-600 dark:text-green-300">First Blood</span>
+                <span className="font-semibold text-red-600 dark:text-red-300">FIRST BLOOD</span>
                 <span className="inline-flex items-center gap-1 min-w-0">
                   <Link
                     href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"}

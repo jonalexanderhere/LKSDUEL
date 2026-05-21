@@ -99,14 +99,24 @@ RETURNS TABLE (
 BEGIN
   RETURN QUERY
   SELECT
-    'solve'::text AS log_type,
+    CASE
+      WHEN s.rank_in_challenge = 1 THEN 'first_blood'::text
+      ELSE 'solve'::text
+    END AS log_type,
     c.id AS log_challenge_id,
     c.title AS log_challenge_title,
     c.category AS log_category,
     u.id AS log_user_id,
     u.username AS log_username,
     s.created_at AS log_created_at
-  FROM public.solves s
+  FROM (
+    SELECT
+      sv.user_id,
+      sv.challenge_id,
+      sv.created_at,
+      ROW_NUMBER() OVER (PARTITION BY sv.challenge_id ORDER BY sv.created_at ASC, sv.id ASC) AS rank_in_challenge
+    FROM public.solves sv
+  ) s
   JOIN public.users u ON u.id = s.user_id
   JOIN public.challenges c ON c.id = s.challenge_id
   LEFT JOIN public.events e ON e.id = c.event_id

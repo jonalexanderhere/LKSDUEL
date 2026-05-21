@@ -36,11 +36,35 @@ export default function NotificationToast({
           >
             {/* Background Glow for First Blood */}
             {solveNotif.isFirstBlood && (
-              <motion.div 
-                animate={{ opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-red-500/20"
-              />
+              <>
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0.85 }}
+                  animate={{ scale: 2.2, opacity: 0 }}
+                  transition={{ duration: 0.7, ease: 'easeOut' }}
+                  className="pointer-events-none absolute left-8 top-1/2 h-16 w-16 -translate-y-1/2 rounded-full bg-yellow-300/75 blur-sm"
+                />
+                <motion.div 
+                  animate={{ opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-red-500/20"
+                />
+                <div className="pointer-events-none absolute inset-0">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.span
+                      key={`fb-particle-${i}`}
+                      initial={{ x: 0, y: 0, opacity: 0.95, scale: 1 }}
+                      animate={{
+                        x: [0, (i % 2 === 0 ? 1 : -1) * (18 + i * 4)],
+                        y: [0, (i < 4 ? -1 : 1) * (10 + i * 3)],
+                        opacity: [0.95, 0],
+                        scale: [1, 0.3],
+                      }}
+                      transition={{ duration: 0.65, ease: 'easeOut' }}
+                      className="absolute left-14 top-1/2 h-1.5 w-1.5 rounded-full bg-yellow-300"
+                    />
+                  ))}
+                </div>
+              </>
             )}
 
             <div className={`relative flex-shrink-0 p-2.5 rounded-lg
