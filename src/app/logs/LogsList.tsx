@@ -108,13 +108,24 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
 
   return (
     <div className="space-y-3">
+      {/* Google Fonts Link & Styles loaded globally for perfect synchronization */}
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap" />
+      <style dangerouslySetInnerHTML={{__html: `
+        .font-nosifer {
+          font-family: 'Nosifer', sans-serif !important;
+        }
+        .font-creepster {
+          font-family: 'Creepster', cursive !important;
+        }
+      `}} />
+
       <AnimatePresence>
         {featuredFirstBlood && energyPhase && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, filter: 'blur(10px)' }}
-            className="pointer-events-none relative overflow-hidden rounded-xl border border-red-800 bg-black px-5 py-16"
+            className="pointer-events-none relative overflow-hidden rounded-xl border-2 border-red-900 bg-black px-5 py-20"
           >
             {/* Deep dark pulsing background */}
             <motion.div
@@ -124,46 +135,62 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             />
             
             <div className="absolute inset-0 overflow-hidden">
-              {/* Intense Blood Dripping (Trails + Sliding Beads) */}
-              {[...Array(20)].map((_, i) => {
-                const left = 3 + i * 5.1;
-                const delay = i * 0.04 + (i % 3) * 0.08;
-                const trailHeight = 35 + (i % 4) * 35;
-                return (
-                  <div key={`trail-${i}`} className="absolute top-0" style={{ left: `${left}%` }}>
-                    <motion.div
-                      initial={{ height: 0 }}
-                      animate={{ height: `${trailHeight}px` }}
-                      transition={{ duration: 0.8, delay: delay }}
-                      className="w-[1.5px] bg-gradient-to-b from-red-955 via-red-900 to-red-800"
-                    />
-                    <motion.div
-                      initial={{ y: 0, opacity: 0 }}
-                      animate={{
-                        y: [0, trailHeight, trailHeight + 15, trailHeight + 25],
-                        opacity: [0, 1, 1, 0]
-                      }}
-                      transition={{
-                        duration: 1.3,
-                        delay: delay + 0.5,
-                        repeat: Infinity,
-                        repeatDelay: 0.6
-                      }}
-                      className="w-2.5 h-3.5 -ml-1 rounded-full bg-red-700 shadow-[0_0_8px_#dc2626]"
-                    />
-                  </div>
-                )
-              })}
+              {/* Intense Blood Dripping (Tapering SVG trails + sliding droplets) */}
+              {[
+                { left: 12, height: 75, delay: 0.1, duration: 1.1 },
+                { left: 24, height: 125, delay: 0.3, duration: 1.3 },
+                { left: 38, height: 95, delay: 0.05, duration: 1.0 },
+                { left: 52, height: 135, delay: 0.25, duration: 1.4 },
+                { left: 68, height: 80, delay: 0.15, duration: 0.95 },
+                { left: 82, height: 120, delay: 0.35, duration: 1.25 },
+                { left: 91, height: 100, delay: 0.02, duration: 1.05 }
+              ].map((item, idx) => (
+                <div key={`intro-drip-${idx}`} className="absolute top-0" style={{ left: `${item.left}%` }}>
+                  {/* Tapering trail */}
+                  <motion.svg
+                    viewBox="0 0 10 100"
+                    preserveAspectRatio="none"
+                    className="w-[2px] opacity-80"
+                    style={{ height: `${item.height}px` }}
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: 1 }}
+                    transition={{ duration: 0.6, delay: item.delay, ease: "easeOut" }}
+                  >
+                    <path d="M 3 0 L 7 0 L 6 95 C 6 98, 4 98, 4 95 Z" fill="#7f1d1d" />
+                  </motion.svg>
+                  
+                  {/* Teardrop droplet */}
+                  <motion.svg
+                    viewBox="0 0 20 30"
+                    className="w-3.5 -ml-1 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
+                    initial={{ y: 0, opacity: 0 }}
+                    animate={{
+                      y: [0, item.height, item.height + 18, item.height + 35],
+                      opacity: [0, 1, 1, 0]
+                    }}
+                    transition={{
+                      duration: item.duration,
+                      delay: item.delay + 0.4,
+                      repeat: Infinity,
+                      repeatDelay: 0.5,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <path d="M 10 0 C 13 0, 17 8, 17 18 C 17 25, 14 30, 10 30 C 6 30, 3 25, 3 18 C 3 8, 7 0, 10 0 Z" fill="#dc2626" />
+                    <ellipse cx="8" cy="10" rx="1.5" ry="3.5" transform="rotate(-15 8 10)" fill="white" opacity="0.6" />
+                  </motion.svg>
+                </div>
+              ))}
             </div>
 
             <div className="relative z-10 flex flex-col items-center justify-center text-center">
               <motion.div
-                initial={{ scale: 0.3, opacity: 0 }}
-                animate={{ scale: [0.3, 1.2, 1], opacity: 1 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="text-red-500/90 text-sm tracking-[0.5em] font-black drop-shadow-[0_0_12px_rgba(239,68,68,0.95)]"
+                initial={{ scale: 0.5, opacity: 0, filter: 'blur(8px)' }}
+                animate={{ scale: [0.5, 1.15, 1], opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="text-4xl sm:text-5xl font-bold uppercase tracking-wider font-nosifer text-red-600 drop-shadow-[0_0_35px_rgba(220,38,38,0.95)] select-none"
               >
-                BLOOD SURGE
+                FIRST BLOOD
               </motion.div>
             </div>
           </motion.div>
@@ -177,17 +204,6 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
             className="relative overflow-hidden rounded-xl border-2 border-red-800 bg-black px-5 py-12 shadow-[0_0_60px_rgba(220,38,38,0.55)]"
           >
-            {/* Google Fonts Link & Styles */}
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&display=swap" />
-            <style dangerouslySetInnerHTML={{__html: `
-              .font-nosifer {
-                font-family: 'Nosifer', sans-serif !important;
-              }
-              .font-creepster {
-                font-family: 'Creepster', cursive !important;
-              }
-            `}} />
-
             {/* Dark moving blood mist */}
             <motion.div
               animate={{ opacity: [0.35, 0.65, 0.35], scale: [1, 1.03, 1] }}
@@ -195,13 +211,31 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(136,19,55,0.45),transparent_75%)]"
             />
 
-            {/* Background Splatters */}
+            {/* High-Fidelity Background Splatters (No cartoon AI stars/flowers) */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-              <svg viewBox="0 0 200 200" className="absolute left-1/4 top-1/3 -translate-x-1/2 -translate-y-1/2 w-72 h-72 fill-red-800/60 filter blur-[1px]">
-                <path d="M 100 100 C 110 80, 130 50, 120 40 C 110 30, 95 60, 90 70 C 80 60, 60 30, 50 40 C 40 50, 70 80, 80 90 C 65 95, 30 90, 25 105 C 20 120, 55 115, 75 110 C 70 125, 40 160, 55 170 C 70 180, 90 140, 95 130 C 110 145, 140 175, 150 160 C 160 145, 125 125, 115 120 C 130 115, 175 125, 180 110 C 185 95, 140 100, 120 100 Z" />
+              {/* Left splatter */}
+              <svg viewBox="0 0 200 200" className="absolute left-1/12 sm:left-1/6 top-1/2 -translate-y-1/2 w-64 h-64 fill-red-950/40 stroke-none pointer-events-none filter blur-[0.5px]">
+                <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" />
+                <path d="M 60 90 Q 20 110, 10 115" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+                <path d="M 110 80 Q 150 50, 160 45" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+                <path d="M 95 130 Q 110 170, 115 180" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+                <circle cx="30" cy="50" r="3" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="25" cy="125" r="2.5" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="170" cy="70" r="3.5" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="145" cy="160" r="2" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="80" cy="175" r="4" fill="#7f1d1d" opacity="0.6" />
               </svg>
-              <svg viewBox="0 0 200 200" className="absolute right-1/4 bottom-1/4 translate-x-1/2 translate-y-1/2 w-64 h-64 fill-red-900/50 filter blur-[1px] rotate-90">
-                <path d="M 100 100 C 110 80, 130 50, 120 40 C 110 30, 95 60, 90 70 C 80 60, 60 30, 50 40 C 40 50, 70 80, 80 90 C 65 95, 30 90, 25 105 C 20 120, 55 115, 75 110 C 70 125, 40 160, 55 170 C 70 180, 90 140, 95 130 C 110 145, 140 175, 150 160 C 160 145, 125 125, 115 120 C 130 115, 175 125, 180 110 C 185 95, 140 100, 120 100 Z" />
+              {/* Right splatter */}
+              <svg viewBox="0 0 200 200" className="absolute right-1/12 sm:right-1/6 top-1/2 -translate-y-1/2 w-64 h-64 fill-red-950/40 stroke-none pointer-events-none filter blur-[0.5px] rotate-115">
+                <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" />
+                <path d="M 60 90 Q 20 110, 10 115" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+                <path d="M 110 80 Q 150 50, 160 45" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+                <path d="M 95 130 Q 110 170, 115 180" stroke="#7f1d1d" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.6" />
+                <circle cx="30" cy="50" r="3" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="25" cy="125" r="2.5" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="170" cy="70" r="3.5" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="145" cy="160" r="2" fill="#7f1d1d" opacity="0.6" />
+                <circle cx="80" cy="175" r="4" fill="#7f1d1d" opacity="0.6" />
               </svg>
             </div>
             
@@ -279,7 +313,8 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               })}
             </div>
 
-            <div className="relative z-10 flex flex-col items-center justify-center">
+            {/* Pushed down pt-10 here to fully prevent dripping top SVG border overlap! */}
+            <div className="relative z-10 flex flex-col items-center justify-center pt-10">
               <motion.div 
                 animate={{ textShadow: ['0 0 10px #f43f5e', '0 0 25px #e11d48', '0 0 10px #f43f5e'] }}
                 transition={{ duration: 1.4, repeat: Infinity }}
