@@ -122,10 +122,17 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       <AnimatePresence>
         {featuredFirstBlood && energyPhase && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.9, rotate: -1 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              rotate: 0,
+              x: [0, -6, 5, -4, 3, -1, 0],
+              y: [0, 5, -4, 3, -2, 1, 0]
+            }}
             exit={{ opacity: 0, filter: 'blur(10px)' }}
-            className="pointer-events-none relative overflow-hidden rounded-xl border-2 border-red-900 bg-black px-5 py-20"
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="pointer-events-none relative overflow-hidden rounded-xl border-2 border-red-900 bg-black px-5 py-20 shadow-[0_0_80px_rgba(220,38,38,0.75)]"
           >
             {/* Deep dark pulsing background */}
             <motion.div
@@ -133,6 +140,61 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-from)_0%,_transparent_80%)] from-red-950/60"
             />
+
+            {/* Reusable Diagonal Glossy Glass Reflection */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+            
+            {/* Massive Organic Impact Splatter in Teaser Phase */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-45 flex items-center justify-center">
+              <motion.svg 
+                viewBox="0 0 200 200" 
+                className="w-96 h-96 pointer-events-none filter blur-[0.4px]"
+                initial={{ scale: 0.2, opacity: 0, rotate: -20 }}
+                animate={{ scale: 1.15, opacity: 0.55, rotate: 0 }}
+                transition={{ duration: 0.38, ease: "easeOut", delay: 0.05 }}
+              >
+                <defs>
+                  <radialGradient id="introCenterSplat" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#1e0207" stopOpacity="0.9" />
+                    <stop offset="35%" stopColor="#4c0519" stopOpacity="0.8" />
+                    <stop offset="65%" stopColor="#881337" stopOpacity="0.6" />
+                    <stop offset="85%" stopColor="#be123c" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#be123c" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                <path d="M 100 100 Q 70 70, 75 90 T 55 120 T 80 150 T 130 140 T 145 105 T 120 75 Z" fill="url(#introCenterSplat)" />
+                <path d="M 85 90 Q 30 70, 15 65" stroke="url(#introCenterSplat)" strokeWidth="3" strokeLinecap="round" fill="none" />
+                <path d="M 115 90 Q 170 60, 185 55" stroke="url(#introCenterSplat)" strokeWidth="3" strokeLinecap="round" fill="none" />
+                <path d="M 100 120 Q 90 180, 85 195" stroke="url(#introCenterSplat)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <path d="M 115 110 Q 165 150, 175 160" stroke="url(#introCenterSplat)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <circle cx="45" cy="55" r="4" fill="url(#introCenterSplat)" />
+                <circle cx="30" cy="85" r="2.5" fill="url(#introCenterSplat)" />
+                <circle cx="165" cy="75" r="3" fill="url(#introCenterSplat)" />
+                <circle cx="180" cy="115" r="3.5" fill="url(#introCenterSplat)" />
+                <circle cx="150" cy="165" r="2" fill="url(#introCenterSplat)" />
+                <circle cx="65" cy="180" r="4.5" fill="url(#introCenterSplat)" />
+              </motion.svg>
+            </div>
+
+            {/* High-density micro-splatters (mist) for the Teaser card background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+              <svg viewBox="0 0 1000 300" className="absolute inset-0 w-full h-full pointer-events-none">
+                <defs>
+                  <radialGradient id="microGlowTeaser" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#ef4444" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                <circle cx="200" cy="80" r="1.5" fill="url(#microGlowTeaser)" />
+                <circle cx="210" cy="95" r="0.8" fill="url(#microGlowTeaser)" />
+                <circle cx="180" cy="120" r="2" fill="url(#microGlowTeaser)" />
+                <circle cx="800" cy="70" r="1.8" fill="url(#microGlowTeaser)" />
+                <circle cx="820" cy="110" r="1.2" fill="url(#microGlowTeaser)" />
+                <circle cx="770" cy="150" r="1.5" fill="url(#microGlowTeaser)" />
+                <circle cx="500" cy="50" r="1.2" fill="url(#microGlowTeaser)" />
+                <circle cx="520" cy="80" r="0.8" fill="url(#microGlowTeaser)" />
+              </svg>
+            </div>
             
             <div className="absolute inset-0 overflow-hidden">
               {/* Intense Blood Dripping (Tapering SVG trails + sliding droplets) */}
@@ -159,7 +221,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                     <path d="M 3 0 L 7 0 L 6 95 C 6 98, 4 98, 4 95 Z" fill="#7f1d1d" />
                   </motion.svg>
                   
-                  {/* Teardrop droplet */}
+                  {/* Teardrop droplet with 3D highlight */}
                   <motion.svg
                     viewBox="0 0 20 30"
                     className="w-3.5 -ml-1 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
@@ -211,6 +273,9 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(136,19,55,0.45),transparent_75%)]"
             />
 
+            {/* Diagonal Glossy Glass Screen Reflection */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
+
             {/* High-Fidelity Background Splatters with volumetric Radial Gradients (Perfect liquid depth) */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-25">
               <svg className="absolute inset-0 w-full h-full">
@@ -251,6 +316,42 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                 </defs>
               </svg>
 
+              {/* High-density background micro-mist spray for premium realism */}
+              <svg viewBox="0 0 1000 300" className="absolute inset-0 w-full h-full pointer-events-none">
+                <defs>
+                  <radialGradient id="microGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#be123c" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#be123c" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                {/* Micro-spray dots scattered elegantly */}
+                <circle cx="150" cy="80" r="1.5" fill="url(#microGlow)" />
+                <circle cx="155" cy="85" r="0.8" fill="url(#microGlow)" />
+                <circle cx="140" cy="95" r="2" fill="url(#microGlow)" />
+                <circle cx="170" cy="65" r="1.2" fill="url(#microGlow)" />
+                <circle cx="180" cy="110" r="0.6" fill="url(#microGlow)" />
+                
+                <circle cx="210" cy="150" r="2.2" fill="url(#microGlow)" />
+                <circle cx="230" cy="130" r="1.0" fill="url(#microGlow)" />
+                <circle cx="225" cy="165" r="0.8" fill="url(#microGlow)" />
+                
+                <circle cx="820" cy="90" r="1.8" fill="url(#microGlow)" />
+                <circle cx="810" cy="100" r="0.9" fill="url(#microGlow)" />
+                <circle cx="840" cy="75" r="2.5" fill="url(#microGlow)" />
+                <circle cx="835" cy="120" r="1.2" fill="url(#microGlow)" />
+                
+                <circle cx="780" cy="160" r="1.5" fill="url(#microGlow)" />
+                <circle cx="795" cy="180" r="0.7" fill="url(#microGlow)" />
+                <circle cx="765" cy="140" r="2" fill="url(#microGlow)" />
+                
+                <circle cx="500" cy="60" r="1.0" fill="url(#microGlow)" />
+                <circle cx="480" cy="70" r="1.5" fill="url(#microGlow)" />
+                <circle cx="530" cy="50" r="0.8" fill="url(#microGlow)" />
+                <circle cx="510" cy="85" r="1.2" fill="url(#microGlow)" />
+                <circle cx="450" cy="110" r="1.6" fill="url(#microGlow)" />
+                <circle cx="550" cy="120" r="0.7" fill="url(#microGlow)" />
+              </svg>
+
               {/* Left splatter */}
               <svg viewBox="0 0 200 200" className="absolute left-1/12 sm:left-1/6 top-1/2 -translate-y-1/2 w-64 h-64 pointer-events-none filter blur-[0.5px]">
                 <path d="M 80 80 Q 55 50, 60 70 T 40 90 T 55 120 T 90 140 T 130 130 T 140 100 T 110 70 Z" fill="url(#splatGradLeft)" />
@@ -285,6 +386,19 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             {/* Top Blood Smear/Border Layer 2 (Brighter overlay linear gradient for deep liquid 3D shine) */}
             <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-12 filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] z-20 pointer-events-none">
               <path d="M 0 0 L 1000 0 L 1000 25 Q 980 32, 960 18 T 920 12 Q 900 35, 890 48 Q 880 52, 870 32 Q 860 18, 840 12 T 800 10 Q 785 28, 775 40 Q 765 42, 755 32 Q 745 18, 730 12 T 670 10 Q 650 20, 630 18 T 590 10 Q 570 35, 560 48 Q 550 52, 540 32 Q 530 18, 520 12 T 460 10 Q 440 20, 420 18 T 380 10 Q 365 28, 355 40 Q 345 42, 335 32 Q 325 18, 320 12 T 290 10 T 250 10 Q 230 28, 220 40 Q 210 42, 200 28 Q 190 12, 170 10 T 130 10 Q 110 22, 90 18 T 50 10 Q 30 28, 20 32 Q 10 35, 0 20 Z" fill="url(#smearGradOverlay)" />
+            </svg>
+
+            {/* Top Blood Smear/Border Layer 3 (Wet specular glossy highlights for extreme realism!) */}
+            <svg viewBox="0 0 1000 70" preserveAspectRatio="none" className="absolute top-0 left-0 w-full h-[54px] z-20 pointer-events-none">
+              <defs>
+                <linearGradient id="specularGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.4" />
+                  <stop offset="35%" stopColor="#ffffff" stopOpacity="0.25" />
+                  <stop offset="70%" stopColor="#ffffff" stopOpacity="0.05" />
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path d="M 0 0 L 1000 0 L 1000 15 Q 980 20, 960 10 T 920 8 Q 900 18, 890 24 Q 880 26, 870 18 Q 860 10, 840 8 T 800 6 Q 785 15, 775 20 Q 765 22, 755 18 Q 745 10, 730 8 T 670 6 Q 650 15, 630 12 T 590 6 Q 570 18, 560 24 Q 550 26, 540 18 Q 530 10, 520 8 T 460 6 Q 440 12, 420 10 T 380 6 Q 365 15, 355 20 Q 345 22, 335 18 Q 325 10, 320 8 T 290 6 T 250 6 Q 230 15, 220 20 Q 210 22, 200 15 Q 190 10, 170 8 T 130 8 Q 110 14, 90 12 T 50 6 Q 30 15, 20 18 Q 10 20, 0 12 Z" fill="url(#specularGrad)" />
             </svg>
 
             {/* Dynamic Blood Drips - Organic SVG shapes at non-uniform positions */}
