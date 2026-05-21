@@ -2,7 +2,7 @@
 
 // React Imports
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Trophy } from "lucide-react";
 
@@ -24,6 +24,8 @@ export type LogEntry = {
 export default function LogsList({ tabType = 'challenges', eventId }: { tabType?: 'challenges' | 'solves' | 'firstblood', eventId?: string | null | 'all' }) {
   const [notifications, setNotifications] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showFeaturedFirstBlood, setShowFeaturedFirstBlood] = useState(false)
+  const [energyPhase, setEnergyPhase] = useState(false)
   const { getFeed } = useLogs()
 
   const eventKey = eventId === undefined ? 'any' : (eventId === null ? 'main' : String(eventId))
@@ -49,6 +51,24 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       ? firstBloodLogs
       : challengeLogs;
   const featuredFirstBlood = tabType === 'firstblood' && firstBloodLogs.length > 0 ? firstBloodLogs[0] : null;
+
+  useEffect(() => {
+    if (tabType !== 'firstblood' || !featuredFirstBlood) {
+      setShowFeaturedFirstBlood(false)
+      setEnergyPhase(false)
+      return
+    }
+    setEnergyPhase(true)
+    const t1 = setTimeout(() => {
+      setEnergyPhase(false)
+      setShowFeaturedFirstBlood(true)
+    }, 650)
+    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 4300)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [tabType, featuredFirstBlood?.log_created_at, featuredFirstBlood?.log_challenge_id])
 
   if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
 
@@ -83,32 +103,59 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
 
   return (
     <div className="space-y-3">
-      {featuredFirstBlood && (
-        <motion.div
-          initial={{ opacity: 0, y: -12, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.5)]"
-        >
+      <AnimatePresence>
+        {featuredFirstBlood && energyPhase && (
           <motion.div
-            animate={{ opacity: [0.25, 0.55, 0.25] }}
-            transition={{ duration: 1.6, repeat: Infinity }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,165,165,0.35),transparent_50%)]"
-          />
-          <div className="relative">
-            <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
-            <div className="mt-2 text-3xl font-black uppercase tracking-[0.12em] text-red-400">FIRST BLOOD</div>
-            <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">
-              {featuredFirstBlood.log_username || 'unknown'}
-            </p>
-            <p className="mt-2 text-center text-2xl font-black text-red-500">
-              {featuredFirstBlood.log_challenge_title}
-            </p>
-            <p className="mt-3 text-center text-xs uppercase tracking-[0.22em] text-zinc-400">
-              {featuredFirstBlood.log_category}
-            </p>
-          </div>
-        </motion.div>
-      )}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="pointer-events-none relative overflow-hidden rounded-xl border border-red-600/70 bg-black/70 px-5 py-8"
+          >
+            <motion.div
+              initial={{ scale: 2.4, opacity: 0.25 }}
+              animate={{ scale: 0.8, opacity: 0.8 }}
+              transition={{ duration: 0.62, ease: 'easeOut' }}
+              className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500/40 blur-2xl"
+            />
+            <motion.div
+              initial={{ scale: 1.8, opacity: 0.15 }}
+              animate={{ scale: 0.9, opacity: 0.65 }}
+              transition={{ duration: 0.62, ease: 'easeOut' }}
+              className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-300/70"
+            />
+            <div className="relative text-center text-red-100 text-xs tracking-[0.3em] font-bold">
+              ENERGY CHARGING
+            </div>
+          </motion.div>
+        )}
+        {featuredFirstBlood && showFeaturedFirstBlood && (
+          <motion.div
+            initial={{ opacity: 0, y: -16, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.99 }}
+            className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.55)]"
+          >
+            <motion.div
+              animate={{ opacity: [0.25, 0.55, 0.25] }}
+              transition={{ duration: 1.6, repeat: Infinity }}
+              className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,165,165,0.35),transparent_50%)]"
+            />
+            <div className="relative">
+              <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
+              <div className="mt-2 text-3xl font-black uppercase tracking-[0.12em] text-red-400">FIRST BLOOD</div>
+              <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">
+                {featuredFirstBlood.log_username || 'unknown'}
+              </p>
+              <p className="mt-2 text-center text-2xl font-black text-red-500">
+                {featuredFirstBlood.log_challenge_title}
+              </p>
+              <p className="mt-3 text-center text-xs uppercase tracking-[0.22em] text-zinc-400">
+                {featuredFirstBlood.log_category}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.ul
         key={cacheKey}
         initial={{ opacity: 0, y: 10 }}
