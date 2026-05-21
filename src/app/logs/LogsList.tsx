@@ -1,12 +1,9 @@
 "use client";
 
-// React Imports
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Trophy } from "lucide-react";
 
-// Shared Imports
 import { Loader } from '@/shared/components';
 import { useLogs } from '@/shared/contexts';
 import { formatRelativeDate } from '@/shared/lib'
@@ -35,22 +32,22 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
   useEffect(() => {
     (async () => {
       setLoading(true);
-
       const merged = await getFeed(tabType, eventId)
       setNotifications(merged as LogEntry[])
       setLoading(false)
     })();
   }, [cacheKey, eventId, getFeed, tabType]);
 
-  // Filter based on tab type
   const challengeLogs = notifications.filter(n => n.log_type === 'new_challenge');
   const solveLogs = notifications.filter(n => n.log_type === 'solve');
   const firstBloodLogs = notifications.filter(n => n.log_type === 'first_blood');
+
   const filteredNotifications = tabType === 'solves'
     ? solveLogs
     : tabType === 'firstblood'
       ? firstBloodLogs
       : challengeLogs;
+
   const featuredFirstBlood = tabType === 'firstblood' && firstBloodLogs.length > 0 ? firstBloodLogs[0] : null;
 
   useEffect(() => {
@@ -59,22 +56,32 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
       setEnergyPhase(false)
       return
     }
-    setShowFeaturedFirstBlood(true)
-    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 6000)
+
+    setEnergyPhase(true)
+    const t1 = setTimeout(() => {
+      setEnergyPhase(false)
+      setShowFeaturedFirstBlood(true)
+    }, 1500)
+    const t2 = setTimeout(() => setShowFeaturedFirstBlood(false), 6200)
+
     return () => {
+      clearTimeout(t1)
       clearTimeout(t2)
     }
   }, [tabType, featuredFirstBlood?.log_created_at, featuredFirstBlood?.log_challenge_id])
 
   useEffect(() => {
+    const enteredChallengeTab = prevTabRef.current !== 'challenges' && tabType === 'challenges'
     const enteredFirstBloodTab = prevTabRef.current !== 'firstblood' && tabType === 'firstblood'
-    if (enteredFirstBloodTab) {
+
+    if (enteredChallengeTab || enteredFirstBloodTab) {
       try {
         const audio = new Audio('/sounds/first-blood.mp3')
-        audio.volume = 0.7
+        audio.volume = enteredFirstBloodTab ? 0.7 : 0.55
         void audio.play()
       } catch { }
     }
+
     prevTabRef.current = tabType
   }, [tabType])
 
@@ -89,23 +96,14 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         className="border rounded-lg px-4 py-6 shadow bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center text-center text-sm text-gray-600 dark:text-gray-300"
       >
         <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 mb-3">
-          <svg
-            width="22"
-            height="22"
-            fill="none"
-            stroke="#3b82f6"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            viewBox="0 0 24 24"
-          >
+          <svg width="22" height="22" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <circle cx="12" cy="16" r="1" />
           </svg>
         </div>
         <p className="font-medium text-gray-700 dark:text-gray-200">No logs found</p>
-        <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">You’re all caught up!</p>
+        <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">You are all caught up!</p>
       </motion.div>
     );
 
@@ -119,237 +117,75 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             exit={{ opacity: 0 }}
             className="pointer-events-none relative overflow-hidden rounded-xl border border-red-600/70 bg-black/70 px-5 py-8"
           >
-            <motion.div 
-              animate={{ rotate: 180 }} 
-              transition={{ duration: 1.5, ease: "easeIn" }}
-              className="absolute inset-0"
-            >
-              {[...Array(60)].map((_, i) => {
-                const angle = (i / 60) * Math.PI * 2 + (i % 5) * 0.2
-                const radius = 220 + (i % 8) * 20
-                const fromX = Math.cos(angle) * radius
-                const fromY = Math.sin(angle) * radius
-                const colors = ['bg-red-400', 'bg-red-500', 'bg-red-600', 'bg-rose-500', 'bg-white']
-                const color = colors[i % colors.length]
-                const size = 1.5 + (i % 4) * 0.5
-                return (
-                  <motion.span
-                    key={`energy-particle-${i}`}
-                    initial={{ x: fromX, y: fromY, opacity: 0, scale: 0.5 }}
-                    animate={{ x: 0, y: 0, opacity: [0, 1, 0], scale: [0.5, 1.5, 0.2] }}
-                    transition={{
-                      duration: 1.2,
-                      ease: 'easeIn',
-                      delay: (i % 12) * 0.05,
-                    }}
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full ${color} shadow-[0_0_15px_rgba(220,38,38,1)]`}
-                    style={{ width: size + 'px', height: size + 'px' }}
-                  />
-                )
-              })}
-            </motion.div>
             <motion.div
-              initial={{ scale: 2.5, opacity: 0 }}
-              animate={{ scale: 0.5, opacity: 1 }}
-              transition={{ duration: 1.35, ease: 'easeIn' }}
-              className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/50 blur-3xl"
+              initial={{ opacity: 0.15, y: -24 }}
+              animate={{ opacity: 0.7, y: 0 }}
+              transition={{ duration: 1.2, ease: 'easeOut' }}
+              className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-red-500/50 to-transparent"
             />
+            <div className="absolute inset-0">
+              {[...Array(12)].map((_, i) => (
+                <motion.span
+                  key={`blood-drip-${i}`}
+                  initial={{ y: -30, opacity: 0, scaleY: 0.7 }}
+                  animate={{ y: [ -30, 6 + (i % 4) * 8 ], opacity: [0, 0.9, 0.65], scaleY: [0.7, 1.25, 1] }}
+                  transition={{ duration: 1.25, ease: 'easeOut', delay: i * 0.04 }}
+                  className="absolute top-0 w-1.5 rounded-b-full bg-red-400/85"
+                  style={{ left: `${6 + i * 7.5}%`, height: `${18 + (i % 5) * 7}px` }}
+                />
+              ))}
+            </div>
             <motion.div
-              initial={{ scale: 2, opacity: 0 }}
-              animate={{ scale: 0.2, opacity: 1 }}
-              transition={{ duration: 1.35, ease: 'easeIn' }}
-              className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-red-400/80"
+              initial={{ scale: 2.3, opacity: 0.2 }}
+              animate={{ scale: 0.85, opacity: 0.8 }}
+              transition={{ duration: 1.35, ease: 'easeOut' }}
+              className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/40 blur-3xl"
             />
+            <div className="relative text-center text-red-100 text-xs tracking-[0.3em] font-bold">BLOOD SURGE</div>
           </motion.div>
         )}
+
         {featuredFirstBlood && showFeaturedFirstBlood && (
           <motion.div
-            initial={{ opacity: 0, y: -50, scale: 0.5, filter: 'blur(10px)' }}
-            animate={{ 
-              opacity: 1, 
-              y: [0, -15, 12, -8, 5, -2, 0], 
-              x: [0, 10, -8, 6, -4, 2, 0],
-              scale: [1, 1.1, 0.95, 1.05, 0.98, 1], 
-              filter: 'blur(0px)' 
-            }}
-            exit={{ opacity: 0, scale: 0.9, filter: 'blur(5px)' }}
+            initial={{ opacity: 0, y: -22, scale: 0.93, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -8, scale: 0.99, filter: 'blur(2px)' }}
             transition={{ type: 'spring', stiffness: 180, damping: 22, mass: 0.8 }}
-            className="relative overflow-hidden rounded-2xl border border-red-500/80 bg-[#0a0000] px-6 py-10 shadow-[0_0_50px_rgba(220,38,38,0.3)] group"
+            className="relative overflow-hidden rounded-xl border border-red-500/70 bg-gradient-to-b from-red-900 via-red-950 to-black px-5 py-5 shadow-[0_16px_45px_rgba(220,38,38,0.55)]"
           >
-            {/* Animated Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(220,38,38,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(220,38,38,0.15)_1px,transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_20%,transparent_100%)] opacity-40" />
-            
-            {/* Pulsing Core Glow */}
             <motion.div
-              animate={{ opacity: [0.3, 0.7, 0.3], scale: [0.8, 1.1, 0.8] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/30 blur-[60px] pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.15, 0.28, 0.15], x: [0, -1, 1, 0] }}
+              transition={{ duration: 0.22, repeat: 4, ease: 'linear' }}
+              className="pointer-events-none absolute inset-0 mix-blend-screen bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.08)_48%,transparent_100%)]"
             />
-            
-            {/* Radar / Target Overlay */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-              <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/10" />
-              <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/15" />
-              <div className="absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-[2px] border-red-500/20" />
-              <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-red-500/30 bg-red-500/10" />
-              
-              {/* Crosshairs */}
-              <div className="absolute left-1/2 top-1/2 h-[600px] w-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10" />
-              <div className="absolute top-1/2 left-1/2 w-[600px] h-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10" />
-              <div className="absolute left-1/2 top-1/2 h-[600px] w-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10 rotate-45" />
-              <div className="absolute top-1/2 left-1/2 w-[600px] h-[1px] -translate-x-1/2 -translate-y-1/2 bg-red-500/10 rotate-45" />
-            </div>
-
-            {/* Shooting particles explosion */}
-            <div className="absolute inset-0 pointer-events-none overflow-visible">
-              {[...Array(80)].map((_, i) => {
-                const angle = (i / 80) * Math.PI * 2 + (Math.random() * 0.1 - 0.05);
-                const velocity = 200 + Math.random() * 300;
-                const tx = Math.cos(angle) * velocity;
-                const ty = Math.sin(angle) * velocity;
-                const rotation = (angle * 180) / Math.PI;
-                const delay = Math.random() * 2;
-                return (
-                  <motion.div
-                    key={`shooting-particle-${i}`}
-                    initial={{ x: 0, y: 0, opacity: 1, scale: 0 }}
-                    animate={{
-                      x: [0, tx],
-                      y: [0, ty],
-                      opacity: [0, 1, 1, 0],
-                      scale: [0, 1, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 1 + Math.random() * 0.8,
-                      ease: 'easeOut',
-                      delay: delay,
-                      repeat: Infinity
-                    }}
-                    className="absolute left-1/2 top-1/2 flex items-center justify-end origin-left"
-                    style={{ 
-                      width: `${40 + Math.random() * 80}px`, 
-                      height: '2px', 
-                      rotate: `${rotation}deg`,
-                      zIndex: 20
-                    }}
-                  >
-                    <div className="w-full h-full bg-gradient-to-r from-transparent via-red-600 to-red-400" />
-                    <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_3px_rgba(255,255,255,0.9)] shrink-0 translate-x-[1px]" />
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            <div className="relative z-10 flex flex-col items-center justify-center">
-              <motion.div
-                initial={{ scale: 0, rotate: -90 }}
-                animate={{ scale: 1, rotate: [0, -10, 10, -5, 5, 0] }}
-                transition={{ type: 'spring', delay: 0.1, duration: 1 }}
-                className="mb-5 rounded-full bg-red-950/90 p-5 border border-red-500/60 shadow-[0_0_30px_rgba(220,38,38,0.6)]"
-              >
-                <Trophy size={42} className="text-red-400 drop-shadow-[0_0_12px_rgba(248,113,113,1)]" />
-              </motion.div>
-
-              <div className="relative text-center">
-                {/* Glitch CSS */}
-                <style dangerouslySetInnerHTML={{ __html: `
-                  @keyframes glitch-skew {
-                    0% { transform: skew(0deg); }
-                    10% { transform: skew(-2deg); }
-                    20% { transform: skew(0.5deg); }
-                    30% { transform: skew(0deg); }
-                    40% { transform: skew(1.5deg); }
-                    50% { transform: skew(-0.5deg); }
-                    60% { transform: skew(0deg); }
-                    70% { transform: skew(-1deg); }
-                    80% { transform: skew(0.4deg); }
-                    90% { transform: skew(0deg); }
-                    100% { transform: skew(-0.5deg); }
-                  }
-                  @keyframes glitch-top {
-                    0% { clip-path: inset(0 0 85% 0); transform: translate(0); }
-                    5% { clip-path: inset(20% 0 60% 0); transform: translate(-6px, -2px); }
-                    10% { clip-path: inset(0 0 85% 0); transform: translate(0); }
-                    15% { clip-path: inset(60% 0 10% 0); transform: translate(4px, 1px); }
-                    20% { clip-path: inset(0 0 85% 0); transform: translate(0); }
-                    25% { clip-path: inset(30% 0 50% 0); transform: translate(-3px, 2px); }
-                    30% { clip-path: inset(0 0 85% 0); transform: translate(0); }
-                    100% { clip-path: inset(0 0 85% 0); transform: translate(0); }
-                  }
-                  @keyframes glitch-bottom {
-                    0% { clip-path: inset(85% 0 0 0); transform: translate(0); }
-                    5% { clip-path: inset(50% 0 20% 0); transform: translate(5px, 2px); }
-                    10% { clip-path: inset(85% 0 0 0); transform: translate(0); }
-                    15% { clip-path: inset(10% 0 65% 0); transform: translate(-4px, -1px); }
-                    20% { clip-path: inset(85% 0 0 0); transform: translate(0); }
-                    25% { clip-path: inset(40% 0 30% 0); transform: translate(3px, -2px); }
-                    30% { clip-path: inset(85% 0 0 0); transform: translate(0); }
-                    100% { clip-path: inset(85% 0 0 0); transform: translate(0); }
-                  }
-                  @keyframes glitch-glow {
-                    0%, 100% { text-shadow: 0 0 10px rgba(239,68,68,0.5), 0 0 20px rgba(239,68,68,0.3); }
-                    25% { text-shadow: 0 0 20px rgba(239,68,68,0.8), 0 0 40px rgba(239,68,68,0.5), 0 0 60px rgba(239,68,68,0.2); }
-                    50% { text-shadow: 0 0 15px rgba(239,68,68,0.6), 0 0 30px rgba(239,68,68,0.4); }
-                    75% { text-shadow: 0 0 25px rgba(239,68,68,0.9), 0 0 50px rgba(239,68,68,0.6), 0 0 80px rgba(239,68,68,0.3); }
-                  }
-                  .fb-glitch-wrapper {
-                    position: relative;
-                    display: inline-block;
-                    animation: glitch-skew 4s infinite linear alternate-reverse;
-                  }
-                  .fb-glitch-text {
-                    animation: glitch-glow 2s ease-in-out infinite;
-                  }
-                  .fb-glitch-layer-top {
-                    position: absolute;
-                    left: 0; top: 0;
-                    width: 100%; height: 100%;
-                    color: #ef4444;
-                    animation: glitch-top 3s infinite linear alternate-reverse;
-                    pointer-events: none;
-                  }
-                  .fb-glitch-layer-bottom {
-                    position: absolute;
-                    left: 0; top: 0;
-                    width: 100%; height: 100%;
-                    color: #f87171;
-                    animation: glitch-bottom 2.5s infinite linear alternate-reverse;
-                    pointer-events: none;
-                  }
-                `}} />
-                <div className="fb-glitch-wrapper">
-                  <h2 className="fb-glitch-text text-4xl sm:text-5xl font-black uppercase tracking-[0.15em] text-transparent bg-clip-text bg-gradient-to-b from-white via-red-200 to-red-600 mb-1">
-                    FIRST BLOOD
-                  </h2>
-                  <span aria-hidden="true" className="fb-glitch-layer-top text-4xl sm:text-5xl font-black uppercase tracking-[0.15em]">
-                    FIRST BLOOD
-                  </span>
-                  <span aria-hidden="true" className="fb-glitch-layer-bottom text-4xl sm:text-5xl font-black uppercase tracking-[0.15em]">
-                    FIRST BLOOD
-                  </span>
-                </div>
-                
-                <div className="flex items-center justify-center gap-4 mt-8 mb-4">
-                  <div className="h-[2px] w-16 bg-gradient-to-r from-transparent to-red-600 rounded-full" />
-                  <span className="text-red-400 text-xs font-bold tracking-[0.4em] uppercase drop-shadow-[0_0_5px_rgba(248,113,113,0.8)]">Achieved By</span>
-                  <div className="h-[2px] w-16 bg-gradient-to-l from-transparent to-red-600 rounded-full" />
-                </div>
-                
-                <p className="text-3xl sm:text-4xl font-extrabold text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.6)]">
-                  {featuredFirstBlood.log_username || 'unknown'}
-                </p>
-                
-                <div className="mt-8 flex flex-col items-center justify-center gap-1.5 bg-red-950/50 py-3.5 px-10 rounded-xl border border-red-800/60 backdrop-blur-md shadow-inner">
-                  <span className="text-[10px] font-bold text-red-300/90 uppercase tracking-[0.3em]">Challenge Solved</span>
-                  <p className="text-xl sm:text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">
-                    {featuredFirstBlood.log_challenge_title} <span className="text-red-500 font-black ml-1">[{featuredFirstBlood.log_category}]</span>
-                  </p>
-                </div>
+            <motion.div
+              animate={{ opacity: [0.25, 0.55, 0.25] }}
+              transition={{ duration: 1.6, repeat: Infinity }}
+              className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(252,165,165,0.35),transparent_50%)]"
+            />
+            <div className="relative">
+              <div className="text-[11px] font-black tracking-[0.35em] text-red-200/95">FIRST BLOOD</div>
+              <div className="mt-2 relative text-3xl font-black uppercase tracking-[0.12em] text-red-400">
+                <span>FIRST BLOOD</span>
+                <motion.span
+                  aria-hidden
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 0.8, 0, 0.55, 0] }}
+                  transition={{ duration: 0.35, times: [0, 0.2, 0.45, 0.7, 1] }}
+                  className="absolute left-0 top-0 text-red-200/80 translate-x-[1px] -translate-y-[1px]"
+                >
+                  FIRST BLOOD
+                </motion.span>
               </div>
+              <p className="mt-4 text-center text-2xl font-extrabold text-zinc-100">{featuredFirstBlood.log_username || 'unknown'}</p>
+              <p className="mt-2 text-center text-2xl font-black text-red-500">{featuredFirstBlood.log_challenge_title}</p>
+              <p className="mt-3 text-center text-xs uppercase tracking-[0.22em] text-zinc-400">{featuredFirstBlood.log_category}</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
       <motion.ul
         key={cacheKey}
         initial={{ opacity: 0, y: 10 }}
@@ -357,115 +193,78 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         transition={{ duration: 0.25 }}
         className="space-y-2"
       >
-      {filteredNotifications.map((notif, idx) => (
-        <motion.li
-          key={idx}
-          className={`border rounded-lg px-4 py-3 shadow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm transition-colors duration-150 min-w-0 ${
-            notif.log_type === "first_blood"
-              ? "bg-gradient-to-r from-red-50 via-rose-50 to-amber-50 border-red-300 dark:from-red-950/50 dark:via-rose-950/40 dark:to-amber-950/30 dark:border-red-800/60 hover:bg-red-50/80"
-              : "bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700"
-          }`}
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          {/* Icon */}
-          <span className={`flex items-center justify-center w-8 h-8 rounded-full mr-2 ${
-            notif.log_type === "first_blood" ? "bg-red-100 dark:bg-red-900/40" : "bg-blue-100 dark:bg-blue-900"
-          }`}>
-            {notif.log_type === "new_challenge" ? (
-              <svg
-                width="20"
-                height="20"
-                fill="none"
-                stroke="#3b82f6"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 19V6" />
-                <path d="M5 12l7-7 7 7" />
-              </svg>
-            ) : notif.log_type === "first_blood" ? (
-              <Trophy size={18} className="text-amber-500" />
-            ) : (
-              <svg
-                width="20"
-                height="20"
-                fill="none"
-                stroke="#10b981"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            )}
-          </span>
+        {filteredNotifications.map((notif, idx) => (
+          <motion.li
+            key={idx}
+            className={`border rounded-lg px-4 py-3 shadow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm transition-colors duration-150 min-w-0 ${
+              notif.log_type === "first_blood"
+                ? "bg-gradient-to-r from-red-50 via-rose-50 to-amber-50 border-red-300 dark:from-red-950/50 dark:via-rose-950/40 dark:to-amber-950/30 dark:border-red-800/60 hover:bg-red-50/80"
+                : "bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700"
+            }`}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className={`flex items-center justify-center w-8 h-8 rounded-full mr-2 ${
+              notif.log_type === "first_blood" ? "bg-red-100 dark:bg-red-900/40" : "bg-blue-100 dark:bg-blue-900"
+            }`}>
+              {notif.log_type === "new_challenge" ? (
+                <svg width="20" height="20" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <path d="M12 19V6" />
+                  <path d="M5 12l7-7 7 7" />
+                </svg>
+              ) : notif.log_type === "first_blood" ? (
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.85)]" />
+              ) : (
+                <svg width="20" height="20" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              )}
+            </span>
 
-          {/* Content */}
-          <div className="flex-1 flex flex-wrap items-center gap-x-2 min-w-0">
-            {notif.log_type === "new_challenge" ? (
-              <>
-                <span className="font-semibold text-blue-600 dark:text-blue-300">New Challenge:</span>
-                <span className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-block">{notif.log_challenge_title}</span>
-                <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
-              </>
-            ) : notif.log_type === "first_blood" ? (
-              <>
-                <span className="inline-flex items-center rounded-md bg-red-600 text-white px-2 py-0.5 text-[10px] font-black tracking-wider shadow-sm">
-                  FIRST BLOOD
-                </span>
-                <motion.span
-                  animate={{ opacity: [0.35, 0.9, 0.35] }}
-                  transition={{ duration: 1.2, repeat: Infinity }}
-                  className="inline-block h-2 w-2 rounded-full bg-yellow-400"
-                />
-                <span className="inline-flex items-center gap-1 min-w-0">
-                  <Link
-                    href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"}
-                    className="text-blue-600 dark:text-blue-300 font-medium hover:underline"
-                  >
-                    <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
-                      {notif.log_username && notif.log_username.length > 20
-                        ? `${notif.log_username.slice(0, 20)}...`
-                        : notif.log_username}
-                    </span>
-                  </Link>
-                </span>
-                <span className="text-red-700 dark:text-red-200 font-semibold">solved</span>
-                <b className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-block">{notif.log_challenge_title}</b>
-                <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
-              </>
-            ) : (
-              <>
-                <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate min-w-0">
-                  <Link
-                    href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"}
-                    className="text-blue-600 dark:text-blue-300 font-medium hover:underline"
-                  >
-                    <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
-                      {notif.log_username && notif.log_username.length > 20
-                        ? `${notif.log_username.slice(0, 20)}...`
-                        : notif.log_username}
-                    </span>
-                  </Link>
-                </span>
-                <span className="text-gray-700 dark:text-gray-300">solved</span>
-                <b className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-flex">{notif.log_challenge_title}</b>
-                <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
-              </>
-            )}
-          </div>
+            <div className="flex-1 flex flex-wrap items-center gap-x-2 min-w-0">
+              {notif.log_type === "new_challenge" ? (
+                <>
+                  <span className="font-semibold text-blue-600 dark:text-blue-300">New Challenge:</span>
+                  <span className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-block">{notif.log_challenge_title}</span>
+                  <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
+                </>
+              ) : notif.log_type === "first_blood" ? (
+                <>
+                  <span className="inline-flex items-center rounded-md bg-red-600 text-white px-2 py-0.5 text-[10px] font-black tracking-wider shadow-sm">FIRST BLOOD</span>
+                  <motion.span animate={{ opacity: [0.35, 0.9, 0.35] }} transition={{ duration: 1.2, repeat: Infinity }} className="inline-block h-2 w-2 rounded-full bg-yellow-400" />
+                  <span className="inline-flex items-center gap-1 min-w-0">
+                    <Link href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"} className="text-blue-600 dark:text-blue-300 font-medium hover:underline">
+                      <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
+                        {notif.log_username && notif.log_username.length > 20 ? `${notif.log_username.slice(0, 20)}...` : notif.log_username}
+                      </span>
+                    </Link>
+                  </span>
+                  <span className="text-red-700 dark:text-red-200 font-semibold">solved</span>
+                  <b className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-block">{notif.log_challenge_title}</b>
+                  <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
+                </>
+              ) : (
+                <>
+                  <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate min-w-0">
+                    <Link href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"} className="text-blue-600 dark:text-blue-300 font-medium hover:underline">
+                      <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
+                        {notif.log_username && notif.log_username.length > 20 ? `${notif.log_username.slice(0, 20)}...` : notif.log_username}
+                      </span>
+                    </Link>
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">solved</span>
+                  <b className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-flex">{notif.log_challenge_title}</b>
+                  <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
+                </>
+              )}
+            </div>
 
-          {/* Date */}
-          <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap sm:ml-2 w-full sm:w-auto text-left sm:text-right">
-            {notif.log_created_at ? formatRelativeDate(notif.log_created_at) : ""}
-          </span>
-        </motion.li>
-      ))}
+            <span className="text-xs text-gray-400 dark:text-gray-500 whitespace-nowrap sm:ml-2 w-full sm:w-auto text-left sm:text-right">
+              {notif.log_created_at ? formatRelativeDate(notif.log_created_at) : ""}
+            </span>
+          </motion.li>
+        ))}
       </motion.ul>
     </div>
   );
