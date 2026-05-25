@@ -18,7 +18,7 @@ export default function LogsPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const { markAllRead, refresh, unreadCount: challengeUnread } = useLogs()
-  const [tabType, setTabType] = useState<'challenges' | 'solves' | 'firstblood'>('solves')
+  const [tabType, setTabType] = useState<'challenges' | 'solves'>('solves')
   const [entryBlast, setEntryBlast] = useState(false)
   const { startedEvents, selectedEvent, setSelectedEvent } = useEventContext()
 
@@ -37,7 +37,7 @@ export default function LogsPage() {
     setEntryBlast(false)
   }, [authLoading, user])
 
-  const handleTabChange = (nextTab: 'challenges' | 'solves' | 'firstblood') => {
+  const handleTabChange = (nextTab: 'challenges' | 'solves') => {
     setTabType(nextTab)
     setEntryBlast(false)
   }
@@ -121,26 +121,10 @@ export default function LogsPage() {
                 </span>
               </span>
             </button>
-            <button
-              onClick={() => handleTabChange('firstblood')}
-              className={`px-4 py-2 text-sm font-medium transition border-b-2 ${tabType === 'firstblood'
-                ? 'border-red-500 text-red-600 dark:text-red-400'
-                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                }`}
-            >
-              <span
-                className="flex items-center gap-1 max-w-[95px] md:max-w-none overflow-hidden"
-                title="First Blood Logs"
-              >
-                <Droplets size={16} className="shrink-0" />
-                <span className="truncate whitespace-nowrap block">
-                  First Blood
-                </span>
-              </span>
-            </button>
           </span>
         </div>
       </div>
+
 
       <div className="min-h-[400px]">
         <AnimatePresence mode="wait">

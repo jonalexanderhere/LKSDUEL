@@ -2,7 +2,7 @@
 
 // React Imports
 import Link from 'next/link'
-import { Info, BookOpen, Flag, Trophy, Shield, FileText, Users, Scale, User, Settings2 } from 'lucide-react';
+import { Info, BookOpen, Flag, Trophy, Shield, FileText, Users, Scale, User, Settings2, Flame } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 import { AnimatePresence } from 'framer-motion'
@@ -288,6 +288,15 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
+
+                {user && (
+                  <Link
+                    href="/attack-feed"
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400'}`}
+                  >
+                    <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
+                  </Link>
+                )}
 
                 {adminStatus && user && (
                   <Link
@@ -603,6 +612,16 @@ export default function Navbar() {
                     </Link>
                   </div>
                 </details>
+
+                {user && (
+                  <Link
+                    href="/attack-feed"
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
+                  </Link>
+                )}
 
                 {user && (
                   <>
