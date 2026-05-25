@@ -135,6 +135,10 @@ export default function Navbar() {
         notifToast={notifToast}
         onDismissSolve={dismissSolveNotif}
         onDismissToast={dismissNotifToast}
+        onToastClick={() => {
+          openNotifPanel(true)
+          dismissNotifToast()
+        }}
       />
 
       <nav className={`shadow-sm fixed top-0 left-0 w-full z-50 ${theme === 'dark' ? 'bg-gray-950' : 'bg-white'}`}>

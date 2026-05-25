@@ -9,6 +9,7 @@ type NotificationToastProps = {
   notifToast: { title: string; message: string } | null
   onDismissSolve: () => void
   onDismissToast: () => void
+  onToastClick?: () => void
 }
 
 export default function NotificationToast({
@@ -16,6 +17,7 @@ export default function NotificationToast({
   notifToast,
   onDismissSolve,
   onDismissToast,
+  onToastClick,
 }: NotificationToastProps) {
   return (
     <div className="fixed top-16 right-4 z-[5000] flex flex-col gap-3 pointer-events-none">
@@ -161,7 +163,8 @@ export default function NotificationToast({
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
-            className="pointer-events-auto flex items-start gap-3 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 text-zinc-100 px-4 py-4 rounded-xl shadow-2xl max-w-[420px]"
+            onClick={onToastClick}
+            className="pointer-events-auto flex items-start gap-3 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 text-zinc-100 px-4 py-4 rounded-xl shadow-2xl max-w-[420px] cursor-pointer hover:bg-zinc-800/90 hover:scale-[1.01] transition-all"
           >
             <div className="mt-0.5 p-2 rounded-lg bg-blue-500/10 text-blue-400">
               <Bell size={18} />
@@ -171,7 +174,10 @@ export default function NotificationToast({
               <div className="text-xs text-zinc-400 leading-relaxed line-clamp-3">{notifToast.message}</div>
             </div>
             <button
-              onClick={onDismissToast}
+              onClick={(e) => {
+                e.stopPropagation()
+                onDismissToast()
+              }}
               className="ml-2 p-1.5 rounded-md hover:bg-zinc-800 text-zinc-500 transition-colors"
             >
               <X size={16} />

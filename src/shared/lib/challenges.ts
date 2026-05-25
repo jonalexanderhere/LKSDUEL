@@ -1009,8 +1009,25 @@ export async function deleteNotification(id: string) {
 export function subscribeToNotifications(onNotif: (payload: { id: string; title: string; message: string; level: string; created_at: string, created_by?: string | null, type: 'INSERT' | 'DELETE' }) => void) {
   const channel = supabase
     .channel('admin-notifications-changes')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, (payload) => {
-      const row: any = payload.new || {};
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications' }, async (payload) => {
+      let row: any = payload.new || {};
+      
+      // Robust fallback: fetch full row if title or message is missing from realtime payload (due to RLS or replication settings)
+      if (row.id && (!row.title || !row.message)) {
+        try {
+          const { data, error } = await supabase
+            .from('notifications')
+            .select('title, message, level, created_at, created_by')
+            .eq('id', row.id)
+            .maybeSingle();
+          if (!error && data) {
+            row = { ...row, ...data };
+          }
+        } catch (err) {
+          console.warn('[subscribeToNotifications] Failed to fetch full notification row:', err);
+        }
+      }
+
       onNotif({
         id: row.id || `realtime-${row.created_at || ''}-${row.title || ''}`,
         title: row.title || 'Notification',
@@ -1044,8 +1061,26 @@ export function subscribeToNotifications(onNotif: (payload: { id: string; title:
 export function subscribeToNewChallenges(onNew: (payload: { title: string, category: string }) => void) {
   const channel = supabase
     .channel('new-challenges-broadcast')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'challenges' }, (payload) => {
-      const row = payload.new as any;
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'challenges' }, async (payload) => {
+      let row = payload.new as any;
+      if (!row) return;
+
+      // Robust fallback: fetch full challenge row if title or category is missing
+      if (row.id && (!row.title || !row.category)) {
+        try {
+          const { data, error } = await supabase
+            .from('challenges')
+            .select('title, category, is_active')
+            .eq('id', row.id)
+            .maybeSingle();
+          if (!error && data) {
+            row = { ...row, ...data };
+          }
+        } catch (err) {
+          console.warn('[subscribeToNewChallenges] Failed to fetch challenge row:', err);
+        }
+      }
+
       if (row.is_active) {
         onNew({ title: row.title, category: row.category });
       }

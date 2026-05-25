@@ -69,15 +69,24 @@ export function useNotifications() {
     setNotifUnreadCount(0)
   }, [markNotificationsSeen])
 
-  const openNotifPanel = useCallback(async () => {
-    setNotifOpen((v) => !v)
-    if (!notifOpen && user) {
+  const openNotifPanel = useCallback(async (forceOpen?: boolean) => {
+    let nextOpen = false;
+    setNotifOpen((prev) => {
+      nextOpen = forceOpen !== undefined ? forceOpen : !prev;
+      return nextOpen;
+    });
+    if (nextOpen && user) {
       setNotifLoading(true)
-      const items = await getNotifications(30, 0)
-      setNotifItems((prev) => mergeNotifications(prev, (items || []) as any))
-      setNotifLoading(false)
+      try {
+        const items = await getNotifications(30, 0)
+        setNotifItems((prev) => mergeNotifications(prev, (items || []) as any))
+      } catch (err) {
+        console.warn('Failed to load notifications:', err)
+      } finally {
+        setNotifLoading(false)
+      }
     }
-  }, [notifOpen, user, mergeNotifications])
+  }, [user, mergeNotifications])
 
   const handleSendNotif = useCallback(async () => {
     if (!notifTitle.trim() || !notifMessage.trim()) return
@@ -174,6 +183,13 @@ export function useNotifications() {
     } catch { }
   }, [solveSoundEnabled])
 
+  // Request browser notification permission on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+  }, [])
+
   // Real-time notifications subscription
   useEffect(() => {
     if (!user) return
@@ -216,6 +232,18 @@ export function useNotifications() {
         audio.play()
       } catch { }
 
+      // Desktop push notification
+      if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+        const desktopNotif = new Notification(payload.title || 'New Announcement', {
+          body: payload.message || '',
+          icon: APP.image_logo || '/favicon.ico'
+        })
+        desktopNotif.onclick = () => {
+          window.focus()
+          openNotifPanel(true)
+        }
+      }
+
       const seen = getSeenNotifIds()
       const isSelf = user && payload.created_by === user.id;
       
@@ -226,7 +254,7 @@ export function useNotifications() {
     return () => {
       unsubscribe()
     }
-  }, [user, getSeenNotifIds])
+  }, [user, getSeenNotifIds, openNotifPanel])
 
   // Initial unread count fetch
   useEffect(() => {
