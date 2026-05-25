@@ -46,13 +46,14 @@ export default function MonitoringList({ solves, isLoading, onRefresh }: Monitor
     <div className="space-y-4">
       {solves.map((s) => {
         // Heuristics flags
-        const isFlagSharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 120
+        const isFlagSharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300 // under 5 minutes
         const isUserSpamming = s.time_since_user_prev_solve_seconds !== null && s.time_since_user_prev_solve_seconds <= 60
-        const isInstantSolve = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 10
+        const isInstantSolve = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 30
+        const isSuspiciousOneshot = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 180 && s.incorrect_attempts_count === 0 // under 3 minutes oneshot
         
         const isAiAgent = isUserSpamming || isInstantSolve
         const isOneshot = s.incorrect_attempts_count === 0
-        const isSuspicious = isFlagSharing || isAiAgent
+        const isSuspicious = isFlagSharing || isAiAgent || isSuspiciousOneshot
 
         return (
           <Card
@@ -128,6 +129,15 @@ export default function MonitoringList({ solves, isLoading, onRefresh }: Monitor
                           <Zap className="w-3.5 h-3.5" />
                           <span>
                             AI Agent / Speed: Solved in only {formatDuration(s.time_to_solve_seconds!)} after opening the challenge.
+                          </span>
+                        </div>
+                      )}
+
+                      {isSuspiciousOneshot && (
+                        <div className="flex items-center gap-2 text-xs font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/30 px-3 py-1.5 rounded border border-red-200/50 dark:border-red-900/40 w-fit">
+                          <Award className="w-3.5 h-3.5 text-yellow-500" />
+                          <span>
+                            Suspicious Oneshot: Solved in only {formatDuration(s.time_to_solve_seconds!)} on the first attempt with no failed attempts.
                           </span>
                         </div>
                       )}

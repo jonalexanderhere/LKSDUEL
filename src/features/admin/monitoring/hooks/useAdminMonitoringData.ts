@@ -73,16 +73,16 @@ export function useAdminMonitoringData() {
       if (!matchesSearch) return false
 
       // 2. Alert Types Heuristics
-      const isFlagSharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 120
+      const isFlagSharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300 // under 5 minutes
+      const isSuspiciousOneshot = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 180 && s.incorrect_attempts_count === 0 // under 3 minutes & oneshot
       const isAiAgent =
-        (s.time_since_user_prev_solve_seconds !== null && s.time_since_user_prev_solve_seconds <= 60) ||
-        (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 10)
-      const isOneshot = s.incorrect_attempts_count === 0
+        (s.time_since_user_prev_solve_seconds !== null && s.time_since_user_prev_solve_seconds <= 60) || // solved another chall within 60s
+        (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 30) // solved within 30s of view
 
       if (filterType === 'flag_sharing') return isFlagSharing
       if (filterType === 'ai_agent') return isAiAgent
-      if (filterType === 'oneshot') return isOneshot
-      if (filterType === 'suspicious') return isFlagSharing || isAiAgent
+      if (filterType === 'oneshot') return isSuspiciousOneshot
+      if (filterType === 'suspicious') return isFlagSharing || isAiAgent || isSuspiciousOneshot
 
       return true
     })
@@ -95,16 +95,16 @@ export function useAdminMonitoringData() {
     let oneshotCount = 0
 
     solves.forEach((s) => {
-      if (s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 120) {
+      if (s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300) {
         flagSharingCount++
       }
       if (
         (s.time_since_user_prev_solve_seconds !== null && s.time_since_user_prev_solve_seconds <= 60) ||
-        (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 10)
+        (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 30)
       ) {
         aiAgentCount++
       }
-      if (s.incorrect_attempts_count === 0) {
+      if (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 180 && s.incorrect_attempts_count === 0) {
         oneshotCount++
       }
     })
@@ -114,7 +114,7 @@ export function useAdminMonitoringData() {
       flagSharingCount,
       aiAgentCount,
       oneshotCount,
-      suspiciousCount: flagSharingCount + aiAgentCount,
+      suspiciousCount: flagSharingCount + aiAgentCount + oneshotCount,
     }
   }, [solves])
 
