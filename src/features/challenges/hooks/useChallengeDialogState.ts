@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import {
   getChallengeDetail,
   getSolversByChallenge,
+  logChallengeView,
 } from '@/shared/lib'
 import type { Attachment, ChallengeWithSolve } from '@/shared/types'
 import {
@@ -72,6 +73,8 @@ export function useChallengeDialogState({
     setChallengeTab('challenge')
     setSolvers([])
     void refreshSubChallenges(challenge.id)
+    void logChallengeView(challenge.id)
+
 
     if (challenge.flag_placeholder && !placeholders[challenge.id]) {
       import('@/shared/lib/challenges').then(({ getChallengePlaceholder }) => {

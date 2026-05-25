@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Users } from 'lucide-react'
+import { Users, ShieldAlert } from 'lucide-react'
 import { Button, Card, CardContent } from '@/shared/ui'
 import ChallengeOverviewCard from './ChallengeOverviewCard'
 import RecentSolversList from './RecentSolversList'
@@ -29,15 +29,22 @@ const ChallengeSidebar: React.FC<ChallengeSidebarProps> = ({
         showViewAll={isGlobalAdmin}
       />
       <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
-        <CardContent className="pt-6">
+        <CardContent className="pt-6 space-y-3">
           <Link href="/admin/teams">
             <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white gap-2">
               <Users className="w-4 h-4" />
               Manage Teams
             </Button>
           </Link>
+          <Link href="/admin/monitoring">
+            <Button variant="outline" className="w-full border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 dark:hover:bg-indigo-950/30 hover:text-indigo-700 dark:hover:text-indigo-300 gap-2">
+              <ShieldAlert className="w-4 h-4" />
+              Monitor Solves
+            </Button>
+          </Link>
         </CardContent>
       </Card>
+
       <RecentSolversList solvers={solvers} onViewAll={onViewAllSolvers} />
     </aside>
   )

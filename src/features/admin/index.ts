@@ -4,3 +4,5 @@ export { AdminEventPage } from './event'
 export { AdminSolversPage } from './solvers'
 export { AdminAdminsPage } from './admins'
 export { AdminTeamsPage } from './teams'
+export { AdminMonitoringPage } from './monitoring'
+

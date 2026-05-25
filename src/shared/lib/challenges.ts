@@ -1157,3 +1157,34 @@ export function subscribeToLogSignals(onSignal: () => void) {
     supabase.removeChannel(challengesChannel)
   }
 }
+
+/**
+ * Log a challenge view event
+ */
+export async function logChallengeView(challengeId: string): Promise<boolean> {
+  try {
+    const { data, error } = await supabase.rpc('log_challenge_view', {
+      p_challenge_id: challengeId
+    })
+    if (error) throw error
+    return !!data
+  } catch (err) {
+    console.error('Error logging challenge view:', err)
+    return false
+  }
+}
+
+/**
+ * Get solves monitoring data (Admin only)
+ */
+export async function getSolvesMonitoring(): Promise<any[]> {
+  try {
+    const { data, error } = await supabase.rpc('get_solves_monitoring')
+    if (error) throw error
+    return data || []
+  } catch (err) {
+    console.error('Error fetching solves monitoring data:', err)
+    return []
+  }
+}
+

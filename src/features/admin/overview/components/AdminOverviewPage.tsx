@@ -2,7 +2,7 @@
 
 import { Loader } from '@/shared/components'
 import { Card, CardContent } from '@/shared/ui'
-import { Users } from 'lucide-react'
+import { Users, ShieldAlert } from 'lucide-react'
 import Link from 'next/link'
 import AuditLogList from './AuditLogList'
 import OverviewStatsCards from './OverviewStatsCards'
@@ -44,8 +44,21 @@ export default function AdminOverviewPage() {
               </CardContent>
             </Card>
           </Link>
-          {/* Add more admin modules here */}
+          <Link href="/admin/monitoring">
+            <Card className="bg-red-600 hover:bg-red-700 text-white transition-all cursor-pointer shadow-lg shadow-red-500/20 group">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold">Solves Monitoring</h3>
+                    <p className="text-red-100 text-sm opacity-80">Track sharing flags, oneshots, and AI agents</p>
+                  </div>
+                  <ShieldAlert className="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
+
 
         <Card className="bg-white dark:bg-gray-800 pt-5">
           <CardContent>
