@@ -296,9 +296,18 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400')}`}
                   >
                     <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/hall-of-fame"
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-blue-400')}`}
+                  >
+                    <Trophy size={18} className="mr-1 text-yellow-500 dark:text-yellow-400" /> Hall of Fame
                   </Link>
                 )}
 
@@ -620,10 +629,20 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400')}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
+                  </Link>
+                )}
+
+                {user && (
+                  <Link
+                    href="/hall-of-fame"
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-blue-400')}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Trophy size={18} className="mr-1 text-yellow-500 dark:text-yellow-400" /> Hall of Fame
                   </Link>
                 )}
 
