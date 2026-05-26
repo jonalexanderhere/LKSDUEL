@@ -1193,6 +1193,27 @@ export function subscribeToLogSignals(onSignal: () => void) {
   }
 }
 
+export function subscribeToSolvesMonitoringSignals(onSignal: () => void, onStatus?: (isConnected: boolean) => void) {
+  const channel = supabase
+    .channel('admin-monitoring-solves')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'solves' }, () => {
+      onSignal()
+    })
+    .subscribe((status) => {
+      if (status === 'SUBSCRIBED') {
+        onStatus?.(true)
+      }
+
+      if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+        onStatus?.(false)
+      }
+    })
+
+  return () => {
+    supabase.removeChannel(channel)
+  }
+}
+
 /**
  * Log a challenge view event
  */

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { useAuth } from '@/shared/hooks'
-import { getSolvesMonitoring, isAdmin } from '@/shared/lib'
+import { getSolvesMonitoring, isAdmin, subscribeToSolvesMonitoringSignals } from '@/shared/lib'
 import type { SolveMonitoringRow } from '../types'
 
 export function useAdminMonitoringData() {
@@ -14,19 +14,32 @@ export function useAdminMonitoringData() {
   const [isAdminUser, setIsAdminUser] = useState(false)
   const [solves, setSolves] = useState<SolveMonitoringRow[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [isRealtimeConnected, setIsRealtimeConnected] = useState(false)
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<Date | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [filterType, setFilterType] = useState<'all' | 'flag_sharing' | 'ai_agent' | 'oneshot' | 'suspicious'>('all')
 
-  const fetchSolves = useCallback(async () => {
-    setIsLoading(true)
+  const fetchSolves = useCallback(async (showLoader = true) => {
+    if (showLoader) {
+      setIsLoading(true)
+    } else {
+      setIsRefreshing(true)
+    }
+
     try {
       const data = await getSolvesMonitoring()
       setSolves(data)
+      setLastUpdatedAt(new Date())
     } catch (err) {
       console.error(err)
       toast.error('Failed to fetch monitoring logs')
     } finally {
-      setIsLoading(false)
+      if (showLoader) {
+        setIsLoading(false)
+      } else {
+        setIsRefreshing(false)
+      }
     }
   }, [])
 
@@ -59,6 +72,34 @@ export function useAdminMonitoringData() {
       mounted = false
     }
   }, [authLoading, user, router, fetchSolves])
+
+  useEffect(() => {
+    if (!isAdminUser) return
+
+    let refreshTimeout: ReturnType<typeof setTimeout> | null = null
+    const scheduleRefresh = () => {
+      if (refreshTimeout) clearTimeout(refreshTimeout)
+      refreshTimeout = setTimeout(() => {
+        fetchSolves(false)
+      }, 400)
+    }
+
+    const unsubscribe = subscribeToSolvesMonitoringSignals(scheduleRefresh, setIsRealtimeConnected)
+    const fallbackInterval = window.setInterval(() => {
+      fetchSolves(false)
+    }, 30000)
+
+    return () => {
+      if (refreshTimeout) clearTimeout(refreshTimeout)
+      window.clearInterval(fallbackInterval)
+      unsubscribe()
+      setIsRealtimeConnected(false)
+    }
+  }, [isAdminUser, fetchSolves])
+
+  const refresh = useCallback(() => {
+    fetchSolves(true)
+  }, [fetchSolves])
 
   const filteredSolves = useMemo(() => {
     return solves.filter((s) => {
@@ -129,6 +170,9 @@ export function useAdminMonitoringData() {
     filterType,
     setFilterType,
     stats,
-    refresh: fetchSolves,
+    isRefreshing,
+    isRealtimeConnected,
+    lastUpdatedAt,
+    refresh,
   }
 }

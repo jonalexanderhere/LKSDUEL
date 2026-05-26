@@ -20,6 +20,9 @@ export default function AdminMonitoringPage() {
     filterType,
     setFilterType,
     stats,
+    isRefreshing,
+    isRealtimeConnected,
+    lastUpdatedAt,
     refresh,
   } = useAdminMonitoringData()
 
@@ -36,19 +39,29 @@ export default function AdminMonitoringPage() {
               <Shield className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
               Solves Monitoring Telemetry
             </h1>
-            <p className="text-gray-500 dark:text-gray-400 text-sm mt-0.5">
-              Real-time heuristic analysis for flag-sharing, automation scripts, and oneshot behaviors.
-            </p>
+            <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
+              <span>Real-time heuristic analysis for flag-sharing, automation scripts, and oneshot behaviors.</span>
+              <span className={`inline-flex items-center gap-1.5 font-semibold ${isRealtimeConnected ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
+                <span className={`h-2 w-2 rounded-full ${isRealtimeConnected ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                {isRealtimeConnected ? 'Live' : 'Syncing'}
+              </span>
+              {lastUpdatedAt && (
+                <span className="text-xs">
+                  Updated {lastUpdatedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                </span>
+              )}
+            </div>
           </div>
 
           <Button
             variant="outline"
             size="sm"
             onClick={refresh}
+            disabled={isRefreshing}
             className="flex items-center gap-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200"
           >
-            <RefreshCw className="w-4 h-4" />
-            Refresh Logs
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+            {isRefreshing ? 'Refreshing...' : 'Refresh Logs'}
           </Button>
         </div>
 
