@@ -141,12 +141,12 @@ export default function Navbar() {
         }}
       />
 
-      <nav className={`shadow-sm fixed top-0 left-0 w-full z-50 ${theme === 'dark' ? 'bg-gray-950' : 'bg-white'}`}>
+      <nav className={`shadow-sm fixed top-0 left-0 w-full z-50 overflow-hidden ${theme === 'dark' ? 'bg-gray-950' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between h-14 items-center">
+          <div className="flex justify-between h-14 items-center overflow-hidden">
             {/* Logo */}
-            <div className="flex items-center space-x-4 lg:space-x-8">
-              <Link href="/" className="flex items-center gap-2 group" data-tour="navbar-logo">
+            <div className="flex min-w-0 items-center space-x-4 lg:space-x-6">
+              <Link href="/" className="flex shrink-0 items-center gap-2 group" data-tour="navbar-logo">
                 <ImageWithFallback
                   src={APP.image_logo}
                   alt={`${APP.shortName} logo`}
@@ -157,11 +157,11 @@ export default function Navbar() {
               </Link>
 
               {/* Desktop menu */}
-              <div className="hidden md:flex items-center gap-1 lg:gap-2">
+              <div className="hidden min-w-0 flex-nowrap items-center gap-1 overflow-hidden md:flex lg:gap-1.5">
                 {user && (
                   <Link
                     href="/challenges"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                     data-tour="navbar-challenges"
                   >
                     <Flag size={18} /> Challenges
@@ -172,18 +172,18 @@ export default function Navbar() {
                   scoreboardOptionCount === 1 ? (
                     <Link
                       href={showTeamScoreboard ? '/teams/scoreboard' : '/scoreboard'}
-                      className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                      className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                       data-tour="navbar-scoreboard"
                     >
                       <Trophy size={18} /> Scoreboard
                     </Link>
                   ) : (
-                    <div ref={scoreboardMenuRef} className="relative">
+                    <div ref={scoreboardMenuRef} className="relative flex-none">
                       <button
                         type="button"
                         data-tour="navbar-scoreboard"
                         onClick={() => setScoreboardOpen((v) => !v)}
-                        className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                        className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                       >
                         <Trophy size={18} /> Scoreboard
                         <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${scoreboardOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -225,7 +225,7 @@ export default function Navbar() {
                 {user && APP.teams.enabled && (
                   <Link
                     href="/teams"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
                     <Users size={18} /> Teams
                   </Link>
@@ -234,19 +234,19 @@ export default function Navbar() {
                 {!user && (
                   <Link
                     href="/preview"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
                     <FileText size={18} /> Preview
                   </Link>
                 )}
 
                 {/* Info Dropdown */}
-                <div ref={docsMenuRef} className="relative">
+                <div ref={docsMenuRef} className="relative flex-none">
                   <button
                     type="button"
                     data-tour="navbar-docs"
                     onClick={() => setDocsOpen((v) => !v)}
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
                     <Info size={18} /> Info
                     <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${docsOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -296,25 +296,25 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400')}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400')}`}
                   >
-                    <Flame size={18} className="text-red-600 dark:text-red-400" /> Attack-Feed
+                    <Flame size={18} className="text-red-600 dark:text-red-400 shrink-0" /> Attack Feed
                   </Link>
                 )}
 
                 {user && (
                   <Link
                     href="/hall-of-fame"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-blue-400')}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-blue-400')}`}
                   >
-                    <Trophy size={18} className="text-yellow-500 dark:text-yellow-400" /> Hall of Fame
+                    <Trophy size={18} className="text-yellow-500 dark:text-yellow-400 shrink-0" /> Hall of Fame
                   </Link>
                 )}
 
                 {adminStatus && user && (
                   <Link
                     href="/admin"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
+                    className={`h-10 px-2.5 lg:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
                     <Shield size={18} /> Admin
                   </Link>
@@ -323,7 +323,7 @@ export default function Navbar() {
             </div>
 
             {/* Right section */}
-            <div className="flex items-center gap-3 lg:gap-5">
+            <div className="flex shrink-0 items-center gap-3 lg:gap-5">
               <div className="hidden sm:flex items-center gap-2 lg:gap-3">
                 {user ? (
                   <>
