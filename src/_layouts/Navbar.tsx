@@ -142,10 +142,10 @@ export default function Navbar() {
       />
 
       <nav className={`shadow-sm fixed top-0 left-0 w-full z-50 ${theme === 'dark' ? 'bg-gray-950' : 'bg-white'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-0">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between h-14 items-center">
             {/* Logo */}
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-4 lg:space-x-8">
               <Link href="/" className="flex items-center gap-2 group" data-tour="navbar-logo">
                 <ImageWithFallback
                   src={APP.image_logo}
@@ -157,14 +157,14 @@ export default function Navbar() {
               </Link>
 
               {/* Desktop menu */}
-              <div className="hidden md:flex space-x-2">
+              <div className="hidden md:flex items-center gap-1 lg:gap-2">
                 {user && (
                   <Link
                     href="/challenges"
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                     data-tour="navbar-challenges"
                   >
-                    <Flag size={18} className="mr-1" /> Challenges
+                    <Flag size={18} /> Challenges
                   </Link>
                 )}
 
@@ -175,7 +175,7 @@ export default function Navbar() {
                       className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                       data-tour="navbar-scoreboard"
                     >
-                      <Trophy size={18} className="mr-1" /> Scoreboard
+                      <Trophy size={18} /> Scoreboard
                     </Link>
                   ) : (
                     <div ref={scoreboardMenuRef} className="relative">
@@ -185,7 +185,7 @@ export default function Navbar() {
                         onClick={() => setScoreboardOpen((v) => !v)}
                         className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                       >
-                        <Trophy size={18} className="mr-1" /> Scoreboard
+                        <Trophy size={18} /> Scoreboard
                         <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${scoreboardOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.25 8.29a.75.75 0 0 1-.02-1.08Z" />
                         </svg>
@@ -227,7 +227,7 @@ export default function Navbar() {
                     href="/teams"
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
-                    <Users size={18} className="mr-1" /> Teams
+                    <Users size={18} /> Teams
                   </Link>
                 )}
 
@@ -236,7 +236,7 @@ export default function Navbar() {
                     href="/preview"
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
-                    <FileText size={18} className="mr-1" /> Preview
+                    <FileText size={18} /> Preview
                   </Link>
                 )}
 
@@ -248,7 +248,7 @@ export default function Navbar() {
                     onClick={() => setDocsOpen((v) => !v)}
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
-                    <Info size={18} className="mr-1" /> Info
+                    <Info size={18} /> Info
                     <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${docsOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.25 8.29a.75.75 0 0 1-.02-1.08Z" />
                     </svg>
@@ -298,7 +298,7 @@ export default function Navbar() {
                     href="/attack-feed"
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-blue-400')}`}
                   >
-                    <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
+                    <Flame size={18} className="text-red-600 dark:text-red-400" /> Attack-Feed
                   </Link>
                 )}
 
@@ -307,7 +307,7 @@ export default function Navbar() {
                     href="/hall-of-fame"
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-blue-400')}`}
                   >
-                    <Trophy size={18} className="mr-1 text-yellow-500 dark:text-yellow-400" /> Hall of Fame
+                    <Trophy size={18} className="text-yellow-500 dark:text-yellow-400" /> Hall of Fame
                   </Link>
                 )}
 
@@ -316,21 +316,21 @@ export default function Navbar() {
                     href="/admin"
                     className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-blue-400 hover:bg-gray-800 focus:ring-2 focus:ring-blue-700' : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-400'}`}
                   >
-                    <Shield size={18} className="mr-1" /> Admin
+                    <Shield size={18} /> Admin
                   </Link>
                 )}
               </div>
             </div>
 
             {/* Right section */}
-            <div className="flex items-center space-x-5">
-              <div className="hidden sm:flex items-center space-x-3">
+            <div className="flex items-center gap-3 lg:gap-5">
+              <div className="hidden sm:flex items-center gap-2 lg:gap-3">
                 {user ? (
                   <>
                     <Link href="/profile" className="flex items-center gap-2 group" data-tour="navbar-profile">
                       <ImageWithFallback src={avatarSrc} alt={user.username} size={36} className="rounded-full" />
                       <span
-                        className={`text-[15px] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'} transition-all duration-150 group-hover:text-blue-500 dark:group-hover:text-blue-400 truncate whitespace-nowrap max-w-[100px] md:max-w-[160px] block`}
+                        className={`hidden lg:block text-[15px] font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'} transition-all duration-150 group-hover:text-blue-500 dark:group-hover:text-blue-400 truncate whitespace-nowrap max-w-[180px]`}
                         title={user.username}
                       >
                         {user.username}
