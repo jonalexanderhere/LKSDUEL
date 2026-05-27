@@ -41,7 +41,7 @@ async function sendDiscordNotification(payload: any) {
   }
 }
 
-// GET request for testing connection directly from Vercel
+// GET request for testing connection and running DB diagnostics
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -53,34 +53,55 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: 'Unauthorized. Please provide ?secret=your_secret in URL' }, { status: 401 });
     }
 
-    const discordPayload = {
-      embeds: [
-        {
-          title: '🧪 SCTF Bot Webhook Test from Vercel',
-          description: 'Successfully connected! The Vercel API Route can communicate with Discord.',
-          color: 3066993, // Green
-          fields: [
-            {
-              name: 'Status',
-              value: '✅ Active & Operational',
-              inline: true
-            },
-            {
-              name: 'Channel ID',
-              value: process.env.DISCORD_CHANNEL_ID || 'Not Configured',
-              inline: true
-            }
-          ],
-          timestamp: new Date().toISOString(),
-          footer: {
-            text: 'SCTF Platform Alert'
-          }
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const publicAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+    const runQuery = async (key: string | undefined, keyName: string) => {
+      if (!key) return { status: 'Not Configured' };
+      try {
+        const client = createClient(supabaseUrl, key);
+        const { data, error } = await client.from('solves').select('id').limit(1);
+        if (error) {
+          return {
+            status: 'Error',
+            message: error.message,
+            details: error.details,
+            hint: error.hint,
+            code: error.code
+          };
         }
-      ]
+        return { status: 'Success', rowsFetched: data?.length || 0 };
+      } catch (err: any) {
+        return { status: 'Crash', error: err.message || err };
+      }
     };
 
-    await sendDiscordNotification(discordPayload);
-    return NextResponse.json({ success: true, message: 'Test notification sent successfully to Discord' });
+    const diagnostics = {
+      serviceRole: await runQuery(serviceRoleKey, 'SUPABASE_SERVICE_ROLE_KEY'),
+      publicAnon: await runQuery(publicAnonKey, 'NEXT_PUBLIC_SUPABASE_ANON_KEY'),
+      publishable: await runQuery(publishableKey, 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY'),
+      constAnon: await runQuery(SUPABASE_ANON_KEY, 'SUPABASE_ANON_KEY'),
+    };
+
+    return NextResponse.json({
+      success: true,
+      message: 'Diagnostics completed',
+      envConfig: {
+        urlExists: !!supabaseUrl,
+        urlLength: supabaseUrl?.length,
+        hasServiceRole: !!serviceRoleKey,
+        serviceRoleLength: serviceRoleKey?.length,
+        hasPublicAnon: !!publicAnonKey,
+        publicAnonLength: publicAnonKey?.length,
+        hasPublishable: !!publishableKey,
+        publishableLength: publishableKey?.length,
+        hasConstAnon: !!SUPABASE_ANON_KEY,
+        constAnonLength: SUPABASE_ANON_KEY?.length
+      },
+      diagnostics
+    });
 
   } catch (err: any) {
     console.error('[FirstBlood Webhook Test] Error:', err);
