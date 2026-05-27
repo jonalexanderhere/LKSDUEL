@@ -50,6 +50,106 @@ if (botToken && !channelId) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// ==============================================================
+// Discord Gateway Connection (To keep the bot ONLINE permanently)
+// ==============================================================
+if (botToken) {
+  let discordWs = null;
+  let heartbeatInterval = null;
+  let sequenceNumber = null;
+
+  function connectToDiscordGateway() {
+    console.log('[Discord Gateway] Connecting to gateway to keep bot status ONLINE...');
+    
+    try {
+      discordWs = new WebSocket('wss://gateway.discord.gg/?v=10&encoding=json');
+      
+      discordWs.onopen = () => {
+        console.log('[Discord Gateway] WebSocket connection opened.');
+      };
+
+      discordWs.onmessage = (event) => {
+        try {
+          const payload = JSON.parse(event.data);
+          const { op, d, t, s } = payload;
+          
+          if (s !== undefined) sequenceNumber = s;
+
+          // Opcode 10: HELLO (Sent by Discord immediately upon connecting)
+          if (op === 10) {
+            const { heartbeat_interval } = d;
+            console.log('[Discord Gateway] HELLO received. Heartbeat interval:', heartbeat_interval);
+
+            // Start sending heartbeats
+            if (heartbeatInterval) clearInterval(heartbeatInterval);
+            heartbeatInterval = setInterval(() => {
+              if (discordWs && discordWs.readyState === 1) { // OPEN
+                discordWs.send(JSON.stringify({ op: 1, d: sequenceNumber }));
+              }
+            }, heartbeat_interval);
+
+            // Send IDENTIFY payload to authenticate the bot
+            console.log('[Discord Gateway] Sending IDENTIFY payload...');
+            discordWs.send(JSON.stringify({
+              op: 2,
+              d: {
+                token: botToken,
+                intents: 513, // GUILDS + GUILD_MESSAGES
+                properties: {
+                  os: process.platform,
+                  browser: 'SCTF-Platform-Bot',
+                  device: 'SCTF-Platform-Bot'
+                },
+                presence: {
+                  status: 'online',
+                  activities: [{
+                    name: 'First Bloods 🩸',
+                    type: 3 // Watching
+                  }],
+                  afk: false
+                }
+              }
+            }));
+          }
+
+          // Opcode 11: HEARTBEAT ACK
+          if (op === 11) {
+            // Heartbeat acknowledged by Discord
+          }
+
+          // Dispatch Event: READY (Bot is fully connected and authenticated)
+          if (op === 0 && t === 'READY') {
+            console.log(`[Discord Gateway] Bot is now ONLINE as: ${d.user.username}#${d.user.discriminator}`);
+          }
+
+        } catch (err) {
+          console.error('[Discord Gateway] Error parsing message:', err.message);
+        }
+      };
+
+      discordWs.onclose = (event) => {
+        console.warn(`[Discord Gateway] Connection closed (Code: ${event.code}). Reconnecting in 5s...`);
+        if (heartbeatInterval) clearInterval(heartbeatInterval);
+        setTimeout(connectToDiscordGateway, 5000);
+      };
+
+      discordWs.onerror = (err) => {
+        console.error('[Discord Gateway] WebSocket error:', err.message || err);
+      };
+
+    } catch (err) {
+      console.error('[Discord Gateway] Failed to initialize WebSocket:', err.message);
+      setTimeout(connectToDiscordGateway, 5000);
+    }
+  }
+
+  // Start Gateway Connection
+  connectToDiscordGateway();
+}
+
+// ==============================================================
+// Discord Notification Dispatcher
+// ==============================================================
 async function sendDiscordNotification(payload) {
   if (botToken && channelId) {
     console.log('[Discord Bot] Sending via Bot Token to channel:', channelId);
@@ -83,6 +183,9 @@ async function sendDiscordNotification(payload) {
   }
 }
 
+// ==============================================================
+// Supabase solves Insert Listener
+// ==============================================================
 console.log('[Discord Bot] Subscribing to solves table INSERT events...');
 
 const channel = supabase
@@ -156,7 +259,7 @@ const channel = supabase
         console.error('[Discord Bot] Failed to resolve team name:', err.message);
       }
 
-      // 5. Send Discord Webhook
+      // 5. Send Discord Embed
       const discordPayload = {
         embeds: [
           {
@@ -205,5 +308,5 @@ const channel = supabase
   });
 
 // Keep process alive
-console.log('[Discord Bot] Standalone Listener is running. Press Ctrl+C to exit.');
+console.log('[Discord Bot] Standalone Listener with Gateway is running. Press Ctrl+C to exit.');
 setInterval(() => {}, 60000);
