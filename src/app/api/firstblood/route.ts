@@ -113,7 +113,27 @@ export async function POST(req: Request) {
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_ANON_KEY;
+    
+    // Debug keys configuration safely
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const publicAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+    console.log('[FirstBlood Webhook] Supabase Init Config:', {
+      urlExists: !!supabaseUrl,
+      urlLength: supabaseUrl?.length,
+      hasServiceRole: !!serviceRoleKey,
+      serviceRoleLength: serviceRoleKey?.length,
+      hasPublicAnon: !!publicAnonKey,
+      publicAnonLength: publicAnonKey?.length,
+      hasPublishable: !!publishableKey,
+      publishableLength: publishableKey?.length,
+      hasConstAnon: !!SUPABASE_ANON_KEY,
+      constAnonLength: SUPABASE_ANON_KEY?.length,
+    });
+
+    const supabaseKey = serviceRoleKey || publicAnonKey || publishableKey || SUPABASE_ANON_KEY;
+    console.log('[FirstBlood Webhook] Using key prefix:', supabaseKey ? supabaseKey.substring(0, 20) + '...' : 'NONE');
+
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // 1. Verify if this solve is the first blood for the challenge
@@ -123,7 +143,21 @@ export async function POST(req: Request) {
       .eq('challenge_id', challengeId)
       .order('created_at', { ascending: true });
 
-    if (solvesError || !solves || solves.length === 0) {
+    if (solvesError) {
+      console.error('[FirstBlood Webhook] Supabase solves fetch error details:', {
+        message: solvesError.message,
+        details: solvesError.details,
+        hint: solvesError.hint,
+        code: solvesError.code,
+      });
+      return NextResponse.json({ 
+        error: `Supabase query failed: ${solvesError.message}`, 
+        details: solvesError.details 
+      }, { status: 500 });
+    }
+
+    if (!solves || solves.length === 0) {
+      console.log('[FirstBlood Webhook] No solves found for challenge:', challengeId);
       return NextResponse.json({ error: 'No solves found for this challenge' }, { status: 404 });
     }
 
