@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "discord-bot": "node src/scripts/discord-firstblood.js"
+    "discord-bot": "node src/scripts/discord-firstblood.js",
+    "test-discord": "node src/scripts/test-discord.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
