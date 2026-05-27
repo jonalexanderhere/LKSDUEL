@@ -41,6 +41,53 @@ async function sendDiscordNotification(payload: any) {
   }
 }
 
+// GET request for testing connection directly from Vercel
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const secret = searchParams.get('secret');
+    
+    // Optional secret check if WEBHOOK_SECRET is set
+    const secretToken = process.env.WEBHOOK_SECRET;
+    if (secretToken && secret !== secretToken) {
+      return NextResponse.json({ error: 'Unauthorized. Please provide ?secret=your_secret in URL' }, { status: 401 });
+    }
+
+    const discordPayload = {
+      embeds: [
+        {
+          title: '🧪 SCTF Bot Webhook Test from Vercel',
+          description: 'Successfully connected! The Vercel API Route can communicate with Discord.',
+          color: 3066993, // Green
+          fields: [
+            {
+              name: 'Status',
+              value: '✅ Active & Operational',
+              inline: true
+            },
+            {
+              name: 'Channel ID',
+              value: process.env.DISCORD_CHANNEL_ID || 'Not Configured',
+              inline: true
+            }
+          ],
+          timestamp: new Date().toISOString(),
+          footer: {
+            text: 'SCTF Platform Alert'
+          }
+        }
+      ]
+    };
+
+    await sendDiscordNotification(discordPayload);
+    return NextResponse.json({ success: true, message: 'Test notification sent successfully to Discord' });
+
+  } catch (err: any) {
+    console.error('[FirstBlood Webhook Test] Error:', err);
+    return NextResponse.json({ error: err.message || 'Server error' }, { status: 500 });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const secretToken = process.env.WEBHOOK_SECRET;
