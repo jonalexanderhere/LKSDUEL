@@ -213,12 +213,7 @@ const channel = supabase
       }
 
       const isFirstBlood = solves[0].id === solve.id;
-      if (!isFirstBlood) {
-        console.log('[Discord Bot] Solve is not first blood. Skipping Discord notification.');
-        return;
-      }
-
-      console.log('[Discord Bot] First Blood detected! Preparing Discord embed...');
+      console.log(`[Discord Bot] Solve detected (First Blood: ${isFirstBlood}). Preparing Discord embed...`);
 
       // 2. Fetch Player Info
       const { data: user } = await supabase
@@ -260,12 +255,18 @@ const channel = supabase
       }
 
       // 5. Send Discord Embed
+      const embedTitle = isFirstBlood ? '🩸 FIRST BLOOD!' : '🚩 CHALLENGE SOLVED';
+      const embedColor = isFirstBlood ? 15158332 : 3066993; // Red for first blood, Green for regular solve
+      const embedDescription = isFirstBlood 
+        ? 'A challenge has been solved for the first time!' 
+        : 'A player has successfully solved a challenge!';
+
       const discordPayload = {
         embeds: [
           {
-            title: '🩸 FIRST BLOOD!',
-            description: `A challenge has been solved for the first time!`,
-            color: 15158332, // Red
+            title: embedTitle,
+            description: embedDescription,
+            color: embedColor,
             fields: [
               {
                 name: '👤 Player',
@@ -297,7 +298,7 @@ const channel = supabase
       };
 
       await sendDiscordNotification(discordPayload);
-      console.log(`[Discord Bot] Successfully sent first blood alert to Discord for player "${username}" on challenge "${challenge.title}"`);
+      console.log(`[Discord Bot] Successfully sent solve alert to Discord for player "${username}" on challenge "${challenge.title}" (First Blood: ${isFirstBlood})`);
 
     } catch (err) {
       console.error('[Discord Bot] Error handling solve change:', err.message);

@@ -186,11 +186,6 @@ export async function POST(req: Request) {
     const firstSolve = solves[0];
     const isFirstBlood = solveId ? firstSolve.id === solveId : firstSolve.user_id === userId;
 
-    if (!isFirstBlood) {
-      console.log(`[FirstBlood Webhook] Solve is not first blood. Solve owner: ${userId}, First solver: ${firstSolve.user_id}`);
-      return NextResponse.json({ message: 'Not a first blood solve. Notification skipped.' });
-    }
-
     // 2. Fetch User Info
     const { data: user, error: userError } = await supabase
       .from('users')
@@ -230,12 +225,18 @@ export async function POST(req: Request) {
     }
 
     // 5. Send to Discord
+    const embedTitle = isFirstBlood ? '🩸 FIRST BLOOD!' : '🚩 CHALLENGE SOLVED';
+    const embedColor = isFirstBlood ? 15158332 : 3066993; // Red for first blood, Green for regular solve
+    const embedDescription = isFirstBlood 
+      ? 'A challenge has been solved for the first time!' 
+      : 'A player has successfully solved a challenge!';
+
     const discordPayload = {
       embeds: [
         {
-          title: '🩸 FIRST BLOOD!',
-          description: `A challenge has been solved for the first time!`,
-          color: 15158332, // Red
+          title: embedTitle,
+          description: embedDescription,
+          color: embedColor,
           fields: [
             {
               name: '👤 Player',
@@ -268,8 +269,12 @@ export async function POST(req: Request) {
 
     await sendDiscordNotification(discordPayload);
 
-    console.log(`[FirstBlood Webhook] Sent Discord notification for ${username} on ${challenge.title}`);
-    return NextResponse.json({ success: true, message: 'First blood notification sent to Discord' });
+    console.log(`[FirstBlood Webhook] Sent Discord notification for ${username} on ${challenge.title} (First Blood: ${isFirstBlood})`);
+    return NextResponse.json({ 
+      success: true, 
+      message: isFirstBlood ? 'First blood notification sent to Discord' : 'Solve notification sent to Discord',
+      isFirstBlood 
+    });
 
   } catch (err: any) {
     console.error('[FirstBlood Webhook] Error:', err);
