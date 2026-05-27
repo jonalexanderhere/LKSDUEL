@@ -13,7 +13,8 @@
     "start": "next start",
     "lint": "next lint",
     "discord-bot": "node src/scripts/discord-firstblood.js",
-    "test-discord": "node src/scripts/test-discord.js"
+    "test-discord": "node src/scripts/test-discord.js",
+    "test-firstblood": "node src/scripts/trigger-webhook-test.js"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
