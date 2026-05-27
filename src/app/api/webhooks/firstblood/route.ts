@@ -2,14 +2,47 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@/const';
 
+async function sendDiscordNotification(payload: any) {
+  const botToken = process.env.DISCORD_BOT_TOKEN;
+  const channelId = process.env.DISCORD_CHANNEL_ID;
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+  if (botToken && channelId) {
+    console.log('[FirstBlood Webhook] Sending via Discord Bot Token to channel:', channelId);
+    const res = await fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bot ${botToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Discord Bot API Error: ${text}`);
+    }
+    return true;
+  } else if (webhookUrl) {
+    console.log('[FirstBlood Webhook] Sending via Discord Webhook URL');
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Discord Webhook Error: ${text}`);
+    }
+    return true;
+  } else {
+    throw new Error('Neither Discord Bot (DISCORD_BOT_TOKEN + DISCORD_CHANNEL_ID) nor Webhook (DISCORD_WEBHOOK_URL) is configured.');
+  }
+}
+
 export async function POST(req: Request) {
   try {
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-    if (!webhookUrl) {
-      console.warn('[FirstBlood Webhook] DISCORD_WEBHOOK_URL is not set in environment variables.');
-      return NextResponse.json({ error: 'Webhook URL not configured' }, { status: 500 });
-    }
-
     const secretToken = process.env.WEBHOOK_SECRET;
     if (secretToken) {
       const headerSecret = req.headers.get('x-webhook-secret');
@@ -37,7 +70,6 @@ export async function POST(req: Request) {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     // 1. Verify if this solve is the first blood for the challenge
-    // A solve is first blood if it has the oldest created_at timestamp for that challenge.
     const { data: solves, error: solvesError } = await supabase
       .from('solves')
       .select('id, user_id, created_at')
@@ -94,7 +126,7 @@ export async function POST(req: Request) {
       console.error('[FirstBlood Webhook] Failed to fetch team info:', err);
     }
 
-    // 5. Send to Discord Webhook
+    // 5. Send to Discord
     const discordPayload = {
       embeds: [
         {
@@ -131,19 +163,7 @@ export async function POST(req: Request) {
       ]
     };
 
-    const discordRes = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(discordPayload),
-    });
-
-    if (!discordRes.ok) {
-      const text = await discordRes.text();
-      console.error('[FirstBlood Webhook] Discord API Error:', text);
-      return NextResponse.json({ error: `Discord Webhook error: ${text}` }, { status: 502 });
-    }
+    await sendDiscordNotification(discordPayload);
 
     console.log(`[FirstBlood Webhook] Sent Discord notification for ${username} on ${challenge.title}`);
     return NextResponse.json({ success: true, message: 'First blood notification sent to Discord' });

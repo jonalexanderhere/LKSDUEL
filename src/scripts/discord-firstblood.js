@@ -29,6 +29,8 @@ loadEnv();
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const botToken = process.env.DISCORD_BOT_TOKEN;
+const channelId = process.env.DISCORD_CHANNEL_ID;
 const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
 if (!supabaseUrl || !supabaseKey) {
@@ -36,12 +38,50 @@ if (!supabaseUrl || !supabaseKey) {
   process.exit(1);
 }
 
-if (!webhookUrl) {
-  console.error('[Discord Bot] Missing DISCORD_WEBHOOK_URL in environment.');
+if (!botToken && !webhookUrl) {
+  console.error('[Discord Bot] Missing Discord Bot credentials (DISCORD_BOT_TOKEN) or Discord Webhook (DISCORD_WEBHOOK_URL) in environment.');
+  process.exit(1);
+}
+
+if (botToken && !channelId) {
+  console.error('[Discord Bot] Discord Bot Token is set, but DISCORD_CHANNEL_ID is missing.');
   process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+async function sendDiscordNotification(payload) {
+  if (botToken && channelId) {
+    console.log('[Discord Bot] Sending via Bot Token to channel:', channelId);
+    const res = await fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bot ${botToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Discord Bot API Error: ${text}`);
+    }
+    return true;
+  } else if (webhookUrl) {
+    console.log('[Discord Bot] Sending via Webhook URL');
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Discord Webhook Error: ${text}`);
+    }
+    return true;
+  }
+}
 
 console.log('[Discord Bot] Subscribing to solves table INSERT events...');
 
@@ -153,20 +193,8 @@ const channel = supabase
         ]
       };
 
-      const res = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(discordPayload)
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        console.error('[Discord Bot] Discord Webhook API Error:', text);
-      } else {
-        console.log(`[Discord Bot] Successfully sent first blood alert to Discord for player "${username}" on challenge "${challenge.title}"`);
-      }
+      await sendDiscordNotification(discordPayload);
+      console.log(`[Discord Bot] Successfully sent first blood alert to Discord for player "${username}" on challenge "${challenge.title}"`);
 
     } catch (err) {
       console.error('[Discord Bot] Error handling solve change:', err.message);
