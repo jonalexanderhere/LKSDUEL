@@ -152,7 +152,8 @@ export async function POST(req: Request) {
       constAnonLength: SUPABASE_ANON_KEY?.length,
     });
 
-    const supabaseKey = serviceRoleKey || publicAnonKey || publishableKey || SUPABASE_ANON_KEY;
+    // Prioritize the working anon/publishable keys since the configured serviceRoleKey is currently invalid/unauthorized
+    const supabaseKey = publicAnonKey || publishableKey || SUPABASE_ANON_KEY || serviceRoleKey;
     console.log('[FirstBlood Webhook] Using key prefix:', supabaseKey ? supabaseKey.substring(0, 20) + '...' : 'NONE');
 
     const supabase = createClient(supabaseUrl, supabaseKey);
