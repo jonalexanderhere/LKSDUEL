@@ -193,6 +193,14 @@ export async function POST(req: Request) {
       .eq('id', userId)
       .single();
 
+    if (userError) {
+      console.error('[FirstBlood Webhook] Supabase user fetch error details:', {
+        message: userError.message,
+        details: userError.details,
+        hint: userError.hint,
+        code: userError.code,
+      });
+    }
     const username = user?.username || 'Unknown Player';
 
     // 3. Fetch Challenge Info
@@ -202,7 +210,21 @@ export async function POST(req: Request) {
       .eq('id', challengeId)
       .single();
 
-    if (challengeError || !challenge) {
+    if (challengeError) {
+      console.error('[FirstBlood Webhook] Supabase challenge fetch error details:', {
+        message: challengeError.message,
+        details: challengeError.details,
+        hint: challengeError.hint,
+        code: challengeError.code,
+      });
+      return NextResponse.json({ 
+        error: `Supabase challenge fetch failed: ${challengeError.message}`, 
+        details: challengeError.details 
+      }, { status: 500 });
+    }
+
+    if (!challenge) {
+      console.log('[FirstBlood Webhook] Challenge details not found for ID:', challengeId);
       return NextResponse.json({ error: 'Challenge details not found' }, { status: 404 });
     }
 
