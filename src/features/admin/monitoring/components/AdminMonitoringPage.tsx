@@ -7,6 +7,7 @@ import { Loader } from '@/shared/components'
 import { AdminPageShell } from '../../shared'
 import { useAdminMonitoringData } from '../hooks/useAdminMonitoringData'
 import MonitoringList from './MonitoringList'
+import UserManagementList from './UserManagementList'
 
 export default function AdminMonitoringPage() {
   const {
@@ -171,6 +172,9 @@ export default function AdminMonitoringPage() {
             <MonitoringList solves={solves} isLoading={isLoading} onRefresh={refresh} />
           </CardContent>
         </Card>
+
+        {/* User Management */}
+        <UserManagementList />
       </div>
     </AdminPageShell>
   )

@@ -129,3 +129,63 @@ export async function revokeEventAdmin(userId: string, eventId: string): Promise
   const message = (data as any)?.message ? String((data as any).message) : undefined
   return { success, deleted, message }
 }
+
+export type UserWithStats = {
+  id: string
+  username: string
+  is_admin: boolean
+  created_at: string
+  team_name: string
+  solve_count: number
+}
+
+export async function getAllUsersWithStats(): Promise<UserWithStats[]> {
+  const { data, error } = await supabase
+    .from('users')
+    .select(`
+      id,
+      username,
+      is_admin,
+      created_at,
+      team_members (
+        teams (
+          name
+        )
+      ),
+      solves (
+        id
+      )
+    `)
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Error fetching users with stats:', error)
+    return []
+  }
+
+  return (data || []).map((u: any) => {
+    const teamName = u.team_members?.[0]?.teams?.name || '-'
+    const solveCount = u.solves?.length || 0
+    return {
+      id: String(u.id),
+      username: String(u.username),
+      is_admin: !!u.is_admin,
+      created_at: String(u.created_at),
+      team_name: teamName,
+      solve_count: solveCount,
+    }
+  })
+}
+
+export async function deleteUserAccount(userId: string): Promise<boolean> {
+  const { data, error } = await supabase.rpc('delete_user_by_admin', {
+    p_user_id: userId,
+  })
+
+  if (error) {
+    console.error('Error calling delete_user_by_admin RPC:', error)
+    throw error
+  }
+
+  return !!data
+}
