@@ -2,7 +2,7 @@
 
 import { Loader } from '@/shared/components'
 import { Card, CardContent } from '@/shared/ui'
-import { Users, ShieldAlert } from 'lucide-react'
+import { Users, ShieldAlert, User } from 'lucide-react'
 import Link from 'next/link'
 import AuditLogList from './AuditLogList'
 import OverviewStatsCards from './OverviewStatsCards'
@@ -53,6 +53,19 @@ export default function AdminOverviewPage() {
                     <p className="text-red-100 text-sm opacity-80">Track sharing flags, oneshots, and AI agents</p>
                   </div>
                   <ShieldAlert className="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link href="/admin/users">
+            <Card className="bg-emerald-600 hover:bg-emerald-700 text-white transition-all cursor-pointer shadow-lg shadow-emerald-500/20 group">
+              <CardContent className="pt-6">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-bold">Users Management</h3>
+                    <p className="text-emerald-100 text-sm opacity-80">View all users, search, and delete accounts</p>
+                  </div>
+                  <User className="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity" />
                 </div>
               </CardContent>
             </Card>

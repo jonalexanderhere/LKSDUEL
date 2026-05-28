@@ -5,4 +5,5 @@ export { AdminSolversPage } from './solvers'
 export { AdminAdminsPage } from './admins'
 export { AdminTeamsPage } from './teams'
 export { AdminMonitoringPage } from './monitoring'
+export { AdminUsersPage } from './users'
 
