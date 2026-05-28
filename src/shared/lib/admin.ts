@@ -189,3 +189,17 @@ export async function deleteUserAccount(userId: string): Promise<boolean> {
 
   return !!data
 }
+
+export async function setUserAdminStatus(userId: string, isAdmin: boolean): Promise<boolean> {
+  const { data, error } = await supabase.rpc('set_user_admin_status', {
+    p_user_id: userId,
+    p_is_admin: isAdmin,
+  })
+
+  if (error) {
+    console.error('Error calling set_user_admin_status RPC:', error)
+    throw error
+  }
+
+  return !!data
+}
