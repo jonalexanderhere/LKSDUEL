@@ -238,7 +238,7 @@ BEGIN
     c.points,
     s.created_at AS solved_at,
     (
-      SELECT EXTRACT(EPOCH FROM (s.created_at - prev_s.created_at))
+      SELECT CAST(EXTRACT(EPOCH FROM (s.created_at - prev_s.created_at)) AS DOUBLE PRECISION)
       FROM public.solves prev_s
       WHERE prev_s.challenge_id = s.challenge_id
         AND prev_s.created_at < s.created_at
@@ -246,7 +246,7 @@ BEGIN
       LIMIT 1
     ) AS time_since_prev_solve_seconds,
     (
-      SELECT EXTRACT(EPOCH FROM (s.created_at - prev_user_s.created_at))
+      SELECT CAST(EXTRACT(EPOCH FROM (s.created_at - prev_user_s.created_at)) AS DOUBLE PRECISION)
       FROM public.solves prev_user_s
       WHERE prev_user_s.user_id = s.user_id
         AND prev_user_s.created_at < s.created_at
@@ -262,7 +262,7 @@ BEGIN
         AND fs.created_at < s.created_at
     ) AS incorrect_attempts_count,
     (
-      SELECT EXTRACT(EPOCH FROM (s.created_at - cv.created_at))
+      SELECT CAST(EXTRACT(EPOCH FROM (s.created_at - cv.created_at)) AS DOUBLE PRECISION)
       FROM public.challenge_views cv
       WHERE cv.challenge_id = s.challenge_id
         AND cv.user_id = s.user_id
