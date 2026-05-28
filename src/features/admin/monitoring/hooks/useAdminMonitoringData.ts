@@ -29,7 +29,68 @@ export function useAdminMonitoringData() {
 
     try {
       const data = await getSolvesMonitoring()
-      setSolves(data)
+      
+      // Enriched solves data with advanced telemetry heuristics
+      const enrichedData = (data || []).map((s: any): SolveMonitoringRow => {
+        const reasons: string[] = []
+        let score = 0
+
+        // Heuristic 1: Oneshot logic (duration under 2 minutes / 120 seconds)
+        const is_oneshot = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 120
+        const is_flawless_oneshot = is_oneshot && s.incorrect_attempts_count === 0
+
+        // Heuristic 2: Sharing flag (time since prev solve of same chall <= 300 seconds)
+        const is_flag_sharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300
+
+        // Heuristic 3: AI & Automation Detection
+        // A. Direct API submission (no view event recorded)
+        if (s.time_to_solve_seconds === null) {
+          score += 75
+          reasons.push("Direct API Submission: challenge solved without being viewed in the UI first.")
+        } else {
+          // B. Speed heuristics
+          if (s.time_to_solve_seconds < 15) {
+            score += 90
+            reasons.push(`Supernatural Speed: challenge solved in ${Math.round(s.time_to_solve_seconds)}s after opening (< 15s).`)
+          } else if (s.time_to_solve_seconds < 60) {
+            score += 60
+            reasons.push(`Rapid Solve: challenge solved in ${Math.round(s.time_to_solve_seconds)}s after opening (< 60s).`)
+          } else if (s.time_to_solve_seconds < 120) {
+            score += 30
+            reasons.push(`Quick Solve: challenge solved in ${Math.round(s.time_to_solve_seconds)}s after opening (< 120s).`)
+          }
+        }
+
+        // C. Consecutive solves by same user (Spamming)
+        if (s.time_since_user_prev_solve_seconds !== null) {
+          if (s.time_since_user_prev_solve_seconds < 15) {
+            score += 80
+            reasons.push(`Ultra-rapid Sequence: solved another challenge ${Math.round(s.time_since_user_prev_solve_seconds)}s after their previous solve (< 15s).`)
+          } else if (s.time_since_user_prev_solve_seconds < 60) {
+            score += 50
+            reasons.push(`Fast Sequence: solved another challenge ${Math.round(s.time_since_user_prev_solve_seconds)}s after their previous solve (< 60s).`)
+          }
+        }
+
+        // D. Flawless High-Speed Accuracy
+        if (is_flawless_oneshot) {
+          score += 15
+          reasons.push("Flawless rapid accuracy: solved on first attempt in under 2 minutes.")
+        }
+
+        const ai_confidence_score = Math.min(score, 100)
+
+        return {
+          ...s,
+          is_oneshot,
+          is_flawless_oneshot,
+          is_flag_sharing,
+          ai_confidence_score,
+          ai_confidence_reasons: reasons,
+        }
+      })
+
+      setSolves(enrichedData)
       setLastUpdatedAt(new Date())
     } catch (err) {
       console.error(err)
@@ -109,16 +170,14 @@ export function useAdminMonitoringData() {
         !query ||
         s.username.toLowerCase().includes(query) ||
         s.challenge_title.toLowerCase().includes(query) ||
-        s.team_name.toLowerCase().includes(query)
+        (s.team_name && s.team_name.toLowerCase().includes(query))
 
       if (!matchesSearch) return false
 
       // 2. Alert Types Heuristics
-      const isFlagSharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300 // under 5 minutes
-      const isSuspiciousOneshot = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 180 && s.incorrect_attempts_count === 0 // under 3 minutes & oneshot
-      const isAiAgent =
-        (s.time_since_user_prev_solve_seconds !== null && s.time_since_user_prev_solve_seconds <= 60) || // solved another chall within 60s
-        (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 30) // solved within 30s of view
+      const isFlagSharing = !!s.is_flag_sharing
+      const isSuspiciousOneshot = !!s.is_oneshot
+      const isAiAgent = (s.ai_confidence_score ?? 0) >= 50
 
       if (filterType === 'flag_sharing') return isFlagSharing
       if (filterType === 'ai_agent') return isAiAgent
@@ -136,16 +195,13 @@ export function useAdminMonitoringData() {
     let oneshotCount = 0
 
     solves.forEach((s) => {
-      if (s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300) {
+      if (s.is_flag_sharing) {
         flagSharingCount++
       }
-      if (
-        (s.time_since_user_prev_solve_seconds !== null && s.time_since_user_prev_solve_seconds <= 60) ||
-        (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 30)
-      ) {
+      if ((s.ai_confidence_score ?? 0) >= 50) {
         aiAgentCount++
       }
-      if (s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 180 && s.incorrect_attempts_count === 0) {
+      if (s.is_oneshot) {
         oneshotCount++
       }
     })
@@ -176,3 +232,4 @@ export function useAdminMonitoringData() {
     refresh,
   }
 }
+
