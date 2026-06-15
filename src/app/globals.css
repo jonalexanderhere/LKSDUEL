@@ -325,3 +325,59 @@ input[type='password']::-ms-clear {
   }
 }
 
+
+/* PREMIUM RPG GLASSMORPHISM OVERRIDES */
+/* Overriding standard Next.js template classes globally for a true Fantasy RPG feel */
+
+.bg-white, .dark \.bg-gray-900, .dark \.bg-gray-950, .bg-gray-50, .dark \.bg-gray-800, .bg-gray-100 {
+    background-color: rgba(20, 10, 5, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(245, 158, 11, 0.2) !important;
+    box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.05) !important;
+    color: #fef3c7 !important;
+}
+
+.rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl {
+    border-radius: 4px !important;
+}
+
+.shadow-sm, .shadow-md, .shadow-lg {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Golden Magic Buttons */
+.bg-blue-600, .bg-blue-500, .dark \.bg-blue-600, .dark \.bg-blue-500 {
+    background: linear-gradient(to bottom, #d97706, #92400e) !important;
+    color: #fef3c7 !important;
+    border: 1px solid #fbbf24 !important;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+
+.bg-blue-600:hover, .bg-blue-500:hover, .dark \.bg-blue-600:hover, .dark \.bg-blue-500:hover {
+    background: linear-gradient(to bottom, #f59e0b, #b45309) !important;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.6) !important;
+    transform: translateY(-1px);
+}
+
+/* Magical Text Elements */
+.text-blue-600, .text-blue-500, .dark \.text-blue-500, .dark \.text-blue-400 {
+    color: #fbbf24 !important;
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.5) !important;
+}
+
+.text-gray-900, .text-gray-800, .dark \.text-gray-100, .dark \.text-white {
+    color: #fef3c7 !important;
+}
+
+/* Glowing Borders */
+.border-gray-200, .dark \.border-gray-800, .border-gray-100 {
+    border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+/* Specific ring overrides for focus */
+.ring-blue-500, .focus\:ring-blue-500:focus {
+    --tw-ring-color: rgba(245, 158, 11, 0.5) !important;
+}
+
