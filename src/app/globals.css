@@ -221,26 +221,26 @@ input[type='password']::-ms-clear {
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --background: 15 35% 5%; /* Sangat gelap, nyaris hitam cokelat: #110A08 */
+    --foreground: 45 30% 90%; /* Teks off-white kekuningan */
+    --card: 16 35% 8%; /* Cokelat gelap: #1A100C */
+    --card-foreground: 45 30% 90%;
+    --popover: 16 35% 8%;
+    --popover-foreground: 45 30% 90%;
+    --primary: 38 92% 50%; /* Emas / Amber: #f59e0b */
+    --primary-foreground: 15 35% 5%; /* Teks gelap di atas tombol utama */
+    --secondary: 24 15% 15%; /* Stone cokelat */
+    --secondary-foreground: 45 30% 90%;
+    --muted: 24 15% 15%;
+    --muted-foreground: 30 10% 60%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 15 35% 5%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-    --chart-1: 220 70% 50%;
+    --border: 24 20% 12%; /* Border cokelat redup */
+    --input: 24 20% 12%;
+    --ring: 38 92% 50%; /* Efek ring emas */
+    --chart-1: 38 92% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;

@@ -22,8 +22,8 @@ export const APP = {
 
   // Base URL (ambil dari env kalau ada). Prefer changing NEXT_PUBLIC_SITE_URL in .env.local.
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  image_icon: 'lks-980x917.png',
-  image_logo: 'lks-980x917.png',
+  image_icon: '/lks-980x917.png',
+  image_logo: '/lks-980x917.png',
   image_preview: '68065832af587.webp',
 
   // Turnstile aktif otomatis kalau site key ada di env.

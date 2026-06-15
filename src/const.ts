@@ -1,6 +1,6 @@
 export const LKSDUEL_ARENA = {
   nxctf_title: 'LKSDUEL',
-  nxctf_logo: '/Logo_SMK_Muh_3_Metro.jpg',
+  nxctf_logo: '/lks-980x917.png',
   nxctf_discord: 'https://discord.gg/5etKks6aQQ',
   nxctf_donation: 'https://saweria.co/ariafatah',
   nxctf_github: 'https://github.com/jonalexanderhere/LKSDUEL-PLATFORM-',
