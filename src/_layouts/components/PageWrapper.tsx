@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import Navbar from '../Navbar'
@@ -21,7 +21,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
   withPadding = true
 }) => {
   return (
-    <div className={`min-h-screen flex flex-col bg-[#f4e4bc] dark:bg-[#1f140f] ${className}`}>
+    <div className={`min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 ${className}`}>
       {showNavbar && <Navbar />}
       
       <main className={`flex-1 ${showNavbar && withPadding ? 'pt-14' : ''}`}>
@@ -35,4 +35,3 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
 }
 
 export default PageWrapper
-

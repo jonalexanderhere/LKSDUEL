@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import { Label, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Switch } from '@/shared/ui'
 import { ChallengeFormData, Event } from '../../types'
 import APP from '@/config'
@@ -34,7 +34,7 @@ export const BasicDetailsSection: React.FC<BasicDetailsSectionProps> = ({
           <Switch
             checked={!!formData.is_maintenance}
             onCheckedChange={v => onChange({ ...formData, is_maintenance: v })}
-            className="mr-2 data-[state=checked]:bg-amber-700 dark:bg-amber-800 data-[state=checked]:border-blue-600 bg-gray-200 border-gray-300 dark:bg-gray-700 dark:border-gray-500 transition-colors"
+            className="mr-2 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600 bg-gray-200 border-gray-300 dark:bg-gray-700 dark:border-gray-500 transition-colors"
           />
           Maintenance
         </Label>
@@ -47,14 +47,14 @@ export const BasicDetailsSection: React.FC<BasicDetailsSectionProps> = ({
           required
           value={formData.title}
           onChange={e => onChange({ ...formData, title: e.target.value })}
-          className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+          className="transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
         />
       </div>
       <div>
         <Label>Category</Label>
         <Select value={formData.category} onValueChange={v => onChange({ ...formData, category: v })}>
-          <SelectTrigger className="w-full transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"><SelectValue /></SelectTrigger>
-          <SelectContent className="bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 rounded-md shadow-lg">
+          <SelectTrigger className="w-full transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"><SelectValue /></SelectTrigger>
+          <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg">
             {categories.map(cat => (
               <SelectItem key={cat} value={cat}>{cat}</SelectItem>
             ))}
@@ -70,8 +70,8 @@ export const BasicDetailsSection: React.FC<BasicDetailsSectionProps> = ({
             value={formData.event_id ?? '__main__'}
             onValueChange={v => onChange({ ...formData, event_id: v === '__main__' ? null : v })}
           >
-            <SelectTrigger className="w-full transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"><SelectValue /></SelectTrigger>
-            <SelectContent className="bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 rounded-md shadow-lg">
+            <SelectTrigger className="w-full transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"><SelectValue /></SelectTrigger>
+            <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg">
               {!hideMainEventOption && (
                 <SelectItem value="__main__">{String(APP.eventMainLabel || 'Main')}</SelectItem>
               )}
@@ -85,8 +85,8 @@ export const BasicDetailsSection: React.FC<BasicDetailsSectionProps> = ({
       <div>
         <Label className="mb-1">Difficulty</Label>
         <Select value={formData.difficulty} onValueChange={v => onChange({ ...formData, difficulty: v })}>
-          <SelectTrigger className="w-full transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"><SelectValue /></SelectTrigger>
-          <SelectContent className="bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 rounded-md shadow-lg">
+          <SelectTrigger className="w-full transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"><SelectValue /></SelectTrigger>
+          <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg">
             {Object.keys(APP.difficultyStyles || {}).map(key => {
               const label = key.charAt(0).toUpperCase() + key.slice(1)
               return <SelectItem key={key} value={label}>{label}</SelectItem>
@@ -97,4 +97,3 @@ export const BasicDetailsSection: React.FC<BasicDetailsSectionProps> = ({
     </div>
   )
 }
-

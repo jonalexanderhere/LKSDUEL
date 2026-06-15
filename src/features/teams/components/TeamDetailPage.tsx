@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
@@ -69,7 +69,7 @@ export default function TeamDetailPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
+        <Loader fullscreen color="text-blue-500" />
       </div>
     )
   }
@@ -77,17 +77,17 @@ export default function TeamDetailPage() {
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-[#f4e4bc] dark:bg-[#1f140f]">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         {loading && !team && (
           <div className="flex justify-center py-16">
-            <Loader color="text-amber-600 dark:text-amber-500" />
+            <Loader color="text-blue-500" />
           </div>
         )}
 
         {loading && team && (
           <div className="fixed top-20 right-8 z-50 opacity-70 pointer-events-none">
-            <Loader color="text-amber-600 dark:text-amber-500" />
+            <Loader color="text-blue-500" />
           </div>
         )}
 
@@ -100,7 +100,7 @@ export default function TeamDetailPage() {
                 onChange={setSelectedEvent}
                 events={teamEvents as any}
                 showMain={showMainOption}
-                className="min-w-[180px] bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 text-sm px-3 py-2 rounded"
+                className="min-w-[180px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm px-3 py-2 rounded"
                 getEventLabel={(ev: any) => String(ev?.name ?? ev?.title ?? 'Untitled')}
               />
             </div>
@@ -136,4 +136,3 @@ export default function TeamDetailPage() {
     </div>
   )
 }
-

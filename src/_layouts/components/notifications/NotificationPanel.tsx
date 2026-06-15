@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -78,14 +78,14 @@ export default function NotificationPanel({
         transition={{ duration: 0.25, ease: "easeOut" }}
         style={{ willChange: 'transform' }}
         className={`fixed right-0 top-0 h-full w-full sm:w-[420px] shadow-2xl border-l flex flex-col z-[51]
-          ${theme === 'dark' ? 'bg-[#0d1117] border-amber-700/50 text-gray-100' : 'bg-[#fdf6e3] border-amber-900/50 text-gray-900'}
+          ${theme === 'dark' ? 'bg-[#0d1117] border-gray-800 text-gray-100' : 'bg-white border-gray-200 text-gray-900'}
         `}
       >
         {/* Header Section */}
-        <div className="pt-6 px-5 pb-3 border-b border-amber-900/50 dark:border-amber-700/50">
+        <div className="pt-6 px-5 pb-3 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-sm bg-amber-600 dark:bg-amber-700/10 text-amber-600 dark:text-amber-500">
+              <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
                 <Bell size={18} />
               </div>
               <div>
@@ -95,14 +95,14 @@ export default function NotificationPanel({
             <div className="flex items-center gap-2">
               <button
                 onClick={markAllNotificationsRead}
-                className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-500 hover:bg-amber-600 dark:bg-amber-700/10 px-2.5 py-1.5 rounded-md transition-all"
+                className="text-[10px] font-bold uppercase tracking-wider text-blue-500 hover:bg-blue-500/10 px-2.5 py-1.5 rounded-md transition-all"
                 title="Mark all as read"
               >
                 Mark all read
               </button>
               <button
                 onClick={() => setNotifOpen(false)}
-                className="p-1.5 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-[#eaddb6] dark:hover:bg-gray-800 transition-all"
+                className="p-1.5 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
               >
                 <X size={18} />
               </button>
@@ -116,26 +116,26 @@ export default function NotificationPanel({
                 onClick={() => setActiveTab('notifications')}
                 className={`pb-2 text-xs font-semibold transition-all relative
                   ${activeTab === 'notifications'
-                    ? 'text-amber-600 dark:text-amber-500'
+                    ? 'text-blue-500'
                     : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}
                 `}
               >
                 Penonton
                 {activeTab === 'notifications' && (
-                  <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-600 dark:bg-amber-700 rounded-full" />
+                  <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full" />
                 )}
               </button>
               <button
                 onClick={() => setActiveTab('admin')}
                 className={`pb-2 text-xs font-semibold transition-all relative
                   ${activeTab === 'admin'
-                    ? 'text-amber-600 dark:text-amber-500'
+                    ? 'text-blue-500'
                     : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}
                 `}
               >
                 Admin Panel
                 {activeTab === 'admin' && (
-                  <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-600 dark:bg-amber-700 rounded-full" />
+                  <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full" />
                 )}
               </button>
             </div>
@@ -149,9 +149,9 @@ export default function NotificationPanel({
         </div>
 
         {/* Global Settings */}
-        <div className="px-5 py-2.5 border-b border-amber-900/50 dark:border-amber-700/50 flex items-center justify-between bg-[#f4e4bc]/30 dark:bg-[#1A100C]/10">
+        <div className="px-5 py-2.5 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between bg-gray-50/30 dark:bg-gray-800/10">
           <div className="flex items-center gap-2">
-            <Megaphone size={13} className="text-amber-600 dark:text-amber-500" />
+            <Megaphone size={13} className="text-blue-500" />
             <span className="text-xs font-medium text-gray-600 dark:text-gray-300">Solve Sounds</span>
           </div>
           <Switch
@@ -175,7 +175,7 @@ export default function NotificationPanel({
               >
                 {notifLoading ? (
                   <div className="flex flex-col items-center justify-center py-20 gap-3 text-gray-500">
-                    <Loader2 size={24} className="animate-spin text-amber-600 dark:text-amber-500" />
+                    <Loader2 size={24} className="animate-spin text-blue-500" />
                     <span className="text-xs font-medium opacity-70">Loading...</span>
                   </div>
                 ) : notifItems.length === 0 ? (
@@ -209,28 +209,28 @@ export default function NotificationPanel({
                 {/* Broadcast Form */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <Plus size={14} className="text-amber-600 dark:text-amber-500" />
+                    <Plus size={14} className="text-blue-500" />
                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500">New Broadcast</h3>
                   </div>
-                  <div className="space-y-2.5 bg-amber-600 dark:bg-amber-700/[0.02] dark:bg-blue-400/[0.02] p-3.5 rounded-sm border-double border-4 border-amber-900/70 border border-blue-500/10">
+                  <div className="space-y-2.5 bg-blue-500/[0.02] dark:bg-blue-400/[0.02] p-3.5 rounded-xl border border-blue-500/10">
                     <input
                       value={notifTitle}
                       onChange={(e) => setNotifTitle(e.target.value)}
                       placeholder="Title"
-                      className={`w-full px-3 py-2 rounded-sm border text-sm focus:ring-1 focus:ring-blue-500/30 focus:outline-none transition-all ${theme === 'dark' ? 'bg-gray-900 border-amber-700/50' : 'bg-[#fdf6e3] border-amber-900/50'}`}
+                      className={`w-full px-3 py-2 rounded-lg border text-sm focus:ring-1 focus:ring-blue-500/30 focus:outline-none transition-all ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}
                     />
                     <textarea
                       value={notifMessage}
                       onChange={(e) => setNotifMessage(e.target.value)}
                       placeholder="Message..."
-                      className={`w-full px-3 py-2 rounded-sm border text-sm focus:ring-1 focus:ring-blue-500/30 focus:outline-none transition-all ${theme === 'dark' ? 'bg-gray-900 border-amber-700/50' : 'bg-[#fdf6e3] border-amber-900/50'}`}
+                      className={`w-full px-3 py-2 rounded-lg border text-sm focus:ring-1 focus:ring-blue-500/30 focus:outline-none transition-all ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}
                       rows={2}
                     />
                     <div className="flex items-center justify-between gap-3 pt-0.5">
                       <select
                         value={notifLevel}
                         onChange={(e) => setNotifLevel(e.target.value as any)}
-                        className={`px-2.5 py-1.5 rounded-sm border text-[11px] font-semibold focus:outline-none ${theme === 'dark' ? 'bg-gray-900 border-amber-700/50 text-gray-300' : 'bg-[#fdf6e3] border-amber-900/50 text-gray-600'}`}
+                        className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-semibold focus:outline-none ${theme === 'dark' ? 'bg-gray-900 border-gray-800 text-gray-300' : 'bg-white border-gray-200 text-gray-600'}`}
                       >
                         <option value="info">General Info</option>
                         <option value="info_platform">Platform Update</option>
@@ -238,7 +238,7 @@ export default function NotificationPanel({
                       </select>
                       <button
                         onClick={handleSendNotif}
-                        className="px-4 py-1.5 rounded-sm bg-amber-700 dark:bg-amber-800 hover:bg-blue-700 text-white text-[11px] font-bold transition-all active:scale-95 shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+                        className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold transition-all active:scale-95 shadow-sm"
                       >
                         Send
                       </button>
@@ -253,7 +253,7 @@ export default function NotificationPanel({
                       <Calendar size={14} className="text-gray-400" />
                       <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500">History</h3>
                     </div>
-                    <span className="text-[9px] font-bold text-amber-600 dark:text-amber-500 opacity-60 uppercase">
+                    <span className="text-[9px] font-bold text-blue-500 opacity-60 uppercase">
                       {notifItems.length} Sent
                     </span>
                   </div>
@@ -264,9 +264,9 @@ export default function NotificationPanel({
                         key={n.id}
                         onMouseEnter={() => setHoveredNotifId(n.id)}
                         onMouseLeave={() => setHoveredNotifId(null)}
-                        className={`group relative p-2.5 rounded-sm border transition-all duration-200 cursor-default
+                        className={`group relative p-2.5 rounded-lg border transition-all duration-200 cursor-default
                             ${hoveredNotifId === n.id
-                            ? 'bg-[#fdf6e3] dark:bg-[#1f140f] border-double border-4 border-amber-900/70 border-blue-500/20 shadow-[0_4px_12px_rgba(0,0,0,0.6)]'
+                            ? 'bg-white dark:bg-gray-900 border-blue-500/20 shadow-sm'
                             : 'bg-transparent border-transparent'}
                           `}
                       >
@@ -289,7 +289,7 @@ export default function NotificationPanel({
                               transition={{ duration: 0.2, ease: "easeOut" }}
                               className="overflow-hidden"
                             >
-                              <div className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 bg-[#f4e4bc] dark:bg-[#1A100C]/50 p-2 rounded-md border border-amber-900/30 dark:border-gray-700/50">
+                              <div className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 p-2 rounded-md border border-gray-100 dark:border-gray-700/50">
                                 <MarkdownRenderer content={n.message} variant="compact" />
                               </div>
                               <div className="mt-1.5 text-[9px] text-gray-400 font-medium">
@@ -310,4 +310,3 @@ export default function NotificationPanel({
     </>
   )
 }
-

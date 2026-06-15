@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { Bell } from 'lucide-react'
@@ -27,7 +27,7 @@ export default function NotificationBell({
         aria-label="Notifications"
         onClick={onToggle}
       >
-        <Bell size={22} className="text-amber-600 dark:text-amber-500" />
+        <Bell size={22} className="text-blue-500" />
       </button>
 
       {unreadCount > 0 && (
@@ -38,4 +38,3 @@ export default function NotificationBell({
     </div>
   )
 }
-

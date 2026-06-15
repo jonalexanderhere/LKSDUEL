@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { motion } from 'framer-motion'
@@ -18,8 +18,8 @@ export function UserCard({ children, className, hover = true }: UserCardProps) {
       transition={{ duration: 0.25, ease: 'easeOut' }}
       whileHover={hover ? { y: -4 } : undefined}
       className={cn(
-        'rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/40 backdrop-blur-sm transition-all duration-300 dark:border-amber-700/50 dark:bg-[#1f140f]/40',
-        hover && 'hover:border-blue-500/50 hover:bg-[#fdf6e3]/80 hover:shadow-[0_10px_20px_rgba(59,130,246,0.1)] dark:hover:bg-gray-800/80',
+        'rounded-xl border border-gray-200 bg-white/40 backdrop-blur-sm transition-all duration-300 dark:border-gray-800 dark:bg-gray-900/40',
+        hover && 'hover:border-blue-500/50 hover:bg-white/80 hover:shadow-[0_10px_20px_rgba(59,130,246,0.1)] dark:hover:bg-gray-800/80',
         className
       )}
     >
@@ -27,4 +27,3 @@ export function UserCard({ children, className, hover = true }: UserCardProps) {
     </motion.div>
   )
 }
-

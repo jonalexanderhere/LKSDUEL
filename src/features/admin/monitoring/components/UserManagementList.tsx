@@ -123,8 +123,8 @@ export default function UserManagementList() {
   }
 
   return (
-    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700 shadow-[0_6px_16px_rgba(0,0,0,0.8)]">
-      <CardHeader className="flex flex-col gap-4 border-b border-amber-900/30 dark:border-gray-700/60 pb-5">
+    <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md">
+      <CardHeader className="flex flex-col gap-4 border-b border-gray-100 dark:border-gray-700/60 pb-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <CardTitle className="text-lg font-bold uppercase tracking-wider text-gray-800 dark:text-gray-200 flex items-center gap-2">
             <User className="w-5 h-5 text-indigo-500" />
@@ -137,7 +137,7 @@ export default function UserManagementList() {
               size="sm"
               onClick={() => fetchUsers(false)}
               disabled={isRefreshing || isLoading}
-              className="flex items-center gap-1 text-xs border-gray-300 dark:border-gray-700 h-9 bg-[#fdf6e3] dark:bg-[#1A100C]"
+              className="flex items-center gap-1 text-xs border-gray-300 dark:border-gray-700 h-9 bg-white dark:bg-gray-800"
             >
               <RefreshCw className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} />
               Sync
@@ -168,10 +168,10 @@ export default function UserManagementList() {
             {searchQuery ? 'No users found matching your search.' : 'No users registered on the platform.'}
           </div>
         ) : (
-          <div className="overflow-x-auto border border-amber-900/30 dark:border-gray-700/50 rounded-sm">
+          <div className="overflow-x-auto border border-gray-100 dark:border-gray-700/50 rounded-lg">
             <Table>
-              <TableHeader className="bg-[#f4e4bc] dark:bg-[#1f140f]/50">
-                <TableRow className="border-b border-amber-900/30 dark:border-gray-700/60">
+              <TableHeader className="bg-gray-50 dark:bg-gray-900/50">
+                <TableRow className="border-b border-gray-100 dark:border-gray-700/60">
                   <TableHead className="font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">User</TableHead>
                   <TableHead className="font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Role</TableHead>
                   <TableHead className="font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">Team Name</TableHead>
@@ -184,7 +184,7 @@ export default function UserManagementList() {
                 {filteredUsers.map((u) => (
                   <TableRow
                     key={u.id}
-                    className="border-b border-amber-900/30 dark:border-gray-700/50 last:border-b-0 hover:bg-[#f4e4bc]/55 dark:hover:bg-gray-800/40 transition-colors"
+                    className="border-b border-gray-100 dark:border-gray-700/50 last:border-b-0 hover:bg-gray-50/55 dark:hover:bg-gray-800/40 transition-colors"
                   >
                     <TableCell className="font-semibold text-amber-900 dark:text-amber-50 py-3.5">
                       {u.username}
@@ -196,7 +196,7 @@ export default function UserManagementList() {
                           Admin
                         </Badge>
                       ) : (
-                        <Badge className="bg-amber-600 dark:bg-amber-700/10 hover:bg-amber-600 dark:bg-amber-700/20 text-amber-700 dark:text-amber-500 dark:text-blue-400 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/50 flex items-center gap-1 w-max font-bold px-2 py-0.5 text-[10px] uppercase">
+                        <Badge className="bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/50 flex items-center gap-1 w-max font-bold px-2 py-0.5 text-[10px] uppercase">
                           <User className="w-3 h-3" />
                           Player
                         </Badge>
@@ -209,7 +209,7 @@ export default function UserManagementList() {
                       <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-black ${
                         u.solve_count > 0 
                           ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-950/25 dark:text-emerald-400' 
-                          : 'bg-[#eaddb6] text-gray-400 dark:bg-[#1f140f] dark:text-gray-600'
+                          : 'bg-gray-100 text-gray-400 dark:bg-gray-900 dark:text-gray-600'
                       }`}>
                         {u.solve_count}
                       </span>
@@ -281,7 +281,7 @@ export default function UserManagementList() {
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={selectedUser !== null} onOpenChange={(open) => !open && setSelectedUser(null)}>
-        <DialogContent className="bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700 max-w-md">
+        <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 max-w-md">
           <DialogHeader>
             <DialogTitle className="text-red-600 dark:text-red-500 flex items-center gap-2 font-black uppercase tracking-wider text-base">
               <ShieldAlert className="w-5 h-5" />
@@ -294,7 +294,7 @@ export default function UserManagementList() {
 
           {selectedUser && (
             <div className="space-y-4 py-4">
-              <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-sm flex gap-3 text-red-800 dark:text-red-400 text-xs">
+              <div className="p-3 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-lg flex gap-3 text-red-800 dark:text-red-400 text-xs">
                 <AlertTriangle className="w-5 h-5 shrink-0" />
                 <div>
                   <p className="font-bold">Warning:</p>
@@ -322,7 +322,7 @@ export default function UserManagementList() {
               variant="outline"
               disabled={isDeleting}
               onClick={() => setSelectedUser(null)}
-              className="border-gray-300 dark:border-gray-700 bg-[#fdf6e3] dark:bg-[#1A100C]"
+              className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
             >
               Cancel
             </Button>
@@ -340,7 +340,7 @@ export default function UserManagementList() {
 
       {/* Role Toggle Confirmation Dialog */}
       <Dialog open={roleToggleUser !== null} onOpenChange={(open) => !open && setRoleToggleUser(null)}>
-        <DialogContent className="bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700 max-w-md">
+        <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 max-w-md">
           <DialogHeader>
             <DialogTitle className="text-indigo-600 dark:text-indigo-400 flex items-center gap-2 font-black uppercase tracking-wider text-base">
               <Shield className="w-5 h-5 animate-pulse" />
@@ -358,7 +358,7 @@ export default function UserManagementList() {
               variant="outline"
               disabled={isTogglingRole}
               onClick={() => setRoleToggleUser(null)}
-              className="border-gray-300 dark:border-gray-700 bg-[#fdf6e3] dark:bg-[#1A100C]"
+              className="border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800"
             >
               Cancel
             </Button>
@@ -379,5 +379,4 @@ export default function UserManagementList() {
     </Card>
   )
 }
-
 

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -40,7 +40,7 @@ export default function NotificationToast({
                 : { opacity: 1, x: 0, scale: 1 }
             }
             exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-            className={`pointer-events-auto relative flex items-center gap-4 px-5 py-4 rounded-sm border-double border-4 border-amber-900/70 shadow-2xl overflow-hidden min-w-[280px] max-w-[400px] border
+            className={`pointer-events-auto relative flex items-center gap-4 px-5 py-4 rounded-xl shadow-2xl overflow-hidden min-w-[280px] max-w-[400px] border
               ${solveNotif.isFirstBlood 
                 ? 'bg-gradient-to-br from-red-600 via-red-700 to-black border-red-500/50 text-white' 
                 : 'bg-zinc-900/95 backdrop-blur-md border-zinc-800 text-zinc-100'}
@@ -98,8 +98,8 @@ export default function NotificationToast({
               </>
             )}
 
-            <div className={`relative flex-shrink-0 p-2.5 rounded-sm
-              ${solveNotif.isFirstBlood ? 'bg-[#fdf6e3]/10' : 'bg-amber-600 dark:bg-amber-700/10 text-amber-600 dark:text-amber-500'}
+            <div className={`relative flex-shrink-0 p-2.5 rounded-lg
+              ${solveNotif.isFirstBlood ? 'bg-white/10' : 'bg-blue-500/10 text-blue-500'}
             `}>
               {solveNotif.isFirstBlood ? <Trophy size={20} className="text-yellow-400" /> : <Bell size={20} />}
             </div>
@@ -137,7 +137,7 @@ export default function NotificationToast({
             <button
               onClick={onDismissSolve}
               className={`relative ml-2 p-1.5 rounded-md transition-colors
-                ${solveNotif.isFirstBlood ? 'hover:bg-[#fdf6e3]/10 text-red-200' : 'hover:bg-zinc-800 text-zinc-500'}
+                ${solveNotif.isFirstBlood ? 'hover:bg-white/10 text-red-200' : 'hover:bg-zinc-800 text-zinc-500'}
               `}
             >
               <X size={16} />
@@ -149,7 +149,7 @@ export default function NotificationToast({
               animate={{ width: 0 }}
               transition={{ duration: solveNotif.isFirstBlood ? 25 : 12, ease: "linear" }}
               className={`absolute bottom-0 left-0 h-0.5 
-                ${solveNotif.isFirstBlood ? 'bg-yellow-400/50' : 'bg-amber-600 dark:bg-amber-700/50'}
+                ${solveNotif.isFirstBlood ? 'bg-yellow-400/50' : 'bg-blue-500/50'}
               `}
             />
           </motion.div>
@@ -164,9 +164,9 @@ export default function NotificationToast({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
             onClick={onToastClick}
-            className="pointer-events-auto flex items-start gap-3 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 text-zinc-100 px-4 py-4 rounded-sm border-double border-4 border-amber-900/70 shadow-2xl max-w-[420px] cursor-pointer hover:bg-zinc-800/90 hover:scale-[1.01] transition-all"
+            className="pointer-events-auto flex items-start gap-3 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 text-zinc-100 px-4 py-4 rounded-xl shadow-2xl max-w-[420px] cursor-pointer hover:bg-zinc-800/90 hover:scale-[1.01] transition-all"
           >
-            <div className="mt-0.5 p-2 rounded-sm bg-amber-600 dark:bg-amber-700/10 text-blue-400">
+            <div className="mt-0.5 p-2 rounded-lg bg-blue-500/10 text-blue-400">
               <Bell size={18} />
             </div>
             <div className="flex-1 min-w-0 pt-1">
@@ -188,5 +188,4 @@ export default function NotificationToast({
     </div>
   )
 }
-
 

@@ -62,7 +62,7 @@ export default function JoinEventDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md rounded-sm border-double border-4 border-amber-900/70 bg-[#fdf6e3]/60 dark:bg-[#111622]/60 border border-amber-900/50 backdrop-blur-xl p-6 shadow-2xl [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400">
+      <DialogContent className="max-w-md rounded-2xl bg-white/60 dark:bg-[#111622]/60 border border-amber-900/50 backdrop-blur-xl p-6 shadow-2xl [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400">
         <DialogHeader>
           <DialogTitle className="text-xl font-black text-amber-900 dark:text-amber-50 uppercase tracking-tight">
             Join Event
@@ -70,7 +70,7 @@ export default function JoinEventDialog({
         </DialogHeader>
 
         <div className="space-y-5 my-4">
-          <div className="p-4 bg-amber-600 dark:bg-amber-700/[0.03] border border-blue-500/10 rounded-sm border-double border-4 border-amber-900/70">
+          <div className="p-4 bg-blue-500/[0.03] border border-blue-500/10 rounded-xl">
             <h3 className="text-sm font-bold text-amber-900 dark:text-amber-50 mb-1">
               {event?.name || 'Unknown Event'}
             </h3>
@@ -89,7 +89,7 @@ export default function JoinEventDialog({
                 value={joinKey}
                 onChange={(e) => setJoinKey(e.target.value)}
                 placeholder="Enter access key..."
-                className="w-full rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 px-4 py-2.5 bg-[#fdf6e3]/50 dark:bg-[#1f140f]/50 text-sm text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                className="w-full rounded-xl border border-amber-900/50 px-4 py-2.5 bg-white/50 dark:bg-gray-900/50 text-sm text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                 autoFocus
               />
             </div>
@@ -105,18 +105,18 @@ export default function JoinEventDialog({
                 onChange={(e) => setJoinNote(e.target.value)}
                 placeholder="Tell us why you'd like to join..."
                 rows={3}
-                className="w-full rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 px-4 py-2.5 bg-[#fdf6e3]/50 dark:bg-[#1f140f]/50 text-sm text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
+                className="w-full rounded-xl border border-amber-900/50 px-4 py-2.5 bg-white/50 dark:bg-gray-900/50 text-sm text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
                 autoFocus
               />
             </div>
           )}
 
           {isPending ? (
-            <div className="p-3 bg-amber-600 dark:bg-amber-700/5 border border-blue-500/20 text-amber-700 dark:text-amber-500 dark:text-blue-400 text-xs font-bold rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center">
+            <div className="p-3 bg-blue-500/5 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-xl flex items-center justify-center">
               Your request is currently pending admin approval.
             </div>
           ) : isRejected ? (
-            <div className="p-3 bg-red-500/5 border border-red-500/20 text-red-600 dark:text-red-400 text-xs font-bold rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center">
+            <div className="p-3 bg-red-500/5 border border-red-500/20 text-red-600 dark:text-red-400 text-xs font-bold rounded-xl flex items-center justify-center">
               Your previous request was declined. You can try again.
             </div>
           ) : null}
@@ -133,7 +133,7 @@ export default function JoinEventDialog({
           <Button
             onClick={handleJoin}
             disabled={loading || isPending}
-            className="bg-amber-700 dark:bg-amber-800 hover:bg-blue-700 text-white rounded-sm border-double border-4 border-amber-900/70 px-6 font-bold text-xs uppercase tracking-widest shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02]"
+            className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-6 font-bold text-xs uppercase tracking-widest shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02]"
           >
             {loading ? "Processing..." : joinMode === 'request' ? 'Submit Request' : joinMode === 'key' ? 'Verify & Join' : 'Join Event'}
           </Button>
@@ -142,5 +142,4 @@ export default function JoinEventDialog({
     </Dialog>
   )
 }
-
 

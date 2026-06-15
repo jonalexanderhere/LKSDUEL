@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Users, ShieldAlert, User } from 'lucide-react'
 import { Button, Card, CardContent } from '@/shared/ui'
@@ -28,7 +28,7 @@ const ChallengeSidebar: React.FC<ChallengeSidebarProps> = ({
         info={isGlobalAdmin ? (siteInfo || undefined) : undefined}
         showViewAll={isGlobalAdmin}
       />
-      <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700 shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+      <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
         <CardContent className="pt-6 space-y-3">
           <Link href="/admin/teams">
             <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white gap-2">
@@ -57,4 +57,3 @@ const ChallengeSidebar: React.FC<ChallengeSidebarProps> = ({
 }
 
 export default ChallengeSidebar
-

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { MarkdownRenderer } from '@/shared/components'
@@ -29,10 +29,10 @@ export default function NotificationItem({
 }: NotificationItemProps) {
   return (
     <div
-      className={`group relative px-3 py-2.5 rounded-sm transition-all duration-150 flex flex-col gap-1
+      className={`group relative px-3 py-2.5 rounded-lg transition-all duration-150 flex flex-col gap-1
         ${!isRead
-          ? 'bg-amber-600 dark:bg-amber-700/[0.03] dark:bg-blue-400/[0.03] border-l-2 border-blue-500'
-          : 'border-l-2 border-transparent hover:bg-amber-600 dark:bg-amber-700/5 dark:hover:bg-blue-400/10'}
+          ? 'bg-blue-500/[0.03] dark:bg-blue-400/[0.03] border-l-2 border-blue-500'
+          : 'border-l-2 border-transparent hover:bg-blue-500/5 dark:hover:bg-blue-400/10'}
       `}
     >
       <div className="flex items-start justify-between gap-3">
@@ -57,7 +57,7 @@ export default function NotificationItem({
             <MarkdownRenderer
               content={notification.message}
               variant="compact"
-              className="line-clamp-2 break-words [&_a]:text-amber-700 dark:text-amber-500 dark:[&_a]:text-blue-400"
+              className="line-clamp-2 break-words [&_a]:text-blue-600 dark:[&_a]:text-blue-400"
             />
           </div>
         </div>
@@ -70,4 +70,3 @@ export default function NotificationItem({
     </div>
   )
 }
-

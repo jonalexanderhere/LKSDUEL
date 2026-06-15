@@ -37,7 +37,7 @@ const ScoreboardChart: React.FC<ScoreboardChartProps> = ({ leaderboard, isDark }
   })
 
   return (
-    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
+    <Card className="bg-white dark:bg-gray-800">
       <CardHeader>
         <CardTitle className="text-lg font-semibold text-center text-amber-900 dark:text-amber-50">Top 10 Users</CardTitle>
       </CardHeader>
@@ -86,5 +86,4 @@ const ScoreboardChart: React.FC<ScoreboardChartProps> = ({ leaderboard, isDark }
 }
 
 export default ScoreboardChart
-
 

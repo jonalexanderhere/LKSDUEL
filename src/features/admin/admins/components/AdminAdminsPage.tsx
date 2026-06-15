@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { Loader } from '@/shared/components'
 import AddEventAdminCard from './AddEventAdminCard'
@@ -37,7 +37,7 @@ export default function AdminAdminsPage() {
     resetGrantForm,
   } = useAdminAdminsData()
 
-  if (authLoading || isLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
+  if (authLoading || isLoading) return <Loader fullscreen color="text-blue-500" />
   if (!user || !isAllowed) return null
 
   return (
@@ -82,4 +82,3 @@ export default function AdminAdminsPage() {
     </>
   )
 }
-

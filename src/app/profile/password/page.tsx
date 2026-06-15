@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import Link from 'next/link'
 import { useAuth } from '@/shared/contexts'
@@ -16,7 +16,7 @@ export default function ChangePasswordPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
+        <Loader fullscreen color="text-blue-500" />
       </div>
     )
   }
@@ -33,7 +33,7 @@ export default function ChangePasswordPage() {
             />
             <Link
               href="/login"
-              className="relative flex w-full items-center justify-center overflow-hidden rounded-sm border-double border-4 border-amber-900/70 bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:scale-[1.02] hover:shadow-blue-500/30 active:scale-[0.98]"
+              className="relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:scale-[1.02] hover:shadow-blue-500/30 active:scale-[0.98]"
             >
               Login
             </Link>
@@ -51,4 +51,3 @@ export default function ChangePasswordPage() {
     </AuthPageShell>
   )
 }
-

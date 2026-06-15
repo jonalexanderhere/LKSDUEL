@@ -1,4 +1,4 @@
-﻿import type React from 'react'
+import type React from 'react'
 import { AlertCircle, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
 
@@ -14,7 +14,7 @@ export function AuthStatusMessage({ children, tone, title }: AuthStatusMessagePr
   return (
     <div
       className={cn(
-        'flex gap-3 rounded-sm border-double border-4 border-amber-900/70 border p-3 text-sm',
+        'flex gap-3 rounded-xl border p-3 text-sm',
         tone === 'success'
           ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'
           : 'border-red-500/20 bg-red-500/10 text-red-700 dark:text-red-300'
@@ -28,4 +28,3 @@ export function AuthStatusMessage({ children, tone, title }: AuthStatusMessagePr
     </div>
   )
 }
-

@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import {
   Card,
   CardContent,
@@ -19,7 +19,7 @@ interface GlobalAdminsCardProps {
 
 const GlobalAdminsCard: React.FC<GlobalAdminsCardProps> = ({ admins }) => {
   return (
-    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
+    <Card className="bg-white dark:bg-gray-800">
       <CardHeader>
         <CardTitle>Global Admins</CardTitle>
       </CardHeader>
@@ -50,5 +50,4 @@ const GlobalAdminsCard: React.FC<GlobalAdminsCardProps> = ({ admins }) => {
 }
 
 export default GlobalAdminsCard
-
 

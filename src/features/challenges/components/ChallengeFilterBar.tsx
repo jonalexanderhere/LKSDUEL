@@ -67,7 +67,7 @@ export default function ChallengeFilterBar({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       data-tour="challenge-filter-bar"
-      className="relative z-20 w-full bg-[#fdf6e3]/40 dark:bg-[#1f140f]/40 border border-amber-900/50 backdrop-blur-sm rounded-sm border-double border-4 border-amber-900/70 p-4 md:p-5"
+      className="relative z-20 w-full bg-white/40 dark:bg-gray-900/40 border border-amber-900/50 backdrop-blur-sm rounded-2xl p-4 md:p-5"
     >
       {events && onEventChange && (
         <EventFilterPills
@@ -102,5 +102,4 @@ export default function ChallengeFilterBar({
     </motion.div>
   )
 }
-
 

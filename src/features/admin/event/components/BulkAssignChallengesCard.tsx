@@ -42,7 +42,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
   onToggleSelect,
 }) => {
   return (
-    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
+    <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
           <CardTitle className="text-amber-900 dark:text-amber-50">Bulk Assign Challenges</CardTitle>
@@ -60,7 +60,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
             <select
               value={bulkEventId}
               onChange={(event) => onBulkEventChange(event.target.value)}
-              className="w-full px-3 py-2 text-sm border border-amber-900/50 dark:border-gray-600 rounded-md bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
+              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
             >
               <option value="">Select event</option>
               {events.map((event) => (
@@ -85,7 +85,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
           />
         </div>
 
-        <div className="mt-4 border border-amber-900/50 dark:border-gray-700 rounded-md max-h-[360px] overflow-auto bg-[#fdf6e3] dark:bg-[#1A100C]">
+        <div className="mt-4 border border-gray-200 dark:border-gray-700 rounded-md max-h-[360px] overflow-auto bg-white dark:bg-gray-800">
           {filteredChallenges.length === 0 ? (
             <EmptyState
               icon={<Search className="w-full h-full" />}
@@ -94,7 +94,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
             />
           ) : (
             filteredChallenges.map((challenge) => (
-              <label key={challenge.id} className="flex items-center gap-3 px-3 py-2 border-b last:border-b-0 border-amber-900/50 dark:border-gray-700 cursor-pointer hover:bg-[#f4e4bc] dark:hover:bg-gray-900/40">
+              <label key={challenge.id} className="flex items-center gap-3 px-3 py-2 border-b last:border-b-0 border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-900/40">
                 <input
                   type="checkbox"
                   checked={selectedIds.includes(challenge.id)}
@@ -118,5 +118,4 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
 }
 
 export default BulkAssignChallengesCard
-
 

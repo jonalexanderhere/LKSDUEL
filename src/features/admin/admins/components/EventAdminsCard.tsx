@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import {
   Button,
   Card,
@@ -21,7 +21,7 @@ interface EventAdminsCardProps {
 
 const EventAdminsCard: React.FC<EventAdminsCardProps> = ({ admins, onAskRemove }) => {
   return (
-    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
+    <Card className="bg-white dark:bg-gray-800">
       <CardHeader>
         <CardTitle>Event Admins</CardTitle>
       </CardHeader>
@@ -58,5 +58,4 @@ const EventAdminsCard: React.FC<EventAdminsCardProps> = ({ admins, onAskRemove }
 }
 
 export default EventAdminsCard
-
 

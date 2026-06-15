@@ -56,11 +56,11 @@ export default function ScoreboardPage() {
     }
   }, [firstBloodMode, user])
 
-  if (authLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
+  if (authLoading) return <Loader fullscreen color="text-blue-500" />
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-[#f4e4bc] dark:bg-[#1f140f]">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* <TitlePage icon={<Trophy size={30} className="text-yellow-500 dark:text-yellow-300 drop-shadow" />}>Scoreboard</TitlePage> */}
 
@@ -72,17 +72,17 @@ export default function ScoreboardPage() {
                 value={selectedEvent}
                 onChange={setSelectedEvent}
                 events={startedEvents}
-                className="min-w-[180px] bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 text-sm px-3 py-2 rounded"
+                className="min-w-[180px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm px-3 py-2 rounded"
                 getEventLabel={(event: any) => String(event?.name ?? event?.title ?? 'Untitled')}
               />
             </div>
           </div>
 
-          <span className="flex gap-2 border-b border-amber-900/50 dark:border-gray-700">
+          <span className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
             <button
               onClick={() => setFirstBloodMode(false)}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${!firstBloodMode
-                ? 'border-blue-500 text-amber-700 dark:text-amber-500 dark:text-blue-400'
+                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
@@ -99,7 +99,7 @@ export default function ScoreboardPage() {
             <button
               onClick={() => setFirstBloodMode(true)}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${firstBloodMode
-                ? 'border-blue-500 text-amber-700 dark:text-amber-500 dark:text-blue-400'
+                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
@@ -123,7 +123,7 @@ export default function ScoreboardPage() {
               initial={{ opacity: 0, y: -20, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
-              className="relative overflow-hidden rounded-sm border-double border-4 border-amber-900/70 border border-red-400/60 bg-gradient-to-r from-red-700 via-red-600 to-amber-600 px-6 py-5 text-white shadow-[0_15px_40px_rgba(220,38,38,0.45)]"
+              className="relative overflow-hidden rounded-2xl border border-red-400/60 bg-gradient-to-r from-red-700 via-red-600 to-amber-600 px-6 py-5 text-white shadow-[0_15px_40px_rgba(220,38,38,0.45)]"
             >
               <motion.div
                 initial={{ scale: 0.4, opacity: 0.9 }}
@@ -155,7 +155,7 @@ export default function ScoreboardPage() {
 
         {loading && leaderboard.length === 0 ? (
           <div className="flex justify-center py-16">
-            <Loader color="text-amber-600 dark:text-amber-500" />
+            <Loader color="text-blue-500" />
           </div>
         ) : !user ? null : (
           <div className={`space-y-8 ${hasMounted ? '' : 'opacity-0'} transition-opacity duration-500`}>
@@ -166,7 +166,7 @@ export default function ScoreboardPage() {
             )}
             <div>
               {isEmpty ? (
-                <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
+                <Card className="bg-white dark:bg-gray-800">
                   <CardHeader>
                     <CardTitle className="text-lg font-semibold text-amber-900 dark:text-amber-50">Ranking</CardTitle>
                   </CardHeader>
@@ -177,7 +177,7 @@ export default function ScoreboardPage() {
                       description={
                         <>
                           Leaderboard is empty!<br />
-                          Be the first to solve a challenge <Rocket size={16} className="inline-block ml-1 text-amber-600 dark:text-amber-500" />
+                          Be the first to solve a challenge <Rocket size={16} className="inline-block ml-1 text-blue-500" />
                         </>
                       }
                       containerHeight="py-12"
@@ -201,5 +201,4 @@ export default function ScoreboardPage() {
     </div>
   )
 }
-
 

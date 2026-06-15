@@ -30,7 +30,7 @@ export default function ChallengeFlagForm({
     <div className="flex flex-col relative w-full">
       {flagFeedback[challenge.id] && (
         <div
-          className={`absolute bottom-[calc(100%+12px)] left-0 right-0 p-2.5 rounded-sm text-xs font-black uppercase tracking-widest text-center shadow-lg transition-all z-20 animate-in fade-in slide-in-from-bottom-2
+          className={`absolute bottom-[calc(100%+12px)] left-0 right-0 p-2.5 rounded-lg text-xs font-black uppercase tracking-widest text-center shadow-lg transition-all z-20 animate-in fade-in slide-in-from-bottom-2
             ${flagFeedback[challenge.id]?.success
               ? 'bg-green-500 text-white dark:bg-green-600'
               : 'bg-red-500 text-white dark:bg-red-600'}
@@ -47,7 +47,7 @@ export default function ChallengeFlagForm({
           handleFlagSubmit(challenge.id)
         }}
       >
-        <div className="relative flex-1 rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#f4e4bc]/50 dark:bg-[#1f140f]/50 overflow-hidden focus-within:ring-2 focus-within:ring-pink-400 transition-all">
+        <div className="relative flex-1 rounded-xl border border-amber-900/50 bg-gray-50/50 dark:bg-gray-900/50 overflow-hidden focus-within:ring-2 focus-within:ring-pink-400 transition-all">
           {challenge.flag_placeholder && placeholders[challenge.id] && (
             <div
               ref={overlayRef}
@@ -85,7 +85,7 @@ export default function ChallengeFlagForm({
             !flagInputs[challenge.id]?.trim() ||
             (challenge.flag_placeholder && placeholders[challenge.id] ? (flagInputs[challenge.id] || '').length !== placeholders[challenge.id].length : false)
           }
-          className="flex items-center justify-center px-6 h-[38px] rounded-sm border-double border-4 border-amber-900/70 bg-gradient-to-br from-pink-500 to-pink-600 text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-pink-500/20 hover:shadow-pink-500/40 hover:from-pink-400 hover:to-pink-500 transition-all disabled:opacity-30 active:scale-95 shrink-0"
+          className="flex items-center justify-center px-6 h-[38px] rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-pink-500/20 hover:shadow-pink-500/40 hover:from-pink-400 hover:to-pink-500 transition-all disabled:opacity-30 active:scale-95 shrink-0"
         >
           {submitting[challenge.id] ? '...' : 'Submit'}
         </button>
@@ -93,5 +93,4 @@ export default function ChallengeFlagForm({
     </div>
   )
 }
-
 

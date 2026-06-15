@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import ConfirmDialog from '@/shared/components/custom/ConfirmDialog'
 import type { Challenge } from '../types'
 
@@ -33,7 +33,7 @@ const DeleteChallengeConfirmDialog: React.FC<DeleteChallengeConfirmDialogProps> 
               <p>Type <b>{pendingDelete.title}</b> to confirm:</p>
               <input
                 type="text"
-                className="w-full mt-2 px-3 py-2 border rounded bg-[#fdf6e3] dark:bg-[#1A100C]"
+                className="w-full mt-2 px-3 py-2 border rounded bg-white dark:bg-gray-800"
                 value={confirmInput}
                 onChange={event => onConfirmInputChange(event.target.value)}
                 autoFocus
@@ -49,4 +49,3 @@ const DeleteChallengeConfirmDialog: React.FC<DeleteChallengeConfirmDialogProps> 
 }
 
 export default DeleteChallengeConfirmDialog
-

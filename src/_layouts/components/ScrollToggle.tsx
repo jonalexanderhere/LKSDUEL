@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useLayoutEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -48,7 +48,7 @@ export default function ScrollToggle() {
   // Warna lebih kontras dan modern
   const base = isDark
     ? 'bg-gray-800 border-gray-600 text-white'
-    : 'bg-[#fdf6e3] border-gray-300 text-gray-900';
+    : 'bg-white border-gray-300 text-gray-900';
 
   // Sembunyikan tombol di halaman Root ("/") setelah semua hooks
   if (pathname === "/" || pathname === "/info" || pathname === "/rules") return null;
@@ -59,7 +59,7 @@ export default function ScrollToggle() {
       aria-label={atBottom ? "Scroll to top" : "Scroll to bottom"}
       className={`fixed bottom-6 right-6 z-10 rounded-full border shadow-lg transition-all duration-200 p-3 group ${base}
         hover:scale-105 hover:shadow-2xl
-        ${isDark ? 'hover:bg-blue-700 hover:border-blue-500' : 'hover:bg-amber-600 dark:bg-amber-700 hover:text-white hover:border-blue-500'}`}
+        ${isDark ? 'hover:bg-blue-700 hover:border-blue-500' : 'hover:bg-blue-500 hover:text-white hover:border-blue-500'}`}
       style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.10)' }}
     >
       <span className="flex items-center justify-center">
@@ -76,4 +76,3 @@ export default function ScrollToggle() {
     </button>
   );
 }
-

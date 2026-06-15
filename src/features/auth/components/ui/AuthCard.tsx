@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { motion } from 'framer-motion'
@@ -16,7 +16,7 @@ export function AuthCard({ children, className }: AuthCardProps) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       className={cn(
-        'w-full rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/60 px-6 py-8 shadow-[0_4px_12px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(249,115,22,0.05)] dark:border-amber-700/50 dark:bg-[#111622]/60 sm:px-8 sm:py-10',
+        'w-full rounded-2xl border border-gray-200 bg-white/60 px-6 py-8 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(249,115,22,0.05)] dark:border-gray-800 dark:bg-[#111622]/60 sm:px-8 sm:py-10',
         className
       )}
     >
@@ -24,4 +24,3 @@ export function AuthCard({ children, className }: AuthCardProps) {
     </motion.div>
   )
 }
-

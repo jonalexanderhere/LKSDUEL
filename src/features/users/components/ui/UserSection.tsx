@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import type { LucideIcon } from 'lucide-react'
@@ -27,10 +27,10 @@ export function UserSection({
   return (
     <UserCard className={className} hover={false}>
       {(title || action) && (
-        <div className="flex flex-col gap-3 border-b border-amber-900/50/80 px-5 py-4 dark:border-amber-700/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-b border-gray-200/80 px-5 py-4 dark:border-gray-800 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
             {Icon && (
-              <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-sm border-double border-4 border-amber-900/70 bg-amber-600 dark:bg-amber-700/10 text-amber-600 dark:text-amber-500 ring-1 ring-blue-500/20">
+              <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 ring-1 ring-blue-500/20">
                 <Icon className="h-4 w-4" />
               </div>
             )}
@@ -54,4 +54,3 @@ export function UserSection({
     </UserCard>
   )
 }
-

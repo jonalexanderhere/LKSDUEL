@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
@@ -92,7 +92,7 @@ export const EmailWithUsernameTooltip: React.FC<EmailWithUsernameTooltipProps> =
           href={`/user/${encodeURIComponent(username)}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="truncate text-sm text-amber-700 dark:text-amber-500 dark:text-blue-400 font-medium border-b border-dotted border-blue-400 hover:border-solid transition-all"
+          className="truncate text-sm text-blue-600 dark:text-blue-400 font-medium border-b border-dotted border-blue-400 hover:border-solid transition-all"
         >
           {email}
         </Link>
@@ -136,4 +136,3 @@ export const EmailWithUsernameTooltip: React.FC<EmailWithUsernameTooltipProps> =
     </div>
   )
 }
-

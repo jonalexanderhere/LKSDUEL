@@ -1,4 +1,4 @@
-﻿// React Imports
+// React Imports
 import React from "react";
 import { Lightbulb } from 'lucide-react';
 
@@ -20,7 +20,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ challenge, hintIdx = 0, open, o
   return (
     <Dialog open={open} onOpenChange={open => { if (!open) onClose(); }}>
       <DialogContent
-        className={DIALOG_CONTENT_CLASS + " rounded-md bg-[#232344] dark:bg-[#1f140f] border border-[#35355e] dark:border-gray-700 p-8 font-mono max-h-[90vh] overflow-y-auto scroll-hidden [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-white"}
+        className={DIALOG_CONTENT_CLASS + " rounded-md bg-[#232344] dark:bg-gray-900 border border-[#35355e] dark:border-gray-700 p-8 font-mono max-h-[90vh] overflow-y-auto scroll-hidden [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-white"}
         style={{ boxShadow: '0 8px 32px #0008', border: '1.5px solid #35355e' }}
       >
         <DialogHeader>
@@ -32,7 +32,7 @@ const HintDialog: React.FC<HintDialogProps> = ({ challenge, hintIdx = 0, open, o
           </DialogTitle>
         </DialogHeader>
         <div className="mt-4">
-          <div className="bg-[#35355e] dark:bg-[#1A100C] border border-[#35355e] dark:border-gray-700 rounded-sm p-4">
+          <div className="bg-[#35355e] dark:bg-gray-800 border border-[#35355e] dark:border-gray-700 rounded-lg p-4">
             {hints[hintIdx] ? (
               <div className="text-gray-200 dark:text-gray-100 leading-relaxed whitespace-pre-wrap">{hints[hintIdx]}</div>
             ) : (
@@ -46,4 +46,3 @@ const HintDialog: React.FC<HintDialogProps> = ({ challenge, hintIdx = 0, open, o
 };
 
 export default HintDialog;
-

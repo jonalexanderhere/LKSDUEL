@@ -26,7 +26,7 @@ export default function AdminMonitoringPage() {
     refresh,
   } = useAdminMonitoringData()
 
-  if (authLoading || isLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
+  if (authLoading || isLoading) return <Loader fullscreen color="text-blue-500" />
   if (!user || !isAdminUser) return null
 
   return (
@@ -62,7 +62,7 @@ export default function AdminMonitoringPage() {
             size="sm"
             onClick={refresh}
             disabled={isRefreshing}
-            className="flex items-center gap-2 border-gray-300 dark:border-gray-700 bg-[#fdf6e3] dark:bg-[#1A100C] text-gray-700 dark:text-gray-200 hover:bg-[#f4e4bc] dark:hover:bg-gray-700 shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+            className="flex items-center gap-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm"
           >
             <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
             {isRefreshing ? 'Refreshing...' : 'Refresh Logs'}
@@ -71,20 +71,20 @@ export default function AdminMonitoringPage() {
 
         {/* Stats Counter Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] shadow-[0_4px_12px_rgba(0,0,0,0.6)] border border-amber-900/50 dark:border-gray-700/60 hover:border-blue-500/30 transition-all duration-300">
+          <Card className="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700/60 hover:border-blue-500/30 transition-all duration-300">
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Total Solves</p>
                 <h3 className="text-3xl font-black text-amber-900 dark:text-amber-50 mt-1">{stats.totalSolves}</h3>
               </div>
-              <BarChart2 className="w-8 h-8 text-amber-600 dark:text-amber-500/80 dark:text-blue-400/80" />
+              <BarChart2 className="w-8 h-8 text-blue-500/80 dark:text-blue-400/80" />
             </CardContent>
           </Card>
 
-          <Card className={`shadow-[0_4px_12px_rgba(0,0,0,0.6)] border transition-all duration-300 ${
+          <Card className={`shadow-sm border transition-all duration-300 ${
             stats.flagSharingCount > 0 
               ? 'bg-gradient-to-br from-red-500/[0.02] to-red-600/[0.05] border-red-500/30 dark:border-red-950/60 dark:from-red-950/10 dark:to-red-950/5 shadow-[0_0_15px_rgba(239,68,68,0.05)]' 
-              : 'bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700'
+              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
           }`}>
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
@@ -97,10 +97,10 @@ export default function AdminMonitoringPage() {
             </CardContent>
           </Card>
 
-          <Card className={`shadow-[0_4px_12px_rgba(0,0,0,0.6)] border transition-all duration-300 ${
+          <Card className={`shadow-sm border transition-all duration-300 ${
             stats.aiAgentCount > 0 
               ? 'bg-gradient-to-br from-red-500/[0.02] to-red-600/[0.05] border-red-500/30 dark:border-red-950/60 dark:from-red-950/10 dark:to-red-950/5 shadow-[0_0_15px_rgba(239,68,68,0.05)]' 
-              : 'bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700'
+              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
           }`}>
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
@@ -113,7 +113,7 @@ export default function AdminMonitoringPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] shadow-[0_4px_12px_rgba(0,0,0,0.6)] border border-amber-900/50 dark:border-gray-700 hover:border-amber-500/30 transition-all duration-300">
+          <Card className="bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 hover:border-amber-500/30 transition-all duration-300">
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Oneshots</p>
@@ -125,8 +125,8 @@ export default function AdminMonitoringPage() {
         </div>
 
         {/* Filters and List Card */}
-        <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700 shadow-[0_6px_16px_rgba(0,0,0,0.8)]">
-          <CardHeader className="flex flex-col gap-4 border-b border-amber-900/30 dark:border-gray-700/60 pb-5">
+        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md">
+          <CardHeader className="flex flex-col gap-4 border-b border-gray-100 dark:border-gray-700/60 pb-5">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <CardTitle className="text-lg font-black uppercase tracking-wider text-gray-800 dark:text-gray-200">
                 Solve Activity Logs
@@ -140,7 +140,7 @@ export default function AdminMonitoringPage() {
                   placeholder="Search user, team, challenge..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 pr-4 py-1.5 w-full text-sm rounded-sm border border-gray-300 dark:border-gray-700 bg-[#f4e4bc] dark:bg-[#1f140f] text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500"
+                  className="pl-9 pr-4 py-1.5 w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500"
                 />
               </div>
             </div>
@@ -161,8 +161,8 @@ export default function AdminMonitoringPage() {
                     onClick={() => setFilterType(pill.type as any)}
                     className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all border ${
                       isActive
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-[0_4px_12px_rgba(0,0,0,0.6)]'
-                        : 'bg-[#f4e4bc] dark:bg-[#1f140f] border-amber-900/50 dark:border-gray-700 hover:bg-[#eaddb6] dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300'
+                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
+                        : 'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300'
                     }`}
                   >
                     {pill.label}
@@ -179,5 +179,4 @@ export default function AdminMonitoringPage() {
     </AdminPageShell>
   )
 }
-
 

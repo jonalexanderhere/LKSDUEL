@@ -55,7 +55,7 @@ export default function ChallengeListContent({
   if (initialLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader color="text-amber-600 dark:text-amber-500" />
+        <Loader color="text-blue-500" />
       </div>
     )
   }
@@ -63,7 +63,7 @@ export default function ChallengeListContent({
   if (eventMembershipLoading && eventMembershipEventId !== eventId) {
     return (
       <div className="flex justify-center py-10">
-        <Loader color="text-amber-600 dark:text-amber-500" />
+        <Loader color="text-blue-500" />
       </div>
     )
   }
@@ -121,7 +121,7 @@ export default function ChallengeListContent({
       {orderedKeys.map((category) => (
         <div key={category} className="mb-12">
           <div className="flex items-center gap-3 mb-6 border-b border-amber-900/50 pb-3">
-            <div className="w-1.5 h-6 bg-amber-700 dark:bg-amber-800 dark:bg-amber-600 dark:bg-amber-700 rounded-full" />
+            <div className="w-1.5 h-6 bg-blue-600 dark:bg-blue-500 rounded-full" />
             <h2 className="text-lg md:text-xl font-black uppercase tracking-tight text-amber-900 dark:text-amber-50">
               {eventId === 'all' && String(category).toLowerCase() === 'intro'
                 ? `Intro (${String(APP.eventMainLabel || 'Main')})`
@@ -148,5 +148,4 @@ export default function ChallengeListContent({
     </>
   )
 }
-
 

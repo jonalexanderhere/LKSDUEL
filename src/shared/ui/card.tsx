@@ -1,4 +1,4 @@
-﻿import * as React from "react"
+import * as React from "react"
 
 import { cn } from "@/shared/lib/utils"
 
@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-sm border-double border-4 border-amber-900/70 border bg-card text-card-foreground shadow",
+      "rounded-xl border bg-card text-card-foreground shadow",
       className
     )}
     {...props}
@@ -74,4 +74,3 @@ const CardFooter = React.forwardRef<
 CardFooter.displayName = "CardFooter"
 
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
-
