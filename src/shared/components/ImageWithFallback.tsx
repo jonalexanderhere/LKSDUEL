@@ -11,7 +11,7 @@ type Props = {
   fallbackBg?: string
 }
 
-export default function ImageWithFallback({ src, alt = '', size = 36, className = '', rounded = true, fallbackBg = 'bg-gray-200 dark:bg-gray-800' }: Props) {
+export default function ImageWithFallback({ src, alt = '', size = 36, className = '', rounded = false, fallbackBg = 'bg-black/60 dark:bg-black/60 border border-amber-500/50' }: Props) {
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -33,17 +33,17 @@ export default function ImageWithFallback({ src, alt = '', size = 36, className 
           alt={alt}
           onError={() => setError(true)}
           onLoad={() => setError(false)}
-          style={{ width: size, height: size, borderRadius: rounded ? '9999px' : undefined, objectFit: 'cover' }}
+          style={{ width: size, height: size, borderRadius: rounded ? '9999px' : '4px', objectFit: 'cover' }}
           // className="shadow"
           referrerPolicy="no-referrer"
         />
       ) : (
         <div
           className={`flex items-center justify-center overflow-hidden ${fallbackBg} text-gray-700 dark:text-gray-200 shadow`}
-          style={{ width: size, height: size, borderRadius: rounded ? 9999 : undefined }}
+          style={{ width: size, height: size, borderRadius: rounded ? 9999 : 4, border: '2px solid rgba(245,158,11,0.5)', boxShadow: 'inset 0 0 10px rgba(245,158,11,0.2)' }}
           aria-hidden
         >
-          {initials || <svg xmlns="http://www.w3.org/2000/svg" className="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" /><path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6" /></svg>}
+          {initials || <svg xmlns="http://www.w3.org/2000/svg" className="w-1/2 h-1/2 text-amber-500/70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" /><path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6" /></svg>}
         </div>
       )}
     </div>

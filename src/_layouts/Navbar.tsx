@@ -157,7 +157,7 @@ export default function Navbar() {
               </Link>
 
               {/* Desktop menu */}
-              <div className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex 2xl:gap-1.5">
+              <div className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex 2xl:gap-1.5 overflow-x-auto scroll-hidden pb-1" style={{ WebkitMaskImage: 'linear-gradient(to right, black 95%, transparent 100%)' }}>
                 {user && (
                   <Link
                     href="/challenges"
@@ -327,10 +327,10 @@ export default function Navbar() {
               <div className="hidden sm:flex items-center gap-2 2xl:gap-3">
                 {user ? (
                   <>
-                    <Link href="/profile" className="flex items-center gap-2 group" data-tour="navbar-profile">
-                      <ImageWithFallback src={avatarSrc} alt={user.username} size={36} className="rounded-full" />
+                    <Link href="/profile" className="flex flex-shrink-0 items-center gap-2 group" data-tour="navbar-profile">
+                      <ImageWithFallback src={avatarSrc} alt={user.username} size={36} className="rounded-sm border-2 border-amber-500/50" />
                       <span
-                        className={`hidden 2xl:block text-[15px] font-semibold ${theme === 'dark' ? 'text-white' : 'text-amber-100'} transition-all duration-150 group-hover:text-amber- dark:group-hover:text-amber- truncate whitespace-nowrap max-w-[180px]`}
+                        className={`hidden xl:block text-[14px] font-bold ${theme === 'dark' ? 'text-amber-100' : 'text-amber-900'} transition-all duration-150 group-hover:text-amber-400 truncate whitespace-nowrap max-w-[120px]`}
                         title={user.username}
                       >
                         {user.username}
@@ -338,7 +338,7 @@ export default function Navbar() {
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="hidden xl:block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150"
+                      className="hidden xl:block bg-gradient-to-b from-red-700 to-red-900 hover:from-red-600 hover:to-red-800 border-2 border-red-500/50 text-white px-3 py-1.5 rounded-sm text-[13px] font-bold shadow-[0_2px_8px_rgba(220,38,38,0.5)] transition-all duration-150 flex-shrink-0"
                     >
                       Logout
                     </button>
