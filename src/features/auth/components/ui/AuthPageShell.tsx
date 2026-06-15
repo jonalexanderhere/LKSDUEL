@@ -17,13 +17,13 @@ export function AuthPageShell({ children, className, contentClassName }: AuthPag
   return (
     <div
       className={cn(
-        'relative flex min-h-[calc(100vh-3.5rem)] flex-col overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100',
+        'relative flex min-h-[calc(100vh-3.5rem)] flex-col overflow-hidden bg-transparent text-gray-900 selection:bg-amber-500/30 dark:bg-transparent dark:text-amber-50',
         className
       )}
     >
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-indigo-600/5 blur-[120px]" />
+        <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-amber-500/5 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-yellow-600/5 blur-[120px]" />
       </div>
 
       {watermarkSrc && (

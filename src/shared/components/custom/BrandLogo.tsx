@@ -17,8 +17,8 @@ const BrandLogo = ({ name = "", className }: BrandLogoProps) => {
         if (upperName === "LKSDUEL" || upperName === "LKSDUEL") {
             return (
                 <span className={cn("font-black tracking-tighter uppercase", className)}>
-                    <span className="text-gray-900 dark:text-white">LKS</span>
-                    <span className="text-blue-600 dark:text-blue-400 drop-shadow-[0_0_8px_rgba(37,99,235,0.3)]">DUEL</span>
+                    <span className="text-gray-900 dark:text-amber-50">LKS</span>
+                    <span className="text-amber-600 dark:text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">DUEL</span>
                 </span>
             );
         }
@@ -26,15 +26,15 @@ const BrandLogo = ({ name = "", className }: BrandLogoProps) => {
         if (upperName.includes("LKS")) {
             return (
                 <span className={cn("font-black tracking-tighter uppercase flex items-center gap-1.5", className)}>
-                    <span className="text-gray-900 dark:text-white">LKS</span>
-                    <span className="text-blue-600 dark:text-blue-400 drop-shadow-[0_0_8px_rgba(37,99,235,0.3)]">DUEL</span>
+                    <span className="text-gray-900 dark:text-amber-50">LKS</span>
+                    <span className="text-amber-600 dark:text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">DUEL</span>
                 </span>
             );
         }
     }
 
     return (
-        <span className={cn("text-blue-600 dark:text-blue-500 font-black tracking-tighter uppercase", className)}>
+        <span className={cn("text-amber-600 dark:text-amber-500 font-black tracking-tighter uppercase", className)}>
             {name}
         </span>
     );
