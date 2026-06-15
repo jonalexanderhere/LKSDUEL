@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Loader } from '@/shared/components'
 import { Card, CardContent } from '@/shared/ui'
@@ -22,7 +22,7 @@ export default function AdminOverviewPage() {
     refreshStats,
   } = useAdminOverviewData()
 
-  if (authLoading || isLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading || isLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user) return null
 
   return (
@@ -73,7 +73,7 @@ export default function AdminOverviewPage() {
         </div>
 
 
-        <Card className="bg-white dark:bg-gray-800 pt-5">
+        <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] pt-5">
           <CardContent>
             <StatsGraph
               data={activityData}
@@ -88,3 +88,4 @@ export default function AdminOverviewPage() {
     </AdminPageShell>
   )
 }
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import { motion } from 'framer-motion'
@@ -26,7 +26,7 @@ export default function EmptyState({
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 text-gray-400 dark:text-gray-500"
+        className="w-16 h-16 sm:w-20 sm:h-20 bg-[#eaddb6] dark:bg-[#1A100C] rounded-full flex items-center justify-center mb-4 text-gray-400 dark:text-gray-500"
       >
         <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
           {icon}
@@ -63,3 +63,4 @@ export default function EmptyState({
     </div>
   )
 }
+

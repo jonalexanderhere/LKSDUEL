@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { Cinzel } from 'next/font/google'
 import { Settings } from 'lucide-react'
@@ -95,7 +95,7 @@ export default async function RootLayout({
                 <EventProvider>
                   <SubChallengesProvider>
                     <LogsProvider>
-                      <div className="min-h-screen relative overflow-hidden bg-gray-50 dark:bg-[#110A08] text-gray-900 dark:text-amber-50">
+                      <div className="min-h-screen relative overflow-hidden bg-[#f4e4bc] dark:bg-[#110A08] text-gray-900 dark:text-amber-50">
                         {/* Global Fantasy Background */}
                         <div className="fixed inset-0 z-[-1] pointer-events-none hidden dark:block opacity-10 bg-[url('/fantasy-bg.png')] bg-cover bg-center bg-no-repeat mix-blend-overlay bg-fixed"></div>
                         <Navbar />
@@ -115,3 +115,4 @@ export default async function RootLayout({
     </html>
   )
 }
+

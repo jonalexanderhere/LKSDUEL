@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import APP from '@/config'
@@ -120,7 +120,7 @@ export default function EventSelect({
     })
   }, [events, sortMode, nowMs, getEventLabel])
 
-  const baseClassName = 'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100'
+  const baseClassName = 'w-full px-3 py-2 text-sm border border-amber-900/50 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 bg-[#fdf6e3] dark:bg-[#1f140f] border-double border-4 border-amber-900/70 text-gray-900 dark:text-gray-100'
   const resolvedClassName = className ? `${baseClassName} ${className}` : baseClassName
 
   return (
@@ -132,7 +132,7 @@ export default function EventSelect({
     >
       {!isValueKnown && (
         <option value={value} disabled>
-          Event not found — select again
+          Event not found â€” select again
         </option>
       )}
       {showAll && <option value={allValue}>{allLabel}</option>}
@@ -145,3 +145,4 @@ export default function EventSelect({
     </select>
   )
 }
+

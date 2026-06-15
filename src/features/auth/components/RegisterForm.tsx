@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useMemo, useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
@@ -83,7 +83,7 @@ export default function RegisterForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword((value) => !value)}
-                className="rounded-lg p-1 text-gray-400 transition-colors hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                className="rounded-sm p-1 text-gray-400 transition-colors hover:text-amber-600 dark:text-amber-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -107,7 +107,7 @@ export default function RegisterForm() {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword((value) => !value)}
-                className="rounded-lg p-1 text-gray-400 transition-colors hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                className="rounded-sm p-1 text-gray-400 transition-colors hover:text-amber-600 dark:text-amber-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                 aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
               >
                 {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -158,3 +158,4 @@ export default function RegisterForm() {
     </AuthCard>
   )
 }
+

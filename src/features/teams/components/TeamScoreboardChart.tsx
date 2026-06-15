@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+﻿import dynamic from 'next/dynamic'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
 import { Skeleton } from '@/shared/ui/skeleton'
 import { TeamProgressSeries } from '../types'
@@ -42,7 +42,7 @@ const TeamScoreboardChart: React.FC<TeamScoreboardChartProps> = ({ series, isDar
   })
 
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
       <CardHeader>
         <CardTitle className="text-lg font-semibold text-center text-gray-900 dark:text-white">
           Top 10 Teams
@@ -93,3 +93,4 @@ const TeamScoreboardChart: React.FC<TeamScoreboardChartProps> = ({ series, isDar
 }
 
 export default TeamScoreboardChart
+

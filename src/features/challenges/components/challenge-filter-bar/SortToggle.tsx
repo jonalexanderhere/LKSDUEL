@@ -20,7 +20,7 @@ export default function SortToggle({ sortMode, onToggle }: SortToggleProps) {
       aria-label="Toggle challenge sorting"
       className={`inline-flex items-center justify-center gap-2 px-3 py-2 text-sm border rounded transition ${
         isDefaultSort
-          ? 'border-gray-200 dark:border-gray-700 bg-[#fdf6e3] dark:bg-[#2c1e16] text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
+          ? 'border-amber-900/50 dark:border-gray-700 bg-[#fdf6e3] dark:bg-[#2c1e16] text-gray-700 dark:text-gray-200 hover:bg-[#f4e4bc] dark:hover:bg-gray-800'
           : 'border-blue-400 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-950/40 dark:text-blue-200 hover:bg-blue-100 dark:hover:bg-blue-950/60'
       }`}
     >
@@ -28,4 +28,5 @@ export default function SortToggle({ sortMode, onToggle }: SortToggleProps) {
     </button>
   )
 }
+
 

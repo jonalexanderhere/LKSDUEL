@@ -36,7 +36,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
             <MarkdownRenderer content={formData.description || '*No description provided*'} />
           </div>
         ) : (
-          <Textarea required rows={5} value={formData.description} onChange={e => onChange({ ...formData, description: e.target.value })} className="transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm scroll-hidden" />
+          <Textarea required rows={5} value={formData.description} onChange={e => onChange({ ...formData, description: e.target.value })} className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)] scroll-hidden" />
         )}
       </div>
       <div className="md:col-span-2">
@@ -47,7 +47,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
             value={formData.flag}
             onChange={e => onChange({ ...formData, flag: e.target.value })}
             placeholder={editing ? 'Leave blank to keep current' : 'ctf{...}'}
-            className="transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+            className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
           />
           <div className="flex items-center gap-1 border-l pl-2 dark:border-gray-700">
             <Button
@@ -58,7 +58,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
               className={cn(
                 "h-8 px-2 flex items-center gap-1.5 transition-all rounded-md",
                 formData.flag_placeholder
-                  ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800"
+                  ? "bg-blue-50 text-amber-700 dark:text-amber-500 dark:bg-blue-900/30 dark:text-blue-400 border border-blue-200 dark:border-blue-800"
                   : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 border border-transparent"
               )}
               title={formData.flag_placeholder ? "Using Flag Placeholder" : "Using Static Flag"}
@@ -96,7 +96,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
                 const next = [...formData.services];
                 next[idx] = e.target.value;
                 onChange({ ...formData, services: next });
-              }} placeholder="service-name" className="transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" />
+              }} placeholder="service-name" className="transition-colors bg-[#f4e4bc] dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]" />
               <Button type="button" variant="ghost" onClick={() => onChange({ ...formData, services: formData.services.filter((_, i) => i !== idx) })}>âœ•</Button>
             </div>
           ))}
@@ -105,4 +105,5 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
     </div>
   )
 }
+
 

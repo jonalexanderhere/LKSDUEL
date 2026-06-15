@@ -75,7 +75,7 @@ export default function ChallengeFilterControls({
           value={filters.search}
           onChange={(event) => onFilterChange({ ...filters, search: event.target.value })}
           placeholder="Search challenge..."
-          className={`w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 ${filters.search && String(filters.search).trim() !== '' ? 'bg-blue-600 text-white dark:bg-blue-700' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] text-amber-900 dark:text-amber-50'} transition ${dirtyState.isSearchDirty ? 'ring-2' : ''}`}
+          className={`w-full px-3 py-2 text-sm border border-amber-900/50 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 ${filters.search && String(filters.search).trim() !== '' ? 'bg-amber-700 dark:bg-amber-800 text-white dark:bg-blue-700' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] text-amber-900 dark:text-amber-50'} transition ${dirtyState.isSearchDirty ? 'ring-2' : ''}`}
         />
       </div>
 
@@ -129,10 +129,10 @@ export default function ChallengeFilterControls({
           title={featureButtonTitle}
           aria-label={featureButtonTitle}
           className={`inline-flex h-9 w-9 items-center justify-center rounded border text-[11px] font-bold transition ${featureMode === 'N'
-            ? 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
+            ? 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-amber-900/50 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-[#f4e4bc] dark:hover:bg-gray-800'
             : featureMode === 'T'
-              ? 'bg-blue-500 border-blue-500 text-white'
-              : 'bg-blue-500 border-blue-500 text-white'
+              ? 'bg-amber-600 dark:bg-amber-700 border-blue-500 text-white'
+              : 'bg-amber-600 dark:bg-amber-700 border-blue-500 text-white'
             }`}
         >
           {featureMode}
@@ -143,7 +143,7 @@ export default function ChallengeFilterControls({
         <button
           type="button"
           onClick={onClear}
-          className={`w-full px-3 py-2 text-sm rounded transition ${dirtyState.anyFilterDirty ? 'bg-blue-600 text-white hover:bg-blue-700' : 'text-blue-600 dark:text-blue-300 bg-blue-50 dark:bg-blue-900 hover:bg-blue-100 dark:hover:bg-blue-800'}`}
+          className={`w-full px-3 py-2 text-sm rounded transition ${dirtyState.anyFilterDirty ? 'bg-amber-700 dark:bg-amber-800 text-white hover:bg-blue-700' : 'text-amber-700 dark:text-amber-500 dark:text-blue-300 bg-blue-50 dark:bg-blue-900 hover:bg-blue-100 dark:hover:bg-blue-800'}`}
           aria-label="Clear filters"
         >
           Clear
@@ -167,4 +167,5 @@ export default function ChallengeFilterControls({
     </form>
   )
 }
+
 

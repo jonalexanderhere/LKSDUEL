@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCircle2, ListChecks, Target, Sparkles } from 'lucide-react'
@@ -35,7 +35,7 @@ export default function SolvedChallenges({
         size="sm"
         variant="outline"
         onClick={onShowUnsolved}
-        className="rounded-full border-blue-500/30 bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 dark:text-blue-400"
+        className="rounded-full border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 text-amber-700 dark:text-amber-500 hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
       >
         <Target className="h-3.5 w-3.5" />
         Show Unsolved
@@ -45,7 +45,7 @@ export default function SolvedChallenges({
           size="sm"
           variant="outline"
           onClick={() => setShowAllModal(true)}
-          className="rounded-full border-blue-500/30 bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 dark:text-blue-400"
+          className="rounded-full border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 text-amber-700 dark:text-amber-500 hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
         >
           <ListChecks className="h-3.5 w-3.5" />
           Show All
@@ -100,7 +100,7 @@ export default function SolvedChallenges({
                 setShowAllModal(false)
                 onShowUnsolved()
               }}
-              className="rounded-full border-blue-500/30 bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 dark:text-blue-400"
+              className="rounded-full border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 text-amber-700 dark:text-amber-500 hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
             >
               <Target className="h-3.5 w-3.5" />
               Show Unsolved
@@ -133,7 +133,7 @@ export default function SolvedChallenges({
             type="button"
             variant="outline"
             onClick={() => setShowAllModal(false)}
-            className="border-blue-500/30 bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 dark:text-blue-400"
+            className="border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 text-amber-700 dark:text-amber-500 hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
           >
             Close
           </Button>
@@ -161,7 +161,7 @@ function ChallengeRow({
       <ProfileChallengeListItem
         title={challenge.title}
         titleBadge={firstBlood ? (
-          <span className="inline-flex items-center gap-1 rounded-full border border-blue-500/20 bg-blue-500/10 px-2 py-0.5 text-[11px] font-bold text-blue-600 dark:text-blue-400">
+          <span className="inline-flex items-center gap-1 rounded-full border border-blue-500/20 bg-amber-600 dark:bg-amber-700/10 px-2 py-0.5 text-[11px] font-bold text-amber-700 dark:text-amber-500 dark:text-blue-400">
             <Sparkles className="h-3 w-3" />
             First Blood
           </span>
@@ -172,7 +172,7 @@ function ChallengeRow({
           </p>
         }
         trailing={(
-          <span className="rounded-full bg-blue-500/10 px-3 py-1 text-sm font-bold text-blue-600 dark:text-blue-400">
+          <span className="rounded-full bg-amber-600 dark:bg-amber-700/10 px-3 py-1 text-sm font-bold text-amber-700 dark:text-amber-500 dark:text-blue-400">
             +{challenge.points}
           </span>
         )}
@@ -180,3 +180,4 @@ function ChallengeRow({
     </motion.div>
   )
 }
+

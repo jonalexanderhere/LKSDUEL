@@ -1,4 +1,4 @@
-import type React from 'react'
+﻿import type React from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
 
@@ -20,13 +20,13 @@ export function UserStat({ icon: Icon, label, value, detail, onClick, className,
       type={onClick ? 'button' : undefined}
       onClick={onClick}
       className={cn(
-        'group flex min-h-[96px] w-full items-center gap-4 rounded-xl border border-gray-200 bg-white/40 p-4 text-left backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/50 hover:bg-white/80 hover:shadow-[0_10px_20px_rgba(59,130,246,0.1)] dark:border-white/10 dark:bg-gray-900/40 dark:hover:bg-gray-800/80',
+        'group flex min-h-[96px] w-full items-center gap-4 rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/40 p-4 text-left backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/50 hover:bg-[#fdf6e3]/80 hover:shadow-[0_10px_20px_rgba(59,130,246,0.1)] dark:border-white/10 dark:bg-[#1f140f]/40 dark:hover:bg-gray-800/80',
         onClick && 'cursor-pointer',
         className
       )}
     >
       <div className={cn(
-        "flex h-11 w-11 flex-none items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 ring-1 ring-blue-500/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 dark:text-blue-400",
+        "flex h-11 w-11 flex-none items-center justify-center rounded-sm border-double border-4 border-amber-900/70 bg-amber-600 dark:bg-amber-700/10 text-amber-600 dark:text-amber-500 ring-1 ring-blue-500/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 dark:text-blue-400",
         iconClassName
       )}>
         <Icon className="h-5 w-5" />
@@ -47,3 +47,4 @@ export function UserStat({ icon: Icon, label, value, detail, onClick, className,
     </Component>
   )
 }
+

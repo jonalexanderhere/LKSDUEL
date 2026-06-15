@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
@@ -15,5 +15,6 @@ export default function NotFound() {
     }
   }, [user, loading, router])
 
-  return <Loader fullscreen color="text-blue-500" />
+  return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
 }
+

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 // React Imports
 import { motion } from "framer-motion"
@@ -102,7 +102,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-5 py-2 rounded-none border-y-2 border-amber-500/40 bg-black/40 backdrop-blur-md mb-8"
             >
               <Gem className="w-4 h-4 text-amber-500 animate-pulse" />
-              <span className="text-sm uppercase tracking-[0.2em] font-bold text-amber-200/90 drop-shadow-md">
+              <span className="text-sm uppercase tracking-[0.2em] font-bold text-amber-200/90 drop-shadow-[0_6px_16px_rgba(0,0,0,0.8)]">
                 The Realm of {APP.shortName}
               </span>
             </motion.div>
@@ -252,3 +252,4 @@ export default function Home() {
     </div>
   )
 }
+

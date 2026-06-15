@@ -72,7 +72,7 @@ export default function EventFilterPills({
           <button
             type="button"
             onClick={() => onEventChange('all')}
-            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition ${selectedEventId === 'all' ? 'bg-blue-600 border-blue-600 text-white' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'} ${!isEventDirty && anyFilterDirty ? 'opacity-90' : ''}`}
+            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-sm border transition ${selectedEventId === 'all' ? 'bg-amber-700 dark:bg-amber-800 border-blue-600 text-white' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-amber-900/50 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-[#f4e4bc] dark:hover:bg-gray-800'} ${!isEventDirty && anyFilterDirty ? 'opacity-90' : ''}`}
           >
             All
           </button>
@@ -81,7 +81,7 @@ export default function EventFilterPills({
           <button
             type="button"
             onClick={() => onEventChange(null)}
-            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition ${!selectedEventId ? 'bg-blue-600 border-blue-600 text-white' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-sm border transition ${!selectedEventId ? 'bg-amber-700 dark:bg-amber-800 border-blue-600 text-white' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-amber-900/50 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-[#f4e4bc] dark:hover:bg-gray-800'}`}
           >
             {mainLabel}
           </button>
@@ -102,12 +102,12 @@ export default function EventFilterPills({
               type="button"
               onClick={() => onEventChange(event.id)}
               className={`
-                shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition flex items-center gap-1
+                shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-sm border transition flex items-center gap-1
                 ${isEndedButAlwaysVisible && !isSelected ? 'text-[10px] opacity-40 border-dashed' : ''}
                 ${isSelected
-                  ? 'bg-blue-600 border-blue-600 text-white'
-                  : (`bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700
-                        hover:bg-gray-50 dark:hover:bg-gray-800` + (showEventState ? ` ${stateStyles[state]}` : ''))
+                  ? 'bg-amber-700 dark:bg-amber-800 border-blue-600 text-white'
+                  : (`bg-[#fdf6e3] dark:bg-[#2c1e16] border-amber-900/50 dark:border-gray-700
+                        hover:bg-[#f4e4bc] dark:hover:bg-gray-800` + (showEventState ? ` ${stateStyles[state]}` : ''))
                 }
               `}
               title={timing || undefined}
@@ -149,4 +149,5 @@ export default function EventFilterPills({
     </div>
   )
 }
+
 

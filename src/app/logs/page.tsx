@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 // React Imports
 import { Suspense, useState, useEffect } from "react";
@@ -53,7 +53,7 @@ export default function LogsPage() {
   }, [tabType, user, selectedEvent, markAllRead])
 
   // if (authLoading) return null
-  if (authLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user) return null;
 
   return (
@@ -78,7 +78,7 @@ export default function LogsPage() {
         </div>
 
         <div>
-          <span className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
+          <span className="flex gap-2 border-b border-amber-900/50 dark:border-gray-700">
             <button
               onClick={() => handleTabChange('challenges')}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${tabType === 'challenges'
@@ -107,7 +107,7 @@ export default function LogsPage() {
             <button
               onClick={() => handleTabChange('solves')}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${tabType === 'solves'
-                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                ? 'border-blue-500 text-amber-700 dark:text-amber-500 dark:text-blue-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
@@ -146,3 +146,4 @@ export default function LogsPage() {
     </main>
   );
 }
+

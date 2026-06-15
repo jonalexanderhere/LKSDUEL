@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import React, { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -68,7 +68,7 @@ function CodeBlockWrapper({ children, isDark = true }: { children: React.ReactNo
             onClick={handleCopy}
             className={`p-1.5 rounded transition-colors ${isDark
               ? 'bg-gray-800 hover:bg-gray-700 text-blue-300'
-              : 'bg-gray-200 hover:bg-gray-300 text-blue-600'
+              : 'bg-gray-200 hover:bg-gray-300 text-amber-700 dark:text-amber-500'
               }`}
             title={copied ? 'Copied!' : 'Copy'}
           >
@@ -79,7 +79,7 @@ function CodeBlockWrapper({ children, isDark = true }: { children: React.ReactNo
             onClick={() => setIsWrapped(!isWrapped)}
             className={`p-1.5 rounded transition-colors ${isDark
               ? 'bg-gray-800 hover:bg-gray-700 text-blue-300'
-              : 'bg-gray-200 hover:bg-gray-300 text-blue-600'
+              : 'bg-gray-200 hover:bg-gray-300 text-amber-700 dark:text-amber-500'
               }`}
             title={isWrapped ? 'Horizontal scroll' : 'Wrap text'}
           >
@@ -133,7 +133,7 @@ function BlockquoteWrapper({ children, isDark = true }: { children: React.ReactN
             className={`p-1.5 rounded transition-colors ${
               isDark
                 ? 'bg-gray-800 hover:bg-gray-700 text-blue-300'
-                : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+                : 'bg-blue-100 hover:bg-blue-200 text-amber-700 dark:text-amber-500'
             }`}
             title={copied ? 'Copied!' : 'Copy'}
           >
@@ -144,7 +144,7 @@ function BlockquoteWrapper({ children, isDark = true }: { children: React.ReactN
             onClick={() => setIsWrapped(!isWrapped)}
             className={`p-1.5 rounded transition-colors ${isDark
               ? 'bg-gray-800 hover:bg-gray-700 text-blue-300'
-              : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+              : 'bg-blue-100 hover:bg-blue-200 text-amber-700 dark:text-amber-500'
               }`}
             title={isWrapped ? 'Horizontal scroll' : 'Wrap text'}
           >
@@ -200,7 +200,7 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkBreaks]}
           components={{
-            h1: ({ ...props }) => <h1 className="text-lg font-bold text-blue-400 border-b border-gray-800 pb-1 mb-4" {...props} />,
+            h1: ({ ...props }) => <h1 className="text-lg font-bold text-blue-400 border-b border-amber-700/50 pb-1 mb-4" {...props} />,
             h2: ({ ...props }) => <h2 className="text-base font-semibold text-blue-300 mb-4" {...props} />,
             h3: ({ ...props }) => <h3 className="text-sm font-semibold text-blue-200 mb-4" {...props} />,
             p: ({ ...props }) => <p className="mb-5 leading-relaxed" {...props} />,
@@ -227,7 +227,7 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
                 </code>
               ) : (
                 <CodeBlockWrapper isDark={false}>
-                  <pre className="bg-gray-900 p-3 rounded-lg text-[10px] leading-snug font-mono max-w-full border border-gray-800 overflow-x-auto mb-6">
+                  <pre className="bg-gray-900 p-3 rounded-sm text-[10px] leading-snug font-mono max-w-full border border-amber-700/50 overflow-x-auto mb-6">
                     <code className="text-gray-200" {...props}>
                       {children}
                     </code>
@@ -236,7 +236,7 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
               ),
             blockquote: ({ ...props }) => (
               <blockquote
-                className="border-l-4 border-blue-500/50 bg-blue-500/5 pl-3 py-1.5 text-[11px] opacity-90 mb-4 rounded-r-sm"
+                className="border-l-4 border-blue-500/50 bg-amber-600 dark:bg-amber-700/5 pl-3 py-1.5 text-[11px] opacity-90 mb-4 rounded-r-sm"
                 {...props}
               />
             ),
@@ -254,7 +254,7 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
         remarkPlugins={[remarkGfm, remarkBreaks]}
         components={{
           h1: ({ ...props }) => (
-            <h1 className="text-2xl font-bold mb-4 text-blue-400 border-b border-gray-800 pb-2 tracking-tight" {...props} />
+            <h1 className="text-2xl font-bold mb-4 text-blue-400 border-b border-amber-700/50 pb-2 tracking-tight" {...props} />
           ),
           h2: ({ ...props }) => <h2 className="text-xl font-semibold mb-4 text-blue-300 tracking-tight" {...props} />,
           h3: ({ ...props }) => <h3 className="text-lg font-semibold mb-4 text-blue-200" {...props} />,
@@ -269,7 +269,7 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
               </code>
             ) : (
               <CodeBlockWrapper isDark>
-                <pre className="bg-gray-900 p-4 rounded-xl text-sm font-mono max-w-full border border-gray-800 shadow-sm">
+                <pre className="bg-gray-900 p-4 rounded-sm border-double border-4 border-amber-900/70 text-sm font-mono max-w-full border border-amber-700/50 shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
                   <code className="max-w-full text-gray-200 leading-relaxed" {...props}>{children}</code>
                 </pre>
               </CodeBlockWrapper>
@@ -283,7 +283,7 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
                   {...props}
                   alt=""
                   loading="lazy"
-                  className="max-w-full h-auto rounded-lg border border-gray-800 cursor-zoom-in"
+                  className="max-w-full h-auto rounded-sm border border-amber-700/50 cursor-zoom-in"
                 />
               </Zoom>
             </div>
@@ -291,12 +291,12 @@ export function MarkdownRenderer({ content, className = '', onCommentsExtracted,
           blockquote: ({ ...props }) => (
             <BlockquoteWrapper isDark>
               <blockquote
-                className="border-l-4 border-blue-400 bg-blue-500/5 pl-4 pr-2 py-2 text-gray-300 rounded-md italic leading-relaxed"
+                className="border-l-4 border-blue-400 bg-amber-600 dark:bg-amber-700/5 pl-4 pr-2 py-2 text-gray-300 rounded-md italic leading-relaxed"
                 {...props}
               />
             </BlockquoteWrapper>
           ),
-          hr: () => <hr className="mb-6 border-gray-800" />,
+          hr: () => <hr className="mb-6 border-amber-700/50" />,
         }}
       >
         {sanitizedContent}
@@ -325,15 +325,15 @@ export function RulesMarkdownRenderer({ content, className = '' }: MarkdownRende
           li: ({ ...props }) => <li className="ml-6 list-disc mb-1" {...props} />,
           strong: ({ ...props }) => <strong className="font-bold text-gray-900 dark:text-blue-400" {...props} />,
           em: ({ ...props }) => <em className="italic text-gray-700 dark:text-gray-300" {...props} />,
-          a: ({ ...props }) => <a className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline font-medium transition-colors" target="_blank" rel="noopener noreferrer" {...props} />,
+          a: ({ ...props }) => <a className="text-amber-700 dark:text-amber-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline font-medium transition-colors" target="_blank" rel="noopener noreferrer" {...props} />,
           code: ({ inline, children, ...props }: any) =>
             inline ? (
-              <code className="bg-blue-100 dark:bg-gray-800 px-2 py-1 rounded text-xs font-mono text-blue-800 dark:text-blue-300 font-semibold" {...props}>
+              <code className="bg-blue-100 dark:bg-[#1A100C] px-2 py-1 rounded text-xs font-mono text-blue-800 dark:text-blue-300 font-semibold" {...props}>
                 {children}
               </code>
             ) : (
               <CodeBlockWrapper isDark={false}>
-                <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg text-sm font-mono max-w-full border border-gray-300 dark:border-gray-700">
+                <pre className="bg-[#eaddb6] dark:bg-[#1f140f] p-4 rounded-sm text-sm font-mono max-w-full border border-gray-300 dark:border-gray-700">
                   <code className="text-gray-900 dark:text-gray-100" {...props}>{children}</code>
                 </pre>
               </CodeBlockWrapper>
@@ -348,3 +348,4 @@ export function RulesMarkdownRenderer({ content, className = '' }: MarkdownRende
 
 // Backwards-compatible default export for existing imports
 export default MarkdownRenderer
+

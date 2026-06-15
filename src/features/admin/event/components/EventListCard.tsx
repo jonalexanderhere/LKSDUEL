@@ -14,7 +14,7 @@ interface EventListCardProps {
 
 const EventListCard: React.FC<EventListCardProps> = ({ events, onAdd, onEdit, onDelete }) => {
   return (
-    <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-amber-900 dark:text-amber-50">Event List</CardTitle>
         <Button onClick={onAdd} className="bg-primary-600 text-white hover:bg-primary-700">
@@ -31,7 +31,7 @@ const EventListCard: React.FC<EventListCardProps> = ({ events, onAdd, onEdit, on
           />
         ) : (
           <motion.div
-            className="divide-y border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden"
+            className="divide-y border border-amber-900/50 dark:border-gray-700 rounded-md overflow-hidden"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
@@ -71,4 +71,5 @@ const EventListCard: React.FC<EventListCardProps> = ({ events, onAdd, onEdit, on
 }
 
 export default EventListCard
+
 

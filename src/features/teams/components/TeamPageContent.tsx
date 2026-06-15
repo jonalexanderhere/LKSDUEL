@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { InfoIcon, Users, Crown, ChartColumnDecreasing, Copy, Wrench, LogOut, CheckCircle2, Sparkles, Coins, UserX, Shield, Key, Lock } from 'lucide-react'
@@ -38,10 +38,10 @@ export default function TeamPageContent({
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <InfoIcon size={18} className="text-blue-500" /> Team Info
+              <InfoIcon size={18} className="text-amber-600 dark:text-amber-500" /> Team Info
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -51,7 +51,7 @@ export default function TeamPageContent({
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">{team.name}</div>
               </div>
             </div>
-            <div className="pt-2 space-y-3 border-t border-gray-100 dark:border-gray-700 mt-2">
+            <div className="pt-2 space-y-3 border-t border-amber-900/30 dark:border-gray-700 mt-2">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-500 dark:text-gray-400 flex items-center gap-2">
                   <Shield size={14} /> Team ID
@@ -62,15 +62,15 @@ export default function TeamPageContent({
           </CardContent>
         </Card>
 
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <ChartColumnDecreasing size={18} className="text-blue-500" /> Team Stats
+              <ChartColumnDecreasing size={18} className="text-amber-600 dark:text-amber-500" /> Team Stats
             </CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex items-center space-x-3">
-              <div className="w-11 h-11 bg-gradient-to-br from-indigo-200 to-indigo-400 dark:from-indigo-900 dark:to-indigo-700 rounded-xl flex items-center justify-center shadow-sm ring-1 ring-indigo-300/60 dark:ring-indigo-800/60">
+              <div className="w-11 h-11 bg-gradient-to-br from-indigo-200 to-indigo-400 dark:from-indigo-900 dark:to-indigo-700 rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.6)] ring-1 ring-indigo-300/60 dark:ring-indigo-800/60">
                 <CheckCircle2 className="h-5 w-5 text-indigo-800 dark:text-indigo-200" />
               </div>
               <div>
@@ -79,7 +79,7 @@ export default function TeamPageContent({
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="w-11 h-11 bg-gradient-to-br from-green-200 to-green-400 dark:from-green-900 dark:to-green-700 rounded-xl flex items-center justify-center shadow-sm ring-1 ring-green-300/60 dark:ring-green-800/60">
+              <div className="w-11 h-11 bg-gradient-to-br from-green-200 to-green-400 dark:from-green-900 dark:to-green-700 rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.6)] ring-1 ring-green-300/60 dark:ring-green-800/60">
                 <Sparkles className="h-5 w-5 text-green-800 dark:text-green-200" />
               </div>
               <div>
@@ -88,7 +88,7 @@ export default function TeamPageContent({
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="w-11 h-11 bg-gradient-to-br from-blue-200 to-blue-400 dark:from-blue-900 dark:to-blue-700 rounded-xl flex items-center justify-center shadow-sm ring-1 ring-blue-300/60 dark:ring-blue-800/60">
+              <div className="w-11 h-11 bg-gradient-to-br from-blue-200 to-blue-400 dark:from-blue-900 dark:to-blue-700 rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.6)] ring-1 ring-blue-300/60 dark:ring-blue-800/60">
                 <Coins className="h-5 w-5 text-blue-800 dark:text-blue-200" />
               </div>
               <div>
@@ -101,7 +101,7 @@ export default function TeamPageContent({
       </div>
 
       {showManageActions && (
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <Wrench size={18} className="text-red-500" /> Quick Actions
@@ -117,10 +117,10 @@ export default function TeamPageContent({
         </Card>
       )}
 
-      <Card className="bg-white dark:bg-gray-800">
+      <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-            <Users size={18} className="text-blue-500" /> Members ({members.length} / 3)
+            <Users size={18} className="text-amber-600 dark:text-amber-500" /> Members ({members.length} / 3)
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-1">
@@ -133,32 +133,32 @@ export default function TeamPageContent({
             />
           ) : (
             members.map((m) => (
-              <div key={m.user_id} className="flex items-start justify-between gap-4 border-b border-gray-100 dark:border-gray-700 py-3 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors rounded px-2">
+              <div key={m.user_id} className="flex items-start justify-between gap-4 border-b border-amber-900/30 dark:border-gray-700 py-3 last:border-0 hover:bg-[#f4e4bc] dark:hover:bg-gray-700/30 transition-colors rounded px-2">
                 <div className="flex items-start gap-2 min-w-0">
                   <div className="space-y-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       {m.role === 'captain' ? <Crown size={16} className="text-yellow-500 dark:text-yellow-400" /> : <Users size={16} className="text-gray-400" />}
                       <Link
                         href={`/user/${encodeURIComponent(m.username)}`}
-                        className="text-sm font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 hover:underline transition-colors truncate max-w-[220px]"
+                        className="text-sm font-medium text-gray-900 dark:text-white hover:text-amber-700 dark:text-amber-500 dark:hover:text-blue-400 hover:underline transition-colors truncate max-w-[220px]"
                       >
                         {m.username}
                       </Link>
                       <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${m.role === 'captain'
                         ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
+                        : 'bg-[#eaddb6] dark:bg-gray-700 text-gray-600 dark:text-gray-300'
                         }`}>
                         {m.role}
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 text-xs">
-                      <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+                      <span className="px-2 py-1 rounded bg-[#eaddb6] dark:bg-gray-700 text-gray-700 dark:text-gray-200">
                         Solves <span className="font-semibold text-gray-900 dark:text-white">{m.first_solve_count ?? 0}</span>
                       </span>
-                      <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+                      <span className="px-2 py-1 rounded bg-[#eaddb6] dark:bg-gray-700 text-gray-700 dark:text-gray-200">
                         Points <span className="font-semibold text-gray-900 dark:text-white">{m.first_solve_score ?? 0}</span>
                       </span>
-                      <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+                      <span className="px-2 py-1 rounded bg-[#eaddb6] dark:bg-gray-700 text-gray-700 dark:text-gray-200">
                         Total Points <span className="font-semibold text-gray-900 dark:text-white">{m.solo_score ?? 0}</span>
                       </span>
                     </div>
@@ -196,3 +196,4 @@ export default function TeamPageContent({
     </div>
   )
 }
+

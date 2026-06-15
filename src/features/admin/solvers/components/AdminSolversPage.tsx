@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Loader } from '@/shared/components'
 import DeleteSolverConfirmDialog from './DeleteSolverConfirmDialog'
@@ -32,7 +32,7 @@ export default function AdminSolversPage() {
     doDelete,
   } = useAdminSolversData()
 
-  if (authLoading || isLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading || isLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user || !isAdminUser) return null
 
   const clearPendingDelete = () => {
@@ -69,3 +69,4 @@ export default function AdminSolversPage() {
     </>
   )
 }
+

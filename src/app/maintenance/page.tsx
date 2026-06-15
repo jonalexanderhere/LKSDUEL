@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -87,24 +87,24 @@ export default function MaintenancePage() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center p-4 font-sans antialiased relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-amber-700 dark:bg-amber-800/5 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.98, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         className="max-w-md w-full relative z-10"
       >
-        <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
+        <div className="bg-zinc-900 border border-white/10 rounded-sm border-double border-4 border-amber-900/70 overflow-hidden shadow-2xl backdrop-blur-xl">
           <div className={cn(
             "h-1.5 w-full",
-            errorType === 'maintenance' ? "bg-blue-500" : "bg-red-500"
+            errorType === 'maintenance' ? "bg-amber-600 dark:bg-amber-700" : "bg-red-500"
           )} />
 
           <div className="p-6 md:p-8 space-y-6">
             <div className="flex items-center gap-4">
               <div className={cn(
-                "w-12 h-12 rounded-xl flex items-center justify-center shrink-0",
-                errorType === 'maintenance' ? "bg-blue-500/20 text-blue-500" : "bg-red-500/20 text-red-500"
+                "w-12 h-12 rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center shrink-0",
+                errorType === 'maintenance' ? "bg-amber-600 dark:bg-amber-700/20 text-amber-600 dark:text-amber-500" : "bg-red-500/20 text-red-500"
               )}>
                 {errorType === 'maintenance' ? <ShieldAlert size={24} /> :
                   errorType === 'config' ? <Settings size={24} /> : <Database size={24} />}
@@ -120,7 +120,7 @@ export default function MaintenancePage() {
             </div>
 
             <div className="space-y-5">
-              <div className="bg-black/20 border border-white/5 rounded-xl p-4">
+              <div className="bg-black/20 border border-white/5 rounded-sm border-double border-4 border-amber-900/70 p-4">
                 <p className="text-sm text-gray-300 leading-relaxed font-medium">
                   {messageMap[errorType]}
                 </p>
@@ -128,7 +128,7 @@ export default function MaintenancePage() {
 
               {/* Diagnostic Panel (Dev Only) */}
               {isDev && (
-                <div className="bg-black/40 border border-white/5 rounded-xl p-4 space-y-3 font-mono text-[11px]">
+                <div className="bg-black/40 border border-white/5 rounded-sm border-double border-4 border-amber-900/70 p-4 space-y-3 font-mono text-[11px]">
                   <p className="text-[9px] font-black text-gray-600 uppercase tracking-widest flex items-center justify-between">
                     Dev Diagnostics
                     <span className="flex items-center gap-1.5">
@@ -168,7 +168,7 @@ export default function MaintenancePage() {
               <Button
                 onClick={() => window.location.reload()}
                 size="sm"
-                className="bg-white hover:bg-gray-200 text-black font-black uppercase tracking-widest h-10 px-4 rounded-xl flex-1 transition-all active:scale-95"
+                className="bg-[#fdf6e3] hover:bg-gray-200 text-black font-black uppercase tracking-widest h-10 px-4 rounded-sm border-double border-4 border-amber-900/70 flex-1 transition-all active:scale-95"
               >
                 <RefreshCw size={14} className="mr-2" /> Retry
               </Button>
@@ -177,7 +177,7 @@ export default function MaintenancePage() {
                 <Button
                   onClick={() => setDevConfigOpen(true)}
                   size="sm"
-                  className="bg-transparent hover:bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest h-10 px-4 rounded-xl transition-all active:scale-95"
+                  className="bg-transparent hover:bg-[#fdf6e3]/5 border border-white/10 text-white font-black uppercase tracking-widest h-10 px-4 rounded-sm border-double border-4 border-amber-900/70 transition-all active:scale-95"
                 >
                   <Key size={14} className="mr-2" /> Fix
                 </Button>
@@ -187,7 +187,7 @@ export default function MaintenancePage() {
                 asChild
                 variant="ghost"
                 size="sm"
-                className="text-gray-500 hover:text-white font-black h-10 px-3 rounded-xl transition-all"
+                className="text-gray-500 hover:text-white font-black h-10 px-3 rounded-sm border-double border-4 border-amber-900/70 transition-all"
               >
                 <a href={APP.links.discord} target="_blank" rel="noopener noreferrer">
                   <MessageCircle size={16} />
@@ -196,7 +196,7 @@ export default function MaintenancePage() {
             </div>
           </div>
 
-          <div className="px-6 py-4 bg-white/5 border-t border-white/5 text-center">
+          <div className="px-6 py-4 bg-[#fdf6e3]/5 border-t border-white/5 text-center">
             <p className="text-[9px] font-black text-gray-600 uppercase tracking-[0.3em]">
               &copy; {new Date().getFullYear()} SOC &bull; Automated Failover System
             </p>
@@ -213,3 +213,4 @@ export default function MaintenancePage() {
     </div>
   )
 }
+

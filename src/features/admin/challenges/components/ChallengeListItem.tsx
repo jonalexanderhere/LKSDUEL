@@ -26,7 +26,7 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
   };
 
   return (
-    <div className="w-full px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+    <div className="w-full px-4 py-3 border-b border-amber-900/50 dark:border-gray-700">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0 order-2 sm:order-1">
           <DifficultyBadge difficulty={challenge.difficulty} width={92} />
@@ -53,7 +53,7 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            className={`${challenge.is_maintenance ? 'text-blue-500 dark:text-blue-400' : 'text-gray-400 dark:text-gray-600'}`}
+            className={`${challenge.is_maintenance ? 'text-amber-600 dark:text-amber-500 dark:text-blue-400' : 'text-gray-400 dark:text-gray-600'}`}
             onClick={async () => onToggleMaintenance(challenge.id, !challenge.is_maintenance)}
             aria-label={challenge.is_maintenance ? "Disable Maintenance" : "Enable Maintenance"}
             title={challenge.is_maintenance ? "Disable Maintenance" : "Enable Maintenance"}
@@ -76,7 +76,7 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
             onClick={() => onEdit(challenge)}
             aria-label="Edit Challenge"
             title="Edit Challenge"
-            className="text-blue-600 dark:text-blue-400"
+            className="text-amber-700 dark:text-amber-500 dark:text-blue-400"
           >
             <Pencil size={16} />
           </Button>
@@ -107,4 +107,5 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
 }
 
 export default ChallengeListItem
+
 

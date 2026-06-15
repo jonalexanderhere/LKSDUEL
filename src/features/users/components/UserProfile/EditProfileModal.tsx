@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 // React Imports
 import { useState } from "react";
@@ -160,7 +160,7 @@ export default function EditProfileModal({
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
                 disabled={loading}
-                className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                 autoComplete="off"
                 maxLength={32}
               />
@@ -176,7 +176,7 @@ export default function EditProfileModal({
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Bio (deskripsi singkat)"
                 disabled={loading}
-                className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                 maxLength={200}
               />
             </div>
@@ -191,7 +191,7 @@ export default function EditProfileModal({
                 onChange={(e) => setProfilePictureUrl(e.target.value)}
                 placeholder="https://..."
                 disabled={loading}
-                className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                 maxLength={512}
               />
             </div>
@@ -209,7 +209,7 @@ export default function EditProfileModal({
                     onChange={(e) => setSosmed((s) => ({ ...s, linkedin: e.target.value }))}
                     placeholder="LinkedIn username/link"
                     disabled={loading}
-                    className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                    className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                     maxLength={64}
                   />
                 </div>
@@ -224,7 +224,7 @@ export default function EditProfileModal({
                     onChange={(e) => setSosmed((s) => ({ ...s, instagram: e.target.value }))}
                     placeholder="Instagram username/link"
                     disabled={loading}
-                    className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                    className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                     maxLength={64}
                   />
                 </div>
@@ -239,7 +239,7 @@ export default function EditProfileModal({
                     onChange={(e) => setSosmed((s) => ({ ...s, discord: e.target.value }))}
                     placeholder="Discord username#tag"
                     disabled={loading}
-                    className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                    className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                     maxLength={64}
                   />
                 </div>
@@ -254,7 +254,7 @@ export default function EditProfileModal({
                     onChange={(e) => setSosmed((s) => ({ ...s, web: e.target.value }))}
                     placeholder="Website link"
                     disabled={loading}
-                    className="border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                    className="border-gray-300 bg-[#fdf6e3] text-gray-900 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-100"
                     maxLength={128}
                   />
                 </div>
@@ -264,13 +264,13 @@ export default function EditProfileModal({
             <AuthProviders authInfo={authInfo} />
 
             {error ? (
-              <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-sm font-semibold text-blue-600 dark:text-blue-400">
+              <div className="rounded-sm border-double border-4 border-amber-900/70 border border-blue-500/20 bg-amber-600 dark:bg-amber-700/10 p-3 text-sm font-semibold text-amber-700 dark:text-amber-500 dark:text-blue-400">
                 {error}
               </div>
             ) : null}
 
             {success ? (
-              <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-3 text-sm font-semibold text-blue-600 dark:text-blue-400">
+              <div className="rounded-sm border-double border-4 border-amber-900/70 border border-blue-500/20 bg-amber-600 dark:bg-amber-700/10 p-3 text-sm font-semibold text-amber-700 dark:text-amber-500 dark:text-blue-400">
                 {success}
               </div>
             ) : null}
@@ -285,7 +285,7 @@ export default function EditProfileModal({
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 font-semibold text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 sm:w-auto"
+            className="w-full bg-amber-700 dark:bg-amber-800 font-semibold text-white hover:bg-blue-700 dark:bg-amber-600 dark:bg-amber-700 dark:hover:bg-blue-400 sm:w-auto"
           >
             {loading ? "Saving..." : "Save"}
           </Button>
@@ -294,3 +294,4 @@ export default function EditProfileModal({
     </BaseModal>
   );
 }
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
@@ -93,9 +93,9 @@ export default function UserProfilePage() {
   // ❌ Error UI (ini boleh beda)
   if (error) {
     return (
-      <div className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+      <div className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-amber-600 dark:bg-amber-700/30 dark:bg-[#0b0f19] dark:text-gray-100">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-          <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
+          <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-amber-600 dark:bg-amber-700/5 blur-[120px]" />
           <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-indigo-600/5 blur-[120px]" />
         </div>
         {(APP.nxctf?.nxctf_logo || APP.image_logo) && (
@@ -118,7 +118,7 @@ export default function UserProfilePage() {
               <button
                 type="button"
                 onClick={() => router.push('/challenges')}
-                className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-500/20 dark:text-blue-400"
+                className="rounded-full border border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 px-4 py-2 text-sm font-semibold text-amber-700 dark:text-amber-500 transition hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
               >
                 Back to Challenges
               </button>

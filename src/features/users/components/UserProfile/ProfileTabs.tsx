@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import { ArrowLeft, ChartColumnDecreasing, Flag } from 'lucide-react'
@@ -19,7 +19,7 @@ export default function ProfileTabs({ activeTab, setActiveTab, onBack, editActio
           <button
             type="button"
             onClick={onBack}
-            className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/50 px-4 py-2 text-sm font-semibold text-gray-600 backdrop-blur transition hover:border-blue-500/40 hover:text-blue-600 dark:border-white/10 dark:bg-gray-800/50 dark:text-gray-400 dark:hover:text-blue-400"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-900/50 bg-[#fdf6e3]/50 px-4 py-2 text-sm font-semibold text-gray-600 backdrop-blur transition hover:border-blue-500/40 hover:text-amber-700 dark:text-amber-500 dark:border-white/10 dark:bg-[#1A100C]/50 dark:text-gray-400 dark:hover:text-blue-400"
           >
             <ArrowLeft className="h-4 w-4" />
             Go Back
@@ -39,3 +39,4 @@ export default function ProfileTabs({ activeTab, setActiveTab, onBack, editActio
     </div>
   )
 }
+

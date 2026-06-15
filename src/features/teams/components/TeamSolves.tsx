@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { CheckCircle2, Trophy } from 'lucide-react'
@@ -30,7 +30,7 @@ export default function TeamSolves({
 
   return (
     <>
-      <Card className="bg-white dark:bg-gray-800">
+      <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-gray-900 dark:text-white flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-green-500" />
@@ -81,7 +81,7 @@ export default function TeamSolves({
 
       <Dialog open={showAllSolves} onOpenChange={setShowAllSolves}>
         <DialogContent className={DIALOG_CONTENT_CLASS_3XL + " fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"}>
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-amber-900/50 dark:border-gray-700 bg-[#f4e4bc] dark:bg-[#1A100C] sticky top-0 z-10">
             <DialogTitle className="text-lg font-bold text-gray-900 dark:text-white">
               All Team Solves ({challenges.length})
             </DialogTitle>
@@ -91,7 +91,7 @@ export default function TeamSolves({
               onClick={() => setShowAllSolves(false)}
               className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400"
             >
-              ✕
+              âœ•
             </Button>
           </div>
 
@@ -115,7 +115,7 @@ export default function TeamSolves({
                         </span>
                       </div>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {c.points} pts • {formatDate(c.first_solved_at)} • First by {c.first_solver_username}
+                        {c.points} pts â€¢ {formatDate(c.first_solved_at)} â€¢ First by {c.first_solver_username}
                       </p>
                     </div>
 
@@ -132,3 +132,4 @@ export default function TeamSolves({
     </>
   )
 }
+

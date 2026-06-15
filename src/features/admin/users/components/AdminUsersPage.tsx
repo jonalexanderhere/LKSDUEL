@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -40,7 +40,7 @@ export default function AdminUsersPage() {
     }
   }, [authLoading, user, router])
 
-  if (authLoading || isLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading || isLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user || !isAdminUser) return null
 
   return (
@@ -51,3 +51,4 @@ export default function AdminUsersPage() {
     </AdminPageShell>
   )
 }
+

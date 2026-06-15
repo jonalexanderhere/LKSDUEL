@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
@@ -37,10 +37,10 @@ const getEventStatus = (evt: Event) => {
   const start = evt.start_time ? new Date(evt.start_time) : null
   const end = evt.end_time ? new Date(evt.end_time) : null
 
-  if (start && now < start) return { label: 'Upcoming', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200', icon: '📅' }
-  if (end && now > end) return { label: 'Ended', color: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200', icon: '✓' }
-  if (end) return { label: 'Ongoing', color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200', icon: '🔥' }
-  return { label: 'Active', color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200', icon: '🔥' }
+  if (start && now < start) return { label: 'Upcoming', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200', icon: 'ðŸ“…' }
+  if (end && now > end) return { label: 'Ended', color: 'bg-[#eaddb6] text-gray-800 dark:bg-gray-700 dark:text-gray-200', icon: 'âœ“' }
+  if (end) return { label: 'Ongoing', color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200', icon: 'ðŸ”¥' }
+  return { label: 'Active', color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200', icon: 'ðŸ”¥' }
 }
 
 const getTimeRemaining = (evt: Event) => {
@@ -153,10 +153,10 @@ export default function PreviewPage() {
     })
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-[#f4e4bc] dark:bg-[#1f140f]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Top: stats */}
-        <Card className="bg-white dark:bg-gray-800">
+        <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
           <CardHeader>
             <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <Trophy size={18} className="text-yellow-500" /> Platform Preview
@@ -164,24 +164,24 @@ export default function PreviewPage() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex items-center space-x-3">
-              <div className="w-11 h-11 bg-gradient-to-br from-indigo-200 to-indigo-400 dark:from-indigo-900 dark:to-indigo-700 rounded-xl flex items-center justify-center shadow-sm ring-1 ring-indigo-300/60 dark:ring-indigo-800/60">
+              <div className="w-11 h-11 bg-gradient-to-br from-indigo-200 to-indigo-400 dark:from-indigo-900 dark:to-indigo-700 rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.6)] ring-1 ring-indigo-300/60 dark:ring-indigo-800/60">
                 <Users className="h-5 w-5 text-indigo-800 dark:text-indigo-200" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">
-                  {loading ? '…' : String(data?.total_users ?? 0)}
+                  {loading ? 'â€¦' : String(data?.total_users ?? 0)}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Total Users</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-3">
-              <div className="w-11 h-11 bg-gradient-to-br from-green-200 to-green-400 dark:from-green-900 dark:to-green-700 rounded-xl flex items-center justify-center shadow-sm ring-1 ring-green-300/60 dark:ring-green-800/60">
+              <div className="w-11 h-11 bg-gradient-to-br from-green-200 to-green-400 dark:from-green-900 dark:to-green-700 rounded-sm border-double border-4 border-amber-900/70 flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.6)] ring-1 ring-green-300/60 dark:ring-green-800/60">
                 <CheckCircle2 className="h-5 w-5 text-green-800 dark:text-green-200" />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white tabular-nums">
-                  {loading ? '…' : String(data?.total_solves ?? 0)}
+                  {loading ? 'â€¦' : String(data?.total_solves ?? 0)}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Total Solves</p>
               </div>
@@ -190,11 +190,11 @@ export default function PreviewPage() {
         </Card>
 
         {/* Tabs: scoreboard / events */}
-        <div className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex gap-2 border-b border-amber-900/50 dark:border-gray-700">
           <button
             onClick={() => setCurrentTab('scoreboard')}
             className={`px-4 py-2 text-sm font-medium transition border-b-2 ${currentTab === 'scoreboard'
-              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+              ? 'border-blue-500 text-amber-700 dark:text-amber-500 dark:text-blue-400'
               : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
               }`}
           >
@@ -206,7 +206,7 @@ export default function PreviewPage() {
           <button
             onClick={() => setCurrentTab('events')}
             className={`px-4 py-2 text-sm font-medium transition border-b-2 ${currentTab === 'events'
-              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+              ? 'border-blue-500 text-amber-700 dark:text-amber-500 dark:text-blue-400'
               : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
               }`}
           >
@@ -234,10 +234,10 @@ export default function PreviewPage() {
             {/* Middle: leaderboard */}
             {loading ? (
               <div className="flex justify-center py-10">
-                <div className="text-sm text-gray-600 dark:text-gray-300">Loading…</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Loadingâ€¦</div>
               </div>
             ) : leaderboard.length === 0 ? (
-              <Card className="bg-white dark:bg-gray-800">
+              <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">Ranking</CardTitle>
                 </CardHeader>
@@ -255,7 +255,7 @@ export default function PreviewPage() {
           <div className="space-y-6">
             {/* Bottom: events */}
             {loading ? null : availableEvents.length === 0 && upcomingList.length === 0 && endedEvents.length === 0 ? (
-              <Card className="bg-white dark:bg-gray-800">
+              <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">Events</CardTitle>
                 </CardHeader>
@@ -279,7 +279,7 @@ export default function PreviewPage() {
                         return (
                           <Card
                             key={evt.id}
-                            className="h-full flex flex-col overflow-hidden transition-all duration-200 bg-white dark:bg-gray-800 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-400"
+                            className="h-full flex flex-col overflow-hidden transition-all duration-200 bg-[#fdf6e3] dark:bg-[#1A100C] hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-400"
                           >
                             {evt.image_url && (
                               <div className="h-72 w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
@@ -303,7 +303,7 @@ export default function PreviewPage() {
                                 </p>
                               )}
 
-                              <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-3">
+                              <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400 border-t border-amber-900/50 dark:border-gray-700 pt-3">
                                 {startText && startLabel && (
                                   <div className="flex items-center gap-2">
                                     <Calendar size={14} />
@@ -343,7 +343,7 @@ export default function PreviewPage() {
                         return (
                           <Card
                             key={evt.id}
-                            className="h-full flex flex-col overflow-hidden transition-all duration-200 bg-white dark:bg-gray-800 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-400"
+                            className="h-full flex flex-col overflow-hidden transition-all duration-200 bg-[#fdf6e3] dark:bg-[#1A100C] hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-400"
                           >
                             {evt.image_url && (
                               <div className="h-72 w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
@@ -367,7 +367,7 @@ export default function PreviewPage() {
                                 </p>
                               )}
 
-                              <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-3">
+                              <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400 border-t border-amber-900/50 dark:border-gray-700 pt-3">
                                 {startText && startLabel && (
                                   <div className="flex items-center gap-2">
                                     <Calendar size={14} />
@@ -407,7 +407,7 @@ export default function PreviewPage() {
                         return (
                           <Card
                             key={evt.id}
-                            className="h-full flex flex-col overflow-hidden transition-all duration-200 bg-white dark:bg-gray-800 hover:shadow-xl hover:border-gray-400 dark:hover:border-gray-400"
+                            className="h-full flex flex-col overflow-hidden transition-all duration-200 bg-[#fdf6e3] dark:bg-[#1A100C] hover:shadow-xl hover:border-gray-400 dark:hover:border-gray-400"
                           >
                             {evt.image_url && (
                               <div className="h-72 w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
@@ -431,7 +431,7 @@ export default function PreviewPage() {
                                 </p>
                               )}
 
-                              <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-3">
+                              <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400 border-t border-amber-900/50 dark:border-gray-700 pt-3">
                                 {startText && startLabel && (
                                   <div className="flex items-center gap-2">
                                     <Calendar size={14} />
@@ -462,7 +462,7 @@ export default function PreviewPage() {
         )}
 
         {currentTab === 'solves' && (
-          <Card className="bg-white dark:bg-gray-800">
+          <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
             <CardHeader>
               <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-green-500" /> Recent Solves
@@ -470,7 +470,7 @@ export default function PreviewPage() {
             </CardHeader>
             <CardContent>
               {loading ? (
-                <div className="text-sm text-gray-600 dark:text-gray-300">Loading…</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Loadingâ€¦</div>
               ) : solves.length === 0 ? (
                 <div className="text-sm text-gray-600 dark:text-gray-300">No solves yet.</div>
               ) : (
@@ -478,7 +478,7 @@ export default function PreviewPage() {
                   {solves.map((s: any, idx) => (
                     <li
                       key={`${s.username}-${s.solved_at}-${idx}`}
-                      className="border rounded-lg px-4 py-3 shadow bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150 min-w-0"
+                      className="border rounded-sm px-4 py-3 shadow bg-[#fdf6e3] dark:bg-[#1A100C] dark:border-gray-700 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150 min-w-0"
                     >
                       <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 mr-2 shrink-0">
                         <svg
@@ -499,7 +499,7 @@ export default function PreviewPage() {
                         <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate min-w-0">
                           <Link
                             href={s.username ? `/user/${encodeURIComponent(s.username)}` : '#'}
-                            className="text-blue-600 dark:text-blue-300 font-medium hover:underline"
+                            className="text-amber-700 dark:text-amber-500 dark:text-blue-300 font-medium hover:underline"
                           >
                             <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
                               {s.username}
@@ -532,3 +532,4 @@ export default function PreviewPage() {
     </div>
   )
 }
+

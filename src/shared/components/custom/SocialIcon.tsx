@@ -1,4 +1,4 @@
-import {
+﻿import {
   Linkedin,
   Instagram,
   Globe,
@@ -54,16 +54,16 @@ export default function SocialIcon({
   };
   const colorClasses: Record<string, string> = {
     linkedin:
-        'bg-transparent text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:text-blue-600 dark:hover:text-blue-400',
+        'bg-transparent text-gray-600 dark:text-gray-300 border-amber-900/50 dark:border-gray-700 hover:text-amber-700 dark:text-amber-500 dark:hover:text-blue-400',
 
     instagram:
-        'bg-transparent text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:text-pink-500',
+        'bg-transparent text-gray-600 dark:text-gray-300 border-amber-900/50 dark:border-gray-700 hover:text-pink-500',
 
     web:
-        'bg-transparent text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white',
+        'bg-transparent text-gray-600 dark:text-gray-300 border-amber-900/50 dark:border-gray-700 hover:text-gray-900 dark:hover:text-white',
 
     discord:
-        'bg-transparent text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:text-indigo-500',
+        'bg-transparent text-gray-600 dark:text-gray-300 border-amber-900/50 dark:border-gray-700 hover:text-indigo-500',
   }
   const Icon = icons[type];
   const baseClass = `
@@ -73,7 +73,7 @@ export default function SocialIcon({
     text-xs font-medium
     border
     transition-colors
-    hover:bg-gray-100 dark:hover:bg-gray-700
+    hover:bg-[#eaddb6] dark:hover:bg-gray-700
     ${colorClasses[type]} ${className}
   `;
   // Hide label on mobile except for Discord
@@ -105,3 +105,4 @@ export default function SocialIcon({
     </span>
   );
 }
+

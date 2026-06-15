@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useState } from 'react'
 
@@ -11,7 +11,7 @@ type Props = {
   fallbackBg?: string
 }
 
-export default function ImageWithFallback({ src, alt = '', size = 36, className = '', rounded = true, fallbackBg = 'bg-gray-200 dark:bg-gray-800' }: Props) {
+export default function ImageWithFallback({ src, alt = '', size = 36, className = '', rounded = true, fallbackBg = 'bg-gray-200 dark:bg-[#1A100C]' }: Props) {
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -49,3 +49,4 @@ export default function ImageWithFallback({ src, alt = '', size = 36, className 
     </div>
   )
 }
+

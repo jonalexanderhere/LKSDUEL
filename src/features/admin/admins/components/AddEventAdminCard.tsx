@@ -47,7 +47,7 @@ const AddEventAdminCard: React.FC<AddEventAdminCardProps> = ({
   onReset,
 }) => {
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
       <CardHeader>
         <CardTitle>Add Event Admin</CardTitle>
       </CardHeader>
@@ -59,13 +59,13 @@ const AddEventAdminCard: React.FC<AddEventAdminCardProps> = ({
               <Input value={usernameQuery} onChange={(e) => onUsernameChange(e.target.value)} placeholder="Type username..." />
 
               {userResults.length > 0 && !selectedUser && (
-                <div className="absolute z-10 mt-1 w-full rounded-md border bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="absolute z-10 mt-1 w-full rounded-md border bg-[#fdf6e3] dark:bg-[#2c1e16] border-amber-900/50 dark:border-gray-700 overflow-hidden">
                   {userResults.map((u) => (
                     <button
                       key={u.id}
                       type="button"
                       onClick={() => onUserSelect(u)}
-                      className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
+                      className="w-full text-left px-3 py-2 text-sm hover:bg-[#f4e4bc] dark:hover:bg-gray-800"
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-medium">{u.username}</span>
@@ -117,4 +117,5 @@ const AddEventAdminCard: React.FC<AddEventAdminCardProps> = ({
 }
 
 export default AddEventAdminCard
+
 

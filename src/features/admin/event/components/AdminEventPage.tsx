@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { AnimatePresence } from 'framer-motion'
 import { Loader } from '@/shared/components'
@@ -71,7 +71,7 @@ export default function AdminEventPage() {
     handleReviewRequest,
   } = useAdminEventData()
 
-  if (authLoading || isLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading || isLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user || !isAdminUser) return null
 
   return (
@@ -170,3 +170,4 @@ export default function AdminEventPage() {
     </>
   )
 }
+

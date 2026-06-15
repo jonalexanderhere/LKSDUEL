@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React, { useEffect, useState } from 'react'
 import { Clock, Loader2, Play, RefreshCcw } from 'lucide-react'
@@ -97,7 +97,7 @@ const ChallengeServicesPanel: React.FC<ChallengeServicesPanelProps> = ({
   return (
     <div>
       <p className="text-xs text-gray-400 mb-1 inline-flex items-center gap-1 uppercase tracking-wider">
-        <span className="h-3.5 w-3.5">🌐</span> NXCTL Services
+        <span className="h-3.5 w-3.5">ðŸŒ</span> NXCTL Services
       </p>
       <div className="grid grid-cols-1 gap-1.5">
         {services.map((service, idx) => {
@@ -153,12 +153,12 @@ const ChallengeServicesPanel: React.FC<ChallengeServicesPanelProps> = ({
           }
 
           return (
-            <div key={idx} className="flex flex-col gap-1.5 bg-[#1a1a33]/80 p-2.5 rounded border border-[#35355e] group hover:border-cyan-500/50 transition-colors shadow-sm">
+            <div key={idx} className="flex flex-col gap-1.5 bg-[#1a1a33]/80 p-2.5 rounded border border-[#35355e] group hover:border-cyan-500/50 transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
               <div className="flex items-center gap-2">
                 <code className="text-sm font-mono text-cyan-300 break-all flex-1">{service}</code>
                 <button
                   type="button"
-                  className="p-1.5 bg-[#232344] hover:bg-[#35355e] rounded text-gray-400 hover:text-green-400 transition shadow-sm disabled:opacity-50"
+                  className="p-1.5 bg-[#232344] hover:bg-[#35355e] rounded text-gray-400 hover:text-green-400 transition shadow-[0_4px_12px_rgba(0,0,0,0.6)] disabled:opacity-50"
                   onClick={() => handleServiceAction(service, 'up')}
                   title="Start Service"
                   disabled={serviceActionLoading[service] || isRunning}
@@ -167,7 +167,7 @@ const ChallengeServicesPanel: React.FC<ChallengeServicesPanelProps> = ({
                 </button>
                 <button
                   type="button"
-                  className="p-1.5 bg-[#232344] hover:bg-[#35355e] rounded text-gray-400 hover:text-yellow-400 transition shadow-sm disabled:opacity-50 flex items-center gap-1"
+                  className="p-1.5 bg-[#232344] hover:bg-[#35355e] rounded text-gray-400 hover:text-yellow-400 transition shadow-[0_4px_12px_rgba(0,0,0,0.6)] disabled:opacity-50 flex items-center gap-1"
                   onClick={() => handleServiceAction(service, 'restart')}
                   title={(() => {
                     if (serviceActionLoading[service]) return 'Please wait...'
@@ -186,7 +186,7 @@ const ChallengeServicesPanel: React.FC<ChallengeServicesPanelProps> = ({
                 </button>
                 <button
                   type="button"
-                  className="p-1.5 bg-[#232344] hover:bg-[#35355e] rounded text-gray-400 hover:text-blue-400 transition shadow-sm disabled:opacity-50 flex items-center gap-1"
+                  className="p-1.5 bg-[#232344] hover:bg-[#35355e] rounded text-gray-400 hover:text-blue-400 transition shadow-[0_4px_12px_rgba(0,0,0,0.6)] disabled:opacity-50 flex items-center gap-1"
                   onClick={() => handleServiceAction(service, 'extend')}
                   title={(() => {
                     if (serviceActionLoading[service]) return 'Please wait...'
@@ -196,7 +196,7 @@ const ChallengeServicesPanel: React.FC<ChallengeServicesPanelProps> = ({
                       if (extendAvailability?.cooldown_remaining_seconds && extendAvailability.cooldown_remaining_seconds > 0) {
                         return `Extend cooldown: ${formatSecs(extendAvailability.cooldown_remaining_seconds)}`
                       }
-                      return `Can extend when remaining ≤ ${formatSecs(thresholdSec)}`
+                      return `Can extend when remaining â‰¤ ${formatSecs(thresholdSec)}`
                     }
                     return `Extend service time`
                   })()}
@@ -264,3 +264,4 @@ const ChallengeServicesPanel: React.FC<ChallengeServicesPanelProps> = ({
 }
 
 export default ChallengeServicesPanel
+

@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import CustomBadge from '@/shared/ui/CustomBadge'
 import APP from '@/config'
 
@@ -22,7 +22,7 @@ const DifficultyBadge: React.FC<DifficultyBadgeProps> = ({ difficulty, className
     red: 'bg-red-600 text-white dark:bg-red-600 dark:text-white',
     purple: 'bg-purple-600 text-white dark:bg-purple-600 dark:text-white',
   };
-  const color = colorMap[colorName] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-white';
+  const color = colorMap[colorName] || 'bg-[#eaddb6] text-gray-800 dark:bg-gray-700 dark:text-white';
   const label = difficulty || 'N/A';
   return (
     <CustomBadge label={label} color={color} className={className} width={typeof width === 'number' ? width : 62} />
@@ -30,3 +30,4 @@ const DifficultyBadge: React.FC<DifficultyBadgeProps> = ({ difficulty, className
 }
 
 export default DifficultyBadge
+

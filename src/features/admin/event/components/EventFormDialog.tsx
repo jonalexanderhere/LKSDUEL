@@ -52,7 +52,7 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
                 required
                 value={formData.name}
                 onChange={(e) => onChange({ ...formData, name: e.target.value })}
-                className="transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               />
             </div>
 
@@ -62,7 +62,7 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
                 rows={3}
                 value={formData.description}
                 onChange={(e) => onChange({ ...formData, description: e.target.value })}
-                className="transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               />
             </div>
 
@@ -71,7 +71,7 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
               <select
                 value={formData.join_mode}
                 onChange={(e) => onChange({ ...formData, join_mode: e.target.value as EventJoinMode })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
               >
                 <option value="open">Open (direct join)</option>
                 <option value="request">Request (admin approval)</option>
@@ -93,7 +93,7 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
                 onChange={(e) => onChange({ ...formData, join_key: e.target.value })}
                 disabled={formData.join_mode !== 'key'}
                 placeholder={formData.join_mode === 'key' ? 'Enter custom join key' : 'Join key only for key mode'}
-                className="transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               />
             </div>
 
@@ -110,7 +110,7 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
                 type="datetime-local"
                 value={formData.start_time}
                 onChange={(e) => onChange({ ...formData, start_time: e.target.value })}
-                className="h-9 px-2 text-sm transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                className="h-9 px-2 text-sm transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               />
             </div>
 
@@ -127,11 +127,11 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
                 type="datetime-local"
                 value={formData.end_time}
                 onChange={(e) => onChange({ ...formData, end_time: e.target.value })}
-                className="h-9 px-2 text-sm transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                className="h-9 px-2 text-sm transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               />
             </div>
 
-            <div className="md:col-span-2 flex items-center justify-between rounded-md border border-gray-200 dark:border-gray-700 px-3 py-2 bg-amber-100 dark:bg-amber-900/30/40">
+            <div className="md:col-span-2 flex items-center justify-between rounded-md border border-amber-900/50 dark:border-gray-700 px-3 py-2 bg-amber-100 dark:bg-amber-900/30/40">
               <div>
                 <p className="text-sm font-medium text-amber-900 dark:text-amber-50">Always show challenges</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Show event challenges after end.</p>
@@ -146,7 +146,7 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
                 placeholder="https://example.com/image.jpg"
                 value={formData.image_url}
                 onChange={(e) => onChange({ ...formData, image_url: e.target.value })}
-                className="transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Optional: Add a banner image URL for this event</p>
             </div>
@@ -167,4 +167,5 @@ const EventFormDialog: React.FC<EventFormDialogProps> = ({
 }
 
 export default EventFormDialog
+
 

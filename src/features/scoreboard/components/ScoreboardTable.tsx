@@ -23,7 +23,7 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
   const pathname = usePathname()
 
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-lg font-semibold text-amber-900 dark:text-amber-50">Ranking</CardTitle>
       {pathname === '/scoreboard' &&
@@ -62,10 +62,10 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
                   <TableRow
                     key={entry.username}
                     className={`
-                      transition-colors duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-600
+                      transition-colors duration-150 ease-in-out hover:bg-[#eaddb6] dark:hover:bg-gray-600
                       ${
                         isCurrentUser
-                          ? 'bg-gray-100 dark:bg-gray-700 font-semibold'
+                          ? 'bg-[#eaddb6] dark:bg-gray-700 font-semibold'
                           : ''
                       }
                     `}
@@ -75,7 +75,7 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
                     <Link
                       href={`/user/${encodeURIComponent(entry.username)}`}
                       className={`hover:underline ${
-                        isCurrentUser ? 'text-blue-700 dark:text-blue-300' : 'hover:text-blue-600 dark:hover:text-blue-400'
+                        isCurrentUser ? 'text-blue-700 dark:text-blue-300' : 'hover:text-amber-700 dark:text-amber-500 dark:hover:text-blue-400'
                       } max-w-[120px] md:max-w-xs truncate whitespace-nowrap block`}
                       title={entry.username}
                     >
@@ -99,4 +99,5 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
 }
 
 export default ScoreboardTable
+
 

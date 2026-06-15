@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useEffect, useState } from 'react'
 import { adminGetAllTeams, createTeam, deleteTeam, regenerateTeamInviteCode, TeamInfo } from '@/shared/lib/teams'
@@ -115,7 +115,7 @@ export function AdminTeamsPage() {
 									value={newTeamName}
 									onChange={(e) => setNewTeamName(e.target.value)}
 									placeholder="Enter team name..."
-									className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500"
+									className="bg-[#fdf6e3]/5 border-white/10 text-white placeholder:text-neutral-500"
 									autoFocus
 								/>
 							</div>
@@ -141,7 +141,7 @@ export function AdminTeamsPage() {
 				</Dialog>
 			</div>
 
-			<Card className="bg-white/5 border-white/10 backdrop-blur-md overflow-hidden">
+			<Card className="bg-[#fdf6e3]/5 border-white/10 backdrop-blur-md overflow-hidden">
 				<CardHeader className="border-b border-white/5">
 					<div className="flex items-center justify-between">
 						<div className="relative w-72">
@@ -149,7 +149,7 @@ export function AdminTeamsPage() {
 								placeholder="Search teams by name or ID..."
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
-								className="bg-white/5 border-white/10 text-white pl-10"
+								className="bg-[#fdf6e3]/5 border-white/10 text-white pl-10"
 							/>
 							<Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
 						</div>
@@ -167,7 +167,7 @@ export function AdminTeamsPage() {
 				<CardContent className="p-0">
 					<div className="overflow-x-auto">
 						<Table>
-							<TableHeader className="bg-white/[0.02]">
+							<TableHeader className="bg-[#fdf6e3]/[0.02]">
 								<TableRow className="hover:bg-transparent border-white/5">
 									<TableHead className="text-neutral-400 font-medium">Team Details</TableHead>
 									<TableHead className="text-neutral-400 font-medium">Credentials</TableHead>
@@ -179,7 +179,7 @@ export function AdminTeamsPage() {
 								{loading ? (
 									Array.from({ length: 5 }).map((_, i) => (
 										<TableRow key={i} className="border-white/5">
-											<TableCell colSpan={4} className="h-16 animate-pulse bg-white/[0.01]" />
+											<TableCell colSpan={4} className="h-16 animate-pulse bg-[#fdf6e3]/[0.01]" />
 										</TableRow>
 									))
 								) : filteredTeams.length === 0 ? (
@@ -190,7 +190,7 @@ export function AdminTeamsPage() {
 									</TableRow>
 								) : (
 									filteredTeams.map((team) => (
-										<TableRow key={team.id} className="border-white/5 hover:bg-white/[0.02] transition-colors group">
+										<TableRow key={team.id} className="border-white/5 hover:bg-[#fdf6e3]/[0.02] transition-colors group">
 											<TableCell>
 												<div className="flex flex-col">
 													<span className="text-white font-medium text-lg">{team.name}</span>
@@ -201,7 +201,7 @@ export function AdminTeamsPage() {
 													{team.member_names && team.member_names.length > 0 && (
 														<div className="flex flex-wrap gap-1 mt-2">
 															{team.member_names.map((name, i) => (
-																<span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+																<span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-amber-600 dark:bg-amber-700/10 text-blue-400 border border-blue-500/20">
 																	{name}
 																</span>
 															))}
@@ -251,7 +251,7 @@ export function AdminTeamsPage() {
 
 function CredentialBadge({ icon, label, value, onCopy, onRegenerate }: { icon: React.ReactNode, label: string, value: string, onCopy: () => void, onRegenerate?: () => void }) {
 	return (
-		<div className="flex items-center bg-white/5 border border-white/10 rounded-md px-2 py-1 gap-2 hover:border-white/20 transition-colors">
+		<div className="flex items-center bg-[#fdf6e3]/5 border border-white/10 rounded-md px-2 py-1 gap-2 hover:border-white/20 transition-colors">
 			<span className="text-neutral-500">{icon}</span>
 			<span className="text-xs font-mono text-neutral-300 max-w-[80px] truncate">{value}</span>
 			<div className="flex items-center gap-1 ml-auto">
@@ -275,3 +275,4 @@ function CredentialBadge({ icon, label, value, onCopy, onRegenerate }: { icon: R
 		</div>
 	)
 }
+

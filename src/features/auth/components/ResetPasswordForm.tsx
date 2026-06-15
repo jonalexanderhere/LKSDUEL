@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react'
 import { Eye, EyeOff, Lock } from 'lucide-react'
@@ -46,7 +46,7 @@ export default function ResetPasswordForm() {
             <button
               type="button"
               onClick={() => setShowNewPassword((value) => !value)}
-              className="rounded-lg p-1 text-gray-400 transition-colors hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+              className="rounded-sm p-1 text-gray-400 transition-colors hover:text-amber-600 dark:text-amber-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
               aria-label={showNewPassword ? 'Hide password' : 'Show password'}
             >
               {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -68,7 +68,7 @@ export default function ResetPasswordForm() {
             <button
               type="button"
               onClick={() => setShowConfirmPassword((value) => !value)}
-              className="rounded-lg p-1 text-gray-400 transition-colors hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+              className="rounded-sm p-1 text-gray-400 transition-colors hover:text-amber-600 dark:text-amber-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
               aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
             >
               {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -98,3 +98,4 @@ export default function ResetPasswordForm() {
     </AuthCard>
   )
 }
+

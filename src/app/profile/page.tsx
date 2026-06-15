@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 // React Imports
 import { useEffect } from 'react'
@@ -13,7 +13,7 @@ export default function ProfilePage() {
   const router = useRouter()
   const { user, loading: authLoading } = useAuth()
 
-  // 🔒 redirect to /login if not logged in
+  // ðŸ”’ redirect to /login if not logged in
   useEffect(() => {
     if (!authLoading && !user) {
       router.push('/login')
@@ -23,7 +23,7 @@ export default function ProfilePage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-blue-500" />
+        <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
       </div>
     )
   }
@@ -40,3 +40,4 @@ export default function ProfilePage() {
     />
   )
 }
+

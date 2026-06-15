@@ -1,4 +1,4 @@
-import { CheckCircle2, Circle } from 'lucide-react'
+﻿import { CheckCircle2, Circle } from 'lucide-react'
 import { cn } from '@/shared/lib/utils'
 
 const RULES = [
@@ -15,10 +15,10 @@ function getStrength(password: string) {
 export function PasswordStrength({ password }: { password: string }) {
   const strength = getStrength(password)
   const label = strength >= 3 ? 'Strong password' : strength >= 2 ? 'Good password' : 'Keep going'
-  const barClass = strength >= 3 ? 'bg-emerald-500' : strength >= 2 ? 'bg-blue-500' : 'bg-red-500'
+  const barClass = strength >= 3 ? 'bg-emerald-500' : strength >= 2 ? 'bg-amber-600 dark:bg-amber-700' : 'bg-red-500'
 
   return (
-    <div className="space-y-3 rounded-xl border border-gray-200 bg-white/40 p-3 dark:border-white/10 dark:bg-white/5">
+    <div className="space-y-3 rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/40 p-3 dark:border-white/10 dark:bg-[#fdf6e3]/5">
       <div className="flex items-center justify-between text-xs">
         <span className="font-semibold text-gray-700 dark:text-gray-300">
           Password strength
@@ -30,7 +30,7 @@ export function PasswordStrength({ password }: { password: string }) {
           <div
             key={index}
             className={cn(
-              'h-1.5 rounded-full bg-gray-200 transition-colors dark:bg-gray-800',
+              'h-1.5 rounded-full bg-gray-200 transition-colors dark:bg-[#1A100C]',
               strength > index && barClass
             )}
           />
@@ -82,3 +82,4 @@ export function PasswordMatchIndicator({
     </div>
   )
 }
+

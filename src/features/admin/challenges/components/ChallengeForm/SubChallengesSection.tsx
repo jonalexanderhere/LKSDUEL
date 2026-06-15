@@ -32,7 +32,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
   const [draggedSubChallengeIndex, setDraggedSubChallengeIndex] = useState<number | null>(null)
 
   return (
-    <div className="md:col-span-2 space-y-3 rounded-md border border-gray-200 dark:border-gray-700 p-3 bg-gray-50/70 dark:bg-gray-800/40">
+    <div className="md:col-span-2 space-y-3 rounded-md border border-amber-900/50 dark:border-gray-700 p-3 bg-[#f4e4bc]/70 dark:bg-[#1A100C]/40">
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <Label className="text-sm font-semibold">Sub-Challenges</Label>
         <div className="flex items-center gap-2">
@@ -74,11 +74,11 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
             }}
             className={`grid grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)_auto] gap-3 items-start rounded-md border bg-[#fdf6e3] dark:bg-[#2c1e16] p-3 transition ${draggedSubChallengeIndex === idx
               ? 'border-primary-400 opacity-70'
-              : 'border-gray-200 dark:border-gray-700'
+              : 'border-amber-900/50 dark:border-gray-700'
               }`}
           >
             <div className="flex items-center gap-2 md:w-12 md:flex-col md:items-center md:gap-1 md:pt-4 md:self-start">
-              <span className="min-w-8 rounded-md border border-gray-200 bg-gray-100 px-2 py-1 text-center text-xs font-semibold text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 md:w-full">
+              <span className="min-w-8 rounded-md border border-amber-900/50 bg-[#eaddb6] px-2 py-1 text-center text-xs font-semibold text-gray-700 dark:border-gray-700 dark:bg-[#1A100C] dark:text-gray-200 md:w-full">
                 #{idx + 1}
               </span>
               <button
@@ -89,7 +89,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
                   setDraggedSubChallengeIndex(idx)
                 }}
                 onDragEnd={() => setDraggedSubChallengeIndex(null)}
-                className="cursor-grab rounded-md p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-700 active:cursor-grabbing dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                className="cursor-grab rounded-md p-1.5 text-gray-400 hover:bg-[#eaddb6] hover:text-gray-700 active:cursor-grabbing dark:hover:bg-gray-800 dark:hover:text-gray-200"
                 title="Drag"
                 aria-label="Drag sub-challenge"
               >
@@ -139,7 +139,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
                   </Button>
                 </div>
                 {questionPreviewRows[idx] ? (
-                  <div className="mt-1 rounded-md border border-gray-200 bg-gray-50 p-2 text-sm dark:border-gray-700 dark:bg-gray-800/70">
+                  <div className="mt-1 rounded-md border border-amber-900/50 bg-[#f4e4bc] p-2 text-sm dark:border-gray-700 dark:bg-[#1A100C]/70">
                     <div className="max-w-full overflow-hidden break-words text-sm font-semibold [&_p]:m-0 [&_p]:text-sm [&_p]:leading-snug [&_ul]:my-0 [&_ol]:my-0 [&_li]:my-0">
                       <MarkdownRenderer content={normalizeQuestionMarkdown(row.question || '*No question yet*')} className="max-w-full break-words" />
                     </div>
@@ -151,7 +151,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
                     value={row.question}
                     onChange={e => onUpdate(idx, 'question', e.target.value)}
                     placeholder="Question text, markdown supported"
-                    className="mt-1 h-24 min-h-[84px] resize-none overflow-y-auto transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                    className="mt-1 h-24 min-h-[84px] resize-none overflow-y-auto transition-colors bg-[#f4e4bc] dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
                   />
                 )}
               </div>
@@ -163,7 +163,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
                   value={row.answer}
                   onChange={e => onUpdate(idx, 'answer', e.target.value)}
                   placeholder="Plaintext answer"
-                  className="transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                  className="transition-colors bg-[#f4e4bc] dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
                 />
               </div>
             </div>
@@ -173,4 +173,5 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
     </div>
   )
 }
+
 

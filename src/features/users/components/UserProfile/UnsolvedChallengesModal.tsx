@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useMemo } from 'react'
 import { LockKeyhole } from 'lucide-react'
@@ -67,7 +67,7 @@ export default function UnsolvedChallengesModal({
       <ModalBody>
         {loading ? (
           <div className="flex justify-center py-12">
-            <Loader color="text-blue-500" />
+            <Loader color="text-amber-600 dark:text-amber-500" />
           </div>
         ) : unsolvedChallenges.length === 0 ? (
           <UserEmptyState
@@ -83,7 +83,7 @@ export default function UnsolvedChallengesModal({
               return (
                 <section key={category} className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-600 dark:text-blue-400">
+                    <span className="rounded-full border border-blue-500/20 bg-amber-600 dark:bg-amber-700/10 px-3 py-1 text-xs font-bold text-amber-700 dark:text-amber-500 dark:text-blue-400">
                       {category}
                     </span>
                     <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -97,7 +97,7 @@ export default function UnsolvedChallengesModal({
                         key={challenge.id}
                         title={challenge.title}
                         titleBadge={(
-                          <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2 py-0.5 text-[11px] font-semibold text-blue-600 dark:text-blue-400">
+                          <span className="rounded-full border border-blue-500/20 bg-amber-600 dark:bg-amber-700/10 px-2 py-0.5 text-[11px] font-semibold text-amber-700 dark:text-amber-500 dark:text-blue-400">
                             {challenge.difficulty}
                           </span>
                         )}
@@ -122,7 +122,7 @@ export default function UnsolvedChallengesModal({
           type="button"
           variant="outline"
           onClick={() => onOpenChange(false)}
-          className="border-blue-500/30 bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 dark:text-blue-400"
+          className="border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 text-amber-700 dark:text-amber-500 hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
         >
           Close
         </Button>
@@ -130,3 +130,4 @@ export default function UnsolvedChallengesModal({
     </BaseModal>
   )
 }
+

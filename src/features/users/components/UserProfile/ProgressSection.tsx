@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import { motion } from 'framer-motion'
@@ -60,9 +60,9 @@ export default function ProgressSection({
         difficulty,
         total_challenges,
         solvedCount: solvedChallenges.filter(c => c.difficulty === difficulty).length,
-        bgColor: bgMap[colorBase] || 'bg-gray-500',
+        bgColor: bgMap[colorBase] || 'bg-[#f4e4bc]0',
         textColor: textMap[colorBase] || 'text-gray-600 dark:text-gray-400',
-        borderColor: borderMap[colorBase] || 'border-gray-500/20 bg-gray-500/10',
+        borderColor: borderMap[colorBase] || 'border-gray-500/20 bg-[#f4e4bc]0/10',
       }
     })
     .filter(({ solvedCount, total_challenges }) => total_challenges > 0 && solvedCount > 0)
@@ -96,7 +96,7 @@ export default function ProgressSection({
           {visibleCategories.map(({ category, total_challenges, solvedCount, progress }) => (
             <div
               key={category}
-              className="rounded-xl border border-gray-200 bg-white/40 p-4 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
+              className="rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/40 p-4 backdrop-blur-sm dark:border-white/10 dark:bg-[#fdf6e3]/5"
             >
               <div className="mb-3 flex items-center justify-between gap-3">
                 <span className="truncate text-sm font-semibold text-gray-900 dark:text-white">
@@ -106,12 +106,12 @@ export default function ProgressSection({
                   {solvedCount}/{total_challenges}
                 </span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+              <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-[#1A100C]">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.6, ease: 'easeInOut' }}
-                  className="h-full rounded-full bg-blue-500 shadow-[0_0_18px_rgba(59,130,246,0.25)]"
+                  className="h-full rounded-full bg-amber-600 dark:bg-amber-700 shadow-[0_0_18px_rgba(59,130,246,0.25)]"
                 />
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function ProgressSection({
       )}
 
       {activeDifficulties.length > 0 && (
-        <div className="rounded-xl border border-gray-200 bg-white/40 p-4 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
+        <div className="rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/40 p-4 backdrop-blur-sm dark:border-white/10 dark:bg-[#fdf6e3]/5">
           <div className="mb-3 flex items-center justify-between">
             <span className="text-sm font-semibold text-gray-900 dark:text-white">
               Difficulty Progress
@@ -129,7 +129,7 @@ export default function ProgressSection({
               {totalSolved}/{totalChallenges}
             </span>
           </div>
-          <div className="flex h-3 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800 gap-0.5">
+          <div className="flex h-3 overflow-hidden rounded-full bg-gray-200 dark:bg-[#1A100C] gap-0.5">
             {activeDifficulties.map(({ difficulty, total_challenges, solvedCount, bgColor }, index) => {
               const segmentWidth = (total_challenges / totalChallenges) * 100
               const segmentProgress = (solvedCount / total_challenges) * 100
@@ -141,7 +141,7 @@ export default function ProgressSection({
                   style={{ width: `${segmentWidth}%` }}
                   title={`${difficulty}: ${solvedCount}/${total_challenges}`}
                 >
-                  <div className="absolute inset-0 bg-black/5 dark:bg-white/5" />
+                  <div className="absolute inset-0 bg-black/5 dark:bg-[#fdf6e3]/5" />
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${segmentProgress}%` }}
@@ -171,3 +171,4 @@ export default function ProgressSection({
     </UserSection>
   )
 }
+

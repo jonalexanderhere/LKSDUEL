@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -108,7 +108,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     prevTabRef.current = tabType
   }, [tabType])
 
-  if (loading && notifications.length === 0) return <Loader fullscreen color="text-blue-500" />;
+  if (loading && notifications.length === 0) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />;
 
   if (filteredNotifications.length === 0)
     return (
@@ -116,7 +116,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="border rounded-lg px-4 py-6 shadow bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center justify-center text-center text-sm text-gray-600 dark:text-gray-300"
+        className="border rounded-sm px-4 py-6 shadow bg-[#fdf6e3] dark:bg-[#1A100C] dark:border-gray-700 flex flex-col items-center justify-center text-center text-sm text-gray-600 dark:text-gray-300"
       >
         <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 mb-3">
           <svg width="22" height="22" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -167,7 +167,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             transition={{ 
               default: { type: 'spring', stiffness: 130, damping: 20 }
             }}
-            className="relative w-full overflow-hidden rounded-xl border border-red-950 bg-black/95 px-5 py-12 shadow-[0_0_35px_rgba(136,19,55,0.25)]"
+            className="relative w-full overflow-hidden rounded-sm border-double border-4 border-amber-900/70 border border-red-950 bg-black/95 px-5 py-12 shadow-[0_0_35px_rgba(136,19,55,0.25)]"
           >
             {/* Dismiss Button */}
             <button 
@@ -457,7 +457,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                                 delay: delay,
                               }}
                             >
-                              <span className="absolute top-0.5 left-0.5 w-[30%] h-[30%] bg-white rounded-full opacity-70" />
+                              <span className="absolute top-0.5 left-0.5 w-[30%] h-[30%] bg-[#fdf6e3] rounded-full opacity-70" />
                             </motion.div>
                           );
                         })}
@@ -497,7 +497,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
                                 delay: delay,
                               }}
                             >
-                              <span className="absolute top-1 left-1 w-[25%] h-[25%] bg-white rounded-full opacity-60" />
+                              <span className="absolute top-1 left-1 w-[25%] h-[25%] bg-[#fdf6e3] rounded-full opacity-60" />
                             </motion.div>
                           );
                         })}
@@ -600,10 +600,10 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
         {filteredNotifications.map((notif, idx) => (
           <motion.li
             key={idx}
-            className={`border rounded-lg px-4 py-3 shadow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm transition-colors duration-150 min-w-0 ${
+            className={`border rounded-sm px-4 py-3 shadow flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm transition-colors duration-150 min-w-0 ${
               notif.log_type === "first_blood"
                 ? "bg-gradient-to-r from-red-100 via-red-50 to-white border-red-400 dark:from-red-950/80 dark:via-red-900/40 dark:to-black dark:border-red-700/60 hover:bg-red-100/80 dark:hover:bg-red-900/50"
-                : "bg-white dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700"
+                : "bg-[#fdf6e3] dark:bg-[#1A100C] dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700"
             }`}
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
@@ -639,16 +639,16 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
             <div className="flex-1 flex flex-wrap items-center gap-x-2 min-w-0">
               {notif.log_type === "new_challenge" ? (
                 <>
-                  <span className="font-semibold text-blue-600 dark:text-blue-300">New Challenge:</span>
+                  <span className="font-semibold text-amber-700 dark:text-amber-500 dark:text-blue-300">New Challenge:</span>
                   <span className="dark:text-gray-100 font-medium max-w-[220px] sm:max-w-[300px] truncate inline-block">{notif.log_challenge_title}</span>
                   <span className="text-gray-500 dark:text-gray-400">[{notif.log_category}]</span>
                 </>
               ) : notif.log_type === "first_blood" ? (
                 <>
-                  <span className="inline-flex items-center rounded-md bg-red-600 text-white px-2 py-0.5 text-[10px] font-black tracking-wider shadow-sm">FIRST BLOOD</span>
+                  <span className="inline-flex items-center rounded-md bg-red-600 text-white px-2 py-0.5 text-[10px] font-black tracking-wider shadow-[0_4px_12px_rgba(0,0,0,0.6)]">FIRST BLOOD</span>
                   <motion.span animate={{ opacity: [0.35, 0.9, 0.35] }} transition={{ duration: 1.2, repeat: Infinity }} className="inline-block h-2 w-2 rounded-full bg-yellow-400" />
                   <span className="inline-flex items-center gap-1 min-w-0">
-                    <Link href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"} className="text-blue-600 dark:text-blue-300 font-medium hover:underline">
+                    <Link href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"} className="text-amber-700 dark:text-amber-500 dark:text-blue-300 font-medium hover:underline">
                       <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
                         {notif.log_username && notif.log_username.length > 20 ? `${notif.log_username.slice(0, 20)}...` : notif.log_username}
                       </span>
@@ -661,7 +661,7 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
               ) : (
                 <>
                   <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate min-w-0">
-                    <Link href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"} className="text-blue-600 dark:text-blue-300 font-medium hover:underline">
+                    <Link href={notif.log_username ? `/user/${encodeURIComponent(notif.log_username)}` : "#"} className="text-amber-700 dark:text-amber-500 dark:text-blue-300 font-medium hover:underline">
                       <span className="inline-flex items-center gap-1 max-w-[160px] sm:max-w-[300px] truncate">
                         {notif.log_username && notif.log_username.length > 20 ? `${notif.log_username.slice(0, 20)}...` : notif.log_username}
                       </span>
@@ -683,3 +683,4 @@ export default function LogsList({ tabType = 'challenges', eventId }: { tabType?
     </div>
   );
 }
+

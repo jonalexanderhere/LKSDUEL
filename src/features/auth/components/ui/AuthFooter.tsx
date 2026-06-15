@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 
 interface AuthFooterProps {
   text: string
@@ -12,10 +12,11 @@ export function AuthFooter({ text, href, linkText }: AuthFooterProps) {
       {text}{' '}
       <Link
         href={href}
-        className="font-semibold text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+        className="font-semibold text-amber-700 dark:text-amber-500 transition-colors hover:text-amber-600 dark:text-amber-500 dark:text-blue-400 dark:hover:text-blue-300"
       >
         {linkText}
       </Link>
     </p>
   )
 }
+

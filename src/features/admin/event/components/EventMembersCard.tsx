@@ -46,7 +46,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
   onRemoveMember,
 }) => {
   return (
-    <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 shadow-[0_4px_12px_rgba(0,0,0,0.6)]">
       <CardHeader>
         <CardTitle className="text-amber-900 dark:text-amber-50">Event Members</CardTitle>
       </CardHeader>
@@ -56,7 +56,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
           <select
             value={manageEventId}
             onChange={(e) => onManageEventChange(e.target.value)}
-            className="mt-2 w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
+            className="mt-2 w-full px-3 py-2 text-sm border border-amber-900/50 dark:border-gray-600 rounded-md bg-[#fdf6e3] dark:bg-[#1A100C] text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
           >
             <option value="">Select event</option>
             {events.map((evt) => (
@@ -102,7 +102,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
                 Add Selected ({selectedCandidateUserIds.length})
               </Button>
             </div>
-            <div className="mt-2 border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden">
+            <div className="mt-2 border border-amber-900/50 dark:border-gray-700 rounded-md overflow-hidden">
               {manageEventId === '' ? (
                 <div className="py-4 px-3 text-sm text-gray-500 dark:text-gray-400">Select event first</div>
               ) : assignUserQuery.trim().length < 2 ? (
@@ -113,7 +113,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
                 <div className="py-4 px-3 text-sm text-gray-500 dark:text-gray-400">No matching users (or all already members)</div>
               ) : (
                 candidateUsers.map((user) => (
-                  <div key={user.id} className="px-3 py-2 border-b last:border-b-0 border-gray-200 dark:border-gray-700 flex items-center justify-between gap-2">
+                  <div key={user.id} className="px-3 py-2 border-b last:border-b-0 border-amber-900/50 dark:border-gray-700 flex items-center justify-between gap-2">
                     <div className="min-w-0 flex items-start gap-2">
                       <input
                         type="checkbox"
@@ -147,14 +147,14 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
               onChange={(e) => onMemberQueryChange(e.target.value)}
               className="mt-2"
             />
-            <div className="mt-2 border border-gray-200 dark:border-gray-700 rounded-md max-h-[300px] overflow-auto">
+            <div className="mt-2 border border-amber-900/50 dark:border-gray-700 rounded-md max-h-[300px] overflow-auto">
               {loadingEventMembers ? (
                 <div className="py-4 px-3 text-sm text-gray-500 dark:text-gray-400">Loading members...</div>
               ) : filteredEventMembers.length === 0 ? (
                 <div className="py-4 px-3 text-sm text-gray-500 dark:text-gray-400">No members yet</div>
               ) : (
                 filteredEventMembers.map((member) => (
-                  <div key={member.user_id} className="px-3 py-2 border-b last:border-b-0 border-gray-200 dark:border-gray-700 flex items-center justify-between gap-2">
+                  <div key={member.user_id} className="px-3 py-2 border-b last:border-b-0 border-amber-900/50 dark:border-gray-700 flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <p className="text-sm font-medium text-amber-900 dark:text-amber-50 truncate">{member.username}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{member.user_id}</p>
@@ -180,5 +180,6 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
 }
 
 export default EventMembersCard
+
 
 

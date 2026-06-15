@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useMemo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -72,16 +72,16 @@ export default function UserProfile({
 
   if (initialLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+      <div className="flex justify-center items-center min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-amber-600 dark:bg-amber-700/30 dark:bg-[#0b0f19] dark:text-gray-100">
         <ProfileBackground />
-        <Loader color="text-blue-500" />
+        <Loader color="text-amber-600 dark:text-amber-500" />
       </div>
     )
   }
 
   if (hasError) {
     return (
-      <div className="relative min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+      <div className="relative min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-amber-600 dark:bg-amber-700/30 dark:bg-[#0b0f19] dark:text-gray-100">
         <ProfileBackground />
         <main className="relative z-10 mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-5xl items-center justify-center px-6 py-16">
           <UserEmptyState
@@ -92,7 +92,7 @@ export default function UserProfile({
               <button
                 type="button"
                 onClick={onBack}
-                className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-500/20 dark:text-blue-400"
+                className="rounded-full border border-blue-500/30 bg-amber-600 dark:bg-amber-700/10 px-4 py-2 text-sm font-semibold text-amber-700 dark:text-amber-500 transition hover:bg-amber-600 dark:bg-amber-700/20 dark:text-blue-400"
               >
                 Go Back
               </button>
@@ -105,12 +105,12 @@ export default function UserProfile({
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+    <div className="relative min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-amber-600 dark:bg-amber-700/30 dark:bg-[#0b0f19] dark:text-gray-100">
       <ProfileBackground />
       <main className="relative z-10 mx-auto w-full max-w-6xl space-y-6 px-6 py-8">
         {loading || loadingDetail ? (
           <div className="flex justify-center py-4 opacity-70">
-            <Loader color="text-blue-500" />
+            <Loader color="text-amber-600 dark:text-amber-500" />
           </div>
         ) : null}
 
@@ -143,7 +143,7 @@ export default function UserProfile({
                       })
                     }}
                     onSaved={refreshUserDetail}
-                    triggerButtonClass="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/50 px-4 py-2 text-sm font-semibold text-gray-600 backdrop-blur transition hover:border-blue-500/40 hover:text-blue-600 dark:border-white/10 dark:bg-gray-800/50 dark:text-gray-400 dark:hover:text-blue-400"
+                    triggerButtonClass="inline-flex items-center gap-2 rounded-full border border-amber-900/50 bg-[#fdf6e3]/50 px-4 py-2 text-sm font-semibold text-gray-600 backdrop-blur transition hover:border-blue-500/40 hover:text-amber-700 dark:text-amber-500 dark:border-white/10 dark:bg-[#1A100C]/50 dark:text-gray-400 dark:hover:text-blue-400"
                     authInfo={authInfo}
                   />
                 ) : null
@@ -230,9 +230,10 @@ function ProfileBackground() {
   return (
     <>
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
+        <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-amber-600 dark:bg-amber-700/5 blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-indigo-600/5 blur-[120px]" />
       </div>
     </>
   )
 }
+

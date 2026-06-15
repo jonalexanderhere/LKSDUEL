@@ -156,7 +156,7 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose() }}>
       <DialogContent
-        className="max-w-2xl w-[95vw] h-[90vh] flex flex-col overflow-hidden rounded-2xl bg-white/60 dark:bg-[#0a0d14]/80 border border-amber-900/50 backdrop-blur-xl p-0 shadow-2xl [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400"
+        className="max-w-2xl w-[95vw] h-[90vh] flex flex-col overflow-hidden rounded-sm border-double border-4 border-amber-900/70 bg-[#fdf6e3]/60 dark:bg-[#0a0d14]/80 border border-amber-900/50 backdrop-blur-xl p-0 shadow-2xl [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400"
         onClick={(event) => event.stopPropagation()}
       >
         {/* Fixed Header Section */}
@@ -186,7 +186,7 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
 
                 {/* Difficulty */}
                 <div className="flex items-center gap-1.5">
-                  <div className={`w-2 h-2 rounded-full ${diffTextColor.replace('text-', 'bg-').replace('-400', '-500')} shadow-sm`} />
+                  <div className={`w-2 h-2 rounded-full ${diffTextColor.replace('text-', 'bg-').replace('-400', '-500')} shadow-[0_4px_12px_rgba(0,0,0,0.6)]`} />
                   <span className="text-[11px] font-semibold text-gray-500 tracking-tight">
                     {normalizedDiff}
                   </span>
@@ -326,4 +326,5 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
 }
 
 export default ChallengeDetailDialog
+
 

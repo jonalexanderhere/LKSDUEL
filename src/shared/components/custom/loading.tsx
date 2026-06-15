@@ -1,14 +1,14 @@
-"use client"
+﻿"use client"
 
 import React from "react"
 
 export default function Loader({
   size = 48,
-  color = "text-blue-500",
+  color = "text-amber-600 dark:text-amber-500",
   fullscreen = false,
 }) {
   const containerClass = fullscreen
-    ? "fixed inset-0 z-[9999] flex items-center justify-center bg-white/50 dark:bg-gray-900/70" // overlay transparan
+    ? "fixed inset-0 z-[9999] flex items-center justify-center bg-[#fdf6e3]/50 dark:bg-[#1f140f]/70" // overlay transparan
     : "flex items-center justify-center"
 
   return (
@@ -44,3 +44,4 @@ export default function Loader({
     </div>
   )
 }
+

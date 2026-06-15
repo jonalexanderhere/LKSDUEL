@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import type { ReactNode } from 'react'
 import { cn } from '@/shared/lib/utils'
@@ -21,7 +21,7 @@ export default function ProfileChallengeListItem({
   return (
     <div
       className={cn(
-        'flex min-h-[88px] flex-col justify-between gap-3 rounded-xl border border-gray-200 bg-white/40 p-4 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:bg-white/80 hover:shadow-[0_10px_20px_rgba(59,130,246,0.1)] dark:border-white/10 dark:bg-white/5 dark:hover:bg-gray-800/80 sm:flex-row sm:items-center',
+        'flex min-h-[88px] flex-col justify-between gap-3 rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/40 p-4 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:bg-[#fdf6e3]/80 hover:shadow-[0_10px_20px_rgba(59,130,246,0.1)] dark:border-white/10 dark:bg-[#fdf6e3]/5 dark:hover:bg-gray-800/80 sm:flex-row sm:items-center',
         className
       )}
     >
@@ -42,3 +42,4 @@ export default function ProfileChallengeListItem({
     </div>
   )
 }
+

@@ -35,7 +35,7 @@ const SolversListCard: React.FC<SolversListCardProps> = ({
   onLoadMore,
 }) => {
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <CardTitle>All Solvers</CardTitle>
 
@@ -48,7 +48,7 @@ const SolversListCard: React.FC<SolversListCardProps> = ({
             onKeyDown={(e) => {
               if (e.key === 'Enter') onSearch()
             }}
-            className="px-3 py-1 text-sm rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-1 text-sm rounded border dark:border-gray-700 bg-[#f4e4bc] dark:bg-[#1f140f] text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <Button id="search-btn" variant="outline" size="sm" onClick={onSearch}>
@@ -78,12 +78,12 @@ const SolversListCard: React.FC<SolversListCardProps> = ({
             {solvers.map((s) => (
               <div
                 key={s.solve_id}
-                className="flex items-center justify-between px-4 py-3 transition-colors border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+                className="flex items-center justify-between px-4 py-3 transition-colors border-b dark:border-gray-700 hover:bg-[#f4e4bc] dark:hover:bg-gray-800"
               >
                 <div className="truncate">
                   <Link
                     href={`/user/${encodeURIComponent(s.username)}`}
-                    className="font-medium text-blue-600 dark:text-blue-300 hover:underline"
+                    className="font-medium text-amber-700 dark:text-amber-500 dark:text-blue-300 hover:underline"
                     title={s.username}
                   >
                     {s.username.length > 20 ? `${s.username.slice(0, 30)}...` : s.username}
@@ -123,4 +123,5 @@ const SolversListCard: React.FC<SolversListCardProps> = ({
 }
 
 export default SolversListCard
+
 

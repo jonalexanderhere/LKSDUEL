@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { memo, useState } from 'react'
 import { Check, Copy } from 'lucide-react'
@@ -102,8 +102,8 @@ function QuestionCard({
             completed
               ? 'flex-1 px-3 py-2 rounded border border-[#35355e] bg-[#1a1a33] text-gray-400 focus:outline-none cursor-not-allowed text-sm'
               : current
-                ? 'flex-1 px-3 py-2 rounded border border-[#35355e] dark:border-gray-700 bg-[#181829] dark:bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-pink-400'
-                : 'flex-1 px-3 py-2 rounded border text-sm focus:outline-none border-[#35355e] dark:border-gray-700 bg-[#181829] dark:bg-gray-800 text-white focus:ring-2 focus:ring-pink-400'
+                ? 'flex-1 px-3 py-2 rounded border border-[#35355e] dark:border-gray-700 bg-[#181829] dark:bg-[#1A100C] text-white focus:outline-none focus:ring-2 focus:ring-pink-400'
+                : 'flex-1 px-3 py-2 rounded border text-sm focus:outline-none border-[#35355e] dark:border-gray-700 bg-[#181829] dark:bg-[#1A100C] text-white focus:ring-2 focus:ring-pink-400'
           }
           onKeyDown={(event) => {
             if (!completed && event.key === 'Enter') {
@@ -247,3 +247,4 @@ export default function SubChallengePanel({
     </div>
   )
 }
+

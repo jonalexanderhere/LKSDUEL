@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import * as React from "react"
 import { cn } from "@/shared/lib/utils"
@@ -19,7 +19,7 @@ const MODAL_SIZE_CLASS = {
 } as const
 
 const BASE_MODAL_CONTENT_CLASS =
-  "w-[calc(100vw-32px)] sm:w-full h-[88vh] max-h-[90vh] flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white/90 p-0 text-gray-900 shadow-2xl backdrop-blur-xl dark:border-gray-800 dark:bg-[#111827]/95 dark:text-gray-100 [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400"
+  "w-[calc(100vw-32px)] sm:w-full h-[88vh] max-h-[90vh] flex flex-col overflow-hidden rounded-sm border-double border-4 border-amber-900/70 border border-amber-900/50 bg-[#fdf6e3]/90 p-0 text-gray-900 shadow-2xl backdrop-blur-xl dark:border-amber-700/50 dark:bg-[#111827]/95 dark:text-gray-100 [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400"
 
 export type ModalSize = keyof typeof MODAL_SIZE_CLASS
 
@@ -73,7 +73,7 @@ export function ModalHeader({
   return (
     <div
       className={cn(
-        "shrink-0 border-b border-gray-200 bg-white/70 px-4 py-4 backdrop-blur md:px-6 dark:border-gray-800 dark:bg-gray-900/80",
+        "shrink-0 border-b border-amber-900/50 bg-[#fdf6e3]/70 px-4 py-4 backdrop-blur md:px-6 dark:border-amber-700/50 dark:bg-[#1f140f]/80",
         className
       )}
     >
@@ -141,7 +141,7 @@ export function ModalFooter({
   return (
     <div
       className={cn(
-        "shrink-0 border-t border-gray-200 bg-white/70 px-4 py-4 backdrop-blur md:px-6 dark:border-gray-800 dark:bg-gray-900/80",
+        "shrink-0 border-t border-amber-900/50 bg-[#fdf6e3]/70 px-4 py-4 backdrop-blur md:px-6 dark:border-amber-700/50 dark:bg-[#1f140f]/80",
         className
       )}
     >
@@ -156,3 +156,4 @@ export function ModalFooter({
     </div>
   )
 }
+

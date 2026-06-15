@@ -59,12 +59,12 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg rounded-2xl p-0 overflow-hidden">
+      <DialogContent className="max-w-lg rounded-sm border-double border-4 border-amber-900/70 p-0 overflow-hidden">
         <div className="p-5 space-y-5">
 
           {/* HEADER */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 font-bold text-sm text-blue-600 dark:text-blue-400">
+            <div className="flex items-center gap-2 font-bold text-sm text-amber-700 dark:text-amber-500 dark:text-blue-400">
               <Flag size={16} />
               FLAG INSPECTOR
             </div>
@@ -77,7 +77,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
           </div>
 
           {/* FLAG DB */}
-          <div className="bg-amber-200/50 dark:bg-amber-900/50 rounded-lg px-3 py-2 font-mono text-sm text-gray-700 dark:text-gray-200 flex justify-between items-center">
+          <div className="bg-amber-200/50 dark:bg-amber-900/50 rounded-sm px-3 py-2 font-mono text-sm text-gray-700 dark:text-gray-200 flex justify-between items-center">
             <span className="truncate">{effectiveDBFlag || 'No flag'}</span>
             <button onClick={() => handleCopy(effectiveDBFlag, 'fetched')}>
               {copyType === 'fetched' ? <Check size={14} /> : <Copy size={14} />}
@@ -90,7 +90,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
             onChange={(e) => setTestInput(e.target.value)}
             placeholder="Type flag..."
             className={cn(
-              "w-full px-3 py-2 rounded-lg font-mono text-sm outline-none border",
+              "w-full px-3 py-2 rounded-sm font-mono text-sm outline-none border",
               "bg-[#fdf6e3] dark:bg-[#2c1e16]",
               "text-amber-900 dark:text-amber-50",
               "placeholder:text-gray-400",
@@ -98,20 +98,20 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
                 ? isMatchWithTest
                   ? "border-emerald-500"
                   : "border-red-500"
-                : "border-gray-200 dark:border-gray-700"
+                : "border-amber-900/50 dark:border-gray-700"
             )}
           />
 
           {/* DIFF */}
           {testInput && (
-            <div className="bg-amber-200/50 dark:bg-amber-900/50 rounded-lg p-3 font-mono text-sm flex flex-wrap gap-[2px]">
+            <div className="bg-amber-200/50 dark:bg-amber-900/50 rounded-sm p-3 font-mono text-sm flex flex-wrap gap-[2px]">
               {diffResult.map((item, i) => (
                 <span
                   key={i}
                   className={cn(
                     "px-[2px] rounded",
                     item.type === 'correct' && "text-emerald-500",
-                    item.type === 'case' && "text-blue-500",
+                    item.type === 'case' && "text-amber-600 dark:text-amber-500",
                     item.type === 'wrong' && "text-red-500"
                   )}
                 >
@@ -125,7 +125,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
           {testInput && (
             <div className="flex gap-3 text-[10px] opacity-70">
               <span className="text-emerald-500">correct</span>
-              <span className="text-blue-500">case</span>
+              <span className="text-amber-600 dark:text-amber-500">case</span>
               <span className="text-red-500">wrong</span>
             </div>
           )}
@@ -133,7 +133,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
           {/* ACTION */}
           <Button
             onClick={() => onOpenChange(false)}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs h-9 rounded-lg"
+            className="w-full bg-amber-700 dark:bg-amber-800 hover:bg-blue-700 text-white text-xs h-9 rounded-sm"
           >
             Close
           </Button>
@@ -143,4 +143,5 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
     </Dialog>
   )
 }
+
 

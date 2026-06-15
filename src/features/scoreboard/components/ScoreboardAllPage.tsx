@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { motion } from 'framer-motion'
 import { Loader } from '@/shared/components'
@@ -17,7 +17,7 @@ export default function ScoreboardAllPage() {
     setSelectedEvent,
   } = useScoreboardAllPageData()
 
-  if (authLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user) return null
 
   return (
@@ -34,7 +34,7 @@ export default function ScoreboardAllPage() {
                 value={selectedEvent}
                 onChange={setSelectedEvent}
                 events={startedEvents}
-                className="min-w-[180px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm px-3 py-2 rounded"
+                className="min-w-[180px] bg-[#fdf6e3] dark:bg-[#1A100C] border border-amber-900/50 dark:border-gray-700 text-sm px-3 py-2 rounded"
               />
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function ScoreboardAllPage() {
 
         {loading && leaderboard.length === 0 ? (
           <div className="flex justify-center py-16">
-            <Loader color="text-blue-500" />
+            <Loader color="text-amber-600 dark:text-amber-500" />
           </div>
         ) : (
           <motion.div
@@ -64,3 +64,4 @@ export default function ScoreboardAllPage() {
     </div>
   )
 }
+

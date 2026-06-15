@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { Pencil } from 'lucide-react'
@@ -65,7 +65,7 @@ export default function EditTeamModal({
         size="sm"
         disabled={disabled}
         onClick={() => setOpen(true)}
-        className="gap-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold border-none"
+        className="gap-2 bg-amber-700 dark:bg-amber-800 dark:bg-amber-600 dark:bg-amber-700 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold border-none"
       >
         <Pencil size={14} />
         Edit Team
@@ -96,7 +96,7 @@ export default function EditTeamModal({
               onChange={(e) => setName(e.target.value)}
               disabled={loading}
               maxLength={50}
-              className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+              className="bg-[#fdf6e3] dark:bg-[#1A100C] border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400">
               Max 50 characters. Must be unique.
@@ -118,7 +118,7 @@ export default function EditTeamModal({
               !name.trim() ||
               name.trim() === currentName
             }
-            className="w-full bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold"
+            className="w-full bg-amber-700 dark:bg-amber-800 dark:bg-amber-600 dark:bg-amber-700 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold"
           >
             {loading ? 'Saving...' : 'Save'}
           </Button>
@@ -127,3 +127,4 @@ export default function EditTeamModal({
     </Dialog>
   )
 }
+

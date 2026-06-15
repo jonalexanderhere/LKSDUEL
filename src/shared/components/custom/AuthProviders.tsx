@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { AuthService } from "@/features/auth";
 import { useState } from "react";
@@ -55,7 +55,7 @@ export default function AuthProviders({ authInfo }: { authInfo: AuthInfo[] }) {
           return (
             <div
               key={item.provider}
-              className="flex flex-1 min-w-0 items-center gap-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-2 shadow-sm transition-all"
+              className="flex flex-1 min-w-0 items-center gap-2 rounded-sm border border-amber-900/50 dark:border-gray-700 bg-[#fdf6e3] dark:bg-[#1f140f] border-double border-4 border-amber-900/70 px-4 py-2 shadow-[0_4px_12px_rgba(0,0,0,0.6)] transition-all"
               style={{ minHeight: 48 }}
             >
               {/* ICON */}
@@ -105,7 +105,7 @@ export default function AuthProviders({ authInfo }: { authInfo: AuthInfo[] }) {
               setLoading(false);
               if (error) setError(error);
             }}
-            className="flex flex-1 min-w-0 items-center gap-2 rounded-lg border border-dashed border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950 px-4 py-2 text-blue-700 dark:text-blue-200 font-semibold shadow-sm hover:border-blue-500 hover:bg-blue-100 dark:hover:bg-blue-900 transition-all"
+            className="flex flex-1 min-w-0 items-center gap-2 rounded-sm border border-dashed border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950 px-4 py-2 text-blue-700 dark:text-blue-200 font-semibold shadow-[0_4px_12px_rgba(0,0,0,0.6)] hover:border-blue-500 hover:bg-blue-100 dark:hover:bg-blue-900 transition-all"
             style={{ minHeight: 48 }}
           >
             <Chrome size={16} />
@@ -136,7 +136,7 @@ export default function AuthProviders({ authInfo }: { authInfo: AuthInfo[] }) {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-400"
+                    className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-[#fdf6e3] dark:bg-[#1A100C] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-400"
                     value={confirmInput}
                     onChange={e => setConfirmInput(e.target.value)}
                     autoFocus
@@ -172,3 +172,4 @@ export default function AuthProviders({ authInfo }: { authInfo: AuthInfo[] }) {
     </div>
   );
 }
+

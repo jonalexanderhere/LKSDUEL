@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ShieldAlert } from 'lucide-react'
@@ -45,14 +45,14 @@ const ChallengeListPanel: React.FC<ChallengeListPanelProps> = ({
 }) => {
   return (
     <motion.div className="lg:col-span-3 order-1" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-      <Card className="h-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+      <Card className="h-full bg-[#fdf6e3] dark:bg-[#1A100C] border-amber-900/50 dark:border-gray-700">
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <span>Challenge List</span>
               {isRefreshing && (
-                <div className="flex items-center gap-2 text-[10px] font-medium text-blue-500 animate-pulse">
-                  <div className="w-1 h-1 rounded-full bg-blue-500 animate-bounce" />
+                <div className="flex items-center gap-2 text-[10px] font-medium text-amber-600 dark:text-amber-500 animate-pulse">
+                  <div className="w-1 h-1 rounded-full bg-amber-600 dark:bg-amber-700 animate-bounce" />
                   SYNCING...
                 </div>
               )}
@@ -91,7 +91,7 @@ const ChallengeListPanel: React.FC<ChallengeListPanelProps> = ({
                 containerHeight="py-8"
               />
             ) : (
-              <div className="divide-y border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden">
+              <div className="divide-y border border-amber-900/50 dark:border-gray-700 rounded-md overflow-hidden">
                 {filteredChallenges.map(challenge => (
                   <ChallengeListItem
                     key={challenge.id}
@@ -113,3 +113,4 @@ const ChallengeListPanel: React.FC<ChallengeListPanelProps> = ({
 }
 
 export default ChallengeListPanel
+

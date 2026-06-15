@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import { motion } from 'framer-motion'
@@ -47,8 +47,8 @@ export default function ProfileHeader({
           src={avatarSrc}
           alt={userDetail.username}
           size={120}
-          className="rounded-full border-4 border-white object-cover shadow-md dark:border-gray-900"
-          fallbackBg="bg-blue-500/10"
+          className="rounded-full border-4 border-white object-cover shadow-[0_6px_16px_rgba(0,0,0,0.8)] dark:border-gray-900"
+          fallbackBg="bg-amber-600 dark:bg-amber-700/10"
         />
 
         <div className="flex min-w-0 flex-1 flex-col gap-2 text-center sm:text-left">
@@ -74,12 +74,12 @@ export default function ProfileHeader({
 
           <div className="mt-1 flex flex-row items-start justify-between gap-4 w-full flex-wrap">
             <div className="flex-1 flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-400 sm:flex-nowrap">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/50 px-3 py-1.5 backdrop-blur dark:border-white/10 dark:bg-gray-900/40">
-                <CalendarDays className="h-3.5 w-3.5 text-blue-500" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-900/50 bg-[#fdf6e3]/50 px-3 py-1.5 backdrop-blur dark:border-white/10 dark:bg-[#1f140f]/40">
+                <CalendarDays className="h-3.5 w-3.5 text-amber-600 dark:text-amber-500" />
                 Joined {userDetail.created_at ? formatRelativeDate(userDetail.created_at) : '-'}
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-white/50 px-3 py-1.5 backdrop-blur dark:border-white/10 dark:bg-gray-900/40">
-                <Clock3 className="h-3.5 w-3.5 text-blue-500" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-900/50 bg-[#fdf6e3]/50 px-3 py-1.5 backdrop-blur dark:border-white/10 dark:bg-[#1f140f]/40">
+                <Clock3 className="h-3.5 w-3.5 text-amber-600 dark:text-amber-500" />
                 Last login {userDetail.last_login_at ? formatRelativeDate(userDetail.last_login_at) : 'Never'}
               </span>
             </div>
@@ -131,3 +131,4 @@ export default function ProfileHeader({
     </motion.section>
   )
 }
+

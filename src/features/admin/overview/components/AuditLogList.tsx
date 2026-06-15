@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
@@ -25,12 +25,12 @@ const ACTION_OPTIONS: { value: ActionType; label: string }[] = [
 
 const getActionStyle = (action: string) => {
   switch (action) {
-    case 'login': return { color: 'text-green-500', icon: '→' }
-    case 'logout': return { color: 'text-yellow-500', icon: '←' }
-    case 'user_signedup': return { color: 'text-blue-500', icon: '+' }
-    case 'user_deleted': return { color: 'text-red-500', icon: '×' }
-    case 'token_refreshed': return { color: 'text-purple-500', icon: '⟲' }
-    default: return { color: 'text-gray-500', icon: '•' }
+    case 'login': return { color: 'text-green-500', icon: 'â†’' }
+    case 'logout': return { color: 'text-yellow-500', icon: 'â†' }
+    case 'user_signedup': return { color: 'text-amber-600 dark:text-amber-500', icon: '+' }
+    case 'user_deleted': return { color: 'text-red-500', icon: 'Ã—' }
+    case 'token_refreshed': return { color: 'text-purple-500', icon: 'âŸ²' }
+    default: return { color: 'text-gray-500', icon: 'â€¢' }
   }
 }
 
@@ -80,14 +80,14 @@ const AuditLogList: React.FC<AuditLogListProps> = ({ logs: propLogs, isLoading: 
   }, [])
 
   if (isLoading) return (
-    <Card className="bg-white dark:bg-gray-800 pt-5">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C] pt-5">
       <CardHeader><CardTitle className="text-lg font-semibold">Audit Logs</CardTitle></CardHeader>
-      <CardContent className="flex justify-center py-8"><Loader color="text-blue-500" /></CardContent>
+      <CardContent className="flex justify-center py-8"><Loader color="text-amber-600 dark:text-amber-500" /></CardContent>
     </Card>
   )
 
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-[#fdf6e3] dark:bg-[#1A100C]">
       <CardHeader className="space-y-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold">Audit Logs</CardTitle>
@@ -119,7 +119,7 @@ const AuditLogList: React.FC<AuditLogListProps> = ({ logs: propLogs, isLoading: 
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Filter by email..."
-            className="text-sm px-3 py-2 rounded-lg border bg-transparent outline-none focus:ring-1 ring-blue-500/50"
+            className="text-sm px-3 py-2 rounded-sm border bg-transparent outline-none focus:ring-1 ring-blue-500/50"
           />
         </div>
       </CardHeader>
@@ -132,7 +132,7 @@ const AuditLogList: React.FC<AuditLogListProps> = ({ logs: propLogs, isLoading: 
             const style = getActionStyle(log.payload.action)
 
             return (
-              <motion.div key={log.id || idx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-6 py-3 hover:bg-gray-50/50 dark:hover:bg-gray-900/10">
+              <motion.div key={log.id || idx} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-6 py-3 hover:bg-[#f4e4bc]/50 dark:hover:bg-gray-900/10">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2 min-w-[140px]">
                     <span className={cn(style.color, "font-black text-lg")}>{style.icon}</span>
@@ -165,3 +165,4 @@ const AuditLogList: React.FC<AuditLogListProps> = ({ logs: propLogs, isLoading: 
 }
 
 export default AuditLogList
+

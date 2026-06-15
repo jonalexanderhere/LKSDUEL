@@ -1,4 +1,4 @@
-// React Imports
+﻿// React Imports
 import React from "react";
 import { motion } from "framer-motion";
 import { Flame, Sparkles, AlertTriangle, Globe, Bomb, Binary, Cpu, Search, Puzzle, Shield, Terminal, Lightbulb, Eye, Image as ImageIcon, Wifi, Flag, CheckCircle2 } from 'lucide-react';
@@ -43,7 +43,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
 
   // Icon lookup for background decoration (UI-layer only)
   const categoryIconMap: Record<string, React.ElementType> = {
-    'text-yellow-500': Lightbulb, 'text-emerald-500': Terminal, 'text-blue-500': Globe,
+    'text-yellow-500': Lightbulb, 'text-emerald-500': Terminal, 'text-amber-600 dark:text-amber-500': Globe,
     'text-teal-500': Search, 'text-cyan-500': Eye, 'text-purple-500': Binary,
     'text-sky-500': Cpu, 'text-red-500': Bomb, 'text-pink-500': ImageIcon,
     'text-indigo-500': Wifi, 'text-gray-500': Puzzle,
@@ -61,12 +61,12 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
       onClick={isMaintenance ? undefined : onClick}
     >
       {/* Hover Glow Overlay */}
-      <div className={`absolute inset-0 rounded-2xl transition-all duration-300 pointer-events-none
+      <div className={`absolute inset-0 rounded-sm border-double border-4 border-amber-900/70 transition-all duration-300 pointer-events-none
         ${isSolved ? 'group-hover:bg-green-500/[0.05]' :
           isTeamSolved ? 'group-hover:bg-purple-500/[0.05]' :
-            'group-hover:bg-blue-500/[0.06]'}`} />
+            'group-hover:bg-amber-600 dark:bg-amber-700/[0.06]'}`} />
 
-      {/* Top Accent Line — only for unsolved */}
+      {/* Top Accent Line â€” only for unsolved */}
       {!isAnySolved && !isMaintenance && (
         <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-transparent via-blue-500/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
@@ -87,14 +87,14 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
           <CategoryIcon size={110} strokeWidth={1.2} />
         </div>
 
-        {/* Solved Flag Badge — flush top-right corner, only user-solved */}
+        {/* Solved Flag Badge â€” flush top-right corner, only user-solved */}
         {isSolved && (
           <div className="absolute top-0 right-0 z-20 flex items-center justify-center w-9 h-9 rounded-tr-2xl rounded-bl-2xl bg-green-500/15 border-b border-l border-green-500/40">
             <Flag size={13} className="text-green-400 fill-green-400" strokeWidth={2} />
           </div>
         )}
 
-        {/* Team Solved Badge — top-right, only team solved (not personally) */}
+        {/* Team Solved Badge â€” top-right, only team solved (not personally) */}
         {isTeamSolved && !isSolved && (
           <div className="absolute top-0 right-0 z-20 flex items-center justify-center w-9 h-9 rounded-tr-2xl rounded-bl-2xl bg-purple-500/15 border-b border-l border-purple-500/40">
             <CheckCircle2 size={13} className="text-purple-400" strokeWidth={2} />
@@ -104,8 +104,8 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
         <div className="relative flex-1 flex flex-col z-10">
           {/* Maintenance Overlay Info */}
           {isMaintenance && (
-            <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/70 dark:bg-gray-950 backdrop-blur-[4px] rounded-xl pointer-events-none">
-              <p className="text-[10px] font-black text-center px-4 text-blue-600 dark:text-blue-500 leading-relaxed uppercase tracking-wider">
+            <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-[#fdf6e3]/70 dark:bg-[#110A08] backdrop-blur-[4px] rounded-sm border-double border-4 border-amber-900/70 pointer-events-none">
+              <p className="text-[10px] font-black text-center px-4 text-amber-700 dark:text-amber-500 dark:text-amber-600 dark:text-amber-500 leading-relaxed uppercase tracking-wider">
                 This service is currently unavailable. Points remain awarded to those who solved it.
               </p>
             </div>
@@ -160,7 +160,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
         <div className={`flex items-center justify-between pt-3 border-t z-10 relative ${categoryBorderColor}`}>
           <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider">
             {isMaintenance ? (
-              <span className="text-blue-500 flex items-center gap-1.5 font-black">
+              <span className="text-amber-600 dark:text-amber-500 flex items-center gap-1.5 font-black">
                 <AlertTriangle size={12} className="animate-pulse" />
                 Maintenance
               </span>
@@ -207,3 +207,4 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
 };
 
 export default ChallengeCard;
+

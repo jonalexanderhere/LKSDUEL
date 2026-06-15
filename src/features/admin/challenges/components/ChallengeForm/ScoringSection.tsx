@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Label, Input, Switch } from '@/shared/ui'
 import { ChallengeFormData } from '../../types'
 
@@ -28,7 +28,7 @@ export const ScoringSection: React.FC<ScoringSectionProps> = ({ formData, onChan
               }
             }}
             placeholder={formData.is_dynamic ? 'Nilai awal' : 'Points'}
-            className="transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+            className="transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
           />
         </div>
         <div className="flex items-center pb-2">
@@ -69,7 +69,7 @@ export const ScoringSection: React.FC<ScoringSectionProps> = ({ formData, onChan
                   onChange({ ...formData, min_points: minVal });
                 }
               }}
-              className="w-full transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+              className="w-full transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               placeholder="Batas minimum"
             />
             {formData.max_points !== '' && Number(formData.min_points) > Number(formData.max_points) && (
@@ -91,7 +91,7 @@ export const ScoringSection: React.FC<ScoringSectionProps> = ({ formData, onChan
                   onChange({ ...formData, decay_per_solve: Number(val) });
                 }
               }}
-              className="w-full transition-colors bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+              className="w-full transition-colors bg-[#fdf6e3] dark:bg-[#1A100C] border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
               placeholder="Turun tiap solve"
             />
           </div>
@@ -100,3 +100,4 @@ export const ScoringSection: React.FC<ScoringSectionProps> = ({ formData, onChan
     </div>
   )
 }
+

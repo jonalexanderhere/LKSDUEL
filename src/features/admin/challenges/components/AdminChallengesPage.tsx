@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React, { useEffect, useState, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -129,11 +129,11 @@ export default function AdminChallengesPage() {
     })
   }, [challenges, adminScope, isGlobalAdmin, eventId, filters])
 
-  if (authLoading || dataLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading || dataLoading) return <Loader fullscreen color="text-amber-600 dark:text-amber-500" />
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-[#f4e4bc] dark:bg-[#1f140f]">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
           <ChallengeListPanel
@@ -195,3 +195,4 @@ export default function AdminChallengesPage() {
     </div>
   )
 }
+
