@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Label, Input, Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui'
 import { Attachment, ChallengeFormData } from '../../types'
 
@@ -32,8 +32,8 @@ export const HintsAttachmentsSection: React.FC<HintsAttachmentsSectionProps> = (
         <div className="space-y-2 mt-2">
           {formData.hint.map((h, idx) => (
             <div key={idx} className="flex items-center gap-2">
-              <Input value={h} onChange={e => onUpdateHint(idx, e.target.value)} className="transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" />
-              <Button type="button" variant="ghost" onClick={() => onRemoveHint(idx)}>✕</Button>
+              <Input value={h} onChange={e => onUpdateHint(idx, e.target.value)} className="transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" />
+              <Button type="button" variant="ghost" onClick={() => onRemoveHint(idx)}>âœ•</Button>
             </div>
           ))}
         </div>
@@ -46,16 +46,16 @@ export const HintsAttachmentsSection: React.FC<HintsAttachmentsSectionProps> = (
         <div className="space-y-2 mt-2">
           {formData.attachments.map((a, idx) => (
             <div key={idx} className="grid grid-cols-12 gap-2 items-center">
-              <Input className="col-span-3 transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" value={a.name} onChange={e => onUpdateAttachment(idx, 'name', e.target.value)} placeholder="File name / Label" required />
-              <Input className="col-span-6 transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" value={a.url} onChange={e => onUpdateAttachment(idx, 'url', e.target.value)} placeholder="URL" required />
+              <Input className="col-span-3 transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" value={a.name} onChange={e => onUpdateAttachment(idx, 'name', e.target.value)} placeholder="File name / Label" required />
+              <Input className="col-span-6 transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" value={a.url} onChange={e => onUpdateAttachment(idx, 'url', e.target.value)} placeholder="URL" required />
               <Select value={a.type} onValueChange={(v: 'file' | 'link') => onUpdateAttachment(idx, 'type', v)}>
-                <SelectTrigger className="col-span-2 transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"><SelectValue placeholder="Type" /></SelectTrigger>
+                <SelectTrigger className="col-span-2 transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"><SelectValue placeholder="Type" /></SelectTrigger>
                 <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg">
                   <SelectItem value="file">File</SelectItem>
                   <SelectItem value="link">Link</SelectItem>
                 </SelectContent>
               </Select>
-              <Button type="button" variant="ghost" onClick={() => onRemoveAttachment(idx)} className="col-span-1">✕</Button>
+              <Button type="button" variant="ghost" onClick={() => onRemoveAttachment(idx)} className="col-span-1">âœ•</Button>
             </div>
           ))}
           {formData.attachments.length === 0 && (
@@ -66,3 +66,4 @@ export const HintsAttachmentsSection: React.FC<HintsAttachmentsSectionProps> = (
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import { Coins, Droplet, User, Rocket } from 'lucide-react'
@@ -168,7 +168,7 @@ export default function ScoreboardPage() {
               {isEmpty ? (
                 <Card className="bg-white dark:bg-gray-800">
                   <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">Ranking</CardTitle>
+                    <CardTitle className="text-lg font-semibold text-amber-900 dark:text-amber-50">Ranking</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <EmptyState
@@ -201,3 +201,4 @@ export default function ScoreboardPage() {
     </div>
   )
 }
+

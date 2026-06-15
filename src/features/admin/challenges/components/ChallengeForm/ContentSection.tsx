@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Label, Input, Textarea, Button } from '@/shared/ui'
 import { MarkdownRenderer } from '@/shared/components'
 import { Flag as FlagIcon, Zap, Type } from 'lucide-react'
@@ -32,11 +32,11 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
           <Button type="button" variant="ghost" size="sm" onClick={() => setShowPreview(!showPreview)}>{showPreview ? 'Edit' : 'Preview'}</Button>
         </div>
         {showPreview ? (
-          <div className="border rounded p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+          <div className="border rounded p-3 bg-amber-100 dark:bg-amber-900/30 dark:border-gray-700">
             <MarkdownRenderer content={formData.description || '*No description provided*'} />
           </div>
         ) : (
-          <Textarea required rows={5} value={formData.description} onChange={e => onChange({ ...formData, description: e.target.value })} className="transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm scroll-hidden" />
+          <Textarea required rows={5} value={formData.description} onChange={e => onChange({ ...formData, description: e.target.value })} className="transition-colors bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 border border-gray-300 dark:border-gray-600 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm scroll-hidden" />
         )}
       </div>
       <div className="md:col-span-2">
@@ -78,7 +78,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
               disabled={flagLoading || (!editing && !formData.flag)}
               className="flex-none pointer-events-auto text-gray-800 dark:text-gray-200 h-8 w-8"
             >
-              {flagLoading ? <span className="animate-pulse">…</span> : <FlagIcon size={18} />}
+              {flagLoading ? <span className="animate-pulse">â€¦</span> : <FlagIcon size={18} />}
             </Button>
           </div>
         </div>
@@ -96,8 +96,8 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
                 const next = [...formData.services];
                 next[idx] = e.target.value;
                 onChange({ ...formData, services: next });
-              }} placeholder="service-name" className="transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" />
-              <Button type="button" variant="ghost" onClick={() => onChange({ ...formData, services: formData.services.filter((_, i) => i !== idx) })}>✕</Button>
+              }} placeholder="service-name" className="transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm" />
+              <Button type="button" variant="ghost" onClick={() => onChange({ ...formData, services: formData.services.filter((_, i) => i !== idx) })}>âœ•</Button>
             </div>
           ))}
         </div>
@@ -105,3 +105,4 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
     </div>
   )
 }
+

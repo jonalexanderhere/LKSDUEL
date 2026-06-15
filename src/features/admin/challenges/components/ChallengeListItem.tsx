@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import DifficultyBadge from '@/shared/components/custom/DifficultyBadge'
 import { Badge, Button } from '@/shared/ui'
 import { Pencil, Trash2, Flag, CheckCircle2, CircleOff, Wrench } from 'lucide-react'
@@ -32,9 +32,9 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
           <DifficultyBadge difficulty={challenge.difficulty} width={92} />
 
           <div className="min-w-0">
-            <div className="font-medium truncate text-gray-900 dark:text-white">{challenge.title}</div>
+            <div className="font-medium truncate text-amber-900 dark:text-amber-50">{challenge.title}</div>
             <div className="text-xs text-muted-foreground dark:text-gray-300 truncate flex items-center gap-2">
-              <span className="truncate">{challenge.category} • {challenge.points} pts</span>
+              <span className="truncate">{challenge.category} â€¢ {challenge.points} pts</span>
               {challenge.is_dynamic && (
                 <>
                   <Badge className="bg-indigo-100 text-indigo-800 dark:bg-indigo-600 dark:text-white px-1 py-0.5">
@@ -107,3 +107,4 @@ const ChallengeListItem: React.FC<ChallengeListItemProps> = ({
 }
 
 export default ChallengeListItem
+

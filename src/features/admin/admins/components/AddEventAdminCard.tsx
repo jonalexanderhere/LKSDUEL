@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import {
   Button,
   Card,
@@ -59,7 +59,7 @@ const AddEventAdminCard: React.FC<AddEventAdminCardProps> = ({
               <Input value={usernameQuery} onChange={(e) => onUsernameChange(e.target.value)} placeholder="Type username..." />
 
               {userResults.length > 0 && !selectedUser && (
-                <div className="absolute z-10 mt-1 w-full rounded-md border bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="absolute z-10 mt-1 w-full rounded-md border bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 overflow-hidden">
                   {userResults.map((u) => (
                     <button
                       key={u.id}
@@ -117,3 +117,4 @@ const AddEventAdminCard: React.FC<AddEventAdminCardProps> = ({
 }
 
 export default AddEventAdminCard
+

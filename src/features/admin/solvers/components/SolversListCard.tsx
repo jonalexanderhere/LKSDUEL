@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Trash2, Search } from 'lucide-react'
@@ -48,7 +48,7 @@ const SolversListCard: React.FC<SolversListCardProps> = ({
             onKeyDown={(e) => {
               if (e.key === 'Enter') onSearch()
             }}
-            className="px-3 py-1 text-sm rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-1 text-sm rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <Button id="search-btn" variant="outline" size="sm" onClick={onSearch}>
@@ -123,3 +123,4 @@ const SolversListCard: React.FC<SolversListCardProps> = ({
 }
 
 export default SolversListCard
+

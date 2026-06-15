@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Button, Card, CardContent, CardHeader, CardTitle, Label } from '@/shared/ui'
 import type { Event, EventJoinRequestRow } from '../types'
 
@@ -24,7 +24,7 @@ const JoinRequestsCard: React.FC<JoinRequestsCardProps> = ({
   return (
     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-gray-900 dark:text-white">Join Requests</CardTitle>
+        <CardTitle className="text-amber-900 dark:text-amber-50">Join Requests</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <div>
@@ -32,7 +32,7 @@ const JoinRequestsCard: React.FC<JoinRequestsCardProps> = ({
           <select
             value={manageEventId}
             onChange={(event) => onManageEventChange(event.target.value)}
-            className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
+            className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
           >
             <option value="">Select event</option>
             {events.map((event) => (
@@ -50,7 +50,7 @@ const JoinRequestsCard: React.FC<JoinRequestsCardProps> = ({
             joinRequests.map((request) => (
               <div key={request.request_id} className="px-3 py-3 border-b last:border-b-0 border-gray-200 dark:border-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{request.username || request.user_id}</p>
+                  <p className="text-sm font-medium text-amber-900 dark:text-amber-50">{request.username || request.user_id}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">Requested at {new Date(request.requested_at).toLocaleString()}</p>
                   {request.note && <p className="text-xs mt-1 text-gray-600 dark:text-gray-300">Note: {request.note}</p>}
                 </div>
@@ -81,4 +81,5 @@ const JoinRequestsCard: React.FC<JoinRequestsCardProps> = ({
 }
 
 export default JoinRequestsCard
+
 

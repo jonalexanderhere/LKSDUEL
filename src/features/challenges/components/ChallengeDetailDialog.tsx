@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React, { useState } from 'react'
 import { Check, Copy, Flag, CheckCircle2 } from 'lucide-react'
@@ -156,7 +156,7 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose() }}>
       <DialogContent
-        className="max-w-2xl w-[95vw] h-[90vh] flex flex-col overflow-hidden rounded-2xl bg-white/60 dark:bg-[#0a0d14]/80 border border-gray-200 dark:border-gray-800 backdrop-blur-xl p-0 shadow-2xl [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400"
+        className="max-w-2xl w-[95vw] h-[90vh] flex flex-col overflow-hidden rounded-2xl bg-white/60 dark:bg-[#0a0d14]/80 border border-amber-900/50 backdrop-blur-xl p-0 shadow-2xl [&_button.absolute.right-4.top-4]:block md:[&_button.absolute.right-4.top-4]:hidden [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400"
         onClick={(event) => event.stopPropagation()}
       >
         {/* Fixed Header Section */}
@@ -165,7 +165,7 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
             {/* ROW 1: Title & Event */}
             <div className="flex items-start justify-between gap-4">
               <DialogTitle asChild>
-                <h2 className="text-2xl font-black text-gray-900 dark:text-gray-100 tracking-tight leading-tight">
+                <h2 className="text-2xl font-black text-amber-900 dark:text-amber-50 tracking-tight leading-tight">
                   {challenge.title}
                 </h2>
               </DialogTitle>
@@ -207,7 +207,7 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
                     <span className="text-[10px] font-bold text-purple-400 uppercase tracking-widest">Team Solved</span>
                   </div>
                 )}
-                <div className={`text-2xl font-black tracking-tighter ${isSolved ? 'text-green-400' : isTeamSolved ? 'text-purple-400' : 'text-gray-900 dark:text-white'}`}>
+                <div className={`text-2xl font-black tracking-tighter ${isSolved ? 'text-green-400' : isTeamSolved ? 'text-purple-400' : 'text-amber-900 dark:text-amber-50'}`}>
                   {challenge.points} <span className="text-[12px] font-bold opacity-60 ml-0.5">pts</span>
                 </div>
               </div>
@@ -326,3 +326,4 @@ const ChallengeDetailDialog: React.FC<ChallengeDetailDialogProps> = ({
 }
 
 export default ChallengeDetailDialog
+

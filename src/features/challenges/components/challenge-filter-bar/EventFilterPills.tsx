@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import { Lock, Zap } from 'lucide-react'
@@ -72,7 +72,7 @@ export default function EventFilterPills({
           <button
             type="button"
             onClick={() => onEventChange('all')}
-            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition ${selectedEventId === 'all' ? 'bg-blue-600 border-blue-600 text-white' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'} ${!isEventDirty && anyFilterDirty ? 'opacity-90' : ''}`}
+            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition ${selectedEventId === 'all' ? 'bg-blue-600 border-blue-600 text-white' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'} ${!isEventDirty && anyFilterDirty ? 'opacity-90' : ''}`}
           >
             All
           </button>
@@ -81,7 +81,7 @@ export default function EventFilterPills({
           <button
             type="button"
             onClick={() => onEventChange(null)}
-            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition ${!selectedEventId ? 'bg-blue-600 border-blue-600 text-white' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+            className={`shrink-0 whitespace-nowrap px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-lg border transition ${!selectedEventId ? 'bg-blue-600 border-blue-600 text-white' : 'bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
           >
             {mainLabel}
           </button>
@@ -106,7 +106,7 @@ export default function EventFilterPills({
                 ${isEndedButAlwaysVisible && !isSelected ? 'text-[10px] opacity-40 border-dashed' : ''}
                 ${isSelected
                   ? 'bg-blue-600 border-blue-600 text-white'
-                  : (`bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700
+                  : (`bg-[#fdf6e3] dark:bg-[#2c1e16] border-gray-200 dark:border-gray-700
                         hover:bg-gray-50 dark:hover:bg-gray-800` + (showEventState ? ` ${stateStyles[state]}` : ''))
                 }
               `}
@@ -149,3 +149,4 @@ export default function EventFilterPills({
     </div>
   )
 }
+

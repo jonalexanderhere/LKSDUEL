@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { motion } from 'framer-motion'
 
@@ -19,7 +19,7 @@ export default function AllEventsButton({
       className={`relative w-full px-5 py-4 rounded-2xl border backdrop-blur-md transition-all duration-300 text-left group
         ${selected
           ? 'bg-blue-500/[0.03] border-blue-500/50 shadow-sm'
-          : 'bg-white/40 dark:bg-gray-900/40 border-gray-200 dark:border-gray-800 hover:border-blue-500/50 shadow-sm'}
+          : 'bg-white/40 dark:bg-gray-900/40 border-amber-900/50 hover:border-blue-500/50 shadow-sm'}
       `}
     >
       {/* Glow Effect on Hover */}
@@ -27,7 +27,7 @@ export default function AllEventsButton({
 
       <div className="flex items-center justify-between gap-4 relative z-10">
         <div className="flex flex-col">
-          <h4 className="text-sm md:text-base font-bold text-gray-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          <h4 className="text-sm md:text-base font-bold text-amber-900 dark:text-amber-50 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
             All Events & Challenges
           </h4>
           <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-widest mt-1 font-medium">
@@ -45,3 +45,4 @@ export default function AllEventsButton({
     </motion.button>
   )
 }
+

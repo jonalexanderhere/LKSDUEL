@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { Label, Input, Textarea, Button, Switch } from '@/shared/ui'
 import { Plus, Trash2, ChevronUp, ChevronDown, GripVertical } from 'lucide-react'
 import { SubChallengeFormRow } from '../../types'
@@ -72,7 +72,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
               onReorder(draggedSubChallengeIndex, idx)
               setDraggedSubChallengeIndex(null)
             }}
-            className={`grid grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)_auto] gap-3 items-start rounded-md border bg-white dark:bg-gray-900 p-3 transition ${draggedSubChallengeIndex === idx
+            className={`grid grid-cols-1 md:grid-cols-[auto_minmax(0,1fr)_auto] gap-3 items-start rounded-md border bg-[#fdf6e3] dark:bg-[#2c1e16] p-3 transition ${draggedSubChallengeIndex === idx
               ? 'border-primary-400 opacity-70'
               : 'border-gray-200 dark:border-gray-700'
               }`}
@@ -151,7 +151,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
                     value={row.question}
                     onChange={e => onUpdate(idx, 'question', e.target.value)}
                     placeholder="Question text, markdown supported"
-                    className="mt-1 h-24 min-h-[84px] resize-none overflow-y-auto transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                    className="mt-1 h-24 min-h-[84px] resize-none overflow-y-auto transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
                   />
                 )}
               </div>
@@ -163,7 +163,7 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
                   value={row.answer}
                   onChange={e => onUpdate(idx, 'answer', e.target.value)}
                   placeholder="Plaintext answer"
-                  className="transition-colors bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-gray-800 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
+                  className="transition-colors bg-gray-50 dark:bg-black/20 border border-amber-900/50 focus:border-primary-500 dark:focus:border-primary-400 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-900 rounded-md shadow-sm"
                 />
               </div>
             </div>
@@ -173,3 +173,4 @@ export const SubChallengesSection: React.FC<SubChallengesSectionProps> = ({
     </div>
   )
 }
+

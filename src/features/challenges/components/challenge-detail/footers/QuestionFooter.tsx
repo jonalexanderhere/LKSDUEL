@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Copy } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { DialogFooterLayout } from './DialogFooterLayout'
@@ -33,7 +33,7 @@ export const QuestionFooter: React.FC<QuestionFooterProps> = ({
                 <button
                   onClick={async () => {
                     await navigator.clipboard.writeText(subChallengeFlag)
-                    toast.success('Flag copied!', { icon: '📋' })
+                    toast.success('Flag copied!', { icon: 'ðŸ“‹' })
                   }}
                   className="flex items-center justify-center px-4 h-full bg-green-500 text-white hover:bg-green-600 transition-all active:scale-95 shadow-md shrink-0"
                   title="Copy Flag"
@@ -49,7 +49,7 @@ export const QuestionFooter: React.FC<QuestionFooterProps> = ({
               </div>
             )
           ) : (
-            <div className="flex items-center px-4 h-[38px] text-[11px] uppercase font-black text-gray-500 dark:text-gray-500 tracking-[0.2em] bg-gray-200/50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-800">
+            <div className="flex items-center px-4 h-[38px] text-[11px] uppercase font-black text-gray-500 dark:text-gray-500 tracking-[0.2em] bg-gray-200/50 dark:bg-gray-800/50 rounded-xl border border-amber-900/50">
               <span className="truncate">Questions Not Solved</span>
             </div>
           )}
@@ -65,3 +65,4 @@ export const QuestionFooter: React.FC<QuestionFooterProps> = ({
     </DialogFooterLayout>
   )
 }
+

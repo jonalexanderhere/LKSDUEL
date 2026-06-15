@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { motion } from 'framer-motion'
 import { Lock } from 'lucide-react'
@@ -120,9 +120,9 @@ export default function ChallengeListContent({
     <>
       {orderedKeys.map((category) => (
         <div key={category} className="mb-12">
-          <div className="flex items-center gap-3 mb-6 border-b border-gray-100 dark:border-gray-800 pb-3">
+          <div className="flex items-center gap-3 mb-6 border-b border-amber-900/50 pb-3">
             <div className="w-1.5 h-6 bg-blue-600 dark:bg-blue-500 rounded-full" />
-            <h2 className="text-lg md:text-xl font-black uppercase tracking-tight text-gray-900 dark:text-white">
+            <h2 className="text-lg md:text-xl font-black uppercase tracking-tight text-amber-900 dark:text-amber-50">
               {eventId === 'all' && String(category).toLowerCase() === 'intro'
                 ? `Intro (${String(APP.eventMainLabel || 'Main')})`
                 : category}
@@ -148,3 +148,4 @@ export default function ChallengeListContent({
     </>
   )
 }
+

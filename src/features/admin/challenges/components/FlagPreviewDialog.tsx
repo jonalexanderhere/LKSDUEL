@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { Check, Flag, Copy } from 'lucide-react'
 import { Button, Dialog, DialogContent } from '@/shared/ui'
 import { cn } from '@/shared/lib/utils'
@@ -77,7 +77,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
           </div>
 
           {/* FLAG DB */}
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2 font-mono text-sm text-gray-700 dark:text-gray-200 flex justify-between items-center">
+          <div className="bg-amber-200/50 dark:bg-amber-900/50 rounded-lg px-3 py-2 font-mono text-sm text-gray-700 dark:text-gray-200 flex justify-between items-center">
             <span className="truncate">{effectiveDBFlag || 'No flag'}</span>
             <button onClick={() => handleCopy(effectiveDBFlag, 'fetched')}>
               {copyType === 'fetched' ? <Check size={14} /> : <Copy size={14} />}
@@ -91,8 +91,8 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
             placeholder="Type flag..."
             className={cn(
               "w-full px-3 py-2 rounded-lg font-mono text-sm outline-none border",
-              "bg-white dark:bg-gray-900",
-              "text-gray-900 dark:text-white",
+              "bg-[#fdf6e3] dark:bg-[#2c1e16]",
+              "text-amber-900 dark:text-amber-50",
               "placeholder:text-gray-400",
               testInput
                 ? isMatchWithTest
@@ -104,7 +104,7 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
 
           {/* DIFF */}
           {testInput && (
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 font-mono text-sm flex flex-wrap gap-[2px]">
+            <div className="bg-amber-200/50 dark:bg-amber-900/50 rounded-lg p-3 font-mono text-sm flex flex-wrap gap-[2px]">
               {diffResult.map((item, i) => (
                 <span
                   key={i}
@@ -143,3 +143,4 @@ export const FlagPreviewDialog: React.FC<FlagPreviewDialogProps> = ({
     </Dialog>
   )
 }
+

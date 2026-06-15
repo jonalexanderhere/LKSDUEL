@@ -71,14 +71,14 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
         <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-transparent via-blue-500/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
 
-      <div className={`relative h-full flex flex-col p-4 md:p-5 rounded-2xl border backdrop-blur-sm transition-all duration-300
+      <div className={`relative h-full flex flex-col p-4 md:p-5 rpg-card rounded-md transition-all duration-300
         ${isMaintenance
-          ? 'bg-blue-500/[0.02] border-blue-500/20 dark:border-blue-500/10 border-dashed shadow-none'
+          ? 'opacity-50 border-dashed shadow-none'
           : isSolved
-            ? 'bg-gray-800/60 border-green-500/25 dark:border-green-500/20 shadow-none'
+            ? 'border-green-700/50 dark:border-green-700/50 shadow-none'
             : isTeamSolved
-              ? 'bg-gray-800/60 border-purple-500/25 dark:border-purple-500/20 shadow-none'
-              : 'bg-gray-800/85 border-gray-600/50 group-hover:border-blue-400/60 shadow-md shadow-black/30 group-hover:shadow-blue-500/10'}`}
+              ? 'border-purple-700/50 dark:border-purple-700/50 shadow-none'
+              : 'hover:border-amber-600/60'}`}
       >
 
         {/* Subtle Background Category Icon */}

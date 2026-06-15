@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/shared/ui/dialog"
@@ -62,16 +62,16 @@ export default function JoinEventDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md rounded-2xl bg-white/60 dark:bg-[#111622]/60 border border-gray-200 dark:border-gray-800 backdrop-blur-xl p-6 shadow-2xl [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400">
+      <DialogContent className="max-w-md rounded-2xl bg-white/60 dark:bg-[#111622]/60 border border-amber-900/50 backdrop-blur-xl p-6 shadow-2xl [&_button.absolute.right-4.top-4]:text-gray-500 dark:[&_button.absolute.right-4.top-4]:text-gray-400">
         <DialogHeader>
-          <DialogTitle className="text-xl font-black text-gray-900 dark:text-white uppercase tracking-tight">
+          <DialogTitle className="text-xl font-black text-amber-900 dark:text-amber-50 uppercase tracking-tight">
             Join Event
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-5 my-4">
           <div className="p-4 bg-blue-500/[0.03] border border-blue-500/10 rounded-xl">
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-1">
+            <h3 className="text-sm font-bold text-amber-900 dark:text-amber-50 mb-1">
               {event?.name || 'Unknown Event'}
             </h3>
             <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -89,7 +89,7 @@ export default function JoinEventDialog({
                 value={joinKey}
                 onChange={(e) => setJoinKey(e.target.value)}
                 placeholder="Enter access key..."
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-2.5 bg-white/50 dark:bg-gray-900/50 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                className="w-full rounded-xl border border-amber-900/50 px-4 py-2.5 bg-white/50 dark:bg-gray-900/50 text-sm text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                 autoFocus
               />
             </div>
@@ -105,7 +105,7 @@ export default function JoinEventDialog({
                 onChange={(e) => setJoinNote(e.target.value)}
                 placeholder="Tell us why you'd like to join..."
                 rows={3}
-                className="w-full rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-2.5 bg-white/50 dark:bg-gray-900/50 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
+                className="w-full rounded-xl border border-amber-900/50 px-4 py-2.5 bg-white/50 dark:bg-gray-900/50 text-sm text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all resize-none"
                 autoFocus
               />
             </div>
@@ -142,3 +142,4 @@ export default function JoinEventDialog({
     </Dialog>
   )
 }
+

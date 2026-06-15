@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import ChallengeFilterBar from '@/features/challenges/components/ChallengeFilterBar'
 import { Search } from 'lucide-react'
 import { Button, Card, CardContent, CardHeader, CardTitle, Label } from '@/shared/ui'
@@ -45,7 +45,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
       <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <CardTitle className="text-gray-900 dark:text-white">Bulk Assign Challenges</CardTitle>
+          <CardTitle className="text-amber-900 dark:text-amber-50">Bulk Assign Challenges</CardTitle>
           <p className="text-xs text-gray-500 dark:text-gray-300">Select multiple challenges, then assign or remove event.</p>
         </div>
         <div className="flex items-center gap-2">
@@ -60,7 +60,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
             <select
               value={bulkEventId}
               onChange={(event) => onBulkEventChange(event.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
+              className="w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
             >
               <option value="">Select event</option>
               {events.map((event) => (
@@ -102,7 +102,7 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
                   className="h-4 w-4 accent-primary-500"
                 />
                 <div className="min-w-0">
-                  <div className="text-sm font-medium text-gray-900 dark:text-white truncate">{challenge.title}</div>
+                  <div className="text-sm font-medium text-amber-900 dark:text-amber-50 truncate">{challenge.title}</div>
                   <div className="text-xs text-gray-500 dark:text-gray-300 truncate">
                     {challenge.category || 'Uncategorized'} {'\u2022'} {challenge.difficulty || 'Unknown'} {'\u2022'} {challenge.event_id ? 'Event' : 'Main'}
                   </div>
@@ -118,3 +118,4 @@ const BulkAssignChallengesCard: React.FC<BulkAssignChallengesCardProps> = ({
 }
 
 export default BulkAssignChallengesCard
+

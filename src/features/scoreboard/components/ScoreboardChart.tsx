@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic'
+﻿import dynamic from 'next/dynamic'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
 import { Skeleton } from '@/shared/ui/skeleton'
 import { LeaderboardEntry } from '@/shared/types'
@@ -39,7 +39,7 @@ const ScoreboardChart: React.FC<ScoreboardChartProps> = ({ leaderboard, isDark }
   return (
     <Card className="bg-white dark:bg-gray-800">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold text-center text-gray-900 dark:text-white">Top 10 Users</CardTitle>
+        <CardTitle className="text-lg font-semibold text-center text-amber-900 dark:text-amber-50">Top 10 Users</CardTitle>
       </CardHeader>
       <CardContent>
         <Plot
@@ -86,3 +86,4 @@ const ScoreboardChart: React.FC<ScoreboardChartProps> = ({ leaderboard, isDark }
 }
 
 export default ScoreboardChart
+

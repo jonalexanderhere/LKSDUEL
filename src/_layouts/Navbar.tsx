@@ -141,7 +141,7 @@ export default function Navbar() {
         }}
       />
 
-      <nav className={`shadow-sm fixed top-0 left-0 w-full z-50 ${theme === 'dark' ? 'bg-gray-950' : 'bg-[#1A100C]/90'}`}>
+      <nav className={`shadow-[0_4px_12px_rgba(0,0,0,0.6)] border-b-4 border-amber-900 fixed top-0 left-0 w-full z-50 ${theme === 'dark' ? 'bg-[#1a0f0a]' : 'bg-[#3e2723]'}`}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex h-14 items-center justify-between gap-4">
             {/* Logo */}

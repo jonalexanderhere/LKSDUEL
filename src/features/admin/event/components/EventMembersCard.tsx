@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, Label } from '@/shared/ui'
 import type { Event, EventMemberRow, UserLite } from '../types'
 
@@ -48,7 +48,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
   return (
     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-gray-900 dark:text-white">Event Members</CardTitle>
+        <CardTitle className="text-amber-900 dark:text-amber-50">Event Members</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
@@ -56,7 +56,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
           <select
             value={manageEventId}
             onChange={(e) => onManageEventChange(e.target.value)}
-            className="mt-2 w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
+            className="mt-2 w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500"
           >
             <option value="">Select event</option>
             {events.map((evt) => (
@@ -122,7 +122,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
                         onChange={() => onToggleCandidateSelection(user.id)}
                       />
                       <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{user.username}</p>
+                        <p className="text-sm font-medium text-amber-900 dark:text-amber-50 truncate">{user.username}</p>
                         <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.id}</p>
                       </div>
                     </div>
@@ -156,7 +156,7 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
                 filteredEventMembers.map((member) => (
                   <div key={member.user_id} className="px-3 py-2 border-b last:border-b-0 border-gray-200 dark:border-gray-700 flex items-center justify-between gap-2">
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{member.username}</p>
+                      <p className="text-sm font-medium text-amber-900 dark:text-amber-50 truncate">{member.username}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{member.user_id}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">Joined: {new Date(member.joined_at).toLocaleString()}</p>
                     </div>
@@ -180,4 +180,5 @@ const EventMembersCard: React.FC<EventMembersCardProps> = ({
 }
 
 export default EventMembersCard
+
 

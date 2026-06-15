@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React from 'react'
 import Link from 'next/link'
@@ -89,7 +89,7 @@ export default function MonitoringList({ solves, isLoading, onRefresh }: Monitor
                       </span>
                     )}
 
-                    <span className="text-gray-400 dark:text-gray-500 text-xs">•</span>
+                    <span className="text-gray-400 dark:text-gray-500 text-xs">â€¢</span>
 
                     <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
                       {formatRelativeDate(s.solved_at)}
@@ -98,7 +98,7 @@ export default function MonitoringList({ solves, isLoading, onRefresh }: Monitor
 
                   <div className="text-sm">
                     <span className="text-gray-500 dark:text-gray-400">Solved </span>
-                    <span className="font-bold text-gray-900 dark:text-gray-100">{s.challenge_title}</span>
+                    <span className="font-bold text-amber-900 dark:text-amber-50">{s.challenge_title}</span>
                     <span className="text-xs font-semibold px-2 py-0.5 ml-2 rounded bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/60">
                       +{s.points} pts
                     </span>
@@ -155,7 +155,7 @@ export default function MonitoringList({ solves, isLoading, onRefresh }: Monitor
                     {isFlawlessOneshot ? (
                       <span className="inline-flex items-center gap-1 text-xs font-black bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-2.5 py-1 rounded shadow-sm border border-yellow-300">
                         <Award className="w-3 h-3" />
-                        ⚡ ONESHOT
+                        âš¡ ONESHOT
                       </span>
                     ) : isOneshot ? (
                       <span className="inline-flex items-center gap-1 text-xs font-bold bg-amber-500 text-black px-2.5 py-1 rounded shadow-sm">
@@ -210,4 +210,5 @@ export default function MonitoringList({ solves, isLoading, onRefresh }: Monitor
     </div>
   )
 }
+
 

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
-import { Inter } from 'next/font/google'
+import { Cinzel } from 'next/font/google'
 import { Settings } from 'lucide-react'
 import 'react-medium-image-zoom/dist/styles.css'
 import './globals.css'
@@ -11,7 +11,7 @@ import { AuthProvider, ThemeProvider, LogsProvider, EventProvider, FilterProvide
 import APP from '@/config'
 import ChallengeJoyride from '@/features/challenges/components/ChallengeJoyride'
 
-const inter = Inter({ subsets: ['latin'] })
+const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP.baseUrl),
@@ -83,7 +83,7 @@ export default async function RootLayout({
 
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={cinzel.className} suppressHydrationWarning>
         {isMaintenancePage ? (
           // Maintenance mode: no navbar, no providers, just raw content
           children

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import toast from 'react-hot-toast'
@@ -186,7 +186,7 @@ export default function UserManagementList() {
                     key={u.id}
                     className="border-b border-gray-100 dark:border-gray-700/50 last:border-b-0 hover:bg-gray-50/55 dark:hover:bg-gray-800/40 transition-colors"
                   >
-                    <TableCell className="font-semibold text-gray-900 dark:text-gray-100 py-3.5">
+                    <TableCell className="font-semibold text-amber-900 dark:text-amber-50 py-3.5">
                       {u.username}
                     </TableCell>
                     <TableCell className="py-3.5">
@@ -205,7 +205,7 @@ export default function UserManagementList() {
                     <TableCell className="text-gray-600 dark:text-gray-300 font-medium py-3.5">
                       {u.team_name}
                     </TableCell>
-                    <TableCell className="text-center font-bold text-gray-900 dark:text-gray-100 py-3.5">
+                    <TableCell className="text-center font-bold text-amber-900 dark:text-amber-50 py-3.5">
                       <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded text-xs font-black ${
                         u.solve_count > 0 
                           ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-950/25 dark:text-emerald-400' 
@@ -379,3 +379,4 @@ export default function UserManagementList() {
     </Card>
   )
 }
+

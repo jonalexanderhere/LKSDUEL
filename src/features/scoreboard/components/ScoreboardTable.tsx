@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
@@ -25,7 +25,7 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
   return (
     <Card className="bg-white dark:bg-gray-800">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">Ranking</CardTitle>
+        <CardTitle className="text-lg font-semibold text-amber-900 dark:text-amber-50">Ranking</CardTitle>
       {pathname === '/scoreboard' &&
         showAllLink &&
         leaderboard.length >= 100 &&
@@ -82,7 +82,7 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
                       {entry.username}
                     </Link>
                   </TableCell>
-                  <TableCell className="w-24 text-center font-medium text-gray-900 dark:text-white">
+                  <TableCell className="w-24 text-center font-medium text-amber-900 dark:text-amber-50">
                     <motion.span key={`score-${entry.username}-${entry.score}`} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.18 }}>
                       {scoreColumnRenderer ? scoreColumnRenderer(entry) : entry.score}
                     </motion.span>
@@ -99,3 +99,4 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
 }
 
 export default ScoreboardTable
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import React from 'react'
 import type { ChallengeWithSolve } from '@/shared/types'
@@ -47,7 +47,7 @@ export default function ChallengeFlagForm({
           handleFlagSubmit(challenge.id)
         }}
       >
-        <div className="relative flex-1 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50 overflow-hidden focus-within:ring-2 focus-within:ring-pink-400 transition-all">
+        <div className="relative flex-1 rounded-xl border border-amber-900/50 bg-gray-50/50 dark:bg-gray-900/50 overflow-hidden focus-within:ring-2 focus-within:ring-pink-400 transition-all">
           {challenge.flag_placeholder && placeholders[challenge.id] && (
             <div
               ref={overlayRef}
@@ -74,7 +74,7 @@ export default function ChallengeFlagForm({
             }}
             maxLength={challenge.flag_placeholder && placeholders[challenge.id] ? placeholders[challenge.id].length : undefined}
             placeholder={challenge.flag_placeholder && placeholders[challenge.id] ? '' : 'Enter flag here...'}
-            className="w-full h-[38px] pl-4 pr-6 bg-transparent text-gray-900 dark:text-white focus:outline-none relative z-10 font-mono text-sm"
+            className="w-full h-[38px] pl-4 pr-6 bg-transparent text-amber-900 dark:text-amber-50 focus:outline-none relative z-10 font-mono text-sm"
             autoFocus
           />
         </div>
@@ -93,3 +93,4 @@ export default function ChallengeFlagForm({
     </div>
   )
 }
+

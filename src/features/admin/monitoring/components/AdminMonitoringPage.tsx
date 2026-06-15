@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import React from 'react'
 import { AlertTriangle, Bot, Zap, ShieldAlert, Award, Search, RefreshCw, BarChart2, Shield } from 'lucide-react'
@@ -35,7 +35,7 @@ export default function AdminMonitoringPage() {
         {/* Title Section */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-black text-gray-900 dark:text-gray-100 uppercase tracking-wider flex items-center gap-2">
+            <h1 className="text-2xl font-black text-amber-900 dark:text-amber-50 uppercase tracking-wider flex items-center gap-2">
               <Shield className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
               Solves Monitoring Telemetry
             </h1>
@@ -75,7 +75,7 @@ export default function AdminMonitoringPage() {
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Total Solves</p>
-                <h3 className="text-3xl font-black text-gray-900 dark:text-gray-100 mt-1">{stats.totalSolves}</h3>
+                <h3 className="text-3xl font-black text-amber-900 dark:text-amber-50 mt-1">{stats.totalSolves}</h3>
               </div>
               <BarChart2 className="w-8 h-8 text-blue-500/80 dark:text-blue-400/80" />
             </CardContent>
@@ -89,7 +89,7 @@ export default function AdminMonitoringPage() {
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Flag Sharing</p>
-                <h3 className={`text-3xl font-black mt-1 ${stats.flagSharingCount > 0 ? 'text-red-600 dark:text-red-500' : 'text-gray-900 dark:text-gray-100'}`}>
+                <h3 className={`text-3xl font-black mt-1 ${stats.flagSharingCount > 0 ? 'text-red-600 dark:text-red-500' : 'text-amber-900 dark:text-amber-50'}`}>
                   {stats.flagSharingCount}
                 </h3>
               </div>
@@ -105,7 +105,7 @@ export default function AdminMonitoringPage() {
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">AI Suspicion</p>
-                <h3 className={`text-3xl font-black mt-1 ${stats.aiAgentCount > 0 ? 'text-red-600 dark:text-red-500' : 'text-gray-900 dark:text-gray-100'}`}>
+                <h3 className={`text-3xl font-black mt-1 ${stats.aiAgentCount > 0 ? 'text-red-600 dark:text-red-500' : 'text-amber-900 dark:text-amber-50'}`}>
                   {stats.aiAgentCount}
                 </h3>
               </div>
@@ -117,7 +117,7 @@ export default function AdminMonitoringPage() {
             <CardContent className="p-4 sm:p-5 flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Oneshots</p>
-                <h3 className="text-3xl font-black text-gray-900 dark:text-gray-100 mt-1">{stats.oneshotCount}</h3>
+                <h3 className="text-3xl font-black text-amber-900 dark:text-amber-50 mt-1">{stats.oneshotCount}</h3>
               </div>
               <Award className="w-8 h-8 text-amber-500" />
             </CardContent>
@@ -140,7 +140,7 @@ export default function AdminMonitoringPage() {
                   placeholder="Search user, team, challenge..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 pr-4 py-1.5 w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500"
+                  className="pl-9 pr-4 py-1.5 w-full text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-amber-900 dark:text-amber-50 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500"
                 />
               </div>
             </div>
@@ -179,3 +179,4 @@ export default function AdminMonitoringPage() {
     </AdminPageShell>
   )
 }
+

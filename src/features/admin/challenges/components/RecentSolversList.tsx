@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { formatRelativeDate } from '../lib'
 import Link from 'next/link'
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@/shared/ui'
@@ -13,7 +13,7 @@ const RecentSolversList: React.FC<RecentSolversListProps> = ({ solvers, onViewAl
   return (
     <Card className="flex-1 flex flex-col bg-white dark:bg-gray-800 min-h-[180px]">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-gray-900 dark:text-white">Recent Solvers</CardTitle>
+        <CardTitle className="text-amber-900 dark:text-amber-50">Recent Solvers</CardTitle>
         <Button variant="default" size="sm" onClick={onViewAll}>View All</Button>
       </CardHeader>
       <CardContent className="flex-1 overflow-y-auto min-h-[140px]">
@@ -45,3 +45,4 @@ const RecentSolversList: React.FC<RecentSolversListProps> = ({ solvers, onViewAl
 }
 
 export default RecentSolversList
+

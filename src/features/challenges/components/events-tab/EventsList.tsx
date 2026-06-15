@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import type { EnrichedChallengeEvent } from '../../types'
 import EventCard from './EventCard'
@@ -37,7 +37,7 @@ export default function EventsList({
 
   return (
     <div className="space-y-5">
-      <h3 className="text-lg font-bold tracking-tight text-gray-900 dark:text-gray-100">
+      <h3 className="text-lg font-bold tracking-tight text-amber-900 dark:text-amber-50">
         {title}
       </h3>
 
@@ -68,3 +68,4 @@ export default function EventsList({
     </div>
   )
 }
+

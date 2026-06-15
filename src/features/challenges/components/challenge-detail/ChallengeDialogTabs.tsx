@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import type { ChallengeDialogTab } from '../../types'
 
@@ -16,7 +16,7 @@ export default function ChallengeDialogTabs({
   onTabChange,
 }: ChallengeDialogTabsProps) {
   return (
-    <div className="flex p-1 gap-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-gray-800 rounded-xl">
+    <div className="flex p-1 gap-1 bg-black/5 dark:bg-white/5 border border-amber-900/50 rounded-xl">
       {tabs.map((tab) => (
         <button
           key={tab.key}
@@ -32,3 +32,4 @@ export default function ChallengeDialogTabs({
     </div>
   )
 }
+
