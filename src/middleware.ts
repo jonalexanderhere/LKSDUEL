@@ -26,6 +26,9 @@ async function checkMaintenance(): Promise<{ isActive: boolean; errorType: 'manu
     return { isActive: true, errorType: 'manual', errorMessage: 'Manual maintenance mode enabled' }
   }
 
+  // Bypass Supabase check for local development temporarily
+  return { isActive: false, errorType: null, errorMessage: '' }
+
   // Jika tidak 'yes', kita selalu cek koneksi database (Auto Mode)
   // Check cache dulu
   const now = Date.now()

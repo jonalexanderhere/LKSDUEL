@@ -97,8 +97,8 @@ if (botToken) {
                 intents: 513, // GUILDS + GUILD_MESSAGES
                 properties: {
                   os: process.platform,
-                  browser: 'SCTF-Platform-Bot',
-                  device: 'SCTF-Platform-Bot'
+                  browser: 'LKSDUEL-Platform-Bot',
+                  device: 'LKSDUEL-Platform-Bot'
                 },
                 presence: {
                   status: 'online',
@@ -291,7 +291,7 @@ const channel = supabase
             ],
             timestamp: new Date().toISOString(),
             footer: {
-              text: 'SCTF Platform Alert'
+              text: 'LKSDUEL Platform Alert'
             }
           }
         ]

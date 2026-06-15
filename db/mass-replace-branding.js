@@ -17,9 +17,9 @@ walkDir(srcDir, (filePath) => {
     let content = fs.readFileSync(filePath, 'utf8');
     if (content.includes('Phoenix Arena')) {
       console.log(`Updating branding in: ${filePath}`);
-      // Replace with SCTF26 for short mentions, or we could use APP.fullName but it requires importing APP which might cause circular deps in some files.
-      // So I'll use SCTF26 for simple text replacements.
-      const updatedContent = content.replace(/Phoenix Arena/g, 'SCTF26');
+      // Replace with LKSDUEL for short mentions, or we could use APP.fullName but it requires importing APP which might cause circular deps in some files.
+      // So I'll use LKSDUEL for simple text replacements.
+      const updatedContent = content.replace(/Phoenix Arena/g, 'LKSDUEL');
       fs.writeFileSync(filePath, updatedContent, 'utf8');
     }
   }

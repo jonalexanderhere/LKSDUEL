@@ -37,7 +37,7 @@ async function testConnection() {
   const payload = {
     embeds: [
       {
-        title: '🧪 SCTF Bot Connection Test',
+        title: '🧪 LKSDUEL Bot Connection Test',
         description: 'Successfully connected! The Discord bot is ready to notify First Bloods.',
         color: 3066993, // Green
         fields: [

@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex flex-col items-start leading-none">
                 <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter">Org</span>
-                <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">SCTF26</span>
+                <span className="text-xs font-black text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">LKSDUEL</span>
               </div>
             </a>
 

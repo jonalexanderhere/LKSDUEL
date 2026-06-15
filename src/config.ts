@@ -1,10 +1,10 @@
-import { LINKS, YEAR, DIFFICULTY_STYLES, SCTF_ARENA } from './const'
+import { LINKS, YEAR, DIFFICULTY_STYLES, LKSDUEL_ARENA } from './const'
 
 export const APP = {
-  shortName: "SCTF26",
-  fullName: "STEVEN CAPTURE THE FLAG 26",
+  shortName: "LKSDUEL",
+  fullName: "LKS DUEL",
   description: "Platform kompetisi siber modern yang dikhususkan untuk penyelenggaraan lomba Capture The Flag.",
-  flagFormat: "SCTF26{your_flag_here}",
+  flagFormat: "LKSDUEL{your_flag_here}",
 
   challengeCategories: [
     "Intro",
@@ -22,9 +22,9 @@ export const APP = {
 
   // Base URL (ambil dari env kalau ada). Prefer changing NEXT_PUBLIC_SITE_URL in .env.local.
   baseUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  image_icon: 'sctf.png',
-  image_logo: 'sctf.png',
-  image_preview: 'og-image.png',
+  image_icon: 'lks-980x917.png',
+  image_logo: 'lks-980x917.png',
+  image_preview: '68065832af587.webp',
 
   // Turnstile aktif otomatis kalau site key ada di env.
   captchaEnabled: Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim()),
@@ -44,9 +44,9 @@ export const APP = {
   eventMainLabel: "main",
   // Gambar untuk "Main/Featured" event (boleh URL external atau path public). Contoh:
   // 'https://example.com/banner.png' atau '/images/banner.png'
-  eventMainImageUrl: "https://raw.githubusercontent.com/ariafatah0711/fgte_s1/refs/heads/main/img/FGTE_2026.png",
+  eventMainImageUrl: "/68065832af587.webp",
   // Fallback image untuk event yang tidak punya image_url.
-  eventFallbackImageUrl: "https://raw.githubusercontent.com/ariafatah0711/fgte_s1/refs/heads/main/img/FGTE_Blank.png",
+  eventFallbackImageUrl: "/telkom.jpg",
 
   /* Maintenance configuration (env-only): NEXT_PUBLIC_MAINTENANCE_MODE should be 'yes' or 'no'. */
   maintenance: {
@@ -59,7 +59,7 @@ export const APP = {
   },
   difficultyStyles: DIFFICULTY_STYLES,
   year: YEAR,
-  nxctf: SCTF_ARENA
+  nxctf: LKSDUEL_ARENA
 }
 
 export default APP

@@ -283,7 +283,7 @@ export async function POST(req: Request) {
           ],
           timestamp: new Date().toISOString(),
           footer: {
-            text: 'SCTF Platform Alert'
+            text: 'LKSDUEL Platform Alert'
           }
         }
       ]

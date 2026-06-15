@@ -1,9 +1,9 @@
-export const SCTF_ARENA = {
-  nxctf_title: 'SCTF26',
-  nxctf_logo: '/sctf.png',
+export const LKSDUEL_ARENA = {
+  nxctf_title: 'LKSDUEL',
+  nxctf_logo: '/Logo_SMK_Muh_3_Metro.jpg',
   nxctf_discord: 'https://discord.gg/5etKks6aQQ',
   nxctf_donation: 'https://saweria.co/ariafatah',
-  nxctf_github: 'https://github.com/jonalexanderhere/SCTF-PLATFORM-',
+  nxctf_github: 'https://github.com/jonalexanderhere/LKSDUEL-PLATFORM-',
   nxctf_github_org: 'https://github.com/jonalexanderhere',
   nxctf_author: 'https://github.com/jonalexanderhere',
   nxctf_docs: 'https://docs.nxctf.my.id/'

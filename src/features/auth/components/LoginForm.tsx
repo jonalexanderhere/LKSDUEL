@@ -33,7 +33,7 @@ export default function LoginForm() {
     <AuthCard>
       <AuthHeader
         badge="Welcome Back"
-        title="Sign in to SCTF26"
+        title="Sign in to LKSDUEL"
         subtitle="Continue your CTF journey"
       />
 
@@ -107,7 +107,7 @@ export default function LoginForm() {
         <GoogleLoginButton />
       </form>
 
-      <AuthFooter text="New to SCTF26?" href="/register" linkText="Create an account" />
+      <AuthFooter text="New to LKSDUEL?" href="/register" linkText="Create an account" />
     </AuthCard>
   )
 }

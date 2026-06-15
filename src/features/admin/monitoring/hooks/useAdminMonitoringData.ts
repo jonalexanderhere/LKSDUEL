@@ -39,8 +39,19 @@ export function useAdminMonitoringData() {
         const is_oneshot = s.time_to_solve_seconds !== null && s.time_to_solve_seconds <= 120
         const is_flawless_oneshot = is_oneshot && s.incorrect_attempts_count === 0
 
-        // Heuristic 2: Sharing flag (time since prev solve of same chall <= 300 seconds)
-        const is_flag_sharing = s.time_since_prev_solve_seconds !== null && s.time_since_prev_solve_seconds <= 300
+        // Heuristic 2: Sharing flag (time since prev solve of same chall by a DIFFERENT team <= 900 seconds)
+        const prevDifferentTeamSolve = arr.slice(index + 1).find(x => 
+          x.challenge_id === s.challenge_id && 
+          (s.team_name ? x.team_name !== s.team_name : x.user_id !== s.user_id)
+        );
+        let time_since_diff_team_solve = null;
+        if (prevDifferentTeamSolve) {
+           time_since_diff_team_solve = (new Date(s.solved_at).getTime() - new Date(prevDifferentTeamSolve.solved_at).getTime()) / 1000;
+        }
+        const is_flag_sharing = time_since_diff_team_solve !== null && time_since_diff_team_solve <= 900;
+        
+        // Update the value so UI shows the correct duration
+        s.time_since_prev_solve_seconds = time_since_diff_team_solve ?? s.time_since_prev_solve_seconds;
 
         // Heuristic 3: AI & Automation Detection
         // A. Direct API submission (no view event recorded)
