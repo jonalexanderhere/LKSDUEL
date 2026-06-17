@@ -160,11 +160,11 @@ export default function Navbar() {
             </div>
 
             {/* Center section: Desktop menu */}
-            <div className="hidden xl:flex flex-1 items-center justify-center gap-1 2xl:gap-2 px-4">
+            <div className="hidden xl:flex flex-1 items-center justify-center gap-0.5 2xl:gap-1 px-4">
                 {user && (
                   <Link
                     href="/challenges"
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                     data-tour="navbar-challenges"
                   >
                     <Flag size={18} /> Quests
@@ -175,7 +175,7 @@ export default function Navbar() {
                   scoreboardOptionCount === 1 ? (
                     <Link
                       href={showTeamLeaderboard ? '/teams/scoreboard' : '/scoreboard'}
-                      className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                      className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                       data-tour="navbar-scoreboard"
                     >
                       <Trophy size={18} /> Leaderboard
@@ -186,7 +186,7 @@ export default function Navbar() {
                         type="button"
                         data-tour="navbar-scoreboard"
                         onClick={() => setLeaderboardOpen((v) => !v)}
-                        className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                        className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                       >
                         <Trophy size={18} /> Leaderboard
                         <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${scoreboardOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -199,7 +199,7 @@ export default function Navbar() {
                             <Link
                               href="/scoreboard"
                               onClick={() => setLeaderboardOpen(false)}
-                              className={`block px-2 py-1.5 text-sm ${showTeamLeaderboard ? 'rounded-t-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
+                              className={`block px-1.5 py-1 text-sm ${showTeamLeaderboard ? 'rounded-t-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                             >
                               <span className="flex items-center">
                                 <User size={18} className="mr-1" />
@@ -211,7 +211,7 @@ export default function Navbar() {
                             <Link
                               href="/teams/scoreboard"
                               onClick={() => setLeaderboardOpen(false)}
-                              className={`block px-2 py-1.5 text-sm ${showUserLeaderboard ? 'rounded-b-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
+                              className={`block px-1.5 py-1 text-sm ${showUserLeaderboard ? 'rounded-b-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                             >
                               <span className="flex items-center">
                                 <Users size={18} className="mr-1" />
@@ -228,7 +228,7 @@ export default function Navbar() {
                 {user && APP.teams.enabled && (
                   <Link
                     href="/teams"
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                   >
                     <Users size={18} /> Guilds
                   </Link>
@@ -237,7 +237,7 @@ export default function Navbar() {
                 {!user && (
                   <Link
                     href="/preview"
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                   >
                     <FileText size={18} /> Preview
                   </Link>
@@ -249,7 +249,7 @@ export default function Navbar() {
                     type="button"
                     data-tour="navbar-docs"
                     onClick={() => setDocsOpen((v) => !v)}
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                   >
                     <Info size={18} /> Info
                     <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${docsOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -261,7 +261,7 @@ export default function Navbar() {
                       <Link
                         href="/info"
                         onClick={() => setDocsOpen(false)}
-                        className={`block px-2 py-1.5 text-sm rounded-t-lg ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
+                        className={`block px-1.5 py-1 text-sm rounded-t-lg ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                         data-tour="navbar-info"
                       >
                         <span className="flex items-center">
@@ -272,7 +272,7 @@ export default function Navbar() {
                       <Link
                         href="/rules"
                         onClick={() => setDocsOpen(false)}
-                        className={`block px-2 py-1.5 text-sm ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
+                        className={`block px-1.5 py-1 text-sm ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                         data-tour="navbar-rules"
                       >
                         <span className="flex items-center">
@@ -284,7 +284,7 @@ export default function Navbar() {
                         href={APP.nxctf.nxctf_docs}
                         target="_blank"
                         onClick={() => setDocsOpen(false)}
-                        className={`block px-2 py-1.5 text-sm rounded-b-lg ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
+                        className={`block px-1.5 py-1 text-sm rounded-b-lg ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                         data-tour="navbar-docs"
                       >
                         <span className="flex items-center">
@@ -299,7 +299,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-red-950/40 shadow-[inset_0_-2px_0_rgba(248,113,113,0.8)]' : 'text-red-600 bg-red-50 shadow-[inset_0_-2px_0_rgba(220,38,38,0.8)]') : (theme === 'dark' ? 'text-red-400/70 hover:text-red-400 hover:bg-red-950/20 hover:shadow-[inset_0_-2px_0_rgba(248,113,113,0.5)]' : 'text-red-600/70 hover:text-red-600 hover:bg-red-50/50 hover:shadow-[inset_0_-2px_0_rgba(220,38,38,0.5)]')}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-red-950/40 shadow-[inset_0_-2px_0_rgba(248,113,113,0.8)]' : 'text-red-600 bg-red-50 shadow-[inset_0_-2px_0_rgba(220,38,38,0.8)]') : (theme === 'dark' ? 'text-red-400/70 hover:text-red-400 hover:bg-red-950/20 hover:shadow-[inset_0_-2px_0_rgba(248,113,113,0.5)]' : 'text-red-600/70 hover:text-red-600 hover:bg-red-50/50 hover:shadow-[inset_0_-2px_0_rgba(220,38,38,0.5)]')}`}
                   >
                     <Flame size={18} className="text-red-600 dark:text-red-400 shrink-0" /> Attack Feed
                   </Link>
@@ -308,7 +308,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/hall-of-fame"
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-amber-400 bg-amber-950/40 shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-600 bg-amber-50 shadow-[inset_0_-2px_0_rgba(217,119,6,0.8)]') : (theme === 'dark' ? 'text-amber-400/70 hover:text-amber-400 hover:bg-amber-950/20 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.5)]' : 'text-amber-600/70 hover:text-amber-600 hover:bg-amber-50/50 hover:shadow-[inset_0_-2px_0_rgba(217,119,6,0.5)]')}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-amber-400 bg-amber-950/40 shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-600 bg-amber-50 shadow-[inset_0_-2px_0_rgba(217,119,6,0.8)]') : (theme === 'dark' ? 'text-amber-400/70 hover:text-amber-400 hover:bg-amber-950/20 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.5)]' : 'text-amber-600/70 hover:text-amber-600 hover:bg-amber-50/50 hover:shadow-[inset_0_-2px_0_rgba(217,119,6,0.5)]')}`}
                   >
                     <Trophy size={18} className="text-yellow-500 dark:text-yellow-400 shrink-0" /> Hall of Fame
                   </Link>
@@ -317,7 +317,7 @@ export default function Navbar() {
                 {adminStatus && user && (
                   <Link
                     href="/admin"
-                    className={`px-2 py-1.5 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[11px] 2xl:text-[12px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
+                    className={`px-1.5 py-1 rounded-md flex items-center gap-1.5 whitespace-nowrap text-[10px] 2xl:text-[11px] tracking-wider uppercase font-bold transition-all duration-300 ${theme === 'dark' ? 'text-amber-100/70 hover:text-amber-400 hover:bg-amber-500/10 hover:shadow-[inset_0_-2px_0_rgba(251,191,36,0.8)]' : 'text-amber-900/70 hover:text-amber-700 hover:bg-amber-900/5 hover:shadow-[inset_0_-2px_0_rgba(180,83,9,0.8)]'}`}
                   >
                     <Shield size={18} /> Admin
                   </Link>
@@ -332,7 +332,7 @@ export default function Navbar() {
                     <Link href="/profile" className="flex items-center gap-2.5 px-1.5 py-1 rounded-full border border-transparent hover:border-amber-500/30 hover:bg-amber-900/20 transition-all duration-300 group" data-tour="navbar-profile">
                       <ImageWithFallback src={avatarSrc} alt={user.username} size={32} className="rounded-full ring-2 ring-amber-500/30 group-hover:ring-amber-400 transition-all shadow-[0_0_8px_rgba(251,191,36,0.2)]" />
                       <span
-                        className={`hidden xl:block text-[11px] 2xl:text-[12px] font-bold tracking-wide ${theme === 'dark' ? 'text-amber-50' : 'text-amber-900'} group-hover:text-amber-300 group-hover:drop-shadow-[0_0_5px_rgba(251,191,36,0.6)] truncate max-w-[100px]`}
+                        className={`hidden xl:block text-[10px] 2xl:text-[11px] font-bold tracking-wide ${theme === 'dark' ? 'text-amber-50' : 'text-amber-900'} group-hover:text-amber-300 group-hover:drop-shadow-[0_0_5px_rgba(251,191,36,0.6)] truncate max-w-[100px]`}
                         title={user.username}
                       >
                         {user.username}
@@ -506,7 +506,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/profile"
-                    className="flex items-center space-x-3 px-2 py-1.5 border-b-2 border-amber-900/50 mb-2"
+                    className="flex items-center space-x-3 px-1.5 py-1 border-b-2 border-amber-900/50 mb-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <ImageWithFallback src={avatarSrc} alt={user.username} size={36} className="rounded-full" />
@@ -523,7 +523,7 @@ export default function Navbar() {
                   <>
                     <Link
                       href="/challenges"
-                      className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
+                      className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <Flag size={18} className="mr-1" /> Quests
@@ -532,21 +532,21 @@ export default function Navbar() {
                       scoreboardOptionCount === 1 ? (
                         <Link
                           href={showTeamLeaderboard ? '/teams/scoreboard' : '/scoreboard'}
-                          className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
+                          className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <Trophy size={18} className="mr-1" /> Leaderboard
                         </Link>
                       ) : (
                         <details className="rounded-lg">
-                          <summary className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}>
+                          <summary className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}>
                             <Trophy size={18} className="mr-1" /> Leaderboard
                           </summary>
                           <div className="mt-1 ml-6 flex flex-col gap-1">
                             {showUserLeaderboard && (
                               <Link
                                 href="/scoreboard"
-                                className={`px-2 py-1.5 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
+                                className={`px-1.5 py-1 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 <span className="flex items-center">
@@ -558,7 +558,7 @@ export default function Navbar() {
                             {showTeamLeaderboard && (
                               <Link
                                 href="/teams/scoreboard"
-                                className={`px-2 py-1.5 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
+                                className={`px-1.5 py-1 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 <span className="flex items-center">
@@ -574,7 +574,7 @@ export default function Navbar() {
                     {APP.teams.enabled && (
                       <Link
                         href="/teams"
-                        className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
+                        className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Users size={18} className="mr-1" /> Guilds
@@ -586,7 +586,7 @@ export default function Navbar() {
                 {!user && (
                   <Link
                     href="/preview"
-                    className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
+                    className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <FileText size={18} className="mr-1" /> Preview
@@ -595,13 +595,13 @@ export default function Navbar() {
 
                 {/* Info Menu - Mobile */}
                 <details className="rounded-lg">
-                  <summary className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}>
+                  <summary className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}>
                     <BookOpen size={18} className="mr-1" /> Info
                   </summary>
                   <div className="mt-1 ml-6 flex flex-col gap-1">
                     <Link
                       href="/info"
-                      className={`px-2 py-1.5 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
+                      className={`px-1.5 py-1 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="flex items-center">
@@ -610,7 +610,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/rules"
-                      className={`px-2 py-1.5 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
+                      className={`px-1.5 py-1 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="flex items-center">
@@ -619,7 +619,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/docs"
-                      className={`px-2 py-1.5 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
+                      className={`px-1.5 py-1 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="flex items-center">
@@ -632,7 +632,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-amber-900/20' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-amber-500 ')}`}
+                    className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-amber-900/20' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-amber-500 ')}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
@@ -642,7 +642,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/hall-of-fame"
-                    className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-amber-900/20' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-amber-500 ')}`}
+                    className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-amber-900/20' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-amber-500 ')}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Trophy size={18} className="mr-1 text-yellow-500 dark:text-yellow-400" /> Hall of Fame
@@ -654,7 +654,7 @@ export default function Navbar() {
                     {adminStatus && (
                       <Link
                         href="/admin"
-                        className={`px-2 py-1.5 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
+                        className={`px-1.5 py-1 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Shield size={18} className="mr-1" /> Admin
@@ -662,7 +662,7 @@ export default function Navbar() {
                     )}
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left bg-red-600 hover:bg-red-700 text-white px-2 py-1.5 rounded-lg text-[15px] font-medium shadow transition-all duration-150"
+                      className="w-full text-left bg-red-600 hover:bg-red-700 text-white px-1.5 py-1 rounded-lg text-[15px] font-medium shadow transition-all duration-150"
                     >
                       Logout
                     </button>
@@ -673,14 +673,14 @@ export default function Navbar() {
                   <>
                     <Link
                       href="/login"
-                      className={`flex px-2 py-1.5 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-500  hover:bg-amber-500  text-white' : 'bg-amber-500  hover:bg-amber-500  text-white'}`}
+                      className={`flex px-1.5 py-1 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-500  hover:bg-amber-500  text-white' : 'bg-amber-500  hover:bg-amber-500  text-white'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Login
                     </Link>
                     <Link
                       href="/register"
-                      className={`flex px-2 py-1.5 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-900/20 hover:bg-gray-700 text-gray-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
+                      className={`flex px-1.5 py-1 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-900/20 hover:bg-gray-700 text-gray-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Register
