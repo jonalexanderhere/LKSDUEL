@@ -13,7 +13,7 @@ export default function RulesPage() {
   if (loading) return <Loader fullscreen color="text-blue-500" />
 
   return (
-    <div className="flex flex-col min-h-[calc(100lvh-60px)] bg-[#fafafa] dark:bg-[#0b0f19] text-gray-900 dark:text-gray-100 selection:bg-blue-500/30 overflow-hidden">
+    <div className="flex flex-col min-h-[calc(100lvh-60px)] bg-transparent  text-gray-900 dark:text-gray-100 selection:bg-blue-500/30 overflow-hidden">
 
       {/* Background Effects - Ultra Subtle */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">

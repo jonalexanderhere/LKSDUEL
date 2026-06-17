@@ -15,7 +15,7 @@ export default function ChallengesPage() {
   if (!data.user) return null
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#fafafa] dark:bg-[#0b0f19] text-amber-900 dark:text-amber-50 selection:bg-blue-500/30 overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-transparent  text-amber-900 dark:text-amber-50 selection:bg-blue-500/30 overflow-hidden">
       {/* Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px]" />

@@ -16,23 +16,9 @@
   }
 }
 
-body {
-    background-color: #0d0806 !important;
-    background-image: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%), url('/fantasy-bg.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    color: #fef3c7 !important;
-}
 
-body {
-    background-color: #0d0806 !important;
-    background-image: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%), url('/fantasy-bg.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    color: #fef3c7 !important;
-}
+
+
 
 .bg-ctfd {
   background: repeating-linear-gradient(0deg,
@@ -89,14 +75,7 @@ html {
   scrollbar-gutter: stable;
 }
 
-body {
-    background-color: #0d0806 !important;
-    background-image: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%), url('/fantasy-bg.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    color: #fef3c7 !important;
-}
+
 
 html body[data-scroll-locked] {
   margin-right: 0 !important;
@@ -263,14 +242,7 @@ input[type='password']::-ms-clear {
     @apply border-border;
   }
 
-  body {
-    background-color: #0d0806 !important;
-    background-image: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%), url('/fantasy-bg.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    color: #fef3c7 !important;
-}
+  
 }
 
 /* animasi marquee */
@@ -341,83 +313,11 @@ input[type='password']::-ms-clear {
 }
 
 
-/* PREMIUM RPG GLASSMORPHISM OVERRIDES */
-/* Overriding standard Next.js template classes globally for a true Fantasy RPG feel */
+
+
+
+
 
 body {
-    background-color: #0d0806 !important;
-    background-image: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%), url('/fantasy-bg.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
-    color: #fef3c7 !important;
+  background-color: transparent;
 }
-
-/* Force dark parchment/stone onto all structural cards */
-[class*="bg-white"], [class*="bg-gray-"], [class*="bg-slate-"], [class*="bg-stone-"], [class*="bg-zinc-"] {
-    background-color: rgba(20, 10, 5, 0.75) !important;
-    backdrop-filter: blur(12px) !important;
-    border-color: rgba(245, 158, 11, 0.2) !important;
-    color: #fef3c7 !important;
-}
-
-/* Fix corner radii to be sharp or slightly rounded, preserving circles for avatars */
-[class*="rounded-"]:not(.rounded-full) {
-    border-radius: 2px !important;
-}
-
-/* Force golden magical buttons for ANY blue or primary buttons */
-[class*="bg-blue-"], [class*="bg-primary"] {
-    background: linear-gradient(to bottom, #d97706, #92400e) !important;
-    color: #fef3c7 !important;
-    border: 1px solid #fbbf24 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.2) !important;
-    text-transform: uppercase !important;
-    font-weight: bold !important;
-    letter-spacing: 1px !important;
-    transition: all 0.2s ease !important;
-}
-
-[class*="bg-blue-"]:hover, [class*="bg-primary"]:hover {
-    background: linear-gradient(to bottom, #f59e0b, #b45309) !important;
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.6), inset 0 1px 2px rgba(255,255,255,0.3) !important;
-    transform: translateY(-1px);
-}
-
-/* Inputs and Selects */
-input, select, textarea {
-    background-color: rgba(10, 5, 0, 0.8) !important;
-    border: 1px solid rgba(245, 158, 11, 0.4) !important;
-    color: #fbbf24 !important;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8) !important;
-    border-radius: 2px !important;
-}
-input:focus, select:focus, textarea:focus {
-    border-color: #fbbf24 !important;
-    box-shadow: 0 0 8px rgba(245, 158, 11, 0.6), inset 0 2px 4px rgba(0,0,0,0.8) !important;
-    outline: none !important;
-    --tw-ring-color: transparent !important;
-}
-
-/* Magical Text */
-[class*="text-blue-"], [class*="text-primary-"] {
-    color: #fbbf24 !important;
-    text-shadow: 0 0 8px rgba(245, 158, 11, 0.5) !important;
-}
-
-/* Generic text overrides to prevent white/gray text */
-[class*="text-gray-"], [class*="text-slate-"], [class*="text-zinc-"] {
-    color: #fef3c7 !important;
-}
-
-/* Borders */
-[class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"] {
-    border-color: rgba(245, 158, 11, 0.2) !important;
-}
-
-/* Dropdowns and Select specific */
-select {
-    background-image: url("data:image/svg+xml;utf8,<svg fill='%23fbbf24' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") !important;
-}
-
-

@@ -93,7 +93,7 @@ export default function UserProfilePage() {
   // ❌ Error UI (ini boleh beda)
   if (error) {
     return (
-      <div className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+      <div className="relative min-h-[calc(100vh-3.5rem)] overflow-hidden bg-transparent text-gray-900 selection:bg-blue-500/30  dark:text-gray-100">
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
           <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-blue-500/5 blur-[120px]" />
           <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-indigo-600/5 blur-[120px]" />

@@ -72,7 +72,7 @@ export default function UserProfile({
 
   if (initialLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+      <div className="flex justify-center items-center min-h-screen overflow-hidden bg-transparent text-gray-900 selection:bg-blue-500/30  dark:text-gray-100">
         <ProfileBackground />
         <Loader color="text-blue-500" />
       </div>
@@ -81,7 +81,7 @@ export default function UserProfile({
 
   if (hasError) {
     return (
-      <div className="relative min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+      <div className="relative min-h-screen overflow-hidden bg-transparent text-gray-900 selection:bg-blue-500/30  dark:text-gray-100">
         <ProfileBackground />
         <main className="relative z-10 mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-5xl items-center justify-center px-6 py-16">
           <UserEmptyState
@@ -105,7 +105,7 @@ export default function UserProfile({
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#fafafa] text-gray-900 selection:bg-blue-500/30 dark:bg-[#0b0f19] dark:text-gray-100">
+    <div className="relative min-h-screen overflow-hidden bg-transparent text-gray-900 selection:bg-blue-500/30  dark:text-gray-100">
       <ProfileBackground />
       <main className="relative z-10 mx-auto w-full max-w-6xl space-y-6 px-6 py-8">
         {loading || loadingDetail ? (

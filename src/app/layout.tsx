@@ -95,9 +95,9 @@ export default async function RootLayout({
                 <EventProvider>
                   <SubChallengesProvider>
                     <LogsProvider>
-                      <div className="min-h-screen relative overflow-hidden bg-gray-50 dark:bg-[#110A08] text-gray-900 dark:text-amber-50">
+                      <div className="min-h-screen relative overflow-hidden bg-transparent text-gray-900 dark:text-amber-50">
                         {/* Global Fantasy Background */}
-                        <div className="fixed inset-0 z-[-1] pointer-events-none hidden dark:block opacity-10 bg-[url('/fantasy-bg.png')] bg-cover bg-center bg-no-repeat mix-blend-overlay bg-fixed"></div>
+                        <div className="fixed inset-0 z-[-1] pointer-events-none bg-[url('/fantasy-bg.png')] bg-cover bg-center bg-no-repeat brightness-[0.4] bg-fixed"></div>
                         <Navbar />
                         <div className="pt-16 relative z-0">{children}</div>
                         <Toaster position="top-right" reverseOrder={false} />
