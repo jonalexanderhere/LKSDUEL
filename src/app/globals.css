@@ -17,14 +17,21 @@
 }
 
 body {
-  font-family: 'Fira Mono', 'JetBrains Mono', 'Menlo', 'monospace';
+    background-color: #0d0806 !important;
+    background-image: radial-gradient(circle at center, rgba(30,10,5,0.7) 0%, rgba(10,5,0,0.95) 100%), url('/fantasy-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    color: #fef3c7 !important;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    background-color: #0d0806 !important;
+    background-image: radial-gradient(circle at center, rgba(30,10,5,0.7) 0%, rgba(10,5,0,0.95) 100%), url('/fantasy-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    color: #fef3c7 !important;
 }
 
 .bg-ctfd {
@@ -83,9 +90,12 @@ html {
 }
 
 body {
-  overflow-x: hidden;
-  /* overflow-y: scroll !important; */
-  scroll-behavior: smooth;
+    background-color: #0d0806 !important;
+    background-image: radial-gradient(circle at center, rgba(30,10,5,0.7) 0%, rgba(10,5,0,0.95) 100%), url('/fantasy-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    color: #fef3c7 !important;
 }
 
 html body[data-scroll-locked] {
@@ -254,8 +264,13 @@ input[type='password']::-ms-clear {
   }
 
   body {
-    @apply bg-background text-foreground;
-  }
+    background-color: #0d0806 !important;
+    background-image: radial-gradient(circle at center, rgba(30,10,5,0.7) 0%, rgba(10,5,0,0.95) 100%), url('/fantasy-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+    color: #fef3c7 !important;
+}
 }
 
 /* animasi marquee */
@@ -331,7 +346,9 @@ input[type='password']::-ms-clear {
 
 body {
     background-color: #0d0806 !important;
-    background-image: radial-gradient(circle at center, rgba(40,20,10,0.8) 0%, #000 100%) !important;
+    background-image: radial-gradient(circle at center, rgba(30,10,5,0.7) 0%, rgba(10,5,0,0.95) 100%), url('/fantasy-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
     background-attachment: fixed !important;
     color: #fef3c7 !important;
 }
@@ -402,3 +419,4 @@ input:focus, select:focus, textarea:focus {
 select {
     background-image: url("data:image/svg+xml;utf8,<svg fill='%23fbbf24' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") !important;
 }
+
