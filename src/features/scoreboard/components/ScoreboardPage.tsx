@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import { Coins, Droplet, User, Rocket } from 'lucide-react'
@@ -56,11 +56,11 @@ export default function ScoreboardPage() {
     }
   }, [firstBloodMode, user])
 
-  if (authLoading) return <Loader fullscreen color="text-blue-500" />
+  if (authLoading) return <Loader fullscreen color="text-amber-500" />
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-transparent dark:bg-transparent">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* <TitlePage icon={<Trophy size={30} className="text-yellow-500 dark:text-yellow-300 drop-shadow" />}>Scoreboard</TitlePage> */}
 
@@ -72,17 +72,17 @@ export default function ScoreboardPage() {
                 value={selectedEvent}
                 onChange={setSelectedEvent}
                 events={startedEvents}
-                className="min-w-[180px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm px-3 py-2 rounded"
+                className="min-w-[180px] bg-amber-900/10 dark:bg-amber-900/10 border border-amber-900/50 text-sm px-3 py-2 rounded"
                 getEventLabel={(event: any) => String(event?.name ?? event?.title ?? 'Untitled')}
               />
             </div>
           </div>
 
-          <span className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
+          <span className="flex gap-2 border-b border-amber-900/50">
             <button
               onClick={() => setFirstBloodMode(false)}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${!firstBloodMode
-                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                ? 'border-amber-500 text-amber-600 dark:text-amber-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
@@ -99,7 +99,7 @@ export default function ScoreboardPage() {
             <button
               onClick={() => setFirstBloodMode(true)}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${firstBloodMode
-                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                ? 'border-amber-500 text-amber-600 dark:text-amber-400'
                 : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
             >
@@ -155,7 +155,7 @@ export default function ScoreboardPage() {
 
         {loading && leaderboard.length === 0 ? (
           <div className="flex justify-center py-16">
-            <Loader color="text-blue-500" />
+            <Loader color="text-amber-500" />
           </div>
         ) : !user ? null : (
           <div className={`space-y-8 ${hasMounted ? '' : 'opacity-0'} transition-opacity duration-500`}>
@@ -166,7 +166,7 @@ export default function ScoreboardPage() {
             )}
             <div>
               {isEmpty ? (
-                <Card className="bg-white dark:bg-gray-800">
+                <Card className="bg-amber-900/10 dark:bg-amber-900/10">
                   <CardHeader>
                     <CardTitle className="text-lg font-semibold text-amber-900 dark:text-amber-50">Ranking</CardTitle>
                   </CardHeader>
@@ -177,7 +177,7 @@ export default function ScoreboardPage() {
                       description={
                         <>
                           Leaderboard is empty!<br />
-                          Be the first to solve a challenge <Rocket size={16} className="inline-block ml-1 text-blue-500" />
+                          Be the first to solve a challenge <Rocket size={16} className="inline-block ml-1 text-amber-500" />
                         </>
                       }
                       containerHeight="py-12"
@@ -201,4 +201,5 @@ export default function ScoreboardPage() {
     </div>
   )
 }
+
 

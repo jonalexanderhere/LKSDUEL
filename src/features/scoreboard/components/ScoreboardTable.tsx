@@ -1,4 +1,4 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/ui/card'
@@ -23,7 +23,7 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
   const pathname = usePathname()
 
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-transparent border-amber-900/50">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-lg font-semibold text-amber-900 dark:text-amber-50">Ranking</CardTitle>
       {pathname === '/scoreboard' &&
@@ -62,10 +62,10 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
                   <TableRow
                     key={entry.username}
                     className={`
-                      transition-colors duration-150 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-600
+                      transition-colors duration-150 ease-in-out hover:bg-amber-900/20
                       ${
                         isCurrentUser
-                          ? 'bg-gray-100 dark:bg-gray-700 font-semibold'
+                          ? 'bg-amber-900/40 font-semibold'
                           : ''
                       }
                     `}
@@ -75,7 +75,7 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
                     <Link
                       href={`/user/${encodeURIComponent(entry.username)}`}
                       className={`hover:underline ${
-                        isCurrentUser ? 'text-blue-700 dark:text-blue-300' : 'hover:text-blue-600 dark:hover:text-blue-400'
+                        isCurrentUser ? 'text-amber-700 dark:text-amber-300' : 'hover:text-amber-600 dark:hover:text-amber-400'
                       } max-w-[120px] md:max-w-xs truncate whitespace-nowrap block`}
                       title={entry.username}
                     >
@@ -99,4 +99,5 @@ const ScoreboardTable: React.FC<ScoreboardTableProps> = ({ leaderboard, currentU
 }
 
 export default ScoreboardTable
+
 

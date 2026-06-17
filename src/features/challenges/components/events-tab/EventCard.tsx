@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { Calendar, Clock } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -47,12 +47,12 @@ export default function EventCard({
       onClick={onSelect}
     >
       {/* Glow Effect on Hover */}
-      <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/[0.03] rounded-2xl transition-colors duration-300 pointer-events-none" />
+      <div className="absolute inset-0 bg-amber-500/0 group-hover:bg-amber-500/[0.05] rounded-2xl transition-colors duration-300 pointer-events-none" />
 
       <div className={`relative h-full flex flex-col overflow-hidden rounded-2xl border backdrop-blur-md transition-all duration-300
         ${selected
-          ? 'bg-blue-500/[0.03] border-blue-500/50 shadow-sm'
-          : 'bg-white/40 dark:bg-gray-900/40 border-amber-900/50 group-hover:border-blue-500/50 shadow-sm'}
+          ? 'bg-amber-500/[0.03] border-amber-500/50 shadow-sm'
+          : 'bg-white/40 dark:bg-gray-900/40 border-amber-900/50 group-hover:border-amber-500/50 shadow-sm'}
         ${tone === 'ended' ? 'opacity-70 grayscale-[0.3]' : ''}
         hover:shadow-md`}
       >
@@ -65,8 +65,8 @@ export default function EventCard({
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 flex items-center justify-center">
-              <Calendar size={24} className="text-blue-500/20" />
+            <div className="w-full h-full bg-black/60 backdrop-blur-md flex items-center justify-center">
+              <img src="/lks-980x917.png" alt="LKS Logo" className="w-16 h-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-300" />
             </div>
           )}
 
@@ -84,7 +84,7 @@ export default function EventCard({
               </div>
             </div>
 
-            <h4 className="text-sm md:text-base font-bold text-amber-900 dark:text-amber-50 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+            <h4 className="text-sm md:text-base font-bold text-amber-900 dark:text-amber-50 leading-tight group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors line-clamp-1">
               {event.name}
             </h4>
           </div>
@@ -102,7 +102,7 @@ export default function EventCard({
                 <Calendar size={12} className="text-blue-500/40" />
                 <span>{startText}</span>
               </div>
-              <div className="flex items-center gap-1 text-[10px] font-mono text-blue-600 dark:text-blue-400">
+              <div className="flex items-center gap-1 text-[10px] font-mono text-amber-500 dark:text-amber-400">
                 <Clock size={11} />
                 <span>{timeRemaining}</span>
               </div>
@@ -113,4 +113,5 @@ export default function EventCard({
     </motion.div>
   )
 }
+
 
