@@ -41,7 +41,7 @@ export default function MainEventCard({
         <div className="relative h-40 w-full overflow-hidden border-b border-amber-900/50/50">
           {imageUrl ? (
             <img
-              src={imageUrl}
+              src="/lks-980x917.png"
               alt={label}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -88,5 +88,6 @@ export default function MainEventCard({
     </motion.div>
   )
 }
+
 
 

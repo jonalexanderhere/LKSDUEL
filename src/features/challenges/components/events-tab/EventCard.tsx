@@ -35,7 +35,7 @@ export default function EventCard({
 }: EventCardProps) {
   const status = getEventStatus(event)
   const timeRemaining = getTimeRemaining(event)
-  const eventImageUrl = normalizeEventImageUrl(event.image_url) || fallbackImageUrl
+  const eventImageUrl = "/lks-980x917.png"
   const { startText, endText, startLabel, endLabel } = getEventDateLabels(event, now)
 
   return (
@@ -113,5 +113,6 @@ export default function EventCard({
     </motion.div>
   )
 }
+
 
 
