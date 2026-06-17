@@ -64,11 +64,11 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
       <div className={`absolute inset-0 rounded-2xl transition-all duration-300 pointer-events-none
         ${isSolved ? 'group-hover:bg-green-500/[0.05]' :
           isTeamSolved ? 'group-hover:bg-purple-500/[0.05]' :
-            'group-hover:bg-blue-500/[0.06]'}`} />
+            'group-hover:bg-amber-500/[0.06]'}`} />
 
       {/* Top Accent Line — only for unsolved */}
       {!isAnySolved && !isMaintenance && (
-        <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-transparent via-blue-500/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-0 left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-transparent via-amber-500/60 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
 
       <div className={`relative h-full flex flex-col p-4 md:p-5 rpg-card rounded-md transition-all duration-300
@@ -105,7 +105,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
           {/* Maintenance Overlay Info */}
           {isMaintenance && (
             <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/70 dark:bg-gray-950 backdrop-blur-[4px] rounded-xl pointer-events-none">
-              <p className="text-[10px] font-black text-center px-4 text-blue-600 dark:text-blue-500 leading-relaxed uppercase tracking-wider">
+              <p className="text-[10px] font-black text-center px-4 text-red-500 dark:text-red-500 leading-relaxed uppercase tracking-wider">
                 This service is currently unavailable. Points remain awarded to those who solved it.
               </p>
             </div>
@@ -150,7 +150,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
                 ? 'text-gray-400 group-hover:text-green-300'
                 : isTeamSolved
                   ? 'text-gray-400 group-hover:text-purple-300'
-                  : 'text-white group-hover:text-blue-300'}`}>
+                  : 'text-white group-hover:text-amber-400'}`}>
               {challenge.title}
             </h3>
           </div>
@@ -160,7 +160,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
         <div className={`flex items-center justify-between pt-3 border-t z-10 relative ${categoryBorderColor}`}>
           <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider">
             {isMaintenance ? (
-              <span className="text-blue-500 flex items-center gap-1.5 font-black">
+              <span className="text-red-500 flex items-center gap-1.5 font-black">
                 <AlertTriangle size={12} className="animate-pulse" />
                 Maintenance
               </span>
@@ -183,7 +183,7 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
                 </span>
               ) : isRecentlyCreated ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-blue-400 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider">
+                  <span className="text-amber-400 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider">
                     <Sparkles size={11} />
                     New
                   </span>
@@ -207,3 +207,4 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({ challenge, highlightTeamS
 };
 
 export default ChallengeCard;
+

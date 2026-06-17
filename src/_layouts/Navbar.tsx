@@ -153,15 +153,15 @@ export default function Navbar() {
                   size={42}
                   className="rounded-full"
                 />
-                <span className={`text-[1.35rem] font-extrabold tracking-wide ${theme === 'dark' ? 'text-white' : 'text-amber-100'} transition-all duration-200 group-hover:text-amber- dark:group-hover:text-amber-`}>{APP.shortName}</span>
+                <span className={`text-[1.35rem] font-extrabold tracking-wide ${theme === 'dark' ? 'text-white' : 'text-amber-100'} transition-all duration-200 group-hover:text-amber-500  dark:group-hover:text-amber-500 `}>{APP.shortName}</span>
               </Link>
 
               {/* Desktop menu */}
-              <div className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex 2xl:gap-1.5 overflow-x-auto scroll-hidden pb-1" style={{ WebkitMaskImage: 'linear-gradient(to right, black 95%, transparent 100%)' }}>
+              <div className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex 2xl:gap-1.5 overflow-x-auto scroll-hidden">
                 {user && (
                   <Link
                     href="/challenges"
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                     data-tour="navbar-challenges"
                   >
                     <Flag size={18} /> Quests
@@ -172,7 +172,7 @@ export default function Navbar() {
                   scoreboardOptionCount === 1 ? (
                     <Link
                       href={showTeamLeaderboard ? '/teams/scoreboard' : '/scoreboard'}
-                      className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                      className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                       data-tour="navbar-scoreboard"
                     >
                       <Trophy size={18} /> Leaderboard
@@ -183,7 +183,7 @@ export default function Navbar() {
                         type="button"
                         data-tour="navbar-scoreboard"
                         onClick={() => setLeaderboardOpen((v) => !v)}
-                        className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                        className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                       >
                         <Trophy size={18} /> Leaderboard
                         <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${scoreboardOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -196,7 +196,7 @@ export default function Navbar() {
                             <Link
                               href="/scoreboard"
                               onClick={() => setLeaderboardOpen(false)}
-                              className={`block px-3 py-2 text-sm ${showTeamLeaderboard ? 'rounded-t-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-[#2D1B15]'}`}
+                              className={`block px-3 py-2 text-sm ${showTeamLeaderboard ? 'rounded-t-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                             >
                               <span className="flex items-center">
                                 <User size={18} className="mr-1" />
@@ -208,7 +208,7 @@ export default function Navbar() {
                             <Link
                               href="/teams/scoreboard"
                               onClick={() => setLeaderboardOpen(false)}
-                              className={`block px-3 py-2 text-sm ${showUserLeaderboard ? 'rounded-b-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-[#2D1B15]'}`}
+                              className={`block px-3 py-2 text-sm ${showUserLeaderboard ? 'rounded-b-lg' : 'rounded-lg'} ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                             >
                               <span className="flex items-center">
                                 <Users size={18} className="mr-1" />
@@ -225,7 +225,7 @@ export default function Navbar() {
                 {user && APP.teams.enabled && (
                   <Link
                     href="/teams"
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                   >
                     <Users size={18} /> Guilds
                   </Link>
@@ -234,7 +234,7 @@ export default function Navbar() {
                 {!user && (
                   <Link
                     href="/preview"
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                   >
                     <FileText size={18} /> Preview
                   </Link>
@@ -246,7 +246,7 @@ export default function Navbar() {
                     type="button"
                     data-tour="navbar-docs"
                     onClick={() => setDocsOpen((v) => !v)}
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                   >
                     <Info size={18} /> Info
                     <svg className={`ml-1 h-3 w-3 opacity-70 transition-transform ${docsOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -258,7 +258,7 @@ export default function Navbar() {
                       <Link
                         href="/info"
                         onClick={() => setDocsOpen(false)}
-                        className={`block px-3 py-2 text-sm rounded-t-lg ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-[#2D1B15]'}`}
+                        className={`block px-3 py-2 text-sm rounded-t-lg ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                         data-tour="navbar-info"
                       >
                         <span className="flex items-center">
@@ -269,7 +269,7 @@ export default function Navbar() {
                       <Link
                         href="/rules"
                         onClick={() => setDocsOpen(false)}
-                        className={`block px-3 py-2 text-sm ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-[#2D1B15]'}`}
+                        className={`block px-3 py-2 text-sm ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                         data-tour="navbar-rules"
                       >
                         <span className="flex items-center">
@@ -281,7 +281,7 @@ export default function Navbar() {
                         href={APP.nxctf.nxctf_docs}
                         target="_blank"
                         onClick={() => setDocsOpen(false)}
-                        className={`block px-3 py-2 text-sm rounded-b-lg ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-[#2D1B15]'}`}
+                        className={`block px-3 py-2 text-sm rounded-b-lg ${theme === 'dark' ? 'hover:bg-amber-900/30' : 'hover:bg-[#2D1B15]'}`}
                         data-tour="navbar-docs"
                       >
                         <span className="flex items-center">
@@ -296,7 +296,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-amber-')}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-amber-900/20' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-amber-500 ')}`}
                   >
                     <Flame size={18} className="text-red-600 dark:text-red-400 shrink-0" /> Attack Feed
                   </Link>
@@ -305,7 +305,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/hall-of-fame"
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-amber-')}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-amber-900/20' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-amber-500 ')}`}
                   >
                     <Trophy size={18} className="text-yellow-500 dark:text-yellow-400 shrink-0" /> Hall of Fame
                   </Link>
@@ -314,7 +314,7 @@ export default function Navbar() {
                 {adminStatus && user && (
                   <Link
                     href="/admin"
-                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                    className={`h-10 px-2.5 2xl:px-3 rounded-lg flex flex-none items-center gap-1.5 whitespace-nowrap text-sm 2xl:text-[15px] leading-none font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                   >
                     <Shield size={18} /> Admin
                   </Link>
@@ -347,13 +347,13 @@ export default function Navbar() {
                   <>
                     <Link
                       href="/login"
-                      className={`px-4 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber- hover:bg-amber- text-white' : 'bg-amber- hover:bg-amber- text-white'}`}
+                      className={`px-4 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-500  hover:bg-amber-500  text-white' : 'bg-amber-500  hover:bg-amber-500  text-white'}`}
                     >
                       Login
                     </Link>
                     <Link
                       href="/register"
-                      className={`px-4 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
+                      className={`px-4 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-900/20 hover:bg-gray-700 text-gray-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
                     >
                       Register
                     </Link>
@@ -404,7 +404,7 @@ export default function Navbar() {
               {user && (
                 <div className="relative mr-2" data-tour="navbar-logs">
                   <button
-                    className={`rounded-full p-1 transition-colors duration-150 ${pathname === '/logs' ? (theme === 'dark' ? 'bg-amber-' : 'bg-amber-') : ''}`}
+                    className={`rounded-full p-1 transition-colors duration-150 ${pathname === '/logs' ? (theme === 'dark' ? 'bg-amber-500 ' : 'bg-amber-500 ') : ''}`}
                     title="Logs"
                     aria-label="Logs"
                     onClick={() => {
@@ -419,7 +419,7 @@ export default function Navbar() {
                       }
                     }}
                   >
-                    <FileText size={22} className="text-amber-" />
+                    <FileText size={22} className="text-amber-500 " />
                   </button>
 
                   {logsUnreadCount > 0 && (
@@ -434,10 +434,10 @@ export default function Navbar() {
               {process.env.NODE_ENV === 'development' && (
                 <button
                   onClick={() => setDevConfigOpen(true)}
-                  className="p-1 rounded-full hover:bg-amber- dark:hover:bg-amber-/30 transition-colors mr-1"
+                  className="p-1 rounded-full hover:bg-amber-500  dark:hover:bg-amber-500 /30 transition-colors mr-1"
                   title="Platform Setup (Dev Only)"
                 >
-                  <Settings2 size={22} className="text-amber-" />
+                  <Settings2 size={22} className="text-amber-500 " />
                 </button>
               )}
 
@@ -470,7 +470,7 @@ export default function Navbar() {
               {/* Mobile toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="xl:hidden p-2 rounded-lg text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-150"
+                className="xl:hidden p-2 rounded-lg text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-amber-900/30 transition-all duration-150"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {mobileMenuOpen ? (
@@ -490,7 +490,7 @@ export default function Navbar() {
                 <span className={`text-lg font-bold tracking-wide ${theme === 'dark' ? 'text-white' : 'text-amber-100'}`}>Menu</span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-150"
+                  className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-amber-900/30 transition-all duration-150"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -508,7 +508,7 @@ export default function Navbar() {
                   >
                     <ImageWithFallback src={avatarSrc} alt={user.username} size={36} className="rounded-full" />
                     <span
-                      className={`text-[15px] font-semibold ${theme === 'dark' ? 'text-white' : 'text-amber-100'} group-hover:text-amber- dark:group-hover:text-amber- truncate whitespace-nowrap max-w-[120px] block`}
+                      className={`text-[15px] font-semibold ${theme === 'dark' ? 'text-white' : 'text-amber-100'} group-hover:text-amber-500  dark:group-hover:text-amber-500  truncate whitespace-nowrap max-w-[120px] block`}
                       title={user.username}
                     >
                       {user.username}
@@ -520,7 +520,7 @@ export default function Navbar() {
                   <>
                     <Link
                       href="/challenges"
-                      className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                      className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <Flag size={18} className="mr-1" /> Quests
@@ -529,21 +529,21 @@ export default function Navbar() {
                       scoreboardOptionCount === 1 ? (
                         <Link
                           href={showTeamLeaderboard ? '/teams/scoreboard' : '/scoreboard'}
-                          className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                          className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           <Trophy size={18} className="mr-1" /> Leaderboard
                         </Link>
                       ) : (
                         <details className="rounded-lg">
-                          <summary className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}>
+                          <summary className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}>
                             <Trophy size={18} className="mr-1" /> Leaderboard
                           </summary>
                           <div className="mt-1 ml-6 flex flex-col gap-1">
                             {showUserLeaderboard && (
                               <Link
                                 href="/scoreboard"
-                                className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}
+                                className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 <span className="flex items-center">
@@ -555,7 +555,7 @@ export default function Navbar() {
                             {showTeamLeaderboard && (
                               <Link
                                 href="/teams/scoreboard"
-                                className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}
+                                className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 <span className="flex items-center">
@@ -571,7 +571,7 @@ export default function Navbar() {
                     {APP.teams.enabled && (
                       <Link
                         href="/teams"
-                        className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                        className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Users size={18} className="mr-1" /> Guilds
@@ -583,7 +583,7 @@ export default function Navbar() {
                 {!user && (
                   <Link
                     href="/preview"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <FileText size={18} className="mr-1" /> Preview
@@ -592,13 +592,13 @@ export default function Navbar() {
 
                 {/* Info Menu - Mobile */}
                 <details className="rounded-lg">
-                  <summary className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}>
+                  <summary className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 cursor-pointer ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}>
                     <BookOpen size={18} className="mr-1" /> Info
                   </summary>
                   <div className="mt-1 ml-6 flex flex-col gap-1">
                     <Link
                       href="/info"
-                      className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}
+                      className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="flex items-center">
@@ -607,7 +607,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/rules"
-                      className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}
+                      className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="flex items-center">
@@ -616,7 +616,7 @@ export default function Navbar() {
                     </Link>
                     <Link
                       href="/docs"
-                      className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber- hover:bg-gray-800' : 'text-gray-700 hover:text-amber- hover:bg-blue-50'}`}
+                      className={`px-3 py-2 rounded-lg text-sm ${theme === 'dark' ? 'text-gray-300 hover:text-amber-500  hover:bg-amber-900/30' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="flex items-center">
@@ -629,7 +629,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/attack-feed"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-gray-800' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-amber-')}`}
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/attack-feed' ? (theme === 'dark' ? 'text-red-400 bg-amber-900/20' : 'text-red-600 bg-red-50') : (theme === 'dark' ? 'text-gray-200 hover:text-red-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-red-600 hover:bg-red-50 focus:ring-2 focus:ring-amber-500 ')}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Flame size={18} className="mr-1 text-red-600 dark:text-red-400" /> Attack-Feed
@@ -639,7 +639,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     href="/hall-of-fame"
-                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-gray-800' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-amber-')}`}
+                    className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${pathname === '/hall-of-fame' ? (theme === 'dark' ? 'text-yellow-400 bg-amber-900/20' : 'text-yellow-600 bg-yellow-50') : (theme === 'dark' ? 'text-gray-200 hover:text-yellow-400 hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-yellow-600 hover:bg-yellow-50 focus:ring-2 focus:ring-amber-500 ')}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Trophy size={18} className="mr-1 text-yellow-500 dark:text-yellow-400" /> Hall of Fame
@@ -651,7 +651,7 @@ export default function Navbar() {
                     {adminStatus && (
                       <Link
                         href="/admin"
-                        className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber- hover:bg-gray-800 focus:ring-2 focus:ring-amber-' : 'text-gray-700 hover:text-amber- hover:bg-blue-50 focus:ring-2 focus:ring-amber-'}`}
+                        className={`px-3 py-2 rounded-lg flex items-center gap-1 text-[15px] font-medium transition-all duration-150 ${theme === 'dark' ? 'text-gray-200 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 ' : 'text-gray-700 hover:text-amber-500  hover:bg-amber-900/30 focus:ring-2 focus:ring-amber-500 '}`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Shield size={18} className="mr-1" /> Admin
@@ -670,14 +670,14 @@ export default function Navbar() {
                   <>
                     <Link
                       href="/login"
-                      className={`flex px-3 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber- hover:bg-amber- text-white' : 'bg-amber- hover:bg-amber- text-white'}`}
+                      className={`flex px-3 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-500  hover:bg-amber-500  text-white' : 'bg-amber-500  hover:bg-amber-500  text-white'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Login
                     </Link>
                     <Link
                       href="/register"
-                      className={`flex px-3 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
+                      className={`flex px-3 py-2 rounded-lg text-[15px] font-medium shadow transition-all duration-150 ${theme === 'dark' ? 'bg-amber-900/20 hover:bg-gray-700 text-gray-200' : 'bg-gray-100 hover:bg-gray-200 text-gray-800'}`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Register
@@ -695,3 +695,4 @@ export default function Navbar() {
     </>
   )
 }
+

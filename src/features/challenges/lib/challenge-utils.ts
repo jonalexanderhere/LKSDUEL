@@ -10,18 +10,18 @@ export interface CategoryDetails {
 
 export function getCategoryDetails(category: string): CategoryDetails {
   const cat = (category || '').toLowerCase()
-  if (cat.includes('intro'))        return { color: 'text-yellow-500',  borderColor: 'border-yellow-500/30',  badgeColor: 'bg-yellow-500/15 text-yellow-400'   }
-  if (cat.includes('boot to root')) return { color: 'text-emerald-500', borderColor: 'border-emerald-500/30', badgeColor: 'bg-emerald-500/15 text-emerald-400'  }
-  if (cat.includes('web'))          return { color: 'text-blue-500',    borderColor: 'border-blue-500/30',    badgeColor: 'bg-blue-500/15 text-blue-400'        }
-  if (cat.includes('forensic'))     return { color: 'text-teal-500',    borderColor: 'border-teal-500/30',    badgeColor: 'bg-teal-500/15 text-teal-400'        }
-  if (cat.includes('osint'))        return { color: 'text-cyan-500',    borderColor: 'border-cyan-500/30',    badgeColor: 'bg-cyan-500/15 text-cyan-400'        }
-  if (cat.includes('crypto'))       return { color: 'text-purple-500',  borderColor: 'border-purple-500/30',  badgeColor: 'bg-purple-500/15 text-purple-400'    }
-  if (cat.includes('rev'))          return { color: 'text-sky-500',  borderColor: 'border-sky-500/30',  badgeColor: 'bg-sky-500/15 text-sky-400'    }
-  if (cat.includes('pwn') || cat.includes('exploit')) return { color: 'text-red-500', borderColor: 'border-red-500/30', badgeColor: 'bg-red-500/15 text-red-400' }
-  if (cat.includes('steg'))         return { color: 'text-pink-500',    borderColor: 'border-pink-500/30',    badgeColor: 'bg-pink-500/15 text-pink-400'        }
-  if (cat.includes('network'))      return { color: 'text-indigo-500',  borderColor: 'border-indigo-500/30',  badgeColor: 'bg-indigo-500/15 text-indigo-400'    }
-  if (cat.includes('misc'))         return { color: 'text-gray-500',    borderColor: 'border-gray-500/30',    badgeColor: 'bg-gray-500/15 text-gray-400'        }
-  return                                   { color: 'text-gray-500',    borderColor: 'border-gray-500/30',    badgeColor: 'bg-gray-500/15 text-gray-400'        }
+  if (cat.includes('intro'))        return { color: 'text-yellow-600',  borderColor: 'border-yellow-600/30',  badgeColor: 'bg-yellow-600/15 text-yellow-500'   }
+  if (cat.includes('boot to root')) return { color: 'text-red-700', borderColor: 'border-red-700/30', badgeColor: 'bg-red-700/15 text-red-500'  }
+  if (cat.includes('web'))          return { color: 'text-amber-500',    borderColor: 'border-amber-500/30',    badgeColor: 'bg-amber-500/15 text-amber-400'        }
+  if (cat.includes('forensic'))     return { color: 'text-stone-500',    borderColor: 'border-stone-500/30',    badgeColor: 'bg-stone-500/15 text-stone-400'        }
+  if (cat.includes('osint'))        return { color: 'text-orange-500',    borderColor: 'border-orange-500/30',    badgeColor: 'bg-orange-500/15 text-orange-400'        }
+  if (cat.includes('crypto'))       return { color: 'text-zinc-400',  borderColor: 'border-zinc-500/30',  badgeColor: 'bg-zinc-500/15 text-zinc-300'    }
+  if (cat.includes('rev'))          return { color: 'text-neutral-500',  borderColor: 'border-neutral-500/30',  badgeColor: 'bg-neutral-500/15 text-neutral-400'    }
+  if (cat.includes('pwn') || cat.includes('exploit')) return { color: 'text-red-600', borderColor: 'border-red-600/30', badgeColor: 'bg-red-600/15 text-red-500' }
+  if (cat.includes('steg'))         return { color: 'text-rose-500',    borderColor: 'border-rose-500/30',    badgeColor: 'bg-rose-500/15 text-rose-400'        }
+  if (cat.includes('network'))      return { color: 'text-amber-600',  borderColor: 'border-amber-600/30',  badgeColor: 'bg-amber-600/15 text-amber-500'    }
+  if (cat.includes('misc'))         return { color: 'text-stone-500',    borderColor: 'border-stone-500/30',    badgeColor: 'bg-stone-500/15 text-stone-400'        }
+  return                                   { color: 'text-amber-500',    borderColor: 'border-amber-500/30',    badgeColor: 'bg-amber-500/15 text-amber-400'        }
 }
 
 export interface DifficultyStyle {
