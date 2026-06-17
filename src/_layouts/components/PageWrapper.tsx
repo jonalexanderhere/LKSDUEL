@@ -24,7 +24,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({
     <div className={`min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 ${className}`}>
       {showNavbar && <Navbar />}
       
-      <main className={`flex-1 ${showNavbar && withPadding ? 'pt-14' : ''}`}>
+      <main className={`flex-1 ${showNavbar && withPadding ? 'pt-16' : ''}`}>
         {children}
       </main>
 

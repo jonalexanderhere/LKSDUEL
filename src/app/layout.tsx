@@ -99,7 +99,7 @@ export default async function RootLayout({
                         {/* Global Fantasy Background */}
                         <div className="fixed inset-0 z-[-1] pointer-events-none hidden dark:block opacity-10 bg-[url('/fantasy-bg.png')] bg-cover bg-center bg-no-repeat mix-blend-overlay bg-fixed"></div>
                         <Navbar />
-                        <div className="pt-14 relative z-0">{children}</div>
+                        <div className="pt-16 relative z-0">{children}</div>
                         <Toaster position="top-right" reverseOrder={false} />
                         <ChallengeJoyride />
                         <ScrollToggle />
