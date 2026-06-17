@@ -156,7 +156,7 @@ export async function POST(req: Request) {
     const supabaseKey = publicAnonKey || publishableKey || SUPABASE_ANON_KEY || serviceRoleKey;
     console.log('[FirstBlood Webhook] Using key prefix:', supabaseKey ? supabaseKey.substring(0, 20) + '...' : 'NONE');
 
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient(supabaseUrl, supabaseKey as string);
 
     // 1. Verify if this solve is the first blood for the challenge
     const { data: solves, error: solvesError } = await supabase

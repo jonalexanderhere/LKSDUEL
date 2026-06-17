@@ -31,7 +31,7 @@ export function useAdminMonitoringData() {
       const data = await getSolvesMonitoring()
       
       // Enriched solves data with advanced telemetry heuristics
-      const enrichedData = (data || []).map((s: any): SolveMonitoringRow => {
+      const enrichedData = (data || []).map((s: any, index: number, arr: any[]): SolveMonitoringRow => {
         const reasons: string[] = []
         let score = 0
 

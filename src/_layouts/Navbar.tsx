@@ -91,7 +91,7 @@ export default function Navbar() {
   }
 
   const showTeamLeaderboard = APP.teams.enabled
-  const showUserLeaderboard = !showTeamLeaderboard || !APP.teams.hideLeaderboardIndividual
+  const showUserLeaderboard = !showTeamLeaderboard || !APP.teams.hideScoreboardIndividual
   const scoreboardOptionCount = Number(showUserLeaderboard) + Number(showTeamLeaderboard)
 
   useEffect(() => {
