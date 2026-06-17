@@ -143,21 +143,24 @@ export default function Navbar() {
 
       <nav className={`backdrop-blur-md border-b border-amber-500/20 fixed top-0 left-0 w-full z-50 transition-all duration-300 ${theme === 'dark' ? 'bg-[#0b0604]/80 shadow-[0_8px_32px_rgba(0,0,0,0.8)]' : 'bg-[#3e2723]/90 shadow-lg'}`}>
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between gap-6">
-            {/* Left & Center section */}
-            <div className="flex flex-1 items-center justify-between min-w-0">
-              <Link href="/" className="flex shrink-0 items-center gap-3 group" data-tour="navbar-logo">
-                <ImageWithFallback
-                  src={APP.image_logo}
-                  alt={`${APP.shortName} logo`}
-                  size={40}
-                  className="rounded-full shadow-[0_0_10px_rgba(251,191,36,0.4)] transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`text-[1.3rem] xl:text-[1.5rem] font-black tracking-widest uppercase ${theme === 'dark' ? 'text-amber-100 drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]' : 'text-amber-900'} transition-all duration-300 group-hover:text-amber-400 group-hover:drop-shadow-[0_0_12px_rgba(251,191,36,0.8)]`}>{APP.shortName}</span>
+          <div className="flex h-16 items-center justify-between gap-4">
+            {/* Left section: Logo */}
+            <div className="flex shrink-0 items-center">
+              <Link href="/" className="flex items-center gap-3 group" data-tour="navbar-logo">
+                <div className="w-[40px] h-[40px] shrink-0">
+                  <ImageWithFallback
+                    src={APP.image_logo}
+                    alt={`${APP.shortName} logo`}
+                    size={40}
+                    className="rounded-full shadow-[0_0_10px_rgba(251,191,36,0.4)] transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+                <span className={`text-[1.3rem] xl:text-[1.5rem] font-black tracking-widest uppercase ${theme === 'dark' ? 'text-amber-100 drop-shadow-[0_0_8px_rgba(251,191,36,0.3)]' : 'text-amber-900'} transition-all duration-300 group-hover:text-amber-400 group-hover:drop-shadow-[0_0_12px_rgba(251,191,36,0.8)] shrink-0`}>{APP.shortName}</span>
               </Link>
+            </div>
 
-              {/* Desktop menu */}
-              <div className="hidden xl:flex min-w-0 flex-nowrap items-center justify-center gap-1 2xl:gap-1.5 flex-1 px-4">
+            {/* Center section: Desktop menu */}
+            <div className="hidden xl:flex flex-1 items-center justify-center gap-1 2xl:gap-2 px-4">
                 {user && (
                   <Link
                     href="/challenges"
@@ -320,7 +323,6 @@ export default function Navbar() {
                   </Link>
                 )}
               </div>
-            </div>
 
             {/* Right section */}
             <div className="flex shrink-0 items-center gap-2 2xl:gap-4">
