@@ -133,7 +133,7 @@ export default function TeamsPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-blue-500" />
+        <Loader fullscreen color="text-amber-500" />
       </div>
     )
   }
@@ -141,17 +141,17 @@ export default function TeamsPage() {
   if (!user) return null
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-transparent">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         {initialLoading ? (
           <div className="flex justify-center py-16">
-            <Loader color="text-blue-500" />
+            <Loader color="text-amber-500" />
           </div>
         ) : (
           <>
             {loading && team && (
               <div className="fixed top-20 right-8 z-50 opacity-70 pointer-events-none">
-                <Loader color="text-blue-500" />
+                <Loader color="text-amber-500" />
               </div>
             )}
 
@@ -183,7 +183,7 @@ export default function TeamsPage() {
             {!team ? (
               <div className={`grid grid-cols-1 ${user?.is_admin ? 'md:grid-cols-2' : ''} gap-6`}>
                 {user?.is_admin && (
-                  <Card className="bg-white/5 border-white/10 backdrop-blur-md overflow-hidden animate-slide-up">
+                  <Card className="bg-amber-900/10/5 border-white/10 backdrop-blur-md overflow-hidden animate-slide-up">
                     <CardHeader className="border-b border-white/5">
                       <CardTitle className="text-lg font-semibold text-white flex items-center gap-2">
                         <Users size={18} className="text-indigo-400" /> Create Team
@@ -197,7 +197,7 @@ export default function TeamsPage() {
                           value={teamName}
                           onChange={(e) => setTeamName(e.target.value)}
                           placeholder="Enter a unique team name"
-                          className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500"
+                          className="bg-amber-900/10/5 border-white/10 text-white placeholder:text-neutral-500"
                           disabled={busy}
                         />
                       </div>
@@ -212,7 +212,7 @@ export default function TeamsPage() {
                   </Card>
                 )}
 
-                <Card className="bg-white/5 border-white/10 backdrop-blur-md overflow-hidden animate-slide-up [animation-delay:100ms]">
+                <Card className="bg-amber-900/10/5 border-white/10 backdrop-blur-md overflow-hidden animate-slide-up [animation-delay:100ms]">
                   <CardHeader className="border-b border-white/5">
                     <CardTitle className="text-lg font-semibold text-white flex items-center gap-2">
                       <UserPlus size={18} className="text-emerald-400" /> Join Team
@@ -226,7 +226,7 @@ export default function TeamsPage() {
                         value={inviteCode}
                         onChange={(e) => setInviteCode(e.target.value)}
                         placeholder="Paste invite code or token here"
-                        className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 font-mono"
+                        className="bg-amber-900/10/5 border-white/10 text-white placeholder:text-neutral-500 font-mono"
                         disabled={busy}
                       />
                     </div>
@@ -286,12 +286,12 @@ export default function TeamsPage() {
         description={
           confirmExpected ? (
             <div className="space-y-2">
-              <p className="text-sm text-gray-700 dark:text-gray-300">
+              <p className="text-sm text-amber-100 dark:text-amber-500/70">
                 {confirmMessage}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-amber-500/70 dark:text-amber-500/70">
                 Type{' '}
-                <span className="font-mono text-gray-900 dark:text-gray-100">
+                <span className="font-mono text-amber-50 dark:text-gray-100">
                   {confirmExpected}
                 </span>{' '}
                 to continue.
@@ -319,3 +319,4 @@ export default function TeamsPage() {
     </div>
   )
 }
+

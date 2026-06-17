@@ -38,7 +38,7 @@ export default function TeamScoreboardPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center py-16">
-        <Loader fullscreen color="text-blue-500" />
+        <Loader fullscreen color="text-amber-500" />
       </div>
     )
   }
@@ -48,7 +48,7 @@ export default function TeamScoreboardPage() {
   const isDark = theme === 'dark'
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-transparent">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         <div className="mb-4 flex justify-between items-center">
           <div className="relative">
@@ -57,18 +57,18 @@ export default function TeamScoreboardPage() {
                 value={String(selectedEvent)}
                 onChange={setSelectedEvent as any}
                 events={startedEvents}
-                className="min-w-[180px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-sm px-3 py-2 rounded"
+                className="min-w-[180px] bg-amber-900/10 dark:bg-amber-900/10 border border-amber-900/50 text-sm px-3 py-2 rounded"
                 getEventLabel={(ev: any) => String(ev?.name ?? ev?.title ?? 'Untitled')}
               />
             </div>
           </div>
 
-          <span className="flex gap-2 border-b border-gray-200 dark:border-gray-700">
+          <span className="flex gap-2 border-b border-amber-900/50">
             <button
               onClick={() => setShowTotalScore(false)}
               className={`px-4 py-2 text-sm font-medium transition border-b-2 ${!showTotalScore
-                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                ? 'border-amber-500 text-amber-600 dark:text-amber-400'
+                : 'border-transparent text-gray-600 dark:text-amber-500/70 hover:text-amber-50 dark:hover:text-gray-200'
                 }`}
             >
               <span
@@ -85,8 +85,8 @@ export default function TeamScoreboardPage() {
               <button
                 onClick={() => setShowTotalScore(true)}
                 className={`px-4 py-2 text-sm font-medium transition border-b-2 ${showTotalScore
-                  ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                  : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                  ? 'border-amber-500 text-amber-600 dark:text-amber-400'
+                  : 'border-transparent text-gray-600 dark:text-amber-500/70 hover:text-amber-50 dark:hover:text-gray-200'
                   }`}
               >
                 <span
@@ -112,16 +112,16 @@ export default function TeamScoreboardPage() {
             />
           )}
 
-          <Card className="bg-white dark:bg-gray-800">
+          <Card className="bg-amber-900/10 dark:bg-amber-900/10">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+              <CardTitle className="text-lg font-semibold text-amber-50 dark:text-amber-50 flex items-center gap-2">
                 <Users size={18} /> Teams Ranking
               </CardTitle>
             </CardHeader>
             <CardContent>
               {loading && entries.length === 0 ? (
                 <div className="flex justify-center py-10">
-                  <Loader color="text-blue-500" />
+                  <Loader color="text-amber-500" />
                 </div>
               ) : entries.length === 0 ? (
                 <EmptyState
@@ -144,15 +144,15 @@ export default function TeamScoreboardPage() {
                       <TableRow key={entry.team_id}>
                         <TableCell className="text-center font-mono">{idx + 1}</TableCell>
                         <TableCell className="font-medium">
-                          <Link href={`/teams/${encodeURIComponent(entry.team_name)}`} className="hover:underline text-gray-900 dark:text-white">
+                          <Link href={`/teams/${encodeURIComponent(entry.team_name)}`} className="hover:underline text-amber-50 dark:text-amber-50">
                             {entry.team_name}
                           </Link>
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-sm">
                             <Users size={14} />
                             {entry.member_count}
                           </span>
                         </TableCell>
-                        <TableCell className="text-right font-semibold text-gray-900 dark:text-white">
+                        <TableCell className="text-right font-semibold text-amber-50 dark:text-amber-50">
                           {showTotalScore ? entry.total_score : entry.unique_score}
                         </TableCell>
                       </TableRow>
@@ -167,3 +167,4 @@ export default function TeamScoreboardPage() {
     </div>
   )
 }
+

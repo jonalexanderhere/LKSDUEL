@@ -65,7 +65,7 @@ export default function EditTeamModal({
         size="sm"
         disabled={disabled}
         onClick={() => setOpen(true)}
-        className="gap-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold border-none"
+        className="gap-2 bg-amber-600 dark:bg-amber-500 hover:bg-amber-700 dark:hover:bg-amber-400 text-white font-semibold border-none"
       >
         <Pencil size={14} />
         Edit Team
@@ -78,17 +78,17 @@ export default function EditTeamModal({
         }
       >
         <DialogHeader>
-          <DialogTitle className="text-gray-900 dark:text-white">
+          <DialogTitle className="text-amber-50 dark:text-amber-50">
             Edit Team
           </DialogTitle>
-          <DialogDescription className="text-gray-500 dark:text-gray-300">
+          <DialogDescription className="text-amber-500/70 dark:text-amber-500/70">
             Update your team information below.
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+            <label className="block text-sm font-medium text-amber-100 dark:text-gray-200">
               Team Name
             </label>
             <Input
@@ -96,9 +96,9 @@ export default function EditTeamModal({
               onChange={(e) => setName(e.target.value)}
               disabled={loading}
               maxLength={50}
-              className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+              className="bg-amber-900/10 dark:bg-amber-900/10 border-amber-900/50 text-amber-50 dark:text-gray-100"
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-amber-500/70 dark:text-amber-500/70">
               Max 50 characters. Must be unique.
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function EditTeamModal({
               !name.trim() ||
               name.trim() === currentName
             }
-            className="w-full bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-400 text-white font-semibold"
+            className="w-full bg-amber-600 dark:bg-amber-500 hover:bg-amber-700 dark:hover:bg-amber-400 text-white font-semibold"
           >
             {loading ? 'Saving...' : 'Save'}
           </Button>
@@ -127,3 +127,4 @@ export default function EditTeamModal({
     </Dialog>
   )
 }
+

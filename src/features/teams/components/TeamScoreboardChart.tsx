@@ -42,9 +42,9 @@ const TeamScoreboardChart: React.FC<TeamScoreboardChartProps> = ({ series, isDar
   })
 
   return (
-    <Card className="bg-white dark:bg-gray-800">
+    <Card className="bg-amber-900/10 dark:bg-amber-900/10">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold text-center text-gray-900 dark:text-white">
+        <CardTitle className="text-lg font-semibold text-center text-amber-50 dark:text-amber-50">
           Top 10 Teams
         </CardTitle>
       </CardHeader>
@@ -93,3 +93,4 @@ const TeamScoreboardChart: React.FC<TeamScoreboardChartProps> = ({ series, isDar
 }
 
 export default TeamScoreboardChart
+
