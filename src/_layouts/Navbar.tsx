@@ -157,7 +157,7 @@ export default function Navbar() {
               </Link>
 
               {/* Desktop menu */}
-              <div className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex 2xl:gap-1.5 overflow-x-auto scroll-hidden">
+              <div className="hidden min-w-0 flex-nowrap items-center gap-1 xl:flex 2xl:gap-1.5 overflow-visible">
                 {user && (
                   <Link
                     href="/challenges"
@@ -695,4 +695,5 @@ export default function Navbar() {
     </>
   )
 }
+
 
